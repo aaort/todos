@@ -14,29 +14,51 @@ final checkboxColors = MaterialStateProperty.resolveWith<Color>((states) {
   }
 });
 
-class TodoTile extends StatelessWidget {
+class TodoTile extends StatefulWidget {
   final String id;
 
   const TodoTile({super.key, required this.id});
 
   @override
+  State<TodoTile> createState() => _TodoTileState();
+}
+
+class _TodoTileState extends State<TodoTile> {
+  bool enabled = false;
+  late FocusNode focusNode;
+  late TextEditingController taskController;
+
+  @override
+  void initState() {
+    focusNode = FocusNode();
+    final initialTask = context.read<Todos>().getTodoById(widget.id).task;
+    taskController = TextEditingController(text: initialTask);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final data = Provider.of<Todos>(context);
-    final todo = data.getTodoById(id);
+    final todo = data.getTodoById(widget.id);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: ListTile(
         onLongPress: () {
-          data.removeTodo(id);
-          TodosIO.deleteTodo(id);
+          setState(() => enabled = true);
+          Future.delayed(const Duration(milliseconds: 100), () {
+            // delay is required for focus to work as expected
+            focusNode.requestFocus();
+          });
         },
         leading: SizedBox(
-          width: MediaQuery.of(context).size.width - 100,
-          child: Text(
-            todo.task,
-            overflow: TextOverflow.ellipsis,
+          width: MediaQuery.of(context).size.width - 150,
+          child: TextFormField(
+            focusNode: focusNode,
+            controller: taskController,
+            enabled: enabled,
+            decoration: const InputDecoration(border: InputBorder.none),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: todo.checked ? Colors.blueGrey : Colors.black,
+                color: Colors.blueGrey,
                 decoration: todo.checked
                     ? TextDecoration.lineThrough
                     : TextDecoration.none),
@@ -46,16 +68,30 @@ class TodoTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(
-              onPressed: () {
-                onEditTodo(context, todo);
-              },
-              icon: const Icon(Icons.edit, size: 27, color: Colors.blueGrey),
-            ),
-            Checkbox(
-              checked: todo.checked,
-              onTap: () => data.toggleCheck(id),
-            ),
+            enabled
+                ? IconButton(
+                    onPressed: () {
+                      setState(() => enabled = false);
+                      taskController.text = todo.task;
+                      focusNode.unfocus();
+                    },
+                    icon: const Icon(Icons.close,
+                        size: 27, color: Colors.blueGrey),
+                  )
+                : Checkbox(
+                    checked: todo.checked,
+                    onTap: () => data.toggleCheck(widget.id),
+                  ),
+            if (enabled)
+              IconButton(
+                onPressed: () {
+                  setState(() => enabled = false);
+                  focusNode.unfocus();
+                  data.editTodo(todo.id, taskController.text);
+                  TodosIO.eidtTodo(id: todo.id, todo: todo);
+                },
+                icon: const Icon(Icons.check, size: 27, color: Colors.blueGrey),
+              )
           ],
         ),
       ),
@@ -74,7 +110,7 @@ class TodoTile extends StatelessWidget {
       Provider.of<Todos>(context, listen: false).editTodo(todo.id, updatedTask);
       final updatedTodo =
           Todo.fromMap(task: updatedTask, checked: todo.checked, id: todo.id);
-      await TodosIO.eidtTodo(id: id, todo: updatedTodo);
+      await TodosIO.eidtTodo(id: widget.id, todo: updatedTodo);
     }
   }
 }
