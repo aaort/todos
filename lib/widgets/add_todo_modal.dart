@@ -4,11 +4,6 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 
-const addTodoTextStyle = TextStyle(
-  color: Colors.lightBlue,
-  fontSize: 30.0,
-  fontWeight: FontWeight.w600,
-);
 const addTodoButtonTextStyle = TextStyle(
   fontSize: 20.0,
   fontWeight: FontWeight.w500,
@@ -57,10 +52,10 @@ class _AddTodoState extends State<AddTodo> {
                     icon: const Icon(Icons.close),
                   ),
                 ),
-              const Text(
+              Text(
                 'Add Todo',
                 textAlign: TextAlign.center,
-                style: addTodoTextStyle,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
               TextField(
                 autofocus: true,
