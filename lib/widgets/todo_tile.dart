@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart' hide Checkbox;
 import 'package:provider/provider.dart';
-import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
-import 'package:todos/styles/text_field.dart';
-import 'package:todos/widgets/add_todo_modal.dart';
 import 'package:todos/widgets/checkbox.dart';
 
 final checkboxColors = MaterialStateProperty.resolveWith<Color>((states) {
