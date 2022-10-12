@@ -4,14 +4,6 @@ import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/checkbox.dart';
 
-final checkboxColors = MaterialStateProperty.resolveWith<Color>((states) {
-  if (states.contains(MaterialState.selected)) {
-    return Colors.blueGrey;
-  } else {
-    return Colors.grey;
-  }
-});
-
 class TodoTile extends StatefulWidget {
   final String id;
 
@@ -59,7 +51,6 @@ class _TodoTileState extends State<TodoTile> {
           ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               if (enabled) ...[
                 IconButton(
@@ -67,11 +58,7 @@ class _TodoTileState extends State<TodoTile> {
                     toggleTodoState(false);
                     taskController.text = todo.task;
                   },
-                  icon: const Icon(
-                    Icons.close,
-                    size: 27,
-                    color: Colors.blueGrey,
-                  ),
+                  icon: const Icon(Icons.close),
                 ),
                 IconButton(
                   onPressed: () {
@@ -79,11 +66,7 @@ class _TodoTileState extends State<TodoTile> {
                     data.editTodo(todo.id, taskController.text);
                     TodosIO.editTodo(todo);
                   },
-                  icon: const Icon(
-                    Icons.check,
-                    size: 27,
-                    color: Colors.blueGrey,
-                  ),
+                  icon: const Icon(Icons.check),
                 )
               ] else
                 Checkbox(
