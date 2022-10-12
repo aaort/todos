@@ -88,7 +88,7 @@ class _TodoTileState extends State<TodoTile> {
                   setState(() => enabled = false);
                   focusNode.unfocus();
                   data.editTodo(todo.id, taskController.text);
-                  TodosIO.eidtTodo(id: todo.id, todo: todo);
+                  TodosIO.editTodo(id: todo.id, todo: todo);
                 },
                 icon: const Icon(Icons.check, size: 27, color: Colors.blueGrey),
               )
@@ -110,7 +110,7 @@ class _TodoTileState extends State<TodoTile> {
       Provider.of<Todos>(context, listen: false).editTodo(todo.id, updatedTask);
       final updatedTodo =
           Todo.fromMap(task: updatedTask, checked: todo.checked, id: todo.id);
-      await TodosIO.eidtTodo(id: widget.id, todo: updatedTodo);
+      await TodosIO.editTodo(id: widget.id, todo: updatedTodo);
     }
   }
 }
