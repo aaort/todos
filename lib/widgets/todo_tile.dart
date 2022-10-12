@@ -92,8 +92,8 @@ class _TodoTileState extends State<TodoTile> {
     );
   }
 
-  void toggleTodoState(bool edtiable) {
-    if (edtiable) {
+  void toggleTodoState(bool editable) {
+    if (editable) {
       setState(() => enabled = true);
       // Delay is required for focus to work as expected
       Future.delayed(
