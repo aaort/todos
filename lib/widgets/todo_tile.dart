@@ -36,56 +36,65 @@ class _TodoTileState extends State<TodoTile> {
 
   @override
   Widget build(BuildContext context) {
-    final data = Provider.of<Todos>(context);
-    final todo = data.getTodoById(widget.id);
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: ListTile(
-        onLongPress: () => toggleTodoState(true),
-        leading: SizedBox(
-          width: MediaQuery.of(context).size.width - 150,
-          child: TextFormField(
-            focusNode: focusNode,
-            controller: taskController,
-            enabled: enabled,
-            cursorColor: Colors.blueGrey,
-            decoration: const InputDecoration(border: InputBorder.none),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.blueGrey,
-                decoration: todo.checked
-                    ? TextDecoration.lineThrough
-                    : TextDecoration.none),
+    return Consumer<Todos>(builder: (context, data, _) {
+      final todo = data.getTodoById(widget.id);
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: ListTile(
+          onLongPress: () => toggleTodoState(true),
+          leading: SizedBox(
+            width: MediaQuery.of(context).size.width - 150,
+            child: TextFormField(
+              focusNode: focusNode,
+              controller: taskController,
+              enabled: enabled,
+              cursorColor: Colors.blueGrey,
+              decoration: const InputDecoration(border: InputBorder.none),
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Colors.blueGrey,
+                  decoration: todo.checked
+                      ? TextDecoration.lineThrough
+                      : TextDecoration.none),
+            ),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (enabled) ...[
+                IconButton(
+                  onPressed: () {
+                    toggleTodoState(false);
+                    taskController.text = todo.task;
+                  },
+                  icon: const Icon(
+                    Icons.close,
+                    size: 27,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    toggleTodoState(false);
+                    data.editTodo(todo.id, taskController.text);
+                    TodosIO.editTodo(todo);
+                  },
+                  icon: const Icon(
+                    Icons.check,
+                    size: 27,
+                    color: Colors.blueGrey,
+                  ),
+                )
+              ] else
+                Checkbox(
+                  checked: todo.checked,
+                  onTap: () => data.toggleCheck(widget.id),
+                ),
+            ],
           ),
         ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            if (enabled) ...[
-              IconButton(
-                onPressed: () {
-                  toggleTodoState(false);
-                  taskController.text = todo.task;
-                },
-                icon: const Icon(Icons.close, size: 27, color: Colors.blueGrey),
-              ),
-              IconButton(
-                onPressed: () {
-                  toggleTodoState(false);
-                  data.editTodo(todo.id, taskController.text);
-                  TodosIO.editTodo(todo);
-                },
-                icon: const Icon(Icons.check, size: 27, color: Colors.blueGrey),
-              )
-            ] else
-              Checkbox(
-                checked: todo.checked,
-                onTap: () => data.toggleCheck(widget.id),
-              ),
-          ],
-        ),
-      ),
-    );
+      );
+    });
   }
 
   void toggleTodoState(bool editable) {
