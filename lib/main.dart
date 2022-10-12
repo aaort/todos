@@ -34,6 +34,7 @@ class App extends StatelessWidget {
               fontSize: 20.0,
             ),
           ),
+          iconTheme: const IconThemeData(color: Colors.blueGrey, size: 27),
         ),
         home: const Home(),
       ),
