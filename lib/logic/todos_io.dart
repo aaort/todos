@@ -69,8 +69,8 @@ class TodosIO {
     await file.writeAsString(todoAsJson);
   }
 
-  static Future<void> editTodo({required String id, required Todo todo}) async {
-    final file = await _getTodoFileById(id);
+  static Future<void> editTodo(Todo todo) async {
+    final file = await _getTodoFileById(todo.id);
     await file?.writeAsString(jsonEncode(todo.asMap));
   }
 

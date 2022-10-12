@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:todos/styles/text_field.dart';
 import 'package:todos/widgets/add_todo_modal.dart';
 import 'package:todos/widgets/checkbox.dart';
 
@@ -52,11 +53,8 @@ class _TodoTileState extends State<TodoTile> {
             enabled: enabled,
             cursorColor: Colors.blueGrey,
             decoration: const InputDecoration(border: InputBorder.none),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.blueGrey,
-                decoration: todo.checked
-                    ? TextDecoration.lineThrough
-                    : TextDecoration.none),
+            style:
+                todo.checked ? kTodoCheckedTextStyle : kTodoUncheckedTextStyle,
           ),
         ),
         trailing: Row(
@@ -81,7 +79,7 @@ class _TodoTileState extends State<TodoTile> {
                 onPressed: () {
                   toggleTodoState(false);
                   data.editTodo(todo.id, taskController.text);
-                  TodosIO.editTodo(id: todo.id, todo: todo);
+                  TodosIO.editTodo(todo);
                 },
                 icon: const Icon(Icons.check, size: 27, color: Colors.blueGrey),
               )
@@ -103,7 +101,7 @@ class _TodoTileState extends State<TodoTile> {
       Provider.of<Todos>(context, listen: false).editTodo(todo.id, updatedTask);
       final updatedTodo =
           Todo.fromMap(task: updatedTask, checked: todo.checked, id: todo.id);
-      await TodosIO.editTodo(id: widget.id, todo: updatedTodo);
+      await TodosIO.editTodo(updatedTodo);
     }
   }
 
