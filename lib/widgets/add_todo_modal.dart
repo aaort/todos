@@ -99,7 +99,7 @@ class _AddTodoState extends State<AddTodo> {
   }
 
   Future<void> onCreateTodo(BuildContext context, String task) async {
-    Provider.of<Todos>(context).addTodo(Todo(task));
+    Provider.of<Todos>(context, listen: false).addTodo(Todo(task));
     await TodosIO.createTodo(Todo(task));
 
     if (mounted) Navigator.pop(context);
