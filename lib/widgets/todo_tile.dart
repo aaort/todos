@@ -50,6 +50,7 @@ class _TodoTileState extends State<TodoTile> {
             focusNode: focusNode,
             controller: taskController,
             enabled: enabled,
+            cursorColor: Colors.blueGrey,
             decoration: const InputDecoration(border: InputBorder.none),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Colors.blueGrey,
