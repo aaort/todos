@@ -53,8 +53,11 @@ class _TodoTileState extends State<TodoTile> {
             enabled: enabled,
             cursorColor: Colors.blueGrey,
             decoration: const InputDecoration(border: InputBorder.none),
-            style:
-                todo.checked ? kTodoCheckedTextStyle : kTodoUncheckedTextStyle,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Colors.blueGrey,
+                decoration: todo.checked
+                    ? TextDecoration.lineThrough
+                    : TextDecoration.none),
           ),
         ),
         trailing: Row(
@@ -87,22 +90,6 @@ class _TodoTileState extends State<TodoTile> {
         ),
       ),
     );
-  }
-
-  Future<void> onEditTodo(BuildContext context, Todo todo) async {
-    final updatedTask = await showModalBottomSheet(
-      context: context,
-      isDismissible: false,
-      builder: (context) => AddTodo(
-        initialTask: todo.task,
-      ),
-    );
-    if (updatedTask != null) {
-      Provider.of<Todos>(context, listen: false).editTodo(todo.id, updatedTask);
-      final updatedTodo =
-          Todo.fromMap(task: updatedTask, checked: todo.checked, id: todo.id);
-      await TodosIO.editTodo(updatedTodo);
-    }
   }
 
   void toggleTodoState(bool edtiable) {
