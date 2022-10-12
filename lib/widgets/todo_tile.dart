@@ -43,13 +43,7 @@ class _TodoTileState extends State<TodoTile> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: ListTile(
-        onLongPress: () {
-          setState(() => enabled = true);
-          Future.delayed(const Duration(milliseconds: 100), () {
-            // delay is required for focus to work as expected
-            focusNode.requestFocus();
-          });
-        },
+        onLongPress: () => toggleTodoState(true),
         leading: SizedBox(
           width: MediaQuery.of(context).size.width - 150,
           child: TextFormField(
@@ -71,9 +65,8 @@ class _TodoTileState extends State<TodoTile> {
             enabled
                 ? IconButton(
                     onPressed: () {
-                      setState(() => enabled = false);
+                      toggleTodoState(false);
                       taskController.text = todo.task;
-                      focusNode.unfocus();
                     },
                     icon: const Icon(Icons.close,
                         size: 27, color: Colors.blueGrey),
@@ -85,8 +78,7 @@ class _TodoTileState extends State<TodoTile> {
             if (enabled)
               IconButton(
                 onPressed: () {
-                  setState(() => enabled = false);
-                  focusNode.unfocus();
+                  toggleTodoState(false);
                   data.editTodo(todo.id, taskController.text);
                   TodosIO.editTodo(id: todo.id, todo: todo);
                 },
@@ -111,6 +103,20 @@ class _TodoTileState extends State<TodoTile> {
       final updatedTodo =
           Todo.fromMap(task: updatedTask, checked: todo.checked, id: todo.id);
       await TodosIO.editTodo(id: widget.id, todo: updatedTodo);
+    }
+  }
+
+  void toggleTodoState(bool edtiable) {
+    if (edtiable) {
+      setState(() => enabled = true);
+      // Delay is required for focus to work as expected
+      Future.delayed(
+        const Duration(milliseconds: 10),
+        () => focusNode.requestFocus(),
+      );
+    } else {
+      setState(() => enabled = false);
+      focusNode.unfocus();
     }
   }
 }
