@@ -64,20 +64,14 @@ class _TodoTileState extends State<TodoTile> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            enabled
-                ? IconButton(
-                    onPressed: () {
-                      toggleTodoState(false);
-                      taskController.text = todo.task;
-                    },
-                    icon: const Icon(Icons.close,
-                        size: 27, color: Colors.blueGrey),
-                  )
-                : Checkbox(
-                    checked: todo.checked,
-                    onTap: () => data.toggleCheck(widget.id),
-                  ),
-            if (enabled)
+            if (enabled) ...[
+              IconButton(
+                onPressed: () {
+                  toggleTodoState(false);
+                  taskController.text = todo.task;
+                },
+                icon: const Icon(Icons.close, size: 27, color: Colors.blueGrey),
+              ),
               IconButton(
                 onPressed: () {
                   toggleTodoState(false);
@@ -86,6 +80,11 @@ class _TodoTileState extends State<TodoTile> {
                 },
                 icon: const Icon(Icons.check, size: 27, color: Colors.blueGrey),
               )
+            ] else
+              Checkbox(
+                checked: todo.checked,
+                onTap: () => data.toggleCheck(widget.id),
+              ),
           ],
         ),
       ),
