@@ -14,10 +14,10 @@ final checkboxColors = MaterialStateProperty.resolveWith<Color>((states) {
   }
 });
 
-class TaskTile extends StatelessWidget {
+class TodoTile extends StatelessWidget {
   final String id;
 
-  const TaskTile({super.key, required this.id});
+  const TodoTile({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
