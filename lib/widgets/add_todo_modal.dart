@@ -4,6 +4,7 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 
+// Using StatefulWidget here only to check for mounted field before pop call
 class AddTodo extends StatefulWidget {
   const AddTodo({super.key});
 
@@ -12,7 +13,7 @@ class AddTodo extends StatefulWidget {
 }
 
 class _AddTodoState extends State<AddTodo> {
-  late TextEditingController taskController;
+  final taskController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

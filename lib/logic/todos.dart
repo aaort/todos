@@ -34,6 +34,7 @@ class Todos extends ChangeNotifier {
   }
 
   void editTodo(String id, String updatedTask) {
+    // TODO: Maybe this could take a new todo as a one argument
     final todo = _todos.firstWhere((todo) => todo.id == id);
     todo.task = updatedTask;
     notifyListeners();

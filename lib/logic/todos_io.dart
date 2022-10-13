@@ -62,10 +62,9 @@ class TodosIO {
   static Future<void> createTodo(Todo todo) async {
     final dirPath = await _getAppDir();
     final filename = todo.id;
-    final todoAsJson = jsonEncode(todo.asMap);
     final file = await File('$dirPath/$_appDirName/$filename.json')
         .create(recursive: true);
-    await file.writeAsString(todoAsJson);
+    await file.writeAsString(jsonEncode(todo.asMap));
   }
 
   static Future<void> editTodo(Todo todo) async {

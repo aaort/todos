@@ -66,10 +66,7 @@ class _TodoTileState extends State<TodoTile> {
                     children: [
                       if (enabled) ...[
                         IconButton(
-                          onPressed: () {
-                            toggleTodoState(false);
-                            taskController.text = todo.task;
-                          },
+                          onPressed: () => onDiscard(todo.task),
                           icon: const Icon(Icons.close),
                         ),
                         IconButton(
@@ -92,6 +89,11 @@ class _TodoTileState extends State<TodoTile> {
     });
   }
 
+  void onDiscard(String initialTask) {
+    toggleTodoState(false);
+    taskController.text = initialTask;
+  }
+
   Future<void> onEditTodo(Todo todo) async {
     toggleTodoState(false);
     context.read<Todos>().editTodo(todo.id, taskController.text);
@@ -104,6 +106,10 @@ class _TodoTileState extends State<TodoTile> {
   }
 
   void toggleTodoState(bool editable) {
+    // Might be used for todo to always display the beginning of task
+    // taskController.selection = TextSelection.fromPosition(
+    //   TextPosition(offset: taskController.text.length),
+    // );
     if (editable) {
       setState(() => enabled = true);
       // Delay is required for focus to work as expected
