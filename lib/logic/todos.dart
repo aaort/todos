@@ -39,7 +39,7 @@ class Todos extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeTodo(String id) {
+  void deleteTodo(String id) {
     _todos.removeWhere((todo) => todo.id == id);
     notifyListeners();
   }

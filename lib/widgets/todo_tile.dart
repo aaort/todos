@@ -96,7 +96,7 @@ class _TodoTileState extends State<TodoTile> {
   }
 
   Future<void> onDeleteTodo(String id) async {
-    Provider.of<Todos>(context, listen: false).removeTodo(id);
+    Provider.of<Todos>(context, listen: false).deleteTodo(id);
     await TodosIO.deleteTodo(id);
   }
 
