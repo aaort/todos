@@ -29,8 +29,8 @@ class TodosIO {
     try {
       for (File file in todoFiles) {
         final path = file.path;
-        final filename =
-            file.path.substring(path.lastIndexOf('/') + 1, path.indexOf('.'));
+        final filename = file.path
+            .substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
         if (filename == id) {
           return file;
         }
