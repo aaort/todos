@@ -85,7 +85,7 @@ class _TodoTileState extends State<TodoTile> {
       setState(() => enabled = true);
       // Delay is required for focus to work as expected
       Future.delayed(
-        const Duration(milliseconds: 10),
+        const Duration(milliseconds: 100),
         () => focusNode.requestFocus(),
       );
     } else {
