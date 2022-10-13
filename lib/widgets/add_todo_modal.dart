@@ -27,27 +27,18 @@ class _AddTodoState extends State<AddTodo> {
 
   @override
   Widget build(BuildContext context) {
-    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
-    final addTodoModalHeight = bottomInset == 0 ? 500.0 : bottomInset * 2;
     return Consumer<Todos>(
       builder: (context, data, child) {
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
-          height: addTodoModalHeight,
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height / 2.5 +
+                MediaQuery.of(context).viewInsets.bottom,
+          ),
+          padding: const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 0),
           child: ListView(
             children: [
-              if (widget.initialTask != null)
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop('returned string');
-                    },
-                    icon: const Icon(Icons.close),
-                  ),
-                ),
               Text(
-                'Add Todo',
+                'New Todo',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
