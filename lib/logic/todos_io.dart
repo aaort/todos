@@ -1,22 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory;
 import 'package:todos/logic/todo.dart';
 
-const appDirName = 'todos';
+const _appDirName = 'todos';
 
 class TodosIO {
-  static Future<String> getAppDir() async {
+  static Future<String> _getAppDir() async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
 
   static Future<List<File>> _getTodoFiles() async {
-    final dirPath = await getAppDir();
+    final dirPath = await _getAppDir();
     final entitiesDir =
-        await Directory('$dirPath/$appDirName').create(recursive: true);
+        await Directory('$dirPath/$_appDirName').create(recursive: true);
 
     final entities = await entitiesDir.list().toList();
 
@@ -61,10 +60,10 @@ class TodosIO {
   }
 
   static Future<void> createTodo(Todo todo) async {
-    final dirPath = await getAppDir();
+    final dirPath = await _getAppDir();
     final filename = todo.id;
     final todoAsJson = jsonEncode(todo.asMap);
-    final file = await File('$dirPath/$appDirName/$filename.json')
+    final file = await File('$dirPath/$_appDirName/$filename.json')
         .create(recursive: true);
     await file.writeAsString(todoAsJson);
   }
@@ -80,8 +79,8 @@ class TodosIO {
   }
 
   static Future<void> deleteAllTodos() async {
-    final dirPath = await getAppDir();
-    final todosDir = Directory('$dirPath/$appDirName');
+    final dirPath = await _getAppDir();
+    final todosDir = Directory('$dirPath/$_appDirName');
 
     todosDir.list().forEach((entity) async {
       await entity.delete();
