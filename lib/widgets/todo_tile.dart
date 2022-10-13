@@ -30,62 +30,74 @@ class _TodoTileState extends State<TodoTile> {
   Widget build(BuildContext context) {
     return Consumer<Todos>(builder: (context, data, _) {
       final todo = data.getTodoById(widget.id);
-      return GestureDetector(
-        onLongPress: () => toggleTodoState(true),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                flex: enabled ? 7 : 9,
-                child: TextFormField(
-                  focusNode: focusNode,
-                  controller: taskController,
-                  enabled: enabled,
-                  cursorColor: Colors.blueGrey,
-                  decoration: const InputDecoration(border: InputBorder.none),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.blueGrey,
-                      decoration: todo.checked
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none),
+      return Dismissible(
+        key: UniqueKey(),
+        background: Container(
+          color: Colors.red,
+        ),
+        onDismissed: (_) => onDeleteTodo(todo.id),
+        child: GestureDetector(
+          onLongPress: () => toggleTodoState(true),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  flex: enabled ? 7 : 9,
+                  child: TextFormField(
+                    focusNode: focusNode,
+                    controller: taskController,
+                    enabled: enabled,
+                    cursorColor: Colors.blueGrey,
+                    decoration: const InputDecoration(border: InputBorder.none),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.blueGrey,
+                        decoration: todo.checked
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none),
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: enabled ? 3 : 1,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (enabled) ...[
-                      IconButton(
-                        onPressed: () {
-                          toggleTodoState(false);
-                          taskController.text = todo.task;
-                        },
-                        icon: const Icon(Icons.close),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          toggleTodoState(false);
-                          data.editTodo(todo.id, taskController.text);
-                          TodosIO.editTodo(todo);
-                        },
-                        icon: const Icon(Icons.check),
-                      )
-                    ] else
-                      Checkbox(
-                        checked: todo.checked,
-                        onTap: () => data.toggleCheck(widget.id),
-                      ),
-                  ],
+                Expanded(
+                  flex: enabled ? 3 : 1,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (enabled) ...[
+                        IconButton(
+                          onPressed: () {
+                            toggleTodoState(false);
+                            taskController.text = todo.task;
+                          },
+                          icon: const Icon(Icons.close),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            toggleTodoState(false);
+                            data.editTodo(todo.id, taskController.text);
+                            TodosIO.editTodo(todo);
+                          },
+                          icon: const Icon(Icons.check),
+                        )
+                      ] else
+                        Checkbox(
+                          checked: todo.checked,
+                          onTap: () => data.toggleCheck(widget.id),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );
     });
+  }
+
+  Future<void> onDeleteTodo(String id) async {
+    Provider.of<Todos>(context, listen: false).removeTodo(id);
+    await TodosIO.deleteTodo(id);
   }
 
   void toggleTodoState(bool editable) {
