@@ -5,9 +5,7 @@ import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 
 class AddTodo extends StatefulWidget {
-  final String? initialTask;
-
-  const AddTodo({super.key, this.initialTask});
+  const AddTodo({super.key});
 
   @override
   State<AddTodo> createState() => _AddTodoState();
@@ -15,14 +13,6 @@ class AddTodo extends StatefulWidget {
 
 class _AddTodoState extends State<AddTodo> {
   late TextEditingController taskController;
-  late bool isNewTodo;
-
-  @override
-  void initState() {
-    taskController = TextEditingController(text: widget.initialTask);
-    isNewTodo = widget.initialTask == null;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +47,7 @@ class _AddTodoState extends State<AddTodo> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                onPressed: () {
-                  final task = taskController.text;
-                  if (task.length > 5) {
-                    isNewTodo ? onCreateTodo(task) : onEditTodo(context, task);
-                  }
-                },
+                onPressed: () => onCreateTodo(taskController.text),
                 child: Text(
                   'Save',
                   style: Theme.of(context).textTheme.bodyMedium,
@@ -76,13 +61,11 @@ class _AddTodoState extends State<AddTodo> {
   }
 
   Future<void> onCreateTodo(String task) async {
-    Provider.of<Todos>(context, listen: false).addTodo(Todo(task));
-    await TodosIO.createTodo(Todo(task));
+    if (task.length > 5) {
+      Provider.of<Todos>(context, listen: false).addTodo(Todo(task));
+      await TodosIO.createTodo(Todo(task));
 
-    if (mounted) Navigator.pop(context);
-  }
-
-  void onEditTodo(BuildContext context, String task) {
-    Navigator.of(context).pop(task);
+      if (mounted) Navigator.pop(context);
+    }
   }
 }
