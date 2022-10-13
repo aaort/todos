@@ -4,12 +4,6 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 
-const addTodoButtonTextStyle = TextStyle(
-  fontSize: 20.0,
-  fontWeight: FontWeight.w500,
-  color: Colors.white,
-);
-
 class AddTodo extends StatefulWidget {
   final String? initialTask;
 
@@ -81,9 +75,9 @@ class _AddTodoState extends State<AddTodo> {
                         : onEditTodo(context, task);
                   }
                 },
-                child: const Text(
+                child: Text(
                   'Save',
-                  style: addTodoButtonTextStyle,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
             ],
