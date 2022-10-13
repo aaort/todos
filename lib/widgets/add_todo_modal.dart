@@ -60,9 +60,7 @@ class _AddTodoState extends State<AddTodo> {
                 onPressed: () {
                   final task = taskController.text;
                   if (task.length > 5) {
-                    isNewTodo
-                        ? onCreateTodo(context, task)
-                        : onEditTodo(context, task);
+                    isNewTodo ? onCreateTodo(task) : onEditTodo(context, task);
                   }
                 },
                 child: Text(
@@ -77,7 +75,7 @@ class _AddTodoState extends State<AddTodo> {
     );
   }
 
-  Future<void> onCreateTodo(BuildContext context, String task) async {
+  Future<void> onCreateTodo(String task) async {
     Provider.of<Todos>(context, listen: false).addTodo(Todo(task));
     await TodosIO.createTodo(Todo(task));
 
