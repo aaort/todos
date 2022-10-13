@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Checkbox;
 import 'package:provider/provider.dart';
+import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/checkbox.dart';
@@ -72,11 +73,7 @@ class _TodoTileState extends State<TodoTile> {
                           icon: const Icon(Icons.close),
                         ),
                         IconButton(
-                          onPressed: () {
-                            toggleTodoState(false);
-                            data.editTodo(todo.id, taskController.text);
-                            TodosIO.editTodo(todo);
-                          },
+                          onPressed: () => onEditTodo(todo),
                           icon: const Icon(Icons.check),
                         )
                       ] else
@@ -93,6 +90,12 @@ class _TodoTileState extends State<TodoTile> {
         ),
       );
     });
+  }
+
+  Future<void> onEditTodo(Todo todo) async {
+    toggleTodoState(false);
+    context.read<Todos>().editTodo(todo.id, taskController.text);
+    TodosIO.editTodo(todo);
   }
 
   Future<void> onDeleteTodo(String id) async {
