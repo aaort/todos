@@ -16,7 +16,6 @@ class AddTodo extends StatefulWidget {
 class _AddTodoState extends State<AddTodo> {
   late TextEditingController taskController;
   late bool isNewTodo;
-  bool addButtonEnabled = false;
 
   @override
   void initState() {
