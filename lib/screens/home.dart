@@ -63,7 +63,7 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
-            TodoList(),
+            const TodoList(),
           ],
         ),
       ),
