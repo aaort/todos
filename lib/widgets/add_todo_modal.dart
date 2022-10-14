@@ -43,7 +43,10 @@ class _AddTodoState extends State<AddTodo> {
             autofocus: true,
             controller: taskController,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.lightBlue),
+            style: const TextStyle(color: Colors.blueGrey),
+            cursorColor: Colors.blueGrey,
+            decoration: const InputDecoration(
+                border: OutlineInputBorder(borderSide: BorderSide.none)),
           ),
           const SizedBox(height: 30),
           RawMaterialButton(
