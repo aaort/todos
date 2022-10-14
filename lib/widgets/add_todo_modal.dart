@@ -69,12 +69,10 @@ class _AddTodoState extends State<AddTodo> {
   }
 
   Future<void> onCreateTodo(String task) async {
-    if (task.length > 5) {
-      context.read<Todos>().addTodo(Todo(task));
-      await TodosIO.createTodo(Todo(task));
+    context.read<Todos>().addTodo(Todo(task));
+    await TodosIO.createTodo(Todo(task));
 
-      if (mounted) Navigator.pop(context);
-    }
+    if (mounted) Navigator.pop(context);
   }
 
   @override
