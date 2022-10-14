@@ -37,18 +37,6 @@ class Home extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const CircleAvatar(
-                    radius: 35,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.list,
-                      size: 35,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
                   Text(
                     'Todo',
                     style: Theme.of(context).textTheme.titleMedium,
