@@ -43,17 +43,25 @@ class _TodoTileState extends State<TodoTile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                  child: TextFormField(
-                    focusNode: focusNode,
-                    controller: taskController,
-                    enabled: enabled,
-                    cursorColor: Colors.blueGrey,
-                    decoration: const InputDecoration(border: InputBorder.none),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.blueGrey,
-                        decoration: todo.checked
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none),
+                  child: Focus(
+                    onFocusChange: (hasFocus) {
+                      if (!hasFocus) {
+                        setState(() => enabled = false);
+                      }
+                    },
+                    child: TextFormField(
+                      focusNode: focusNode,
+                      controller: taskController,
+                      enabled: enabled,
+                      cursorColor: Colors.blueGrey,
+                      decoration:
+                          const InputDecoration(border: InputBorder.none),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.blueGrey,
+                          decoration: todo.checked
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none),
+                    ),
                   ),
                 ),
                 Padding(
@@ -122,5 +130,11 @@ class _TodoTileState extends State<TodoTile> {
       setState(() => enabled = false);
       focusNode.unfocus();
     }
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
   }
 }
