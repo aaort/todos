@@ -33,9 +33,7 @@ class _TodoTileState extends State<TodoTile> {
       final todo = data.getTodoById(widget.id);
       return Dismissible(
         key: UniqueKey(),
-        background: Container(
-          color: Colors.red,
-        ),
+        background: Container(color: Colors.red),
         onDismissed: (_) => onDeleteTodo(todo.id),
         child: GestureDetector(
           onLongPress: () => toggleTodoState(true),
@@ -44,8 +42,7 @@ class _TodoTileState extends State<TodoTile> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  flex: enabled ? 7 : 9,
+                Flexible(
                   child: TextFormField(
                     focusNode: focusNode,
                     controller: taskController,
@@ -59,17 +56,21 @@ class _TodoTileState extends State<TodoTile> {
                             : TextDecoration.none),
                   ),
                 ),
-                Expanded(
-                  flex: enabled ? 3 : 1,
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       if (enabled) ...[
                         IconButton(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          constraints: const BoxConstraints(),
                           onPressed: () => onDiscard(todo.task),
                           icon: const Icon(Icons.close),
                         ),
                         IconButton(
+                          padding: const EdgeInsets.all(0),
+                          constraints: const BoxConstraints(),
                           onPressed: () => onEditTodo(todo),
                           icon: const Icon(Icons.check),
                         )
