@@ -79,7 +79,11 @@ class _TodoTileState extends State<TodoTile> {
                         IconButton(
                           padding: const EdgeInsets.all(0),
                           constraints: const BoxConstraints(),
-                          onPressed: () => onEditTodo(todo),
+                          onPressed: () {
+                            final newTodo = todo;
+                            newTodo.task = taskController.text;
+                            onEditTodo(newTodo);
+                          },
                           icon: const Icon(Icons.check),
                         )
                       ] else
@@ -106,7 +110,7 @@ class _TodoTileState extends State<TodoTile> {
   Future<void> onEditTodo(Todo todo) async {
     toggleTodoState(false);
     context.read<Todos>().editTodo(todo.id, taskController.text);
-    TodosIO.editTodo(todo);
+    await TodosIO.editTodo(todo);
   }
 
   Future<void> onDeleteTodo(String id) async {
