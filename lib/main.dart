@@ -49,6 +49,9 @@ class App extends StatelessWidget {
             color: Colors.blueGrey,
             size: 27,
           ),
+          inputDecorationTheme: const InputDecorationTheme(
+            border: InputBorder.none,
+          ),
         ),
         home: const Home(),
       ),

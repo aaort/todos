@@ -55,8 +55,6 @@ class _TodoTileState extends State<TodoTile> {
                       enabled: enabled,
                       cursorColor: Colors.blueGrey,
                       textCapitalization: TextCapitalization.sentences,
-                      decoration:
-                          const InputDecoration(border: InputBorder.none),
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Colors.blueGrey,
                           decoration: todo.checked
