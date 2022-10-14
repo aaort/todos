@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
                 children: [
                   Text(
                     'Todo',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 10,

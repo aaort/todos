@@ -18,7 +18,13 @@ class App extends StatelessWidget {
         title: 'Todos',
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.blueGrey,
+          primaryColor: Colors.blueGrey,
           textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              color: Colors.white,
+              fontSize: 45.0,
+              fontWeight: FontWeight.w900,
+            ),
             titleMedium: TextStyle(
               color: Colors.white,
               fontSize: 30.0,
