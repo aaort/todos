@@ -69,7 +69,8 @@ class TodosIO {
 
   static Future<void> editTodo(Todo todo) async {
     final file = await _getTodoFileById(todo.id);
-    await file?.writeAsString(jsonEncode(todo.asMap));
+    if (file == null) throw 'file with a given id is not found';
+    await file.writeAsString(jsonEncode(todo.asMap));
   }
 
   static Future<void> deleteTodo(String id) async {
