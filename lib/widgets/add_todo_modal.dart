@@ -69,8 +69,9 @@ class _AddTodoState extends State<AddTodo> {
   }
 
   Future<void> onCreateTodo(String task) async {
-    context.read<Todos>().addTodo(Todo(task));
-    await TodosIO.createTodo(Todo(task));
+    final todo = Todo(task);
+    context.read<Todos>().addTodo(todo);
+    await TodosIO.createTodo(todo);
 
     if (mounted) Navigator.pop(context);
   }
