@@ -7,13 +7,13 @@ import 'package:todos/logic/todo.dart';
 const _appDirName = 'todos';
 
 class TodosIO {
-  static Future<String> _getAppDir() async {
+  static Future<String> get _getAppDir async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
 
   static Future<List<File>> _getTodoFiles() async {
-    final dirPath = await _getAppDir();
+    final dirPath = await _getAppDir;
     final entitiesDir =
         await Directory('$dirPath/$_appDirName').create(recursive: true);
 
@@ -60,7 +60,7 @@ class TodosIO {
   }
 
   static Future<void> createTodo(Todo todo) async {
-    final dirPath = await _getAppDir();
+    final dirPath = await _getAppDir;
     final filename = todo.id;
     final file = await File('$dirPath/$_appDirName/$filename.json')
         .create(recursive: true);
@@ -78,7 +78,7 @@ class TodosIO {
   }
 
   static Future<void> deleteAllTodos() async {
-    final dirPath = await _getAppDir();
+    final dirPath = await _getAppDir;
     final todosDir = Directory('$dirPath/$_appDirName');
 
     todosDir.list().forEach((entity) async {
