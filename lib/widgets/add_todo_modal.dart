@@ -14,6 +14,15 @@ class AddTodo extends StatefulWidget {
 
 class _AddTodoState extends State<AddTodo> {
   final taskController = TextEditingController();
+  bool createEnabled = false;
+
+  @override
+  void initState() {
+    taskController.addListener(() {
+      setState(() => createEnabled = taskController.text.length >= 5);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +47,14 @@ class _AddTodoState extends State<AddTodo> {
           ),
           const SizedBox(height: 30),
           RawMaterialButton(
-            fillColor: taskController.text.length > 5
-                ? Colors.lightBlue
-                : Colors.blueGrey,
+            fillColor: createEnabled ? Colors.blueGrey : Colors.blueGrey[300],
             disabledElevation: 0,
             padding: const EdgeInsets.symmetric(vertical: 10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            onPressed: () => onCreateTodo(taskController.text),
+            onPressed:
+                createEnabled ? () => onCreateTodo(taskController.text) : null,
             child: Text(
               'Save',
               style: Theme.of(context).textTheme.bodyMedium,
@@ -64,5 +72,11 @@ class _AddTodoState extends State<AddTodo> {
 
       if (mounted) Navigator.pop(context);
     }
+  }
+
+  @override
+  void dispose() {
+    taskController.dispose();
+    super.dispose();
   }
 }
