@@ -4,21 +4,23 @@ import 'package:todos/logic/todos.dart';
 import 'package:todos/widgets/todo_tile.dart';
 
 class TodoList extends StatelessWidget {
+  const TodoList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<Todos>(
-      builder: (context, data, _) {
-        final todos = data.todos;
-        return Expanded(
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-            child: ListView.builder(
+    return Expanded(
+      child: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Consumer<Todos>(
+          builder: (context, data, _) {
+            final todos = data.todos;
+            return ListView.builder(
               padding: const EdgeInsets.symmetric(
                 vertical: 20.0,
                 horizontal: 10.0,
@@ -27,10 +29,10 @@ class TodoList extends StatelessWidget {
               itemBuilder: (_, index) {
                 return TodoTile(id: todos[index].id);
               },
-            ),
-          ),
-        );
-      },
+            );
+          },
+        ),
+      ),
     );
   }
 }
