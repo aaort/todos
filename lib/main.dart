@@ -52,6 +52,11 @@ class App extends StatelessWidget {
           inputDecorationTheme: const InputDecorationTheme(
             border: InputBorder.none,
           ),
+          snackBarTheme: const SnackBarThemeData(
+            backgroundColor: Colors.blueGrey,
+            actionTextColor: Colors.white,
+            contentTextStyle: TextStyle(color: Colors.white),
+          ),
         ),
         home: const Home(),
       ),

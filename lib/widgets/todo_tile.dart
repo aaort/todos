@@ -35,6 +35,7 @@ class _TodoTileState extends State<TodoTile> {
         key: UniqueKey(),
         background: Container(color: Colors.red),
         onDismissed: (_) => onDeleteTodo(todo.id),
+        confirmDismiss: (_) => confirmDeletion(context),
         child: GestureDetector(
           onLongPress: () => toggleTodoState(true),
           child: Container(
@@ -56,7 +57,6 @@ class _TodoTileState extends State<TodoTile> {
                       cursorColor: Colors.blueGrey,
                       textCapitalization: TextCapitalization.sentences,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.blueGrey,
                           decoration: todo.checked
                               ? TextDecoration.lineThrough
                               : TextDecoration.none),
@@ -140,4 +140,26 @@ class _TodoTileState extends State<TodoTile> {
     focusNode.dispose();
     super.dispose();
   }
+}
+
+Future<bool?> confirmDeletion(BuildContext context) async {
+  bool confirmation = true;
+  await ScaffoldMessenger.of(context)
+      .showSnackBar(
+        SnackBar(
+          content: const Text('Todo\'s deleted'),
+          duration: const Duration(seconds: 4),
+          width: MediaQuery.of(context).size.width - 30,
+          behavior: SnackBarBehavior.floating,
+          action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              confirmation = false;
+            },
+          ),
+        ),
+      )
+      .closed;
+
+  return confirmation;
 }
