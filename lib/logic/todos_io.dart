@@ -41,8 +41,13 @@ class TodosIO {
     }
   }
 
+  static int _sortFilesBySize(File file1, File file2) {
+    return file1.lastModifiedSync().compareTo(file2.lastModifiedSync());
+  }
+
   static Future<List<Todo>> getTodos() async {
     final todoFiles = await _getTodoFiles();
+    todoFiles.sort(_sortFilesBySize);
 
     final todos = <Todo>[];
     for (File file in todoFiles) {
