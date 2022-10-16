@@ -34,15 +34,24 @@ class _AddTodoState extends State<AddTodo> {
       padding: const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 0),
       child: ListView(
         children: [
-          Text(
-            'New Todo',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyLarge,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Add Todo',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              IconButton(
+                icon: const Icon(Icons.date_range),
+                onPressed: () {},
+              ),
+            ],
           ),
           TextField(
             autofocus: true,
             controller: taskController,
-            textAlign: TextAlign.center,
+            // TODO: for debugging, takes to much resources
             style: const TextStyle(color: Colors.blueGrey),
             cursorColor: Colors.blueGrey,
           ),
