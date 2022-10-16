@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:bottom_picker/bottom_picker.dart';
 
 // Using StatefulWidget here only to check for mounted field before pop call
 class AddTodo extends StatefulWidget {
@@ -15,6 +16,23 @@ class AddTodo extends StatefulWidget {
 class _AddTodoState extends State<AddTodo> {
   final taskController = TextEditingController();
   bool createEnabled = false;
+
+  DateTime? pickedReminder;
+
+  Future<void> setReminder() async {
+    BottomPicker.date(
+      title: "Set your Birthday",
+      titleStyle: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: Colors.blue,
+      ),
+      onChange: (reminderDate) {
+        setState(() => pickedReminder = reminderDate);
+      },
+      displaySubmitButton: false,
+    ).show(context);
+  }
 
   @override
   void initState() {
@@ -44,7 +62,7 @@ class _AddTodoState extends State<AddTodo> {
               ),
               IconButton(
                 icon: const Icon(Icons.date_range),
-                onPressed: () {},
+                onPressed: setReminder,
               ),
             ],
           ),
