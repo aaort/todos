@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
+import 'package:todos/logic/notifications.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
@@ -102,21 +103,7 @@ class _AddTodoState extends State<AddTodo> {
 
     final reminderDate = pickedReminder;
     if (reminderDate != null) {
-      tz.initializeTimeZones();
-
-      final scheduleDate = tz.TZDateTime.from(reminderDate, tz.local);
-
-      FlutterLocalNotificationsPlugin().zonedSchedule(
-        100,
-        'Todo reminder',
-        todo.task,
-        scheduleDate,
-        // TODO: provide additional details for notification if required
-        NotificationDetails(),
-        uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime,
-        androidAllowWhileIdle: false,
-      );
+      Notifications.addTodoReminder(reminderDate, todo);
     }
 
     if (mounted) Navigator.pop(context);
