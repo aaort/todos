@@ -1,13 +1,10 @@
-import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 import 'package:todos/logic/notifications.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:todos/widgets/pickers.dart';
 
 // Using StatefulWidget here only to check for mounted field before pop call
 class AddTodo extends StatefulWidget {
@@ -24,19 +21,16 @@ class _AddTodoState extends State<AddTodo> {
   DateTime? _reminderDateTime;
 
   Future<void> setReminder() async {
-    BottomPicker.dateTime(
-      title: "Set reminder date and time",
-      titleStyle: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 15,
-        color: Colors.blue,
-      ),
-      onChange: (pickedReminderDateTime) {
-        setState(() => _reminderDateTime = pickedReminderDateTime);
-      },
-      displaySubmitButton: false,
-    ).show(context);
+    showDateTimePicker(
+      context: context,
+      title: 'Set reminder date and time',
+      initialDateTime: _reminderDateTime,
+      onChange: onDateTimeChange,
+    );
   }
+
+  onDateTimeChange(DateTime newDateTime) =>
+      setState(() => _reminderDateTime = newDateTime);
 
   @override
   void initState() {
