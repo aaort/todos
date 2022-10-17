@@ -12,38 +12,30 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
   // handle action
 }
 
+const _androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+const _iosSettings = DarwinInitializationSettings();
+
 const InitializationSettings initializationSettings = InitializationSettings(
-  android: initializationSettingsAndroid,
-  iOS: initializationSettingsDarwin,
+  android: _androidSettings,
+  iOS: _iosSettings,
   // macOS: initializationSettingsDarwin,
   // linux: initializationSettingsLinux,
 );
 
-const initializationSettingsDarwin =
-    DarwinInitializationSettings(requestSoundPermission: true);
-const initializationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
-
-const darwinNotificationDetails = DarwinNotificationDetails(badgeNumber: 3);
-const androidNotificationDetails = AndroidNotificationDetails(
-  'androidNotificationChannelId',
-  'androidNotificationChannelName',
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  'reminder_channel', // id
+  'reminding notification', // title
+  description:
+      'This channel is used for reminding notifications', // description
+  importance: Importance.high,
+  playSound: true,
 );
 
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description:
-        'This channel is used for important notifications.', // description
-    importance: Importance.high,
-    playSound: true);
-
 class Notifications {
-  static final _flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  static final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
-    await _flutterLocalNotificationsPlugin.initialize(
+    await _localNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {
@@ -52,18 +44,15 @@ class Notifications {
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
 
-    await _flutterLocalNotificationsPlugin
+    await _localNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
   }
 
-  static final androidNotificationDetails = AndroidNotificationDetails(
+  static final _androidNotificationDetails = AndroidNotificationDetails(
     channel.id,
     channel.name,
-    channelDescription: channel.description,
-    playSound: true,
-    icon: '@mipmap/ic_launcher',
   );
 
   static Future<void> addTodoReminder(DateTime reminderDate, Todo todo) async {
@@ -78,7 +67,7 @@ class Notifications {
       scheduleDate,
       // TODO: provide additional details for notification if required
       NotificationDetails(
-        android: androidNotificationDetails,
+        android: _androidNotificationDetails,
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
