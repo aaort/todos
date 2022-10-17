@@ -44,14 +44,18 @@ class _AddTodoState extends State<AddTodo> {
   void onReminderOptionChange(ReminderOption option) async {
     switch (option) {
       case ReminderOption.in_5_minutes:
+        setState(() {
+          _reminderDateTime = DateTime.now().add(const Duration(minutes: 5));
+        });
         break;
-      // TODO: implement notification scheduled in 5 minutes
       case ReminderOption.in_15_minutes:
+        setState(() {
+          _reminderDateTime = DateTime.now().add(const Duration(minutes: 15));
+        });
         break;
-      // TODO: implement notification scheduled in 15 minutes
       case ReminderOption.custom_date_and_time:
-        FocusNode().unfocus();
-        await Future.delayed(const Duration(milliseconds: 200));
+        FocusManager.instance.primaryFocus?.unfocus();
+        await Future.delayed(const Duration(milliseconds: 400));
         showDateTimePicker(
           context: context,
           title: 'Set reminder date and time',
