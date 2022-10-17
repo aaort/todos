@@ -33,7 +33,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
     importance: Importance.high,
     playSound: true);
 
-class NotificationsSetup {
+class Notifications {
   static final _flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
