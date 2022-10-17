@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
+import 'package:todos/notifications_setup.dart';
 import 'package:todos/screens/home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await NotificationsSetup.initialize();
+
   runApp(const App());
 }
 
