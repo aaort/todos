@@ -1,11 +1,12 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+// TODO: Customize setup for app needs
+
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
   // handle action
 }
 
-// TODO: Customize setup for app needs
 const InitializationSettings initializationSettings = InitializationSettings(
   android: initializationSettingsAndroid,
   iOS: initializationSettingsDarwin,
@@ -14,7 +15,7 @@ const InitializationSettings initializationSettings = InitializationSettings(
 );
 
 const initializationSettingsDarwin =
-    DarwinInitializationSettings(requestSoundPermission: false);
+    DarwinInitializationSettings(requestSoundPermission: true);
 const initializationSettingsAndroid =
     AndroidInitializationSettings('@mipmap/ic_launcher');
 
