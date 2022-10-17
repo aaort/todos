@@ -1,5 +1,6 @@
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:todos/widgets/add_todo_modal.dart';
 
 void showDateTimePicker({
   required BuildContext context,
@@ -21,5 +22,26 @@ void showDateTimePicker({
       onChange(pickedReminderDateTime);
     },
     displaySubmitButton: false,
+  ).show(context);
+}
+
+void showReminderOptionsPicker<T>({
+  required BuildContext context,
+  String? title,
+  required List<T> options,
+  required Function(T) onChange,
+}) {
+  final optionWidgets = options.map((option) {
+    final optionTitle = option.toString().split('.').last.replaceAll('_', ' ');
+    return Text(optionTitle);
+  }).toList();
+
+  BottomPicker(
+    items: optionWidgets,
+    title: title ?? 'Pick value',
+    dismissable: true,
+    onSubmit: (pickedOptionIndex) {
+      onChange(options[pickedOptionIndex]);
+    },
   ).show(context);
 }

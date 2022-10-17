@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/notifications.dart';
@@ -5,6 +7,14 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/pickers.dart';
+
+enum ReminderOption {
+// using underscores here to be able separate words
+// for displaying as option titles inside picker
+  in_5_minutes,
+  in_15_minutes,
+  custom_date_and_time,
+}
 
 // Using StatefulWidget here only to check for mounted field before pop call
 class AddTodo extends StatefulWidget {
@@ -20,17 +30,36 @@ class _AddTodoState extends State<AddTodo> {
 
   DateTime? _reminderDateTime;
 
-  Future<void> setReminder() async {
-    showDateTimePicker(
+  void onReminderOptionPick() {
+    showReminderOptionsPicker<ReminderOption>(
       context: context,
-      title: 'Set reminder date and time',
-      initialDateTime: _reminderDateTime,
-      onChange: onDateTimeChange,
+      options: ReminderOption.values,
+      onChange: onReminderOptionChange,
     );
   }
 
-  onDateTimeChange(DateTime newDateTime) =>
+  void onDateTimeChange(DateTime newDateTime) =>
       setState(() => _reminderDateTime = newDateTime);
+
+  void onReminderOptionChange(ReminderOption option) async {
+    switch (option) {
+      case ReminderOption.in_5_minutes:
+        break;
+      // TODO: implement notification scheduled in 5 minutes
+      case ReminderOption.in_15_minutes:
+        break;
+      // TODO: implement notification scheduled in 15 minutes
+      case ReminderOption.custom_date_and_time:
+        FocusNode().unfocus();
+        await Future.delayed(const Duration(milliseconds: 200));
+        showDateTimePicker(
+          context: context,
+          title: 'Set reminder date and time',
+          initialDateTime: _reminderDateTime,
+          onChange: onDateTimeChange,
+        );
+    }
+  }
 
   @override
   void initState() {
@@ -60,7 +89,7 @@ class _AddTodoState extends State<AddTodo> {
               ),
               IconButton(
                 icon: const Icon(Icons.date_range),
-                onPressed: setReminder,
+                onPressed: onReminderOptionPick,
               ),
             ],
           ),
