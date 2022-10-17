@@ -1,9 +1,12 @@
+import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
-import 'package:bottom_picker/bottom_picker.dart';
 
 // Using StatefulWidget here only to check for mounted field before pop call
 class AddTodo extends StatefulWidget {
@@ -69,7 +72,6 @@ class _AddTodoState extends State<AddTodo> {
           TextField(
             autofocus: true,
             controller: taskController,
-            // TODO: for debugging, takes to much resources
             style: const TextStyle(color: Colors.blueGrey),
             cursorColor: Colors.blueGrey,
           ),
@@ -97,6 +99,25 @@ class _AddTodoState extends State<AddTodo> {
     final todo = Todo(task);
     context.read<Todos>().addTodo(todo);
     await TodosIO.createTodo(todo);
+
+    final reminderDate = pickedReminder;
+    if (reminderDate != null) {
+      tz.initializeTimeZones();
+
+      final scheduleDate = tz.TZDateTime.from(reminderDate, tz.local);
+
+      FlutterLocalNotificationsPlugin().zonedSchedule(
+        100,
+        'Todo reminder',
+        todo.task,
+        scheduleDate,
+        // TODO: provide additional details for notification if required
+        NotificationDetails(),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidAllowWhileIdle: false,
+      );
+    }
 
     if (mounted) Navigator.pop(context);
   }
