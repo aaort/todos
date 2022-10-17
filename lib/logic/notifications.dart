@@ -75,7 +75,7 @@ class Notifications {
       Random().nextInt(1000),
       'Todo reminder',
       todo.task,
-      tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+      scheduleDate,
       // TODO: provide additional details for notification if required
       NotificationDetails(
         android: androidNotificationDetails,

@@ -21,18 +21,18 @@ class _AddTodoState extends State<AddTodo> {
   final taskController = TextEditingController();
   bool createEnabled = false;
 
-  DateTime? pickedReminder;
+  DateTime? _reminderDateTime;
 
   Future<void> setReminder() async {
-    BottomPicker.date(
-      title: "Set your Birthday",
+    BottomPicker.dateTime(
+      title: "Set reminder date and time",
       titleStyle: const TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 15,
         color: Colors.blue,
       ),
-      onChange: (reminderDate) {
-        setState(() => pickedReminder = reminderDate);
+      onChange: (pickedReminderDateTime) {
+        setState(() => _reminderDateTime = pickedReminderDateTime);
       },
       displaySubmitButton: false,
     ).show(context);
@@ -101,9 +101,9 @@ class _AddTodoState extends State<AddTodo> {
     context.read<Todos>().addTodo(todo);
     await TodosIO.createTodo(todo);
 
-    final reminderDate = pickedReminder;
-    if (reminderDate != null) {
-      Notifications.addTodoReminder(reminderDate, todo);
+    final reminderDateTime = _reminderDateTime;
+    if (reminderDateTime != null) {
+      Notifications.addTodoReminder(reminderDateTime, todo);
     }
 
     if (mounted) Navigator.pop(context);
