@@ -1,12 +1,12 @@
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
 
-Future<void> showDateTimePicker({
+void showDateTimePicker({
   required BuildContext context,
   String? title,
   DateTime? initialDateTime,
   required Function(DateTime) onChange,
-}) async {
+}) {
   initialDateTime ??= DateTime.now();
 
   BottomPicker.dateTime(
