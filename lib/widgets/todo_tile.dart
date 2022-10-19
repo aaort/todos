@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Checkbox;
 import 'package:provider/provider.dart';
+import 'package:todos/logic/notifications.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
@@ -34,7 +35,7 @@ class _TodoTileState extends State<TodoTile> {
       return Dismissible(
         key: UniqueKey(),
         background: Container(color: Colors.red),
-        onDismissed: (_) => onDeleteTodo(todo.id),
+        onDismissed: (_) => onDeleteTodo(todo),
         confirmDismiss: (_) => confirmDeletion(context),
         child: GestureDetector(
           onLongPress: () => toggleTodoState(true),
@@ -112,16 +113,16 @@ class _TodoTileState extends State<TodoTile> {
     await TodosIO.editTodo(todo);
   }
 
-  Future<void> onDeleteTodo(String id) async {
-    context.read<Todos>().deleteTodo(id);
-    await TodosIO.deleteTodo(id);
+  Future<void> onDeleteTodo(Todo todo) async {
+    context.read<Todos>().deleteTodo(todo.id);
+    await TodosIO.deleteTodo(todo.id);
+    final reminderId = todo.reminderId;
+    if (reminderId != null) {
+      await Notifications.removeTodoReminder(reminderId);
+    }
   }
 
   void toggleTodoState(bool editable) {
-    // Might be used for todo to always display the beginning of task
-    // taskController.selection = TextSelection.fromPosition(
-    //   TextPosition(offset: taskController.text.length),
-    // );
     if (editable) {
       setState(() => enabled = true);
       // Delay is required for focus to work as expected

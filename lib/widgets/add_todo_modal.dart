@@ -124,11 +124,11 @@ class _AddTodoState extends State<AddTodo> {
   }
 
   Future<void> onCreateTodo(String task) async {
-    final todo = Todo(task);
+    final reminderDateTime = _reminderDateTime;
+    final todo = Todo(task, scheduled: reminderDateTime != null);
     context.read<Todos>().addTodo(todo);
     await TodosIO.createTodo(todo);
 
-    final reminderDateTime = _reminderDateTime;
     if (reminderDateTime != null) {
       Notifications.addTodoReminder(reminderDateTime, todo);
     }

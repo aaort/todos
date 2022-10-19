@@ -57,6 +57,7 @@ class TodosIO {
           task: todoMap['task'],
           checked: todoMap['checked'],
           id: todoMap['id'],
+          reminderId: todoMap['reminderId'],
         ),
       );
     }
@@ -69,7 +70,8 @@ class TodosIO {
     final filename = todo.id;
     final file = await File('$dirPath/$_appDirName/$filename.json')
         .create(recursive: true);
-    await file.writeAsString(jsonEncode(todo.asMap));
+    final content = jsonEncode(todo.asMap);
+    await file.writeAsString(content);
   }
 
   static Future<void> editTodo(Todo todo) async {

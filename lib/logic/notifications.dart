@@ -61,7 +61,7 @@ class Notifications {
     final scheduleDate = tz.TZDateTime.from(reminderDate, tz.local);
 
     FlutterLocalNotificationsPlugin().zonedSchedule(
-      Random().nextInt(1000),
+      todo.reminderId!,
       'Todo reminder',
       todo.task,
       scheduleDate,
@@ -73,5 +73,13 @@ class Notifications {
           UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
     );
+  }
+
+  static Future<void> removeTodoReminder(int id) async {
+    try {
+      await FlutterLocalNotificationsPlugin().cancel(id);
+    } catch (e) {
+      throw 'Failed to cancel notification with id: $id, error: $e';
+    }
   }
 }
