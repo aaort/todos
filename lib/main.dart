@@ -62,6 +62,11 @@ class App extends StatelessWidget {
             actionTextColor: Colors.white,
             contentTextStyle: TextStyle(color: Colors.white),
           ),
+          textButtonTheme: TextButtonThemeData(
+            style: ButtonStyle(
+              textStyle: MaterialStateProperty.resolveWith(getButtonTextStyle),
+            ),
+          ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor:
@@ -88,4 +93,14 @@ Color getButtonColor(Set<MaterialState> states) {
     return Colors.blueGrey.shade200;
   }
   return Colors.blueGrey;
+}
+
+TextStyle getButtonTextStyle(Set<MaterialState> states) {
+  const Set<MaterialState> interactiveStates = <MaterialState>{
+    MaterialState.disabled
+  };
+  if (states.any(interactiveStates.contains)) {
+    return TextStyle(color: Colors.blueGrey.shade200);
+  }
+  return const TextStyle(color: Colors.blueGrey);
 }
