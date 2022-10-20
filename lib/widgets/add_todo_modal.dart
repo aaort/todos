@@ -93,7 +93,7 @@ class _AddTodoState extends State<AddTodo> {
               ),
               IconButton(
                 icon: const Icon(Icons.date_range),
-                onPressed: onReminderOptionPick,
+                onPressed: createEnabled ? onReminderOptionPick : null,
               ),
             ],
           ),
