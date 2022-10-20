@@ -33,13 +33,10 @@ void showReminderOptionsPicker<T>({
   final optionWidgets = options.map((option) {
     final optionTitle = option.toString().split('.').last.replaceAll('_', ' ');
     return TextButton(
-      onPressed: () {
-        onChange(
-          options[options.indexOf(option)],
-        );
-      },
+      onPressed: () => onChange(options[options.indexOf(option)]),
       child: Text(
         optionTitle,
+        textAlign: TextAlign.center,
         style: Theme.of(context).textButtonTheme.style?.textStyle?.resolve({}),
       ),
     );
@@ -48,8 +45,8 @@ void showReminderOptionsPicker<T>({
   showModalBottomSheet(
     context: context,
     builder: (_) {
-      return Wrap(
-        direction: Axis.vertical,
+      return Column(
+        mainAxisSize: MainAxisSize.min,
         children: optionWidgets,
       );
     },
