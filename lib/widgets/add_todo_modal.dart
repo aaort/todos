@@ -104,13 +104,7 @@ class _AddTodoState extends State<AddTodo> {
             cursorColor: Colors.blueGrey,
           ),
           const SizedBox(height: 30),
-          RawMaterialButton(
-            fillColor: createEnabled ? Colors.blueGrey : Colors.blueGrey[300],
-            disabledElevation: 0,
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
+          ElevatedButton(
             onPressed:
                 createEnabled ? () => onCreateTodo(taskController.text) : null,
             child: Text(
