@@ -42,6 +42,7 @@ class _AddTodoState extends State<AddTodo> {
       setState(() => _reminderDateTime = newDateTime);
 
   void onReminderOptionChange(ReminderOption option) async {
+    Navigator.pop(context);
     switch (option) {
       case ReminderOption.in_5_minutes:
         setState(() {

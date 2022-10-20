@@ -32,15 +32,26 @@ void showReminderOptionsPicker<T>({
 }) {
   final optionWidgets = options.map((option) {
     final optionTitle = option.toString().split('.').last.replaceAll('_', ' ');
-    return Text(optionTitle);
+    return TextButton(
+      onPressed: () {
+        onChange(
+          options[options.indexOf(option)],
+        );
+      },
+      child: Text(
+        optionTitle,
+        style: Theme.of(context).textButtonTheme.style?.textStyle?.resolve({}),
+      ),
+    );
   }).toList();
 
-  BottomPicker(
-    items: optionWidgets,
-    title: title ?? 'Pick value',
-    dismissable: true,
-    onSubmit: (pickedOptionIndex) {
-      onChange(options[pickedOptionIndex]);
+  showModalBottomSheet(
+    context: context,
+    builder: (_) {
+      return Wrap(
+        direction: Axis.vertical,
+        children: optionWidgets,
+      );
     },
-  ).show(context);
+  );
 }
