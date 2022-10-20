@@ -1,6 +1,5 @@
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/widgets/add_todo_modal.dart';
 
 void showDateTimePicker({
   required BuildContext context,
