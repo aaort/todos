@@ -47,6 +47,7 @@ void showReminderOptionsPicker<T>({
     builder: (_) {
       return Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: optionWidgets,
       );
     },
