@@ -39,7 +39,7 @@ void showReminderOptionsPicker<T>({
       child: Text(
         capitalizedTitle,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textButtonTheme.style?.textStyle?.resolve({}),
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20.0),
       ),
     );
   }).toList();
