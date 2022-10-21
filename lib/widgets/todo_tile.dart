@@ -34,7 +34,12 @@ class _TodoTileState extends State<TodoTile> {
       final todo = data.getTodoById(widget.id);
       return Dismissible(
         key: UniqueKey(),
-        background: Container(color: Colors.red),
+        background: Container(
+          decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(17.0),
+          ),
+        ),
         onDismissed: (_) => onDeleteTodo(todo),
         confirmDismiss: (_) => confirmDeletion(context),
         child: GestureDetector(
