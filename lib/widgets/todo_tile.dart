@@ -43,7 +43,7 @@ class _TodoTileState extends State<TodoTile> {
         onDismissed: (_) => onDeleteTodo(todo),
         confirmDismiss: (_) => confirmDeletion(context),
         child: GestureDetector(
-          onLongPress: () => toggleTodoState(true),
+          onLongPress: toggleTodoState,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Row(
@@ -57,6 +57,7 @@ class _TodoTileState extends State<TodoTile> {
                       }
                     },
                     child: TextFormField(
+                      autofocus: true,
                       focusNode: focusNode,
                       controller: taskController,
                       enabled: enabled,
@@ -108,12 +109,12 @@ class _TodoTileState extends State<TodoTile> {
   }
 
   void onDiscard(String initialTask) {
-    toggleTodoState(false);
+    toggleTodoState();
     taskController.text = initialTask;
   }
 
   Future<void> onEditTodo(Todo todo) async {
-    toggleTodoState(false);
+    toggleTodoState();
     context.read<Todos>().editTodo(todo.id, taskController.text);
     await TodosIO.editTodo(todo);
   }
@@ -127,18 +128,10 @@ class _TodoTileState extends State<TodoTile> {
     }
   }
 
-  void toggleTodoState(bool editable) {
-    if (editable) {
-      setState(() => enabled = true);
-      // Delay is required for focus to work as expected
-      Future.delayed(
-        const Duration(milliseconds: 100),
-        () => focusNode.requestFocus(),
-      );
-    } else {
-      setState(() => enabled = false);
-      focusNode.unfocus();
-    }
+  void toggleTodoState() async {
+    setState(() => enabled = !enabled);
+    await Future.delayed(const Duration(milliseconds: 100));
+    enabled ? focusNode.requestFocus() : null;
   }
 
   @override
