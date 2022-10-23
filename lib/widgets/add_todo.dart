@@ -99,6 +99,7 @@ class _AddTodoState extends State<AddTodo> {
             ],
           ),
           TextField(
+            key: const Key('createTodoInputId'),
             autofocus: true,
             controller: taskController,
             style: const TextStyle(color: Colors.blueGrey),
@@ -106,6 +107,7 @@ class _AddTodoState extends State<AddTodo> {
           ),
           const SizedBox(height: 30),
           ElevatedButton(
+            key: const Key('createTodoButtonId'),
             onPressed:
                 createEnabled ? () => onCreateTodo(taskController.text) : null,
             child: Text(
