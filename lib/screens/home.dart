@@ -7,24 +7,25 @@ import 'package:todos/widgets/todo_list.dart';
 class Home extends StatelessWidget {
   const Home({super.key});
 
+  showAddTodoModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => const AddTodo(),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueGrey,
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (_) => const AddTodo(),
-            isScrollControlled: true,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
-            ),
-          );
-        },
+        onPressed: () => showAddTodoModal(context),
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
