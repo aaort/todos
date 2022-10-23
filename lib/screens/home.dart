@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
-import 'package:todos/widgets/add_todo_modal.dart';
+import 'package:todos/widgets/add_todo.dart';
 import 'package:todos/widgets/todo_list.dart';
 
 class Home extends StatelessWidget {
