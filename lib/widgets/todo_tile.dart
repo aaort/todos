@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart' hide Checkbox;
+import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/notifications.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/checkbox.dart';
-import 'package:todos/widgets/dismissible_background.dart';
 
 class TodoTile extends StatefulWidget {
   final String id;
@@ -33,12 +33,14 @@ class _TodoTileState extends State<TodoTile> {
   Widget build(BuildContext context) {
     return Consumer<Todos>(builder: (context, data, _) {
       final todo = data.getTodoById(widget.id);
-      return Dismissible(
+      return DismissibleTile(
         key: UniqueKey(),
-        background: const DismissibleBackground(side: Side.left),
-        secondaryBackground: const DismissibleBackground(side: Side.right),
         onDismissed: (_) => onDeleteTodo(todo),
-        confirmDismiss: (_) => confirmDeletion(context),
+        confirmDismiss: (_) => onConfirmDelete(context),
+        ltrDismissedColor: Colors.red,
+        rtlDismissedColor: Colors.red,
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        delayBeforeResize: const Duration(milliseconds: 500),
         child: GestureDetector(
           onLongPress: toggleTodoState,
           child: Container(
@@ -138,7 +140,7 @@ class _TodoTileState extends State<TodoTile> {
   }
 }
 
-Future<bool?> confirmDeletion(BuildContext context) async {
+Future<bool?> onConfirmDelete(BuildContext context) async {
   bool confirmation = true;
   await ScaffoldMessenger.of(context)
       .showSnackBar(
