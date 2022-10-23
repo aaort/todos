@@ -3,7 +3,7 @@ import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart';
 
 class Dismissible extends StatelessWidget {
   final Function onDismissed;
-  final Function onConfirmDismissed;
+  final Future<bool?> Function() onConfirmDismissed;
   final Widget child;
 
   const Dismissible({
