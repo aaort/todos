@@ -5,6 +5,7 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/checkbox.dart';
+import 'package:todos/widgets/dismissible_background.dart';
 
 class TodoTile extends StatefulWidget {
   final String id;
@@ -34,12 +35,8 @@ class _TodoTileState extends State<TodoTile> {
       final todo = data.getTodoById(widget.id);
       return Dismissible(
         key: UniqueKey(),
-        background: Container(
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(17.0),
-          ),
-        ),
+        background: const DismissibleBackground(side: Side.left),
+        secondaryBackground: const DismissibleBackground(side: Side.right),
         onDismissed: (_) => onDeleteTodo(todo),
         confirmDismiss: (_) => confirmDeletion(context),
         child: GestureDetector(
