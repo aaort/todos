@@ -59,7 +59,7 @@ class _AddTodoState extends State<AddTodo> {
         await Future.delayed(const Duration(milliseconds: 400));
         showDateTimePicker(
           context: context,
-          title: 'Set reminder date and time',
+          title: 'Remind me...',
           initialDateTime: _reminderDateTime,
           onChange: onDateTimeChange,
         );
