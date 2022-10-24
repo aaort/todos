@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueGrey,
         onPressed: () => showAddTodoModal(context),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.edit_outlined),
       ),
       body: SafeArea(
         bottom: false,
