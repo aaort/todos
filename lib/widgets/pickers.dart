@@ -1,5 +1,4 @@
 import 'package:bottom_picker/bottom_picker.dart';
-import 'package:bottom_picker/resources/arrays.dart';
 import 'package:flutter/material.dart';
 
 void showDateTimePicker({
@@ -14,7 +13,7 @@ void showDateTimePicker({
     title: title ?? "Pick date and time",
     initialDateTime: initialDateTime,
     titleStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 25.0),
-    bottomPickerTheme: BottomPickerTheme.blue,
+    pickerTextStyle: const TextStyle(fontSize: 20.0, color: Colors.blueGrey),
     onChange: (pickedReminderDateTime) {
       onChange(pickedReminderDateTime);
     },
