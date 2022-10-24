@@ -16,10 +16,10 @@ void showDateTimePicker({
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Text(title ?? 'Remind me in...',
-                style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 20.0),
+          Text(
+            title ?? 'Remind me in...',
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 3,
@@ -33,12 +33,7 @@ void showDateTimePicker({
               onChange(dateTime);
               Navigator.pop(context);
             },
-            child: Text('Done',
-                style: Theme.of(context)
-                    .textButtonTheme
-                    .style
-                    ?.textStyle
-                    ?.resolve({})),
+            child: Text('Done', style: Theme.of(context).textTheme.bodySmall),
           ),
         ],
       ),
