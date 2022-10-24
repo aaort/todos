@@ -4,6 +4,7 @@ void popupModalBottomSheet(
     {required BuildContext context, required Widget child}) {
   showModalBottomSheet<void>(
     context: context,
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(20),
