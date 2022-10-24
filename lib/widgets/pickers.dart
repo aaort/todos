@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todos/widgets/modal_bottom_sheet.dart';
 
 void showDateTimePicker({
   required BuildContext context,
@@ -9,49 +10,42 @@ void showDateTimePicker({
 }) {
   DateTime dateTime = initialDateTime ?? DateTime.now();
 
-  showModalBottomSheet<void>(
+  popupModalBottomSheet(
     context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20),
+    child: SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Text(title ?? 'Remind me in...',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(fontSize: 25.0)),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 3,
+            child: CupertinoDatePicker(
+              onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
+              initialDateTime: initialDateTime,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              onChange(dateTime);
+              Navigator.pop(context);
+            },
+            child: Text('Done',
+                style: Theme.of(context)
+                    .textButtonTheme
+                    .style
+                    ?.textStyle
+                    ?.resolve({})),
+          ),
+        ],
       ),
     ),
-    builder: (_) {
-      return SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: Text(title ?? 'Remind me in...',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(fontSize: 25.0)),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 3,
-              child: CupertinoDatePicker(
-                onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
-                initialDateTime: initialDateTime,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                onChange(dateTime);
-                Navigator.pop(context);
-              },
-              child: Text('Done',
-                  style: Theme.of(context)
-                      .textButtonTheme
-                      .style
-                      ?.textStyle
-                      ?.resolve({})),
-            ),
-          ],
-        ),
-      );
-    },
   );
 }
 
@@ -75,21 +69,14 @@ void showReminderOptionsPicker<T>({
     );
   }).toList();
 
-  showModalBottomSheet(
+  popupModalBottomSheet(
     context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20),
+    child: SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: optionWidgets,
       ),
     ),
-    builder: (_) {
-      return SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: optionWidgets,
-        ),
-      );
-    },
   );
 }

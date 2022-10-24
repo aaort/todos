@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/widgets/add_todo.dart';
+import 'package:todos/widgets/modal_bottom_sheet.dart';
 import 'package:todos/widgets/todo_list.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   showAddTodoModal(BuildContext context) {
-    showModalBottomSheet(
+    popupModalBottomSheet(
       context: context,
-      builder: (_) => const AddTodo(),
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(20),
-        ),
-      ),
+      child: const AddTodo(),
     );
   }
 
