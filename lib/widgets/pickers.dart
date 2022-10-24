@@ -19,10 +19,7 @@ void showDateTimePicker({
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: Text(title ?? 'Remind me in...',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontSize: 25.0)),
+                style: Theme.of(context).textTheme.titleSmall),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 3,
