@@ -110,9 +110,12 @@ class _AddTodoState extends State<AddTodo> {
             key: const Key('createTodoButtonId'),
             onPressed:
                 createEnabled ? () => onCreateTodo(taskController.text) : null,
-            child: Text(
-              'Save',
-              style: Theme.of(context).textTheme.bodyMedium,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                'Save',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ),
           ),
         ],
