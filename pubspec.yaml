@@ -40,8 +40,6 @@ dependencies:
   uuid: ^3.0.6
   flutter_local_notifications: ^12.0.2
   flutter_dismissible_tile: ^1.0.1+1
-  bottom_picker:
-    git: https://github.com/aaort/Bottom-Picker.git
 
 dev_dependencies:
   flutter_test:

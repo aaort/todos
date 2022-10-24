@@ -1,4 +1,4 @@
-import 'package:bottom_picker/bottom_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void showDateTimePicker({
@@ -7,20 +7,52 @@ void showDateTimePicker({
   DateTime? initialDateTime,
   required Function(DateTime) onChange,
 }) {
-  initialDateTime ??= DateTime.now();
+  DateTime dateTime = initialDateTime ?? DateTime.now();
 
-  BottomPicker.dateTime(
-    title: title ?? "Pick date and time",
-    initialDateTime: initialDateTime,
-    titleStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 25.0),
-    pickerTextStyle: const TextStyle(fontSize: 20.0, color: Colors.blueGrey),
-    onChange: (pickedReminderDateTime) {
-      onChange(pickedReminderDateTime);
+  showModalBottomSheet<void>(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(20),
+      ),
+    ),
+    builder: (_) {
+      return SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Text(title ?? 'Remind me in...',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(fontSize: 25.0)),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+              child: CupertinoDatePicker(
+                onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
+                initialDateTime: initialDateTime,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                onChange(dateTime);
+                Navigator.pop(context);
+              },
+              child: Text('Done',
+                  style: Theme.of(context)
+                      .textButtonTheme
+                      .style
+                      ?.textStyle
+                      ?.resolve({})),
+            ),
+          ],
+        ),
+      );
     },
-    dismissable: true,
-    displaySubmitButton: false,
-    displayCloseIcon: false,
-  ).show(context);
+  );
 }
 
 void showReminderOptionsPicker<T>({
