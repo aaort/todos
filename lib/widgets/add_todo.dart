@@ -102,7 +102,7 @@ class _AddTodoState extends State<AddTodo> {
             key: const Key('createTodoInputId'),
             autofocus: true,
             controller: taskController,
-            style: const TextStyle(color: Colors.blueGrey),
+            style: Theme.of(context).textTheme.bodySmall,
             cursorColor: Colors.blueGrey,
           ),
           const SizedBox(height: 30),
