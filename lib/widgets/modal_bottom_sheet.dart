@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
-void popupModalBottomSheet(
-    {required BuildContext context,
-    required Widget child,
-    EdgeInsets? padding}) {
+void popupModalBottomSheet({
+  required BuildContext context,
+  required Widget child,
+  EdgeInsets? padding,
+}) {
   showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
