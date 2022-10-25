@@ -121,11 +121,14 @@ class _AddTodoState extends State<AddTodo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                GestureDetector(
-                  onTap: onReminderOptionPick,
-                  child: Text(
-                    _getReminderText(_reminderDateTime!),
-                    style: Theme.of(context).textTheme.bodySmall,
+                Flexible(
+                  flex: 8,
+                  child: GestureDetector(
+                    onTap: onReminderOptionPick,
+                    child: Text(
+                      _getReminderText(_reminderDateTime!),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                 ),
                 InkWell(
