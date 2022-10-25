@@ -120,7 +120,7 @@ class _AddTodoState extends State<AddTodo> {
             ),
           ),
           if (_reminderDateTime != null) ...[
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
