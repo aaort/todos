@@ -79,7 +79,7 @@ class _TodoTileState extends State<TodoTile> {
                           icon: const Icon(Icons.close),
                         ),
                         IconButton(
-                          padding: const EdgeInsets.all(0),
+                          padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
                           onPressed: () {
                             final newTodo = todo;
