@@ -60,6 +60,7 @@ class App extends StatelessWidget {
             color: Colors.blueGrey,
             size: 27,
           ),
+          disabledColor: Colors.blueGrey.shade200,
           inputDecorationTheme: const InputDecorationTheme(
             border: InputBorder.none,
           ),
