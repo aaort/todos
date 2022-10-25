@@ -40,8 +40,8 @@ class _TodoTileState extends State<TodoTile> {
     return Consumer<Todos>(builder: (context, data, _) {
       final todo = data.getTodoById(widget.id);
       return Dismissible(
-        onDismissed: () => onDeleteTodo(todo),
-        onConfirmDismissed: () => onConfirmDelete(context),
+        onDismiss: () => onDeleteTodo(todo),
+        onConfirmDismiss: () => onConfirmDelete(context),
         child: GestureDetector(
           onLongPress: toggleTodoState,
           child: Container(

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart';
 
 class Dismissible extends StatelessWidget {
-  final Function onDismissed;
-  final Future<bool?> Function() onConfirmDismissed;
+  final Function onDismiss;
+  final Future<bool?> Function() onConfirmDismiss;
   final Widget child;
 
   const Dismissible({
     super.key,
-    required this.onDismissed,
-    required this.onConfirmDismissed,
+    required this.onDismiss,
+    required this.onConfirmDismiss,
     required this.child,
   });
 
@@ -17,8 +17,8 @@ class Dismissible extends StatelessWidget {
   Widget build(BuildContext context) {
     return DismissibleTile(
       key: UniqueKey(),
-      onDismissed: (_) => onDismissed(),
-      confirmDismiss: (_) => onConfirmDismissed(),
+      onDismissed: (_) => onDismiss(),
+      confirmDismiss: (_) => onConfirmDismiss(),
       ltrDismissedColor: Colors.red,
       ltrOverlay: const Icon(
         Icons.delete_outline_rounded,
