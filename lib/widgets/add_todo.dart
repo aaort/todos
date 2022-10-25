@@ -90,9 +90,13 @@ class _AddTodoState extends State<AddTodo> {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              InkWell(
-                onTap: createEnabled ? onReminderOptionPick : null,
-                child: const Icon(Icons.date_range),
+              IconButton(
+                onPressed: createEnabled ? onReminderOptionPick : null,
+                constraints: const BoxConstraints(),
+                padding: EdgeInsets.zero,
+                icon: const Icon(
+                  Icons.date_range,
+                ),
               ),
             ],
           ),
@@ -131,9 +135,11 @@ class _AddTodoState extends State<AddTodo> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () => setState(() => _reminderDateTime = null),
-                  child: const Icon(Icons.delete_forever_outlined),
+                IconButton(
+                  onPressed: () => setState(() => _reminderDateTime = null),
+                  constraints: const BoxConstraints(),
+                  padding: EdgeInsets.zero,
+                  icon: const Icon(Icons.delete_forever_outlined),
                 )
               ],
             ),
@@ -163,6 +169,7 @@ class _AddTodoState extends State<AddTodo> {
   }
 }
 
+// TODO: need refactor
 String _getReminderText(DateTime dateTime) {
   final diff = dateTime.difference(DateTime.now());
   if (diff.inHours < 1) {
