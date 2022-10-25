@@ -12,9 +12,8 @@ class TodoList extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20),
           ),
         ),
         child: Consumer<Todos>(
