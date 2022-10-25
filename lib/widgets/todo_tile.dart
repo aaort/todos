@@ -21,6 +21,12 @@ class _TodoTileState extends State<TodoTile> {
   late FocusNode focusNode;
   late TextEditingController taskController;
 
+  void onFocusChange(bool hasFocus) {
+    if (!hasFocus) {
+      setState(() => enabled = false);
+    }
+  }
+
   @override
   void initState() {
     focusNode = FocusNode();
@@ -45,11 +51,7 @@ class _TodoTileState extends State<TodoTile> {
               children: [
                 Flexible(
                   child: Focus(
-                    onFocusChange: (hasFocus) {
-                      if (!hasFocus) {
-                        setState(() => enabled = false);
-                      }
-                    },
+                    onFocusChange: onFocusChange,
                     child: TextFormField(
                       autofocus: true,
                       focusNode: focusNode,
