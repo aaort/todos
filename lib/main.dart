@@ -64,9 +64,14 @@ class App extends StatelessWidget {
           inputDecorationTheme: const InputDecorationTheme(
             border: InputBorder.none,
           ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.blueGrey,
+            elevation: 2.0,
+          ),
           snackBarTheme: const SnackBarThemeData(
             backgroundColor: Colors.blueGrey,
             actionTextColor: Colors.white,
+            elevation: 2.0,
             contentTextStyle: TextStyle(color: Colors.white),
           ),
           textButtonTheme: TextButtonThemeData(
