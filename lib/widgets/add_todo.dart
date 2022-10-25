@@ -46,12 +46,12 @@ class _AddTodoState extends State<AddTodo> {
     switch (option) {
       case ReminderOption.in_5_minutes:
         setState(() {
-          _reminderDateTime = DateTime.now().add(const Duration(minutes: 5));
+          _reminderDateTime = DateTime.now().add(const Duration(minutes: 6));
         });
         break;
       case ReminderOption.in_15_minutes:
         setState(() {
-          _reminderDateTime = DateTime.now().add(const Duration(minutes: 15));
+          _reminderDateTime = DateTime.now().add(const Duration(minutes: 16));
         });
         break;
       case ReminderOption.custom_date_and_time:
