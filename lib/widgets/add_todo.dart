@@ -95,7 +95,7 @@ class _AddTodoState extends State<AddTodo> {
                 constraints: const BoxConstraints(),
                 padding: EdgeInsets.zero,
                 icon: const Icon(
-                  Icons.date_range,
+                  Icons.timer_outlined,
                 ),
               ),
             ],
