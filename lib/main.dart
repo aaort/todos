@@ -81,6 +81,7 @@ class App extends StatelessWidget {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
+              elevation: MaterialStateProperty.resolveWith(getButtonElevation),
               backgroundColor:
                   MaterialStateProperty.resolveWith(getButtonColor),
               shape: MaterialStateProperty.resolveWith(
@@ -94,6 +95,14 @@ class App extends StatelessWidget {
         home: const Home(),
       ),
     );
+  }
+}
+
+double getButtonElevation(Set<MaterialState> states) {
+  if (states.contains(MaterialState.disabled)) {
+    return 0;
+  } else {
+    return 2.0;
   }
 }
 
