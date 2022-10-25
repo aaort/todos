@@ -79,6 +79,13 @@ class _TodoTileState extends State<TodoTile> {
                           icon: const Icon(Icons.close),
                         ),
                         IconButton(
+                          padding: const EdgeInsets.only(right: 10.0),
+                          constraints: const BoxConstraints(),
+                          // TODO: implement reminder editing
+                          onPressed: () {},
+                          icon: const Icon(Icons.timer_outlined),
+                        ),
+                        IconButton(
                           padding: EdgeInsets.zero,
                           constraints: const BoxConstraints(),
                           onPressed: () {
