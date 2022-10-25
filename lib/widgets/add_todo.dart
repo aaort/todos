@@ -47,14 +47,10 @@ class _AddTodoState extends State<AddTodo> {
     Navigator.pop(context);
     switch (option) {
       case ReminderOption.in_5_minutes:
-        setState(() {
-          _reminderDateTime = DateTime.now().add(const Duration(minutes: 6));
-        });
+        onDateTimeChange(DateTime.now().add(const Duration(minutes: 6)));
         break;
       case ReminderOption.in_15_minutes:
-        setState(() {
-          _reminderDateTime = DateTime.now().add(const Duration(minutes: 16));
-        });
+        onDateTimeChange(DateTime.now().add(const Duration(minutes: 16)));
         break;
       case ReminderOption.custom_date_and_time:
         FocusManager.instance.primaryFocus?.unfocus();
