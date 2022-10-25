@@ -67,7 +67,7 @@ class _AddTodoState extends State<AddTodo> {
   @override
   void initState() {
     taskController.addListener(() {
-      setState(() => createEnabled = taskController.text.length >= 5);
+      setState(() => createEnabled = taskController.text.isNotEmpty);
     });
     super.initState();
   }
@@ -110,8 +110,7 @@ class _AddTodoState extends State<AddTodo> {
           const SizedBox(height: 30),
           ElevatedButton(
             key: const Key('createTodoButtonId'),
-            onPressed:
-                createEnabled ? () => onCreateTodo(taskController.text) : null,
+            onPressed: onCreateTodo,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Text(
@@ -149,7 +148,12 @@ class _AddTodoState extends State<AddTodo> {
     );
   }
 
-  Future<void> onCreateTodo(String task) async {
+  Future<void> onCreateTodo() async {
+    final task = taskController.text;
+    if (task.isEmpty) {
+      Navigator.pop(context);
+      return;
+    }
     final reminderDateTime = _reminderDateTime;
     final todo = Todo(task, scheduled: reminderDateTime != null);
     context.read<Todos>().addTodo(todo);
