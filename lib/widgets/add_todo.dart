@@ -41,6 +41,21 @@ class _AddTodoState extends State<AddTodo> {
   void onDateTimeChange(DateTime newDateTime) =>
       setState(() => _reminderDateTime = newDateTime);
 
+  String? get _getReminderText {
+    final pickedReminderDateTime = _reminderDateTime;
+    if (pickedReminderDateTime == null) return null;
+    final currentDateTime = DateTime.now();
+    final diff = pickedReminderDateTime.difference(currentDateTime);
+    if (diff.inHours < 1) {
+      return 'Remind me in ${diff.inMinutes.toString()} minutes';
+    } else if (diff.inHours < 24) {
+      return 'Remind me today at ${pickedReminderDateTime.hour.toString().padLeft(2, '0')}'
+          ':${pickedReminderDateTime.minute.toString().padLeft(2, '0')}';
+    } else {
+      return 'Remind me in ${diff.inDays} day${diff.inDays > 1 ? 's' : ''}';
+    }
+  }
+
   void onReminderOptionChange(ReminderOption option) async {
     Navigator.pop(context);
     switch (option) {
@@ -118,6 +133,17 @@ class _AddTodoState extends State<AddTodo> {
               ),
             ),
           ),
+          if (_reminderDateTime != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: GestureDetector(
+                onTap: onReminderOptionPick,
+                child: Text(
+                  _getReminderText!,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+            ),
         ],
       ),
     );
