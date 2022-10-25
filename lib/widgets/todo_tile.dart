@@ -41,7 +41,7 @@ class _TodoTileState extends State<TodoTile> {
       final todo = data.getTodoById(widget.id);
       return Dismissible(
         onDismiss: () => onDeleteTodo(todo),
-        onConfirmDismiss: () => onConfirmDelete(context),
+        onConfirmDismiss: () => _onConfirmDelete(context),
         child: GestureDetector(
           onLongPress: toggleTodoState,
           child: Container(
@@ -137,7 +137,7 @@ class _TodoTileState extends State<TodoTile> {
   }
 }
 
-Future<bool?> onConfirmDelete(BuildContext context) async {
+Future<bool?> _onConfirmDelete(BuildContext context) async {
   bool confirmation = true;
   await ScaffoldMessenger.of(context)
       .showSnackBar(
