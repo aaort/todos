@@ -25,7 +25,8 @@ void showDateTimePicker({
             height: MediaQuery.of(context).size.height / 3,
             child: CupertinoDatePicker(
               onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
-              initialDateTime: initialDateTime,
+              minimumDate: dateTime,
+              initialDateTime: dateTime,
             ),
           ),
           InkWell(
