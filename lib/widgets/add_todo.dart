@@ -37,8 +37,11 @@ class _AddTodoState extends State<AddTodo> {
     );
   }
 
-  void onDateTimeChange(DateTime newDateTime) =>
-      setState(() => _reminderDateTime = newDateTime);
+  void onDateTimeChange(DateTime newDateTime) {
+    setState(() {
+      _reminderDateTime = newDateTime.add(const Duration(milliseconds: 10));
+    });
+  }
 
   void onReminderOptionChange(ReminderOption option) async {
     Navigator.pop(context);
