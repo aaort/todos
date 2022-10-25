@@ -22,8 +22,6 @@ class Home extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         floatingActionButton: FloatingActionButton(
-          elevation: 2.0,
-          backgroundColor: Colors.blueGrey,
           onPressed: () => showAddTodoModal(context),
           child: const Icon(Icons.edit_outlined),
         ),
