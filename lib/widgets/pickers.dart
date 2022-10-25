@@ -26,7 +26,8 @@ void showDateTimePicker({
             child: CupertinoDatePicker(
               onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
               minimumDate: DateTime.now(),
-              initialDateTime: dateTime,
+              // Append some time to initial date to avoid conflicts
+              initialDateTime: dateTime.add(const Duration(seconds: 10)),
             ),
           ),
           InkWell(
