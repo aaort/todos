@@ -1,5 +1,4 @@
 // ignore_for_file: constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/notifications.dart';
@@ -92,9 +91,9 @@ class _AddTodoState extends State<AddTodo> {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              IconButton(
-                icon: const Icon(Icons.date_range),
-                onPressed: createEnabled ? onReminderOptionPick : null,
+              InkWell(
+                onTap: createEnabled ? onReminderOptionPick : null,
+                child: const Icon(Icons.date_range),
               ),
             ],
           ),
@@ -120,12 +119,21 @@ class _AddTodoState extends State<AddTodo> {
           ),
           if (_reminderDateTime != null) ...[
             const SizedBox(height: 20),
-            GestureDetector(
-              onTap: onReminderOptionPick,
-              child: Text(
-                _getReminderText(_reminderDateTime!),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: onReminderOptionPick,
+                  child: Text(
+                    _getReminderText(_reminderDateTime!),
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => setState(() => _reminderDateTime = null),
+                  child: const Icon(Icons.delete_forever_outlined),
+                )
+              ],
             ),
           ]
         ],
