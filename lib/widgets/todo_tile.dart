@@ -41,7 +41,6 @@ class _TodoTileState extends State<TodoTile> {
       final todo = data.getTodoById(widget.id);
       return Dismissible(
         onDismiss: () => onDeleteTodo(todo),
-        onConfirmDismiss: () => _onConfirmDelete(context),
         child: GestureDetector(
           onLongPress: toggleTodoState,
           child: Container(
@@ -142,26 +141,4 @@ class _TodoTileState extends State<TodoTile> {
     focusNode.dispose();
     super.dispose();
   }
-}
-
-Future<bool?> _onConfirmDelete(BuildContext context) async {
-  bool confirmation = true;
-  await ScaffoldMessenger.of(context)
-      .showSnackBar(
-        SnackBar(
-          content: const Text('Todo\'s deleted'),
-          duration: const Duration(seconds: 4),
-          width: MediaQuery.of(context).size.width - 30,
-          behavior: SnackBarBehavior.floating,
-          action: SnackBarAction(
-            label: 'Undo',
-            onPressed: () {
-              confirmation = false;
-            },
-          ),
-        ),
-      )
-      .closed;
-
-  return confirmation;
 }
