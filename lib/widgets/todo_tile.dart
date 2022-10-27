@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide Checkbox, Dismissible;
+import 'package:flutter/material.dart' hide Checkbox;
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
