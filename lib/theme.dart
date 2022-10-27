@@ -62,10 +62,8 @@ final themeData = ThemeData(
     style: ButtonStyle(
       elevation: MaterialStateProperty.resolveWith(getButtonElevation),
       backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
-      shape: MaterialStateProperty.resolveWith(
-        (_) => RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       ),
     ),
   ),
