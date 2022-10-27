@@ -46,6 +46,9 @@ class _TodoTileState extends State<TodoTile> {
                   child: TextFormField(
                     autofocus: true,
                     focusNode: focusNode,
+
+                    /// Probably not the best solution because
+                    /// will update text on each rerender
                     controller: taskController..text = todo.task,
                     enabled: enabled,
                     cursorColor: Colors.blueGrey,
