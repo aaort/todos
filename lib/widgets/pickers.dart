@@ -4,9 +4,9 @@ import 'package:todos/widgets/modal_bottom_sheet.dart';
 
 void showDateTimePicker({
   required BuildContext context,
+  required Function(DateTime) onChange,
   String? title,
   DateTime? initialDateTime,
-  required Function(DateTime) onChange,
 }) {
   DateTime dateTime = initialDateTime ?? DateTime.now();
 

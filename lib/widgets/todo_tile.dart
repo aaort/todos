@@ -6,6 +6,7 @@ import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/checkbox.dart';
 import 'package:todos/widgets/dismissible.dart';
+import 'package:todos/widgets/pickers.dart';
 
 class TodoTile extends StatefulWidget {
   final String id;
@@ -27,9 +28,26 @@ class _TodoTileState extends State<TodoTile> {
     }
   }
 
+  void onReminderDateTimeUpdate(DateTime newDateTime) {
+    final todo = context.read<Todos>().getTodoById(widget.id);
+    context.read<Todos>().getTodoById(widget.id).updateReminder(newDateTime);
+    Notifications.updateTodoReminder(todo);
+  }
+
+  void onReminderPressed() {
+    final todo = context.read<Todos>().getTodoById(widget.id);
+    showDateTimePicker(
+      context: context,
+      onChange: onReminderDateTimeUpdate,
+      initialDateTime: todo.reminderDateTime,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final todo = context.watch<Todos>().getTodoById(widget.id);
+    final bool canSetReminder =
+        todo.reminderDateTime?.isAfter(DateTime.now()) ?? false;
 
     return Dismissible(
       onDismiss: () => onDeleteTodo(todo),
@@ -76,7 +94,7 @@ class _TodoTileState extends State<TodoTile> {
                         padding: const EdgeInsets.only(right: 10.0),
                         constraints: const BoxConstraints(),
                         // TODO: implement reminder editing
-                        onPressed: () {},
+                        onPressed: canSetReminder ? onReminderPressed : null,
                         icon: const Icon(Icons.timer_outlined),
                       ),
                       IconButton(

@@ -6,6 +6,14 @@ import 'package:todos/logic/todo.dart';
 
 const _appDirName = 'todos';
 
+dynamic _toEncodable(value) {
+  if (value is DateTime) {
+    return value.toIso8601String();
+  }
+
+  return value;
+}
+
 class TodosIO {
   static Future<String> get _getAppDir async {
     final directory = await getApplicationDocumentsDirectory();
@@ -57,6 +65,7 @@ class TodosIO {
           task: todoMap['task'],
           checked: todoMap['checked'],
           id: todoMap['id'],
+          reminderDateTime: DateTime.parse(todoMap['reminderDateTime']),
           reminderId: todoMap['reminderId'],
         ),
       );
@@ -70,14 +79,17 @@ class TodosIO {
     final filename = todo.id;
     final file = await File('$dirPath/$_appDirName/$filename.json')
         .create(recursive: true);
-    final content = jsonEncode(todo.asMap);
+    final content = jsonEncode(
+      todo.asMap,
+      toEncodable: _toEncodable,
+    );
     await file.writeAsString(content);
   }
 
   static Future<void> editTodo(Todo todo) async {
     final file = await _getTodoFileById(todo.id);
     if (file == null) throw 'file with a given id is not found';
-    await file.writeAsString(jsonEncode(todo.asMap));
+    await file.writeAsString(jsonEncode(todo.asMap, toEncodable: _toEncodable));
   }
 
   static Future<void> deleteTodo(String id) async {

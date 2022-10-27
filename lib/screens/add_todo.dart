@@ -154,13 +154,12 @@ class _AddTodoState extends State<AddTodo> {
       Navigator.pop(context);
       return;
     }
-    final reminderDateTime = _reminderDateTime;
-    final todo = Todo(task, scheduled: reminderDateTime != null);
+    final todo = Todo(task, reminderDateTime: _reminderDateTime);
     context.read<Todos>().addTodo(todo);
     await TodosIO.createTodo(todo);
 
-    if (reminderDateTime != null) {
-      Notifications.addTodoReminder(reminderDateTime, todo);
+    if (todo.reminderDateTime != null) {
+      Notifications.addTodoReminder(todo);
     }
 
     if (mounted) Navigator.pop(context);

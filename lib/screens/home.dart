@@ -5,8 +5,20 @@ import 'package:todos/screens/add_todo.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 import 'package:todos/widgets/todo_list.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with TickerProviderStateMixin {
+  late final _animController = AnimationController(
+    duration: const Duration(seconds: 1),
+    vsync: this,
+  );
+  late final _animation =
+      CurvedAnimation(parent: _animController, curve: Curves.bounceIn);
 
   showAddTodoModal(BuildContext context) {
     popupModalBottomSheet(
@@ -16,14 +28,23 @@ class Home extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    _animController.forward();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => showAddTodoModal(context),
-          child: const Icon(Icons.edit_outlined),
+        floatingActionButton: ScaleTransition(
+          scale: _animation,
+          child: FloatingActionButton(
+            onPressed: () => showAddTodoModal(context),
+            child: const Icon(Icons.edit_outlined),
+          ),
         ),
         body: SafeArea(
           bottom: false,

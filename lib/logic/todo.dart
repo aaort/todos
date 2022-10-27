@@ -6,13 +6,13 @@ class Todo {
   String task;
   bool checked;
   late final String id;
-  bool? scheduled;
+  DateTime? reminderDateTime;
 
   int? reminderId;
 
-  Todo(this.task, {this.checked = false, this.scheduled = false}) {
+  Todo(this.task, {this.checked = false, this.reminderDateTime}) {
     id = const Uuid().v4();
-    if (scheduled!) {
+    if (reminderDateTime != null) {
       reminderId = Random().nextInt(1000);
     }
   }
@@ -21,6 +21,7 @@ class Todo {
     required this.task,
     required this.checked,
     required this.id,
+    required this.reminderDateTime,
     this.reminderId,
   });
 
@@ -28,6 +29,15 @@ class Todo {
     checked = !checked;
   }
 
-  Map<String, dynamic> get asMap =>
-      {'task': task, 'checked': checked, 'id': id, 'reminderId': reminderId};
+  void updateReminder(DateTime newReminderDateTime) {
+    reminderDateTime = newReminderDateTime;
+  }
+
+  Map<String, dynamic> get asMap => {
+        'task': task,
+        'checked': checked,
+        'id': id,
+        'reminderDateTime': reminderDateTime,
+        'reminderId': reminderId
+      };
 }

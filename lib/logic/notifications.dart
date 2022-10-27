@@ -53,10 +53,10 @@ class Notifications {
     channel.name,
   );
 
-  static Future<void> addTodoReminder(DateTime reminderDate, Todo todo) async {
+  static Future<void> addTodoReminder(Todo todo) async {
     tz.initializeTimeZones();
 
-    final scheduleDate = tz.TZDateTime.from(reminderDate, tz.local);
+    final scheduleDate = tz.TZDateTime.from(todo.reminderDateTime!, tz.local);
 
     FlutterLocalNotificationsPlugin().zonedSchedule(
       todo.reminderId!,
@@ -76,8 +76,20 @@ class Notifications {
   static Future<void> removeTodoReminder(int id) async {
     try {
       await FlutterLocalNotificationsPlugin().cancel(id);
+      (await FlutterLocalNotificationsPlugin().getActiveNotifications())
+          .first
+          .id;
     } catch (e) {
       throw 'Failed to cancel notification with id: $id, error: $e';
+    }
+  }
+
+  static Future<void> updateTodoReminder(Todo todo) async {
+    try {
+      await FlutterLocalNotificationsPlugin().cancel(todo.reminderId!);
+      addTodoReminder(todo);
+    } catch (e) {
+      throw 'Failed to cancel notification with id: ${todo.id}, error: $e';
     }
   }
 }
