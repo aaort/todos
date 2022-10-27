@@ -87,9 +87,7 @@ class _TodoTileState extends State<TodoTile> {
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                         onPressed: () {
-                          final newTodo = todo;
-                          newTodo.task = taskController.text;
-                          onEditTodo(newTodo);
+                          onEditTodo(todo..task = taskController.text);
                         },
                         icon: const Icon(Icons.check),
                       )
