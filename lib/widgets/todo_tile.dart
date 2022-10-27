@@ -18,8 +18,8 @@ class TodoTile extends StatefulWidget {
 
 class _TodoTileState extends State<TodoTile> {
   bool enabled = false;
-  late FocusNode focusNode;
-  late TextEditingController taskController;
+  final FocusNode focusNode = FocusNode();
+  late TextEditingController taskController = TextEditingController();
 
   void onFocusChange(bool hasFocus) {
     if (!hasFocus) {
@@ -28,16 +28,9 @@ class _TodoTileState extends State<TodoTile> {
   }
 
   @override
-  void initState() {
-    focusNode = FocusNode();
-    final initialTask = context.read<Todos>().getTodoById(widget.id).task;
-    taskController = TextEditingController(text: initialTask);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final todo = context.watch<Todos>().getTodoById(widget.id);
+
     return Dismissible(
       onDismiss: () => onDeleteTodo(todo),
       child: GestureDetector(
@@ -53,7 +46,7 @@ class _TodoTileState extends State<TodoTile> {
                   child: TextFormField(
                     autofocus: true,
                     focusNode: focusNode,
-                    controller: taskController,
+                    controller: taskController..text = todo.task,
                     enabled: enabled,
                     cursorColor: Colors.blueGrey,
                     textCapitalization: TextCapitalization.sentences,
