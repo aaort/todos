@@ -60,12 +60,15 @@ class TodosIO {
     final todos = <Todo>[];
     for (File file in todoFiles) {
       final todoMap = jsonDecode((await file.readAsString())) as Map;
+      final reminderDateTime = todoMap['reminderDateTime'] != null
+          ? DateTime.parse(todoMap['reminderDateTime'])
+          : null;
       todos.add(
         Todo.fromMap(
           task: todoMap['task'],
           checked: todoMap['checked'],
           id: todoMap['id'],
-          reminderDateTime: DateTime.parse(todoMap['reminderDateTime']),
+          reminderDateTime: reminderDateTime,
           reminderId: todoMap['reminderId'],
         ),
       );
