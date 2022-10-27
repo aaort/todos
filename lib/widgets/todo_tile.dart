@@ -42,7 +42,7 @@ class _TodoTileState extends State<TodoTile> {
       onDismiss: () => onDeleteTodo(todo),
       child: GestureDetector(
         onLongPress: toggleTodoState,
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
