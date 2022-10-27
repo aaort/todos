@@ -71,29 +71,18 @@ final themeData = ThemeData(
   ),
 );
 
-double getButtonElevation(Set<MaterialState> states) {
-  if (states.contains(MaterialState.disabled)) {
-    return 0;
-  } else {
-    return 2.0;
-  }
-}
+double getButtonElevation(Set<MaterialState> states) =>
+    states.contains(MaterialState.disabled) ? 2.0 : 0;
 
 Color getButtonColor(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.disabled
-  };
-  if (states.any(interactiveStates.contains)) {
+  if (states.contains(MaterialState.disabled)) {
     return Colors.blueGrey.shade200;
   }
   return Colors.blueGrey;
 }
 
 TextStyle getButtonTextStyle(Set<MaterialState> states) {
-  const Set<MaterialState> interactiveStates = <MaterialState>{
-    MaterialState.disabled
-  };
-  if (states.any(interactiveStates.contains)) {
+  if (states.contains(MaterialState.disabled)) {
     return TextStyle(color: Colors.blueGrey.shade200);
   }
   return const TextStyle(color: Colors.blueGrey);
