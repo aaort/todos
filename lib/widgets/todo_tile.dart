@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart' hide Checkbox, Dismissible;
 import 'package:provider/provider.dart';
-import 'package:todos/logic/notifications.dart';
-import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
-import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/checkbox.dart';
 import 'package:todos/widgets/dismissible.dart';
-import 'package:todos/widgets/pickers.dart';
 
 class TodoTile extends StatefulWidget {
   final String id;
@@ -28,21 +25,6 @@ class _TodoTileState extends State<TodoTile> {
     }
   }
 
-  void onReminderDateTimeUpdate(DateTime newDateTime) {
-    final todo = context.read<Todos>().getTodoById(widget.id);
-    context.read<Todos>().getTodoById(widget.id).updateReminder(newDateTime);
-    Notifications.updateTodoReminder(todo);
-  }
-
-  void onReminderPressed() {
-    final todo = context.read<Todos>().getTodoById(widget.id);
-    showDateTimePicker(
-      context: context,
-      onChange: onReminderDateTimeUpdate,
-      initialDateTime: todo.reminderDateTime,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final todo = context.watch<Todos>().getTodoById(widget.id);
@@ -50,7 +32,7 @@ class _TodoTileState extends State<TodoTile> {
         todo.reminderDateTime?.isAfter(DateTime.now()) ?? false;
 
     return Dismissible(
-      onDismiss: () => onDeleteTodo(todo),
+      onDismiss: () => TodoActions(context, todo).onDeleteTodo(todo),
       child: GestureDetector(
         onLongPress: toggleTodoState,
         child: Padding(
@@ -94,14 +76,20 @@ class _TodoTileState extends State<TodoTile> {
                         padding: const EdgeInsets.only(right: 10.0),
                         constraints: const BoxConstraints(),
                         // TODO: implement reminder editing
-                        onPressed: canSetReminder ? onReminderPressed : null,
+                        onPressed: canSetReminder
+                            ? TodoActions(context, todo).onReminderPressed
+                            : null,
                         icon: const Icon(Icons.timer_outlined),
                       ),
                       IconButton(
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
                         onPressed: () {
-                          onEditTodo(todo..task = taskController.text);
+                          final newTodo = todo..task = taskController.text;
+                          toggleTodoState();
+                          TodoActions(context, newTodo).onEditTodo(
+                            newTodo,
+                          );
                         },
                         icon: const Icon(Icons.check),
                       )
@@ -126,21 +114,6 @@ class _TodoTileState extends State<TodoTile> {
     taskController.text = initialTask;
   }
 
-  Future<void> onEditTodo(Todo todo) async {
-    toggleTodoState();
-    context.read<Todos>().editTodo(todo.id, taskController.text);
-    await TodosIO.editTodo(todo);
-  }
-
-  Future<void> onDeleteTodo(Todo todo) async {
-    context.read<Todos>().deleteTodo(todo.id);
-    await TodosIO.deleteTodo(todo.id);
-    final reminderId = todo.reminderId;
-    if (reminderId != null) {
-      await Notifications.removeTodoReminder(reminderId);
-    }
-  }
-
   void toggleTodoState() async {
     setState(() => enabled = !enabled);
     await Future.delayed(const Duration(milliseconds: 100));
@@ -150,6 +123,7 @@ class _TodoTileState extends State<TodoTile> {
   @override
   void dispose() {
     focusNode.dispose();
+    taskController.dispose();
     super.dispose();
   }
 }
