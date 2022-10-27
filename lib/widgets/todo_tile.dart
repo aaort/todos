@@ -29,7 +29,7 @@ class _TodoTileState extends State<TodoTile> {
   Widget build(BuildContext context) {
     final todo = context.watch<Todos>().getTodoById(widget.id);
     final bool canSetReminder =
-        todo.reminderDateTime?.isAfter(DateTime.now()) ?? false;
+        todo.reminderDateTime?.isAfter(DateTime.now()) ?? true;
 
     return Dismissible(
       onDismiss: () => TodoActions(context, todo).onDeleteTodo(todo),
