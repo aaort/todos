@@ -8,6 +8,7 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final todos = context.watch<Todos>().todos;
     return Expanded(
       child: Container(
         decoration: const BoxDecoration(
@@ -16,19 +17,14 @@ class TodoList extends StatelessWidget {
             top: Radius.circular(20),
           ),
         ),
-        child: Consumer<Todos>(
-          builder: (context, data, _) {
-            final todos = data.todos;
-            return ListView.builder(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20.0,
-                horizontal: 10.0,
-              ),
-              itemCount: todos.length,
-              itemBuilder: (_, index) {
-                return TodoTile(id: todos[index].id);
-              },
-            );
+        child: ListView.builder(
+          padding: const EdgeInsets.symmetric(
+            vertical: 20.0,
+            horizontal: 10.0,
+          ),
+          itemCount: todos.length,
+          itemBuilder: (_, index) {
+            return TodoTile(id: todos[index].id);
           },
         ),
       ),
