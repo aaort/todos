@@ -31,79 +31,76 @@ class _TodoTileState extends State<TodoTile> {
     final bool canSetReminder =
         todo.reminderDateTime?.isAfter(DateTime.now()) ?? true;
 
-    return Dismissible(
+    return DismissibleTile(
       onDismiss: () => TodoActions(context, todo).onDeleteTodo(todo),
-      child: GestureDetector(
-        onLongPress: toggleTodoState,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Focus(
-                  onFocusChange: onFocusChange,
-                  child: TextFormField(
-                    autofocus: true,
-                    focusNode: focusNode,
+      onLongPress: toggleTodoState,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Focus(
+                onFocusChange: onFocusChange,
+                child: TextFormField(
+                  autofocus: true,
+                  focusNode: focusNode,
 
-                    /// Probably not the best solution because
-                    /// will update text on each rerender
-                    controller: taskController..text = todo.task,
-                    enabled: enabled,
-                    cursorColor: Colors.blueGrey,
-                    textCapitalization: TextCapitalization.sentences,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        decoration: todo.checked
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none),
-                  ),
+                  /// Probably not the best solution because
+                  /// will update text on each rerender
+                  controller: taskController..text = todo.task,
+                  enabled: enabled,
+                  cursorColor: Colors.blueGrey,
+                  textCapitalization: TextCapitalization.sentences,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      decoration: todo.checked
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (enabled) ...[
-                      IconButton(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        constraints: const BoxConstraints(),
-                        onPressed: () => onDiscard(todo.task),
-                        icon: const Icon(Icons.close),
-                      ),
-                      IconButton(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        constraints: const BoxConstraints(),
-                        // TODO: implement reminder editing
-                        onPressed: canSetReminder
-                            ? TodoActions(context, todo).onReminderPressed
-                            : null,
-                        icon: const Icon(Icons.timer_outlined),
-                      ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        onPressed: () {
-                          final newTodo = todo..task = taskController.text;
-                          toggleTodoState();
-                          TodoActions(context, newTodo).onEditTodo(
-                            newTodo,
-                          );
-                        },
-                        icon: const Icon(Icons.check),
-                      )
-                    ] else
-                      Checkbox(
-                        checked: todo.checked,
-                        onTap: () =>
-                            context.read<Todos>().toggleCheck(widget.id),
-                      ),
-                  ],
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (enabled) ...[
+                    IconButton(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      constraints: const BoxConstraints(),
+                      onPressed: () => onDiscard(todo.task),
+                      icon: const Icon(Icons.close),
+                    ),
+                    IconButton(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      constraints: const BoxConstraints(),
+                      // TODO: implement reminder editing
+                      onPressed: canSetReminder
+                          ? TodoActions(context, todo).onReminderPressed
+                          : null,
+                      icon: const Icon(Icons.timer_outlined),
+                    ),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () {
+                        final newTodo = todo..task = taskController.text;
+                        toggleTodoState();
+                        TodoActions(context, newTodo).onEditTodo(
+                          newTodo,
+                        );
+                      },
+                      icon: const Icon(Icons.check),
+                    )
+                  ] else
+                    Checkbox(
+                      checked: todo.checked,
+                      onTap: () => context.read<Todos>().toggleCheck(widget.id),
+                    ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

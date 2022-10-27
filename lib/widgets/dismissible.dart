@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart';
+import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart' as ds;
 
-class Dismissible extends StatelessWidget {
+class DismissibleTile extends StatelessWidget {
   final Function onDismiss;
   final Future<bool?> Function()? onConfirmDismiss;
+  final VoidCallback onLongPress;
   final Widget child;
 
-  const Dismissible({
+  const DismissibleTile({
     super.key,
     required this.onDismiss,
-    this.onConfirmDismiss,
     required this.child,
+    required this.onLongPress,
+    this.onConfirmDismiss,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DismissibleTile(
+    return ds.DismissibleTile(
       key: UniqueKey(),
       onDismissed: (_) => onDismiss(),
       confirmDismiss:
@@ -32,7 +34,7 @@ class Dismissible extends StatelessWidget {
       ),
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       delayBeforeResize: const Duration(milliseconds: 500),
-      child: child,
+      child: GestureDetector(onLongPress: onLongPress, child: child),
     );
   }
 }
