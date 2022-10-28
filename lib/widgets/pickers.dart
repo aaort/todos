@@ -51,12 +51,11 @@ void showReminderOptionsPicker<T>({
 }) {
   final optionWidgets = options.map((option) {
     final optionTitle = option.toString().split('.').last.replaceAll('_', ' ');
-    final capitalizedTitle =
-        optionTitle[0].toUpperCase() + optionTitle.substring(1);
+    ;
     return TextButton(
       onPressed: () => onChange(options[options.indexOf(option)]),
       child: Text(
-        capitalizedTitle,
+        optionTitle.capitalize(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20.0),
       ),
@@ -73,4 +72,10 @@ void showReminderOptionsPicker<T>({
       ),
     ),
   );
+}
+
+extension ExtendedString on String {
+  String capitalize() {
+    return this[0].toUpperCase() + substring(1);
+  }
 }
