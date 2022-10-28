@@ -38,7 +38,9 @@ class _TodoTileState extends State<TodoTile> {
           children: [
             Flexible(
               child: Text(
-                todo.task,
+                todo.task * 4,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
             ),
