@@ -56,7 +56,7 @@ void showReminderOptionsPicker<T>({
       child: Text(
         optionTitle.capitalize(),
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontSize: 20.0),
+        style: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }).toList();
