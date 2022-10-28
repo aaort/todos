@@ -6,6 +6,7 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/widgets/pickers.dart';
+import 'package:todos/widgets/todo_icon_button.dart';
 
 enum ReminderOption {
 // using underscores here to be able separate words
@@ -133,10 +134,8 @@ class _AddTodoState extends State<AddTodo> {
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
-              IconButton(
+              TodoIconButton(
                 onPressed: createEnabled ? onReminderOptionPick : null,
-                constraints: const BoxConstraints(),
-                padding: EdgeInsets.zero,
                 icon: const Icon(
                   Icons.timer_outlined,
                 ),
@@ -177,10 +176,8 @@ class _AddTodoState extends State<AddTodo> {
                     ),
                   ),
                 ),
-                IconButton(
+                TodoIconButton(
                   onPressed: () => setState(() => _reminderDateTime = null),
-                  constraints: const BoxConstraints(),
-                  padding: EdgeInsets.zero,
                   icon: const Icon(Icons.delete_forever_outlined),
                 )
               ],
