@@ -14,7 +14,7 @@ class TodoActions {
   TodoActions(this.context, this.currentTodo);
 
   Future<void> onEditTodo(Todo todo) async {
-    context.read<Todos>().editTodo(todo.id, todo.task);
+    context.read<Todos>().editTodo(todo);
     await TodosIO.editTodo(todo);
   }
 

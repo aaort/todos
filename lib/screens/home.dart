@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
-import 'package:todos/screens/add_todo.dart';
+import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 import 'package:todos/widgets/todo_list.dart';
 

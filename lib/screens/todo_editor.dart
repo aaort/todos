@@ -17,7 +17,9 @@ enum ReminderOption {
 
 // Using StatefulWidget here only to check for mounted field before pop call
 class AddTodo extends StatefulWidget {
-  const AddTodo({super.key});
+  final Todo? initialTodo;
+
+  const AddTodo({super.key, this.initialTodo});
 
   @override
   State<AddTodo> createState() => _AddTodoState();
@@ -64,8 +66,49 @@ class _AddTodoState extends State<AddTodo> {
     }
   }
 
+  Future<void> onTodoSaved() async {
+    final task = taskController.text;
+    final initialTodo = widget.initialTodo;
+    if (initialTodo != null) {
+      final updatedTodo = Todo.fromMap(
+        task: task,
+        checked: initialTodo.checked,
+        id: initialTodo.id,
+        reminderId: initialTodo.reminderId,
+        reminderDateTime: _reminderDateTime,
+      );
+
+      context.read<Todos>().editTodo(updatedTodo);
+      await TodosIO.editTodo(updatedTodo);
+      if (updatedTodo.reminderDateTime != null) {
+        if (initialTodo.reminderId != null) {
+          // Had reminder before
+          Notifications.updateTodoReminder(updatedTodo);
+        } else {
+          Notifications.addTodoReminder(updatedTodo);
+        }
+      }
+    } else {
+      if (task.isEmpty) {
+        Navigator.pop(context);
+        return;
+      }
+      final todo = Todo(task, reminderDateTime: _reminderDateTime);
+      context.read<Todos>().addTodo(todo);
+      await TodosIO.createTodo(todo);
+
+      if (todo.reminderDateTime != null) {
+        Notifications.addTodoReminder(todo);
+      }
+    }
+
+    if (mounted) Navigator.pop(context);
+  }
+
   @override
   void initState() {
+    taskController.text = widget.initialTodo?.task ?? '';
+    _reminderDateTime = widget.initialTodo?.reminderDateTime;
     taskController.addListener(() {
       setState(() => createEnabled = taskController.text.isNotEmpty);
     });
@@ -110,7 +153,7 @@ class _AddTodoState extends State<AddTodo> {
           const SizedBox(height: 30),
           ElevatedButton(
             key: const Key('createTodoButtonId'),
-            onPressed: onCreateTodo,
+            onPressed: onTodoSaved,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Text(
@@ -146,23 +189,6 @@ class _AddTodoState extends State<AddTodo> {
         ],
       ),
     );
-  }
-
-  Future<void> onCreateTodo() async {
-    final task = taskController.text;
-    if (task.isEmpty) {
-      Navigator.pop(context);
-      return;
-    }
-    final todo = Todo(task, reminderDateTime: _reminderDateTime);
-    context.read<Todos>().addTodo(todo);
-    await TodosIO.createTodo(todo);
-
-    if (todo.reminderDateTime != null) {
-      Notifications.addTodoReminder(todo);
-    }
-
-    if (mounted) Navigator.pop(context);
   }
 
   @override
