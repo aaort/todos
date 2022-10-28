@@ -27,7 +27,7 @@ final themeData = ThemeData(
     bodySmall: TextStyle(
       color: Colors.blueGrey,
       fontSize: 20.0,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(
       color: Colors.blueGrey,
