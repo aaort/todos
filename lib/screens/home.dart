@@ -23,7 +23,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   showAddTodoModal(BuildContext context) {
     popupModalBottomSheet(
       context: context,
-      child: const AddTodo(),
+      child: const TodoEditor(),
     );
   }
 

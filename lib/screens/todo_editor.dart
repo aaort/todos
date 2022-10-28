@@ -14,16 +14,16 @@ enum ReminderOption {
 }
 
 // Using StatefulWidget here only to check for mounted field before pop call
-class AddTodo extends StatefulWidget {
+class TodoEditor extends StatefulWidget {
   final Todo? initialTodo;
 
-  const AddTodo({super.key, this.initialTodo});
+  const TodoEditor({super.key, this.initialTodo});
 
   @override
-  State<AddTodo> createState() => _AddTodoState();
+  State<TodoEditor> createState() => _TodoEditorState();
 }
 
-class _AddTodoState extends State<AddTodo> {
+class _TodoEditorState extends State<TodoEditor> {
   final taskController = TextEditingController();
   bool createEnabled = false;
 

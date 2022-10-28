@@ -15,7 +15,8 @@ class TodoTile extends StatelessWidget {
 
   void onLongPress(BuildContext context) async {
     final todo = context.read<Todos>().getTodoById(id);
-    popupModalBottomSheet(context: context, child: AddTodo(initialTodo: todo));
+    popupModalBottomSheet(
+        context: context, child: TodoEditor(initialTodo: todo));
   }
 
   void toggleCheck(BuildContext context) {

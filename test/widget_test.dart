@@ -21,7 +21,7 @@ void main() {
     expect(addTodoButton, findsOneWidget);
     expect(todoTile, findsNothing);
 
-    final addTodoModal = find.byType(AddTodo);
+    final addTodoModal = find.byType(TodoEditor);
     expect(addTodoModal, findsNothing);
 
     await tester.tap(addTodoButton);
