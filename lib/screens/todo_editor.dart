@@ -1,10 +1,7 @@
 // ignore_for_file: constant_identifier_names
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todos/logic/notifications.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/logic/todos.dart';
-import 'package:todos/logic/todos_io.dart';
+import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/widgets/pickers.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
 
@@ -68,39 +65,11 @@ class _AddTodoState extends State<AddTodo> {
   }
 
   Future<void> onTodoSaved() async {
-    final task = taskController.text;
-    final initialTodo = widget.initialTodo;
-    if (initialTodo != null) {
-      final updatedTodo = Todo.fromMap(
-        task: task,
-        checked: initialTodo.checked,
-        id: initialTodo.id,
-        reminderId: initialTodo.reminderId,
-        reminderDateTime: _reminderDateTime,
-      );
-
-      context.read<Todos>().editTodo(updatedTodo);
-      await TodosIO.editTodo(updatedTodo);
-      if (updatedTodo.reminderDateTime != null) {
-        if (initialTodo.reminderId != null) {
-          // Had reminder before
-          Notifications.updateTodoReminder(updatedTodo);
-        } else {
-          Notifications.addTodoReminder(updatedTodo);
-        }
-      }
+    final todo = Todo(taskController.text, reminderDateTime: _reminderDateTime);
+    if (widget.initialTodo != null) {
+      TodoActions(context, widget.initialTodo!).updateTodo(todo);
     } else {
-      if (task.isEmpty) {
-        Navigator.pop(context);
-        return;
-      }
-      final todo = Todo(task, reminderDateTime: _reminderDateTime);
-      context.read<Todos>().addTodo(todo);
-      await TodosIO.createTodo(todo);
-
-      if (todo.reminderDateTime != null) {
-        Notifications.addTodoReminder(todo);
-      }
+      TodoActions(context, todo).createTodo();
     }
 
     if (mounted) Navigator.pop(context);

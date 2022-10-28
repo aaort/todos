@@ -13,9 +13,40 @@ class TodoActions {
 
   TodoActions(this.context, this.currentTodo);
 
-  Future<void> onEditTodo(Todo todo) async {
+  Future<void> updateTodo(Todo updatedTodo) async {
+    final todo = Todo.fromMap(
+      task: updatedTodo.task,
+      checked: currentTodo.checked,
+      id: currentTodo.id,
+      reminderId: updatedTodo.reminderId,
+      reminderDateTime: updatedTodo.reminderDateTime,
+    );
+
     context.read<Todos>().editTodo(todo);
     await TodosIO.editTodo(todo);
+    if (todo.reminderDateTime != null) {
+      if (currentTodo.reminderId != null) {
+        // Had reminder before
+        Notifications.updateTodoReminder(todo);
+      } else {
+        Notifications.addTodoReminder(todo);
+      }
+    }
+  }
+
+  Future<void> createTodo() async {
+    if (currentTodo.task.isEmpty) {
+      Navigator.pop(context);
+      return;
+    }
+    final todo =
+        Todo(currentTodo.task, reminderDateTime: currentTodo.reminderDateTime);
+    context.read<Todos>().addTodo(todo);
+    await TodosIO.createTodo(todo);
+
+    if (todo.reminderDateTime != null) {
+      Notifications.addTodoReminder(todo);
+    }
   }
 
   Future<void> onDeleteTodo(Todo todo) async {
