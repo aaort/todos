@@ -30,7 +30,11 @@ class Styles {
 
   ShapeBorder getRoundedBordersShape(num round) {
     return RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(round.toDouble()),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(
+          round.toDouble(),
+        ),
+      ),
     );
   }
 }
