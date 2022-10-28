@@ -2,8 +2,10 @@ import 'package:flutter/material.dart' hide Checkbox;
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
+import 'package:todos/styles.dart';
 import 'package:todos/widgets/checkbox.dart';
 import 'package:todos/widgets/dismissible.dart';
+import 'package:todos/widgets/todo_tile_action_button.dart';
 
 class TodoTile extends StatefulWidget {
   final String id;
@@ -17,12 +19,26 @@ class TodoTile extends StatefulWidget {
 class _TodoTileState extends State<TodoTile> {
   bool enabled = false;
   final FocusNode focusNode = FocusNode();
-  late TextEditingController taskController = TextEditingController();
+  final TextEditingController taskController = TextEditingController();
 
-  void onFocusChange(bool hasFocus) {
-    if (!hasFocus) {
-      setState(() => enabled = false);
-    }
+  void onChangesSaved() {
+    toggleTodoState();
+    final todo = context.read<Todos>().getTodoById(widget.id);
+    final newTodo = todo..task = taskController.text;
+    TodoActions(context, newTodo).onEditTodo(
+      newTodo,
+    );
+  }
+
+  void onDiscard(String initialTask) {
+    toggleTodoState();
+    taskController.text = initialTask;
+  }
+
+  void toggleTodoState() async {
+    setState(() => enabled = !enabled);
+    await Future.delayed(const Duration(milliseconds: 100));
+    enabled ? focusNode.requestFocus() : null;
   }
 
   @override
@@ -52,10 +68,7 @@ class _TodoTileState extends State<TodoTile> {
                   enabled: enabled,
                   cursorColor: Colors.blueGrey,
                   textCapitalization: TextCapitalization.sentences,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      decoration: todo.checked
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none),
+                  style: Styles(context).getTodoTextStyle(todo.checked),
                 ),
               ),
             ),
@@ -65,31 +78,20 @@ class _TodoTileState extends State<TodoTile> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (enabled) ...[
-                    IconButton(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      constraints: const BoxConstraints(),
+                    TodoTileActionButton(
                       onPressed: () => onDiscard(todo.task),
                       icon: const Icon(Icons.close),
                     ),
-                    IconButton(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      constraints: const BoxConstraints(),
-                      // TODO: implement reminder editing
+                    const SizedBox(width: 10),
+                    TodoTileActionButton(
                       onPressed: canSetReminder
                           ? TodoActions(context, todo).onReminderPressed
                           : null,
                       icon: const Icon(Icons.timer_outlined),
                     ),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      onPressed: () {
-                        final newTodo = todo..task = taskController.text;
-                        toggleTodoState();
-                        TodoActions(context, newTodo).onEditTodo(
-                          newTodo,
-                        );
-                      },
+                    const SizedBox(width: 10),
+                    TodoTileActionButton(
+                      onPressed: onChangesSaved,
                       icon: const Icon(Icons.check),
                     )
                   ] else
@@ -106,15 +108,10 @@ class _TodoTileState extends State<TodoTile> {
     );
   }
 
-  void onDiscard(String initialTask) {
-    toggleTodoState();
-    taskController.text = initialTask;
-  }
-
-  void toggleTodoState() async {
-    setState(() => enabled = !enabled);
-    await Future.delayed(const Duration(milliseconds: 100));
-    enabled ? focusNode.requestFocus() : null;
+  void onFocusChange(bool hasFocus) {
+    if (!hasFocus) {
+      setState(() => enabled = false);
+    }
   }
 
   @override
