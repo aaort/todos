@@ -23,7 +23,11 @@ class Todo {
     required this.id,
     required this.reminderDateTime,
     this.reminderId,
-  });
+  }) {
+    if (reminderDateTime != null && reminderId == null) {
+      reminderId = Random().nextInt(1000);
+    }
+  }
 
   void toggleCheck() {
     checked = !checked;
