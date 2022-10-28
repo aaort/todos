@@ -12,12 +12,25 @@ class Styles {
         decoration: checked ? TextDecoration.lineThrough : TextDecoration.none);
   }
 
-  BoxDecoration get getTodoListContainerStyle {
+  BoxDecoration get todoListContainerDecoration {
     return const BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.vertical(
         top: Radius.circular(20),
       ),
+    );
+  }
+
+  EdgeInsets get todoListPadding {
+    return const EdgeInsets.symmetric(
+      vertical: 20.0,
+      horizontal: 10.0,
+    );
+  }
+
+  ShapeBorder getRoundedBordersShape(num round) {
+    return RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(round.toDouble()),
     );
   }
 }

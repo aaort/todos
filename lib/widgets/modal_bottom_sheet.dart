@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/styles.dart';
 
 void popupModalBottomSheet({
   required BuildContext context,
@@ -8,11 +9,7 @@ void popupModalBottomSheet({
   showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20),
-      ),
-    ),
+    shape: Styles(context).getRoundedBordersShape(20),
     builder: (context) => Padding(
       padding: padding ?? const EdgeInsets.symmetric(vertical: 10.0),
       child: child,
