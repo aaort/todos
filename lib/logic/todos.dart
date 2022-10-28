@@ -33,9 +33,11 @@ class Todos extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editTodo(String id, String updatedTask) {
-    // TODO: Maybe this could take a new todo as a one argument
-    _todos.firstWhere((todo) => todo.id == id).task = updatedTask;
+  void editTodo(Todo updatedTodo) {
+    _todos[_todos.indexWhere((todo) => todo.id == updatedTodo.id)].task =
+        updatedTodo.task;
+    _todos[_todos.indexWhere((todo) => todo.id == updatedTodo.id)]
+        .reminderDateTime = updatedTodo.reminderDateTime;
     notifyListeners();
   }
 
