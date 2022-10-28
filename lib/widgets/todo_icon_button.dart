@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TodoTileActionButton extends StatelessWidget {
+class TodoIconButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Widget icon;
 
-  const TodoTileActionButton(
+  const TodoIconButton(
       {super.key, required this.onPressed, required this.icon});
 
   @override
