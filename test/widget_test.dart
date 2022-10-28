@@ -13,40 +13,34 @@ void main() {
 
     final home = find.byType(Home);
     final todoList = find.byType(TodoList);
-    final addTodoButton = find.byType(FloatingActionButton);
+    final showTodoEditorButton = find.byType(FloatingActionButton);
     final todoTile = find.byType(TodoTile);
 
     expect(home, findsOneWidget);
     expect(todoList, findsOneWidget);
-    expect(addTodoButton, findsOneWidget);
+    expect(showTodoEditorButton, findsOneWidget);
     expect(todoTile, findsNothing);
 
-    final addTodoModal = find.byType(TodoEditor);
-    expect(addTodoModal, findsNothing);
+    final todoEditorModal = find.byType(TodoEditor);
+    expect(todoEditorModal, findsNothing);
 
-    await tester.tap(addTodoButton);
-    await tester.pump();
-    expect(addTodoModal, findsOneWidget);
+    /// Required because of animation taking time to
+    /// let button actually appear on the screen
+    await tester.pumpAndSettle();
+    await tester.tap(showTodoEditorButton);
+    await tester.pumpAndSettle();
+    expect(todoEditorModal, findsOneWidget);
 
     final createTodoButton = find.byKey(const Key('createTodoButtonId'));
-    expect(tester.widget<ElevatedButton>(createTodoButton).enabled, false);
+    expect(createTodoButton, findsOneWidget);
 
     final createTodoInput = find.byKey(const Key('createTodoInputId'));
-    expect(createTodoButton, findsOneWidget);
+    expect(createTodoInput, findsOneWidget);
 
     const inputContent = 'something really important';
     await tester.enterText(createTodoInput, inputContent);
     await tester.pump();
     final createTodoInputText = find.text(inputContent);
     expect(createTodoInputText, findsOneWidget);
-
-    expect(tester.widget<ElevatedButton>(createTodoButton).enabled, true);
-
-    await tester.tap(createTodoButton);
-    await tester.pumpAndSettle(const Duration(seconds: 2));
-    // Wait until hide animation's complete
-    expect(
-        addTodoModal.evaluate().first.renderObject!.debugNeedsPaint, isFalse);
-    // Checks whether widget is visible or not (true if visible)
   });
 }
