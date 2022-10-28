@@ -36,7 +36,7 @@ class TodoTile extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                todo.task * 4,
+                todo.task,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: Styles(context).getTodoTextStyle(todo.checked),
