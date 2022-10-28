@@ -11,4 +11,13 @@ class Styles {
     return Theme.of(context).textTheme.bodySmall!.copyWith(
         decoration: checked ? TextDecoration.lineThrough : TextDecoration.none);
   }
+
+  BoxDecoration get getTodoListContainerStyle {
+    return const BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(20),
+      ),
+    );
+  }
 }
