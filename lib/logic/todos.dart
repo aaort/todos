@@ -34,10 +34,9 @@ class Todos extends ChangeNotifier {
   }
 
   void editTodo(Todo updatedTodo) {
-    _todos[_todos.indexWhere((todo) => todo.id == updatedTodo.id)].task =
-        updatedTodo.task;
-    _todos[_todos.indexWhere((todo) => todo.id == updatedTodo.id)]
-        .reminderDateTime = updatedTodo.reminderDateTime;
+    final index = _todos.indexWhere((todo) => todo.id == updatedTodo.id);
+    _todos[index].task = updatedTodo.task;
+    _todos[index].reminderDateTime = updatedTodo.reminderDateTime;
     notifyListeners();
   }
 
