@@ -16,7 +16,9 @@ class TodoTile extends StatelessWidget {
   void onLongPress(BuildContext context) async {
     final todo = context.read<Todos>().getTodoById(id);
     popupModalBottomSheet(
-        context: context, child: TodoEditor(initialTodo: todo));
+      context: context,
+      child: TodoEditor(initialTodo: todo),
+    );
   }
 
   void toggleCheck(BuildContext context) {
@@ -30,27 +32,16 @@ class TodoTile extends StatelessWidget {
     return DismissibleTile(
       onDismiss: () => TodoActions(context, todo).onDeleteTodo(todo),
       onLongPress: () => onLongPress(context),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Text(
-                todo.task,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Styles(context).getTodoTextStyle(todo.checked),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: Checkbox(
-                checked: todo.checked,
-                onTap: () => toggleCheck(context),
-              ),
-            ),
-          ],
+      child: ListTile(
+        title: Text(
+          todo.task,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Styles(context).getTodoTextStyle(todo.checked),
+        ),
+        trailing: Checkbox(
+          checked: todo.checked,
+          onTap: () => toggleCheck(context),
         ),
       ),
     );
