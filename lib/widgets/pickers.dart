@@ -52,7 +52,7 @@ void showReminderOptionsPicker<T>({
   final optionWidgets = options.map((option) {
     final optionTitle = option.toString().split('.').last.replaceAll('_', ' ');
     return TextButton(
-      onPressed: () => onChange(options[options.indexOf(option)]),
+      onPressed: () => onChange(option),
       child: Text(
         optionTitle.capitalize(),
         textAlign: TextAlign.center,
