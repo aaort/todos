@@ -170,7 +170,9 @@ class _TodoEditorState extends State<TodoEditor> {
 // TODO: need refactor
 String _getReminderText(DateTime dateTime) {
   final diff = dateTime.difference(DateTime.now());
-  if (diff.inHours < 1) {
+  if (diff.isNegative) {
+    return 'Reminded';
+  } else if (diff.inHours < 1) {
     return 'Remind me in ${diff.inMinutes} minutes';
   } else if (diff.inHours < 24) {
     return 'Remind me today at ${dateTime.hour.toString().padLeft(2, '0')}'
