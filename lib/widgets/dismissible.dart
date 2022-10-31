@@ -23,18 +23,20 @@ class DismissibleTile extends StatelessWidget {
       confirmDismiss:
           onConfirmDismiss != null ? (_) => onConfirmDismiss!() : null,
       ltrDismissedColor: Colors.red,
-      ltrOverlay: const Icon(
-        Icons.delete_outline_rounded,
-        color: Colors.white,
-      ),
+      ltrOverlay: _trashIcon(),
       rtlDismissedColor: Colors.red,
-      rtlOverlay: const Icon(
-        Icons.delete_outline_rounded,
-        color: Colors.white,
-      ),
+      rtlOverlay: _trashIcon(),
+      resizeDuration: const Duration(milliseconds: 200),
       borderRadius: const BorderRadius.all(Radius.circular(16)),
-      delayBeforeResize: const Duration(milliseconds: 500),
+      delayBeforeResize: const Duration(milliseconds: 200),
       child: GestureDetector(onLongPress: onLongPress, child: child),
     );
   }
+}
+
+Icon _trashIcon() {
+  return const Icon(
+    Icons.delete_outline_rounded,
+    color: Colors.white,
+  );
 }
