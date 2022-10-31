@@ -16,9 +16,7 @@ class TodoList extends StatelessWidget {
         child: ListView.builder(
           padding: Styles(context).todoListPadding,
           itemCount: todos.length,
-          itemBuilder: (_, index) {
-            return TodoTile(id: todos[index].id);
-          },
+          itemBuilder: (_, index) => TodoTile(id: todos[index].id),
         ),
       ),
     );
