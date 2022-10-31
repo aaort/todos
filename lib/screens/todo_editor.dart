@@ -65,11 +65,14 @@ class _TodoEditorState extends State<TodoEditor> {
   }
 
   Future<void> onTodoSaved() async {
-    final todo = Todo(taskController.text, reminderDateTime: _reminderDateTime);
-    if (widget.initialTodo != null) {
-      TodoActions(context, widget.initialTodo!).updateTodo(todo);
-    } else {
-      TodoActions(context, todo).createTodo();
+    if (taskController.text.isNotEmpty) {
+      final todo =
+          Todo(taskController.text, reminderDateTime: _reminderDateTime);
+      if (widget.initialTodo != null) {
+        TodoActions(context, widget.initialTodo!).updateTodo(todo);
+      } else {
+        TodoActions(context, todo).createTodo();
+      }
     }
 
     if (mounted) Navigator.pop(context);

@@ -35,10 +35,6 @@ class TodoActions {
   }
 
   Future<void> createTodo() async {
-    if (currentTodo.task.isEmpty) {
-      Navigator.pop(context);
-      return;
-    }
     final todo =
         Todo(currentTodo.task, reminderDateTime: currentTodo.reminderDateTime);
     context.read<Todos>().addTodo(todo);
