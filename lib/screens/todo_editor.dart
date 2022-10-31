@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 import 'package:flutter/material.dart';
+import 'package:todos/helpers/date.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/widgets/pickers.dart';
@@ -143,7 +144,7 @@ class _TodoEditorState extends State<TodoEditor> {
                   child: GestureDetector(
                     onTap: onReminderOptionPick,
                     child: Text(
-                      _getReminderText(_reminderDateTime!),
+                      getReminderText(_reminderDateTime!),
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -164,20 +165,5 @@ class _TodoEditorState extends State<TodoEditor> {
   void dispose() {
     taskController.dispose();
     super.dispose();
-  }
-}
-
-// TODO: need refactor
-String _getReminderText(DateTime dateTime) {
-  final diff = dateTime.difference(DateTime.now());
-  if (diff.isNegative) {
-    return 'Reminded';
-  } else if (diff.inHours < 1) {
-    return 'Remind me in ${diff.inMinutes} minutes';
-  } else if (diff.inHours < 24) {
-    return 'Remind me today at ${dateTime.hour.toString().padLeft(2, '0')}'
-        ':${dateTime.minute.toString().padLeft(2, '0')}';
-  } else {
-    return 'Remind me in ${diff.inDays} day${diff.inDays > 1 ? 's' : ''}';
   }
 }
