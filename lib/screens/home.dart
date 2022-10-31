@@ -2,23 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/screens/todo_editor.dart';
+import 'package:todos/widgets/add_todo_button.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 import 'package:todos/widgets/todo_list.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> with TickerProviderStateMixin {
-  late final _animController = AnimationController(
-    duration: const Duration(seconds: 1),
-    vsync: this,
-  );
-  late final _animation =
-      CurvedAnimation(parent: _animController, curve: Curves.bounceIn);
 
   showAddTodoModal(BuildContext context) {
     popupModalBottomSheet(
@@ -28,23 +17,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   @override
-  void initState() {
-    _animController.forward();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        floatingActionButton: ScaleTransition(
-          scale: _animation,
-          child: FloatingActionButton(
-            onPressed: () => showAddTodoModal(context),
-            child: const Icon(Icons.edit_outlined),
-          ),
+        floatingActionButton: AddTodoButton(
+          onPressed: () => showAddTodoModal(context),
         ),
         body: SafeArea(
           bottom: false,
@@ -76,12 +55,5 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _animController.dispose();
-    _animation.dispose();
-    super.dispose();
   }
 }
