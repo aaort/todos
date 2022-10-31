@@ -150,7 +150,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 ),
                 TodoIconButton(
                   onPressed: () => setState(() => _reminderDateTime = null),
-                  icon: const Icon(Icons.delete_forever_outlined),
+                  icon: const Icon(Icons.close),
                 )
               ],
             ),
@@ -171,7 +171,7 @@ class _TodoEditorState extends State<TodoEditor> {
 String _getReminderText(DateTime dateTime) {
   final diff = dateTime.difference(DateTime.now());
   if (diff.inHours < 1) {
-    return 'Remind me in ${diff.inMinutes.toString()} minutes';
+    return 'Remind me in ${diff.inMinutes} minutes';
   } else if (diff.inHours < 24) {
     return 'Remind me today at ${dateTime.hour.toString().padLeft(2, '0')}'
         ':${dateTime.minute.toString().padLeft(2, '0')}';
