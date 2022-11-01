@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide Checkbox;
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
+import 'package:todos/logic/todos_io.dart';
 import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/styles.dart';
 import 'package:todos/widgets/dismissible.dart';
@@ -22,6 +23,7 @@ class TodoTile extends StatelessWidget {
 
   void toggleCheck(BuildContext context) {
     context.read<Todos>().toggleCheck(id);
+    TodosIO.toggleCheck(id);
   }
 
   @override
