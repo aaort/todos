@@ -38,6 +38,7 @@ class TodoTile extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: Styles(context).getTodoTextStyle(todo.checked),
         ),
+        contentPadding: EdgeInsets.zero,
         value: todo.checked,
         onChanged: (_) => toggleCheck(context),
         checkColor: Colors.white,
