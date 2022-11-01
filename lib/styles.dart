@@ -24,7 +24,7 @@ class Styles {
   EdgeInsets get todoListPadding {
     return const EdgeInsets.symmetric(
       vertical: 20.0,
-      horizontal: 10.0,
+      horizontal: 15.0,
     );
   }
 

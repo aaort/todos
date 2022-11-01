@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 final themeData = ThemeData(
   scaffoldBackgroundColor: Colors.blueGrey,
   primaryColor: Colors.blueGrey,
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: Colors.blueGrey,
+    accentColor: Colors.blueGrey,
+  ),
   textTheme: const TextTheme(
     titleLarge: TextStyle(
       color: Colors.white,
