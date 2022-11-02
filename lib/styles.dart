@@ -22,9 +22,9 @@ class Styles {
   }
 
   EdgeInsets get todoListPadding {
-    return const EdgeInsets.symmetric(
+    return EdgeInsets.symmetric(
       vertical: 20.0,
-      horizontal: 15.0,
+      horizontal: Theme.of(context).appBarTheme.titleSpacing!,
     );
   }
 

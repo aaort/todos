@@ -71,6 +71,15 @@ final themeData = ThemeData(
       ),
     ),
   ),
+  appBarTheme: const AppBarTheme(
+    elevation: 0,
+    titleSpacing: 15.0,
+    titleTextStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 30.0,
+      fontWeight: FontWeight.w800,
+    ),
+  ),
 );
 
 double getButtonElevation(Set<MaterialState> states) =>

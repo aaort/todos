@@ -10,14 +10,12 @@ class TodoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<Todos>().todos;
-    return Expanded(
-      child: Container(
-        decoration: Styles(context).todoListContainerDecoration,
-        child: ListView.builder(
-          padding: Styles(context).todoListPadding,
-          itemCount: todos.length,
-          itemBuilder: (_, index) => TodoTile(id: todos[index].id),
-        ),
+    return Container(
+      decoration: Styles(context).todoListContainerDecoration,
+      child: ListView.builder(
+        padding: Styles(context).todoListPadding,
+        itemCount: todos.length,
+        itemBuilder: (_, index) => TodoTile(id: todos[index].id),
       ),
     );
   }
