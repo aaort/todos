@@ -92,4 +92,9 @@ class Notifications {
       throw 'Failed to cancel notification with id: ${todo.id}, error: $e';
     }
   }
+
+  // Used only for debugging
+  static Future<void> deleteAllReminders() async {
+    await FlutterLocalNotificationsPlugin().cancelAll();
+  }
 }
