@@ -53,7 +53,7 @@ void showOptionsPicker<T>({
     return TextButton(
       onPressed: () => onChange(option.value),
       child: Text(
-        option.title.capitalize(),
+        option.title,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodySmall,
       ),
@@ -77,10 +77,4 @@ class PickerOption<T> {
   final T value;
 
   PickerOption(this.title, this.value);
-}
-
-extension ExtendedString on String {
-  String capitalize() {
-    return this[0].toUpperCase() + substring(1);
-  }
 }
