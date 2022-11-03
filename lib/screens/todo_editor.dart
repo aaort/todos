@@ -104,7 +104,8 @@ class _TodoEditorState extends State<TodoEditor> {
             MediaQuery.of(context).viewInsets.bottom,
       ),
       padding: const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 0),
-      child: ListView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
