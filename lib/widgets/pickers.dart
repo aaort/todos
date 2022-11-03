@@ -43,18 +43,17 @@ void showDateTimePicker({
   );
 }
 
-void showReminderOptionsPicker<T>({
+void showOptionsPicker<T>({
   required BuildContext context,
-  String? title,
-  required List<T> options,
+  required String title,
+  required List<Option<T>> options,
   required Function(T) onChange,
 }) {
   final optionWidgets = options.map((option) {
-    final optionTitle = option.toString().split('.').last.replaceAll('_', ' ');
     return TextButton(
-      onPressed: () => onChange(option),
+      onPressed: () => onChange(option.value),
       child: Text(
-        optionTitle.capitalize(),
+        option.title.capitalize(),
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.bodySmall,
       ),
@@ -71,6 +70,13 @@ void showReminderOptionsPicker<T>({
       ),
     ),
   );
+}
+
+class Option<T> {
+  final String title;
+  final T value;
+
+  Option(this.title, this.value);
 }
 
 extension ExtendedString on String {

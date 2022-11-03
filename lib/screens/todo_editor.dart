@@ -11,8 +11,14 @@ enum ReminderOption {
 // for displaying as option titles inside picker
   in_5_minutes,
   in_15_minutes,
-  custom_date_and_time,
+  custom,
 }
+
+final _reminderOptions = <Option<ReminderOption>>[
+  Option('In 5 minutes', ReminderOption.in_5_minutes),
+  Option('In 15 minutes', ReminderOption.in_15_minutes),
+  Option('Custom', ReminderOption.custom),
+];
 
 // Using StatefulWidget here only to check for mounted field before pop call
 class TodoEditor extends StatefulWidget {
@@ -31,9 +37,10 @@ class _TodoEditorState extends State<TodoEditor> {
   DateTime? _reminderDateTime;
 
   void onReminderOptionPick() {
-    showReminderOptionsPicker<ReminderOption>(
+    showOptionsPicker<ReminderOption>(
       context: context,
-      options: ReminderOption.values,
+      title: 'Remind me',
+      options: _reminderOptions,
       onChange: onReminderOptionChange,
     );
   }
@@ -53,7 +60,7 @@ class _TodoEditorState extends State<TodoEditor> {
       case ReminderOption.in_15_minutes:
         onDateTimeChange(DateTime.now().add(const Duration(minutes: 16)));
         break;
-      case ReminderOption.custom_date_and_time:
+      case ReminderOption.custom:
         FocusManager.instance.primaryFocus?.unfocus();
         await Future.delayed(const Duration(milliseconds: 400));
         showDateTimePicker(
