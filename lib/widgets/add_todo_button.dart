@@ -12,11 +12,11 @@ class AddTodoButton extends StatefulWidget {
 class _AddTodoButtonState extends State<AddTodoButton>
     with TickerProviderStateMixin {
   late final _animController = AnimationController(
-    duration: const Duration(seconds: 1),
+    duration: const Duration(milliseconds: 500),
     vsync: this,
   );
   late final _animation =
-      CurvedAnimation(parent: _animController, curve: Curves.bounceIn);
+      CurvedAnimation(parent: _animController, curve: Curves.linear);
 
   @override
   void initState() {
