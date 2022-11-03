@@ -14,10 +14,10 @@ enum ReminderOption {
   custom,
 }
 
-final _reminderOptions = <Option<ReminderOption>>[
-  Option('In 5 minutes', ReminderOption.in_5_minutes),
-  Option('In 15 minutes', ReminderOption.in_15_minutes),
-  Option('Custom', ReminderOption.custom),
+final _reminderOptions = <PickerOption<ReminderOption>>[
+  PickerOption('In 5 minutes', ReminderOption.in_5_minutes),
+  PickerOption('In 15 minutes', ReminderOption.in_15_minutes),
+  PickerOption('Custom', ReminderOption.custom),
 ];
 
 // Using StatefulWidget here only to check for mounted field before pop call

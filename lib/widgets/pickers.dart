@@ -46,7 +46,7 @@ void showDateTimePicker({
 void showOptionsPicker<T>({
   required BuildContext context,
   required String title,
-  required List<Option<T>> options,
+  required List<PickerOption<T>> options,
   required Function(T) onChange,
 }) {
   final optionWidgets = options.map((option) {
@@ -72,11 +72,11 @@ void showOptionsPicker<T>({
   );
 }
 
-class Option<T> {
+class PickerOption<T> {
   final String title;
   final T value;
 
-  Option(this.title, this.value);
+  PickerOption(this.title, this.value);
 }
 
 extension ExtendedString on String {
