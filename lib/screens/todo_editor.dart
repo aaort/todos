@@ -119,6 +119,7 @@ class _TodoEditorState extends State<TodoEditor> {
             key: const Key('createTodoInputId'),
             autofocus: true,
             controller: taskController,
+            textCapitalization: TextCapitalization.sentences,
             style: Theme.of(context).textTheme.bodySmall,
             cursorColor: Colors.blueGrey,
           ),
