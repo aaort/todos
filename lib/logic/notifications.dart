@@ -2,12 +2,16 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/todos_io.dart';
 
 // TODO: Customize setup for app needs
 
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
-  // handle action
+  // notification payload should be the todo id
+  if (notificationResponse.payload != null) {
+    TodosIO.toggleCheck(notificationResponse.payload!);
+  }
 }
 
 const _androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -37,7 +41,7 @@ class Notifications {
       initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {
-        // ...
+        // TODO: implement actions for notification actions
       },
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
@@ -51,6 +55,13 @@ class Notifications {
   static final _androidNotificationDetails = AndroidNotificationDetails(
     channel.id,
     channel.name,
+    actions: <AndroidNotificationAction>[
+      const AndroidNotificationAction(
+        'mark_completed_id',
+        'Mark as completed',
+        cancelNotification: true,
+      ),
+    ],
   );
 
   static Future<void> addTodoReminder(Todo todo) async {
@@ -70,6 +81,7 @@ class Notifications {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
+      payload: todo.id,
     );
   }
 
