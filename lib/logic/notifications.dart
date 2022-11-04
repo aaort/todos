@@ -41,6 +41,7 @@ class Notifications {
   static final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
+    tz.initializeTimeZones();
     await _localNotificationsPlugin.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: notificationTapBackground,
@@ -66,8 +67,6 @@ class Notifications {
   );
 
   static Future<void> addTodoReminder(Todo todo) async {
-    tz.initializeTimeZones();
-
     final scheduleDate = tz.TZDateTime.from(todo.reminderDateTime!, tz.local);
 
     FlutterLocalNotificationsPlugin().zonedSchedule(
