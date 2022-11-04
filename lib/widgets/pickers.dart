@@ -43,7 +43,7 @@ void showDateTimePicker({
   );
 }
 
-void showOptionsPicker<T>({
+void showOptionPicker<T>({
   required BuildContext context,
   required String title,
   required List<PickerOption<T>> options,
