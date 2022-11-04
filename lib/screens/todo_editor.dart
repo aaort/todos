@@ -14,9 +14,9 @@ enum ReminderOption {
   custom,
 }
 
-final _reminderOptions = <PickerOption<ReminderOption>>[
-  PickerOption('In 5 minutes', ReminderOption.in_5_minutes),
-  PickerOption('In 15 minutes', ReminderOption.in_15_minutes),
+final _reminderOptions = <PickerOption<dynamic>>[
+  PickerOption('In 5 minutes', const Duration(minutes: 5)),
+  PickerOption('In 15 minutes', const Duration(minutes: 15)),
   PickerOption('Custom', ReminderOption.custom),
 ];
 
@@ -34,23 +34,15 @@ class _TodoEditorState extends State<TodoEditor> {
   final taskController = TextEditingController();
   bool createEnabled = false;
 
-  DateTime? _reminderDateTime;
-  ReminderOption? _reminderOption;
+  dynamic _reminder; // Duration | DateTime | null
 
   String get _reminderText {
-    if (_reminderDateTime != null) {
-      return getReminderText(_reminderDateTime!);
-    }
-    if (_reminderOption != null) {
-      if (_reminderOption == ReminderOption.custom) return '';
-      return 'Remind me in '
-          '${_reminderOption == ReminderOption.in_5_minutes ? 5 : 15} minutes';
-    }
-    return '';
+    return getReminderText(
+        _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder);
   }
 
   void showReminderOptionPicker() {
-    showOptionPicker<ReminderOption>(
+    showOptionPicker<dynamic>(
       context: context,
       title: 'Remind me',
       options: _reminderOptions,
@@ -58,34 +50,32 @@ class _TodoEditorState extends State<TodoEditor> {
     );
   }
 
-  void onDateTimeChange(DateTime newDateTime) {
-    setState(() {
-      _reminderDateTime = newDateTime.add(const Duration(milliseconds: 10));
-    });
-  }
+  void onReminderChange(dynamic newReminder) =>
+      setState(() => _reminder = newReminder);
 
-  void onReminderOptionChange(ReminderOption option) async {
+  void onReminderOptionChange(dynamic option) async {
     Navigator.pop(context);
-    if (option == ReminderOption.custom) {
+    if (option is Duration) {
+      onReminderChange(option);
+    } else {
       FocusManager.instance.primaryFocus?.unfocus();
       await Future.delayed(const Duration(milliseconds: 400));
       showDateTimePicker(
         context: context,
         title: 'Remind me...',
-        initialDateTime: _reminderDateTime,
-        onChange: onDateTimeChange,
+        initialDateTime: _reminder is Duration
+            ? getDateTimeOfDuration(_reminder)
+            : _reminder,
+        onChange: onReminderChange,
       );
-    } else {
-      _reminderDateTime = null;
     }
-    setState(() => _reminderOption = option);
   }
 
   Future<void> onTodoSaved() async {
     if (taskController.text.isNotEmpty) {
-      DateTime? reminder = _reminderDateTime;
-      reminder ??= DateTime.now().add(Duration(
-          minutes: _reminderOption == ReminderOption.in_5_minutes ? 5 : 15));
+      DateTime reminder =
+          _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder;
+
       final todo = Todo(taskController.text, reminderDateTime: reminder);
       if (widget.initialTodo != null) {
         TodoActions(context, widget.initialTodo!).updateTodo(todo);
@@ -100,7 +90,7 @@ class _TodoEditorState extends State<TodoEditor> {
   @override
   void initState() {
     taskController.text = widget.initialTodo?.task ?? '';
-    _reminderDateTime = widget.initialTodo?.reminderDateTime;
+    _reminder = widget.initialTodo?.reminderDateTime;
     taskController.addListener(() {
       setState(() => createEnabled = taskController.text.isNotEmpty);
     });
@@ -154,7 +144,7 @@ class _TodoEditorState extends State<TodoEditor> {
               ),
             ),
           ),
-          if (_reminderDateTime != null || _reminderOption != null) ...[
+          if (_reminder != null) ...[
             const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,10 +172,7 @@ class _TodoEditorState extends State<TodoEditor> {
   }
 
   void clearReminder() {
-    setState(() {
-      _reminderOption = null;
-      _reminderDateTime = null;
-    });
+    setState(() => _reminder = null);
   }
 
   @override

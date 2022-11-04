@@ -11,3 +11,7 @@ String getReminderText(DateTime dateTime) {
     return 'Remind me in ${diff.inDays} day${diff.inDays > 1 ? 's' : ''}';
   }
 }
+
+DateTime getDateTimeOfDuration(Duration duration) {
+  return DateTime.now().add(duration);
+}
