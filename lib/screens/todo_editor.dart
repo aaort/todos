@@ -41,11 +41,16 @@ class _TodoEditorState extends State<TodoEditor> {
     if (_reminderDateTime != null) {
       return getReminderText(_reminderDateTime!);
     }
-    return 'Remind me in ${_reminderOption == ReminderOption.in_5_minutes ? 5 : 15} minutes';
+    if (_reminderOption != null) {
+      if (_reminderOption == ReminderOption.custom) return '';
+      return 'Remind me in '
+          '${_reminderOption == ReminderOption.in_5_minutes ? 5 : 15} minutes';
+    }
+    return '';
   }
 
-  void onReminderOptionPick() {
-    showOptionsPicker<ReminderOption>(
+  void showReminderOptionPicker() {
+    showOptionPicker<ReminderOption>(
       context: context,
       title: 'Remind me',
       options: _reminderOptions,
@@ -73,9 +78,7 @@ class _TodoEditorState extends State<TodoEditor> {
     } else {
       _reminderDateTime = null;
     }
-    setState(() {
-      _reminderOption = option;
-    });
+    setState(() => _reminderOption = option);
   }
 
   Future<void> onTodoSaved() async {
@@ -124,7 +127,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               TodoIconButton(
-                onPressed: createEnabled ? onReminderOptionPick : null,
+                onPressed: createEnabled ? showReminderOptionPicker : null,
                 icon: const Icon(
                   Icons.timer_outlined,
                 ),
@@ -159,7 +162,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 Flexible(
                   flex: 8,
                   child: GestureDetector(
-                    onTap: onReminderOptionPick,
+                    onTap: showReminderOptionPicker,
                     child: Text(
                       _reminderText,
                       style: Theme.of(context).textTheme.bodySmall,

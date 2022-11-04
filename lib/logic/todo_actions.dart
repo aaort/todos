@@ -35,13 +35,11 @@ class TodoActions {
   }
 
   Future<void> createTodo() async {
-    final todo =
-        Todo(currentTodo.task, reminderDateTime: currentTodo.reminderDateTime);
-    context.read<Todos>().addTodo(todo);
-    await TodosIO.createTodo(todo);
+    context.read<Todos>().addTodo(currentTodo);
+    await TodosIO.createTodo(currentTodo);
 
-    if (todo.reminderDateTime != null) {
-      Notifications.addTodoReminder(todo);
+    if (currentTodo.reminderDateTime != null) {
+      Notifications.addTodoReminder(currentTodo);
     }
   }
 

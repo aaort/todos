@@ -92,12 +92,12 @@ class TodosIO {
     await file.writeAsString(jsonEncode(todo.asMap, toEncodable: _toEncodable));
   }
 
-  static Future<void> toggleCheck(String id) async {
+  static Future<void> toggleCheck(String id, {bool? value}) async {
     // todo with updated check value should be passed here
     final file = await _getTodoFileById(id);
     if (file == null) return;
     final todoMap = jsonDecode((await file.readAsString())) as Map;
-    todoMap['checked'] = !todoMap['checked'];
+    todoMap['checked'] = value ?? !todoMap['checked'];
     await file.writeAsString(jsonEncode(todoMap));
   }
 

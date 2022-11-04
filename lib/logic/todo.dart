@@ -29,8 +29,8 @@ class Todo {
     }
   }
 
-  void toggleCheck() {
-    checked = !checked;
+  void toggleCheck(bool? value) {
+    checked = value ?? !checked;
   }
 
   void updateReminder(DateTime newReminderDateTime) {
