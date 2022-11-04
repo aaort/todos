@@ -27,7 +27,7 @@ void showDateTimePicker({
               onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
               minimumDate: DateTime.now(),
               // Append some time to initial date to avoid conflicts
-              initialDateTime: dateTime.add(const Duration(minutes: 2)),
+              initialDateTime: dateTime.add(const Duration(seconds: 10)),
             ),
           ),
           InkWell(
@@ -43,7 +43,7 @@ void showDateTimePicker({
   );
 }
 
-void showOptionsPicker<T>({
+void showOptionPicker<T>({
   required BuildContext context,
   required String title,
   required List<PickerOption<T>> options,
