@@ -41,7 +41,12 @@ class _TodoEditorState extends State<TodoEditor> {
     if (_reminderDateTime != null) {
       return getReminderText(_reminderDateTime!);
     }
-    return 'Remind me in ${_reminderOption == ReminderOption.in_5_minutes ? 5 : 15} minutes';
+    if (_reminderOption != null) {
+      if (_reminderOption == ReminderOption.custom) return '';
+      return 'Remind me in '
+          '${_reminderOption == ReminderOption.in_5_minutes ? 5 : 15} minutes';
+    }
+    return '';
   }
 
   void showReminderOptionPicker() {
