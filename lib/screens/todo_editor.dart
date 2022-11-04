@@ -35,6 +35,14 @@ class _TodoEditorState extends State<TodoEditor> {
   bool createEnabled = false;
 
   DateTime? _reminderDateTime;
+  ReminderOption? _reminderOption;
+
+  String get _reminderText {
+    if (_reminderDateTime != null) {
+      return getReminderText(_reminderDateTime!);
+    }
+    return 'Remind me in ${_reminderOption == ReminderOption.in_5_minutes ? 5 : 15} minutes';
+  }
 
   void onReminderOptionPick() {
     showOptionsPicker<ReminderOption>(
@@ -53,29 +61,29 @@ class _TodoEditorState extends State<TodoEditor> {
 
   void onReminderOptionChange(ReminderOption option) async {
     Navigator.pop(context);
-    switch (option) {
-      case ReminderOption.in_5_minutes:
-        onDateTimeChange(DateTime.now().add(const Duration(minutes: 6)));
-        break;
-      case ReminderOption.in_15_minutes:
-        onDateTimeChange(DateTime.now().add(const Duration(minutes: 16)));
-        break;
-      case ReminderOption.custom:
-        FocusManager.instance.primaryFocus?.unfocus();
-        await Future.delayed(const Duration(milliseconds: 400));
-        showDateTimePicker(
-          context: context,
-          title: 'Remind me...',
-          initialDateTime: _reminderDateTime,
-          onChange: onDateTimeChange,
-        );
+    if (option == ReminderOption.custom) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      await Future.delayed(const Duration(milliseconds: 400));
+      showDateTimePicker(
+        context: context,
+        title: 'Remind me...',
+        initialDateTime: _reminderDateTime,
+        onChange: onDateTimeChange,
+      );
+    } else {
+      _reminderDateTime = null;
     }
+    setState(() {
+      _reminderOption = option;
+    });
   }
 
   Future<void> onTodoSaved() async {
     if (taskController.text.isNotEmpty) {
-      final todo =
-          Todo(taskController.text, reminderDateTime: _reminderDateTime);
+      DateTime? reminder = _reminderDateTime;
+      reminder ??= DateTime.now().add(Duration(
+          minutes: _reminderOption == ReminderOption.in_5_minutes ? 5 : 15));
+      final todo = Todo(taskController.text, reminderDateTime: reminder);
       if (widget.initialTodo != null) {
         TodoActions(context, widget.initialTodo!).updateTodo(todo);
       } else {
@@ -143,7 +151,7 @@ class _TodoEditorState extends State<TodoEditor> {
               ),
             ),
           ),
-          if (_reminderDateTime != null) ...[
+          if (_reminderDateTime != null || _reminderOption != null) ...[
             const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -153,13 +161,13 @@ class _TodoEditorState extends State<TodoEditor> {
                   child: GestureDetector(
                     onTap: onReminderOptionPick,
                     child: Text(
-                      getReminderText(_reminderDateTime!),
+                      _reminderText,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
                 ),
                 TodoIconButton(
-                  onPressed: () => setState(() => _reminderDateTime = null),
+                  onPressed: clearReminder,
                   icon: const Icon(Icons.close),
                 )
               ],
@@ -168,6 +176,13 @@ class _TodoEditorState extends State<TodoEditor> {
         ],
       ),
     );
+  }
+
+  void clearReminder() {
+    setState(() {
+      _reminderOption = null;
+      _reminderDateTime = null;
+    });
   }
 
   @override
