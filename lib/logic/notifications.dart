@@ -88,9 +88,6 @@ class Notifications {
   static Future<void> removeTodoReminder(int id) async {
     try {
       await FlutterLocalNotificationsPlugin().cancel(id);
-      (await FlutterLocalNotificationsPlugin().getActiveNotifications())
-          .first
-          .id;
     } catch (e) {
       throw 'Failed to cancel notification with id: $id, error: $e';
     }
