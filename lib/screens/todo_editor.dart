@@ -73,9 +73,7 @@ class _TodoEditorState extends State<TodoEditor> {
     } else {
       _reminderDateTime = null;
     }
-    setState(() {
-      _reminderOption = option;
-    });
+    setState(() => _reminderOption = option);
   }
 
   Future<void> onTodoSaved() async {
