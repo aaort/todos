@@ -3,7 +3,7 @@ String getReminderText(DateTime dateTime) {
   if (diff.isNegative) {
     return 'Reminded';
   } else if (diff.inMinutes < 60) {
-    return 'Remind me in ${diff.inMinutes} minutes';
+    return 'Remind me in ${(diff.inSeconds / 60).round()} minutes';
   } else if (diff.inHours < 24) {
     return 'Remind me today at ${dateTime.hour.toString().padLeft(2, '0')}'
         ':${dateTime.minute.toString().padLeft(2, '0')}';
