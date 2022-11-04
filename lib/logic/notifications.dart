@@ -15,7 +15,11 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 }
 
 const _androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-const _iosSettings = DarwinInitializationSettings();
+const _iosSettings = DarwinInitializationSettings(
+  onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+);
+
+void onDidReceiveLocalNotification(id, title, body, payload) {}
 
 const InitializationSettings initializationSettings = InitializationSettings(
   android: _androidSettings,
