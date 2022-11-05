@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todos/logic/notifications.dart';
+import 'package:todos/notifications/notifications.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/widgets/pickers.dart';
 
