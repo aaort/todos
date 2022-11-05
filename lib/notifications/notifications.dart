@@ -57,6 +57,22 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
   playSound: true,
 );
 
+final _androidNotificationDetails = AndroidNotificationDetails(
+  channel.id,
+  channel.name,
+  actions: <AndroidNotificationAction>[
+    const AndroidNotificationAction(
+      'mark_completed_id',
+      'Mark as completed',
+      cancelNotification: true,
+    ),
+  ],
+);
+
+const _darwinNotificationDetails = DarwinNotificationDetails(
+  categoryIdentifier: 'plainCategory',
+);
+
 class Notifications {
   static final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -73,22 +89,6 @@ class Notifications {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
   }
-
-  static final _androidNotificationDetails = AndroidNotificationDetails(
-    channel.id,
-    channel.name,
-    actions: <AndroidNotificationAction>[
-      const AndroidNotificationAction(
-        'mark_completed_id',
-        'Mark as completed',
-        cancelNotification: true,
-      ),
-    ],
-  );
-
-  static const _darwinNotificationDetails = DarwinNotificationDetails(
-    categoryIdentifier: 'plainCategory',
-  );
 
   static Future<void> addTodoReminder(Todo todo) async {
     final scheduleDate = tz.TZDateTime.from(todo.reminderDateTime!, tz.local);
