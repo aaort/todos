@@ -40,7 +40,6 @@ class Notifications {
       'Todo reminder',
       todo.task,
       scheduleDate,
-      // TODO: provide additional details for notification if required
       NotificationDetails(
         android: androidNotificationDetails,
         iOS: darwinNotificationDetails,
@@ -62,8 +61,7 @@ class Notifications {
 
   static Future<void> updateTodoReminder(Todo todo) async {
     try {
-      await notifications.cancel(todo.reminderId!);
-      addTodoReminder(todo);
+      await addTodoReminder(todo);
     } catch (e) {
       throw 'Failed to cancel notification with id: ${todo.id}, error: $e';
     }
