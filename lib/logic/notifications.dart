@@ -14,14 +14,32 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
   }
 }
 
+final darwinNotificationCategories = <DarwinNotificationCategory>[
+  DarwinNotificationCategory(
+    'plainCategory',
+    actions: <DarwinNotificationAction>[
+      DarwinNotificationAction.plain(
+        'action_id_1',
+        'Mark as completed',
+        options: {
+          DarwinNotificationActionOption.destructive,
+          DarwinNotificationActionOption.foreground,
+        },
+      ),
+    ],
+    options: {DarwinNotificationCategoryOption.hiddenPreviewShowTitle},
+  ),
+];
+
 const _androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-const _iosSettings = DarwinInitializationSettings(
+final _iosSettings = DarwinInitializationSettings(
   onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+  notificationCategories: darwinNotificationCategories,
 );
 
 void onDidReceiveLocalNotification(id, title, body, payload) {}
 
-const InitializationSettings initializationSettings = InitializationSettings(
+final InitializationSettings initializationSettings = InitializationSettings(
   android: _androidSettings,
   iOS: _iosSettings,
   // macOS: initializationSettingsDarwin,
@@ -66,6 +84,10 @@ class Notifications {
     ],
   );
 
+  static const _darwinNotificationDetails = DarwinNotificationDetails(
+    categoryIdentifier: 'plainCategory',
+  );
+
   static Future<void> addTodoReminder(Todo todo) async {
     final scheduleDate = tz.TZDateTime.from(todo.reminderDateTime!, tz.local);
 
@@ -77,6 +99,7 @@ class Notifications {
       // TODO: provide additional details for notification if required
       NotificationDetails(
         android: _androidNotificationDetails,
+        iOS: _darwinNotificationDetails,
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
