@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -128,5 +130,17 @@ class Notifications {
   // Used only for debugging
   static Future<void> deleteAllReminders() async {
     await FlutterLocalNotificationsPlugin().cancelAll();
+  }
+
+  static void showNotification({String? title, String? body}) {
+    FlutterLocalNotificationsPlugin().show(
+      Random().nextInt(100),
+      title ?? 'test title',
+      body ?? 'test body',
+      NotificationDetails(
+        android: _androidNotificationDetails,
+        iOS: _darwinNotificationDetails,
+      ),
+    );
   }
 }
