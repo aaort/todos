@@ -5,6 +5,7 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:todos/notifications/constants.dart';
 
 // TODO: Customize setup for app needs
 
@@ -15,63 +16,6 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
     TodosIO.toggleCheck(notificationResponse.payload!);
   }
 }
-
-final darwinNotificationCategories = <DarwinNotificationCategory>[
-  DarwinNotificationCategory(
-    'plainCategory',
-    actions: <DarwinNotificationAction>[
-      DarwinNotificationAction.plain(
-        'action_id_1',
-        'Mark as completed',
-        options: {
-          DarwinNotificationActionOption.destructive,
-          DarwinNotificationActionOption.foreground,
-        },
-      ),
-    ],
-    options: {DarwinNotificationCategoryOption.hiddenPreviewShowTitle},
-  ),
-];
-
-const _androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
-final _iosSettings = DarwinInitializationSettings(
-  onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-  notificationCategories: darwinNotificationCategories,
-);
-
-void onDidReceiveLocalNotification(id, title, body, payload) {}
-
-final InitializationSettings initializationSettings = InitializationSettings(
-  android: _androidSettings,
-  iOS: _iosSettings,
-  // macOS: initializationSettingsDarwin,
-  // linux: initializationSettingsLinux,
-);
-
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'reminder_channel', // id
-  'reminding notification', // title
-  description:
-      'This channel is used for reminding notifications', // description
-  importance: Importance.high,
-  playSound: true,
-);
-
-final _androidNotificationDetails = AndroidNotificationDetails(
-  channel.id,
-  channel.name,
-  actions: <AndroidNotificationAction>[
-    const AndroidNotificationAction(
-      'mark_completed_id',
-      'Mark as completed',
-      cancelNotification: true,
-    ),
-  ],
-);
-
-const _darwinNotificationDetails = DarwinNotificationDetails(
-  categoryIdentifier: 'plainCategory',
-);
 
 class Notifications {
   static final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -100,8 +44,8 @@ class Notifications {
       scheduleDate,
       // TODO: provide additional details for notification if required
       NotificationDetails(
-        android: _androidNotificationDetails,
-        iOS: _darwinNotificationDetails,
+        android: androidNotificationDetails,
+        iOS: darwinNotificationDetails,
       ),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
@@ -138,8 +82,8 @@ class Notifications {
       title ?? 'test title',
       body ?? 'test body',
       NotificationDetails(
-        android: _androidNotificationDetails,
-        iOS: _darwinNotificationDetails,
+        android: androidNotificationDetails,
+        iOS: darwinNotificationDetails,
       ),
     );
   }
