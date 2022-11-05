@@ -1,26 +1,33 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-final darwinNotificationCategories = <DarwinNotificationCategory>[
-  DarwinNotificationCategory(
-    'plainCategory',
-    actions: <DarwinNotificationAction>[
-      DarwinNotificationAction.plain(
-        'action_id_1',
-        'Mark as completed',
-        options: {
-          DarwinNotificationActionOption.destructive,
-          DarwinNotificationActionOption.foreground,
-        },
-      ),
-    ],
-    options: {DarwinNotificationCategoryOption.hiddenPreviewShowTitle},
-  ),
-];
+const String plainNotificationCategory = 'plainCategory';
 
 const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
 final iosSettings = DarwinInitializationSettings(
   onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-  notificationCategories: darwinNotificationCategories,
+  notificationCategories: _darwinNotificationCategories,
+);
+
+final _darwinNotificationCategories = <DarwinNotificationCategory>[
+  DarwinNotificationCategory(
+    plainNotificationCategory,
+    actions: _darwinNotificationActions,
+    options: {DarwinNotificationCategoryOption.hiddenPreviewShowTitle},
+  ),
+];
+
+final _darwinNotificationActions = <DarwinNotificationAction>[
+  DarwinNotificationAction.plain(
+    'action_id_1',
+    'Mark as completed',
+    options: {
+      DarwinNotificationActionOption.foreground,
+    },
+  ),
+];
+
+const darwinNotificationDetails = DarwinNotificationDetails(
+  categoryIdentifier: plainNotificationCategory,
 );
 
 void onDidReceiveLocalNotification(id, title, body, payload) {}
@@ -33,10 +40,9 @@ final InitializationSettings initializationSettings = InitializationSettings(
 );
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'reminder_channel', // id
-  'reminding notification', // title
-  description:
-      'This channel is used for reminding notifications', // description
+  'reminder_channel',
+  'reminding notification',
+  description: 'This channel is used for reminding notifications',
   importance: Importance.high,
   playSound: true,
 );
@@ -51,8 +57,4 @@ final androidNotificationDetails = AndroidNotificationDetails(
       cancelNotification: true,
     ),
   ],
-);
-
-const darwinNotificationDetails = DarwinNotificationDetails(
-  categoryIdentifier: 'plainCategory',
 );
