@@ -7,8 +7,6 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/notifications/constants.dart';
 
-// TODO: Customize setup for app needs
-
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
   // notification payload should be the todo id
@@ -18,17 +16,17 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 }
 
 class Notifications {
-  static final _localNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  static final notifications = FlutterLocalNotificationsPlugin();
 
   static Future<void> initialize() async {
     tz.initializeTimeZones();
-    await _localNotificationsPlugin.initialize(
+    await notifications.initialize(
       initializationSettings,
       onDidReceiveNotificationResponse: notificationTapBackground,
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
 
-    await _localNotificationsPlugin
+    await notifications
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
@@ -37,7 +35,7 @@ class Notifications {
   static Future<void> addTodoReminder(Todo todo) async {
     final scheduleDate = tz.TZDateTime.from(todo.reminderDateTime!, tz.local);
 
-    _localNotificationsPlugin.zonedSchedule(
+    notifications.zonedSchedule(
       todo.reminderId!,
       'Todo reminder',
       todo.task,
@@ -56,7 +54,7 @@ class Notifications {
 
   static Future<void> removeTodoReminder(int id) async {
     try {
-      await _localNotificationsPlugin.cancel(id);
+      await notifications.cancel(id);
     } catch (e) {
       throw 'Failed to cancel notification with id: $id, error: $e';
     }
@@ -64,7 +62,7 @@ class Notifications {
 
   static Future<void> updateTodoReminder(Todo todo) async {
     try {
-      await _localNotificationsPlugin.cancel(todo.reminderId!);
+      await notifications.cancel(todo.reminderId!);
       addTodoReminder(todo);
     } catch (e) {
       throw 'Failed to cancel notification with id: ${todo.id}, error: $e';
@@ -73,11 +71,11 @@ class Notifications {
 
   // Used only for debugging
   static Future<void> deleteAllReminders() async {
-    await _localNotificationsPlugin.cancelAll();
+    await notifications.cancelAll();
   }
 
   static void showNotification({String? title, String? body}) {
-    _localNotificationsPlugin.show(
+    notifications.show(
       Random().nextInt(100),
       title ?? 'test title',
       body ?? 'test body',
