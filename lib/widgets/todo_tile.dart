@@ -30,7 +30,7 @@ class TodoTile extends StatelessWidget {
     final todo = context.watch<Todos>().getTodoById(id);
 
     return DismissibleTile(
-      onDismiss: () => TodoActions(context, todo).onDeleteTodo(todo),
+      onDismiss: TodoActions(context, todo).deleteTodo,
       onLongPress: () => onLongPress(context),
       child: CheckboxListTile(
         title: Text(

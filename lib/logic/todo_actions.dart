@@ -43,10 +43,10 @@ class TodoActions {
     }
   }
 
-  Future<void> onDeleteTodo(Todo todo) async {
-    context.read<Todos>().deleteTodo(todo.id);
-    await TodosIO.deleteTodo(todo.id);
-    final reminderId = todo.reminderId;
+  Future<void> deleteTodo() async {
+    context.read<Todos>().deleteTodo(currentTodo.id);
+    await TodosIO.deleteTodo(currentTodo.id);
+    final reminderId = currentTodo.reminderId;
     if (reminderId != null) {
       await Notifications.removeTodoReminder(reminderId);
     }
@@ -66,18 +66,18 @@ class TodoActions {
     }
   }
 
-  void onReminderDateTimeUpdate(DateTime newDateTime) {
+  void updateReminder(DateTime newReminder) {
     context
         .read<Todos>()
         .getTodoById(currentTodo.id)
-        .updateReminder(newDateTime);
+        .updateReminder(newReminder);
     Notifications.updateTodoReminder(currentTodo);
   }
 
   void onReminderPressed() {
     showDateTimePicker(
       context: context,
-      onChange: onReminderDateTimeUpdate,
+      onChange: updateReminder,
       initialDateTime: currentTodo.reminderDateTime,
     );
   }
