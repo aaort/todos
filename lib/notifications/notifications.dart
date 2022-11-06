@@ -22,7 +22,6 @@ class Notifications {
     tz.initializeTimeZones();
     await notifications.initialize(
       initializationSettings,
-      onDidReceiveNotificationResponse: notificationTapBackground,
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
 
@@ -63,7 +62,7 @@ class Notifications {
     try {
       await addTodoReminder(todo);
     } catch (e) {
-      throw 'Failed to cancel notification with id: ${todo.id}, error: $e';
+      throw 'Failed to cancel notification with id: ${todo.reminderId}, error: $e';
     }
   }
 
