@@ -8,7 +8,10 @@ void showDateTimePicker({
   String? title,
   DateTime? initialDateTime,
 }) {
-  DateTime dateTime = initialDateTime ?? DateTime.now();
+  DateTime dateTime =
+      initialDateTime ?? DateTime.now().add(const Duration(minutes: 1));
+
+  final minimumDate = dateTime;
 
   popupModalBottomSheet(
     context: context,
@@ -25,7 +28,7 @@ void showDateTimePicker({
             height: MediaQuery.of(context).size.height / 3,
             child: CupertinoDatePicker(
               onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
-              minimumDate: DateTime.now(),
+              minimumDate: minimumDate,
               // Append some time to initial date to avoid conflicts
               initialDateTime: dateTime.add(const Duration(seconds: 10)),
             ),
