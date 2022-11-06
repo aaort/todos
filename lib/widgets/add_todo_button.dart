@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todos/screens/todo_editor.dart';
+import 'package:todos/widgets/modal_bottom_sheet.dart';
 
 class AddTodoButton extends StatefulWidget {
-  final VoidCallback onPressed;
-
-  const AddTodoButton({super.key, required this.onPressed});
+  const AddTodoButton({super.key});
 
   @override
   State<AddTodoButton> createState() => _AddTodoButtonState();
@@ -18,6 +18,13 @@ class _AddTodoButtonState extends State<AddTodoButton>
   late final _animation =
       CurvedAnimation(parent: _animController, curve: Curves.linear);
 
+  showAddTodoModal(BuildContext context) {
+    popupModalBottomSheet(
+      context: context,
+      child: const TodoEditor(),
+    );
+  }
+
   @override
   void initState() {
     _animController.forward();
@@ -29,7 +36,7 @@ class _AddTodoButtonState extends State<AddTodoButton>
     return ScaleTransition(
       scale: _animation,
       child: FloatingActionButton(
-        onPressed: widget.onPressed,
+        onPressed: () => showAddTodoModal(context),
         child: const Icon(Icons.edit_outlined),
       ),
     );
