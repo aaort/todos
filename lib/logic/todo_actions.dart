@@ -52,6 +52,20 @@ class TodoActions {
     }
   }
 
+  void toggleCheck() {
+    context.read<Todos>().toggleCheckById(currentTodo.id);
+    TodosIO.toggleCheck(currentTodo.id);
+    final todo = context.read<Todos>().getTodoById(currentTodo.id);
+    if (todo.reminderId == null) return;
+    if (todo.checked) {
+      Notifications.removeTodoReminder(todo.reminderId!);
+    } else {
+      if (todo.reminderDateTime!.isAfter(DateTime.now())) {
+        Notifications.addTodoReminder(todo);
+      }
+    }
+  }
+
   void onReminderDateTimeUpdate(DateTime newDateTime) {
     context
         .read<Todos>()
