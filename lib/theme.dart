@@ -82,6 +82,12 @@ final themeData = ThemeData(
       fontWeight: FontWeight.w800,
     ),
   ),
+  bottomSheetTheme: BottomSheetThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    backgroundColor: Colors.white,
+  ),
 );
 
 double getButtonElevation(Set<MaterialState> states) =>
