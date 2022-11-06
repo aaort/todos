@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:todos/notifications/notifications.dart';
 import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/styles.dart';
 import 'package:todos/widgets/dismissible.dart';
@@ -24,6 +25,15 @@ class TodoTile extends StatelessWidget {
   void toggleCheck(BuildContext context) {
     context.read<Todos>().toggleCheck(id);
     TodosIO.toggleCheck(id);
+    final todo = context.read<Todos>().getTodoById(id);
+    if (todo.reminderId == null) return;
+    if (todo.checked) {
+      Notifications.removeTodoReminder(todo.reminderId!);
+    } else {
+      if (todo.reminderDateTime!.isAfter(DateTime.now())) {
+        Notifications.addTodoReminder(todo);
+      }
+    }
   }
 
   @override
@@ -42,7 +52,7 @@ class TodoTile extends StatelessWidget {
         ),
         contentPadding: EdgeInsets.zero,
         value: todo.checked,
-        onChanged: (_) => toggleCheck(context),
+        onChanged: (value) => toggleCheck(context),
         checkColor: Colors.white,
         activeColor: Colors.blueGrey,
         side: const BorderSide(color: Colors.blueGrey, width: 1),
