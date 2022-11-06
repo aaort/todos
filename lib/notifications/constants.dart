@@ -1,16 +1,16 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-const String plainNotificationCategory = 'plainCategory';
+const String _plainNotificationCategory = 'plainCategory';
 
 const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
 final iosSettings = DarwinInitializationSettings(
-  onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+  onDidReceiveLocalNotification: _onDidReceiveLocalNotification,
   notificationCategories: _darwinNotificationCategories,
 );
 
 final _darwinNotificationCategories = <DarwinNotificationCategory>[
   DarwinNotificationCategory(
-    plainNotificationCategory,
+    _plainNotificationCategory,
     actions: _darwinNotificationActions,
     options: {DarwinNotificationCategoryOption.hiddenPreviewShowTitle},
   ),
@@ -27,10 +27,10 @@ final _darwinNotificationActions = <DarwinNotificationAction>[
 ];
 
 const darwinNotificationDetails = DarwinNotificationDetails(
-  categoryIdentifier: plainNotificationCategory,
+  categoryIdentifier: _plainNotificationCategory,
 );
 
-void onDidReceiveLocalNotification(id, title, body, payload) {}
+void _onDidReceiveLocalNotification(id, title, body, payload) {}
 
 final InitializationSettings initializationSettings = InitializationSettings(
   android: androidSettings,
