@@ -12,15 +12,6 @@ class Styles {
         decoration: checked ? TextDecoration.lineThrough : TextDecoration.none);
   }
 
-  BoxDecoration get todoListContainerDecoration {
-    return const BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(20),
-      ),
-    );
-  }
-
   EdgeInsets get todoListPadding {
     return EdgeInsets.symmetric(
       vertical: 20.0,
