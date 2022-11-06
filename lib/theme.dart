@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const primaryColor = Colors.blueGrey;
-const modalBorderRadius = 20.0;
+const kModalBorderRadius = 20.0;
 
 final themeData = ThemeData(
   scaffoldBackgroundColor: primaryColor,
@@ -85,7 +85,7 @@ final themeData = ThemeData(
   ),
   bottomSheetTheme: BottomSheetThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(modalBorderRadius),
+      borderRadius: BorderRadius.circular(kModalBorderRadius),
     ),
     backgroundColor: Colors.white,
   ),
