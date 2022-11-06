@@ -1,4 +1,3 @@
-// ignore_for_file: constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:todos/helpers/date.dart';
 import 'package:todos/logic/todo.dart';
@@ -7,10 +6,6 @@ import 'package:todos/widgets/pickers.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
 
 enum ReminderOption {
-// using underscores here to be able separate words
-// for displaying as option titles inside picker
-  in_5_minutes,
-  in_15_minutes,
   custom,
 }
 
@@ -20,7 +15,6 @@ final _reminderOptions = <PickerOption<dynamic>>[
   PickerOption('Custom', ReminderOption.custom),
 ];
 
-// Using StatefulWidget here only to check for mounted field before pop call
 class TodoEditor extends StatefulWidget {
   final Todo? initialTodo;
 
@@ -73,7 +67,7 @@ class _TodoEditorState extends State<TodoEditor> {
 
   Future<void> onTodoSaved() async {
     if (taskController.text.isNotEmpty) {
-      DateTime reminder =
+      DateTime? reminder =
           _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder;
 
       final todo = Todo(taskController.text, reminderDateTime: reminder);
