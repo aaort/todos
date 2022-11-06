@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+const primaryColor = Colors.blueGrey;
+
 final themeData = ThemeData(
-  scaffoldBackgroundColor: Colors.blueGrey,
-  primaryColor: Colors.blueGrey,
+  scaffoldBackgroundColor: primaryColor,
+  primaryColor: primaryColor,
   colorScheme: ColorScheme.fromSwatch(
-    primarySwatch: Colors.blueGrey,
-    accentColor: Colors.blueGrey,
+    primarySwatch: primaryColor,
+    accentColor: primaryColor,
   ),
   textTheme: const TextTheme(
     titleLarge: TextStyle(
@@ -19,7 +21,7 @@ final themeData = ThemeData(
       fontWeight: FontWeight.w800,
     ),
     titleSmall: TextStyle(
-      color: Colors.blueGrey,
+      color: primaryColor,
       fontSize: 25.0,
       fontWeight: FontWeight.w600,
     ),
@@ -29,30 +31,30 @@ final themeData = ThemeData(
       fontWeight: FontWeight.w400,
     ),
     bodySmall: TextStyle(
-      color: Colors.blueGrey,
+      color: primaryColor,
       fontSize: 20.0,
       fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(
-      color: Colors.blueGrey,
+      color: primaryColor,
       fontSize: 30.0,
       fontWeight: FontWeight.w600,
     ),
   ),
   iconTheme: const IconThemeData(
-    color: Colors.blueGrey,
+    color: primaryColor,
     size: 27,
   ),
-  disabledColor: Colors.blueGrey.shade200,
+  disabledColor: primaryColor.shade200,
   inputDecorationTheme: const InputDecorationTheme(
     border: InputBorder.none,
   ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: Colors.blueGrey,
+    backgroundColor: primaryColor,
     elevation: 2.0,
   ),
   snackBarTheme: const SnackBarThemeData(
-    backgroundColor: Colors.blueGrey,
+    backgroundColor: primaryColor,
     actionTextColor: Colors.white,
     elevation: 2.0,
     contentTextStyle: TextStyle(color: Colors.white),
@@ -87,14 +89,14 @@ double getButtonElevation(Set<MaterialState> states) =>
 
 Color getButtonColor(Set<MaterialState> states) {
   if (states.contains(MaterialState.disabled)) {
-    return Colors.blueGrey.shade200;
+    return primaryColor.shade200;
   }
-  return Colors.blueGrey;
+  return primaryColor;
 }
 
 TextStyle getButtonTextStyle(Set<MaterialState> states) {
   if (states.contains(MaterialState.disabled)) {
-    return TextStyle(color: Colors.blueGrey.shade200);
+    return TextStyle(color: primaryColor.shade200);
   }
-  return const TextStyle(color: Colors.blueGrey);
+  return const TextStyle(color: primaryColor);
 }
