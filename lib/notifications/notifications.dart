@@ -22,6 +22,7 @@ class Notifications {
     tz.initializeTimeZones();
     await notifications.initialize(
       initializationSettings,
+      onDidReceiveNotificationResponse: notificationTapBackground,
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
 
