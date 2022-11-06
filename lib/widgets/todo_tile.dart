@@ -23,7 +23,7 @@ class TodoTile extends StatelessWidget {
   }
 
   void toggleCheck(BuildContext context) {
-    context.read<Todos>().toggleCheck(id);
+    context.read<Todos>().toggleCheckById(id);
     TodosIO.toggleCheck(id);
     final todo = context.read<Todos>().getTodoById(id);
     if (todo.reminderId == null) return;

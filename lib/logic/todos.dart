@@ -23,7 +23,7 @@ class Todos extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleCheck(String id, {bool? value}) {
+  void toggleCheckById(String id, {bool? value}) {
     _todos.firstWhere((todo) => todo.id == id).toggleCheck(value);
     notifyListeners();
   }
