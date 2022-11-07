@@ -1,7 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:timezone/timezone.dart' as tz;
-import 'package:timezone/data/latest.dart' as tz;
 
 const String _notificationChannelKey = 'basic_channel';
 const String _notificationGroupKey = 'basic_channel_group';
@@ -17,7 +15,6 @@ class Notifications {
   static initialize() async {
     final allowed = await notifications.requestPermissionToSendNotifications();
     if (!allowed) return;
-    tz.initializeTimeZones();
     AwesomeNotifications().initialize(
       _appIconDir,
       [
