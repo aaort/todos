@@ -56,6 +56,11 @@ class Notifications {
     );
   }
 
+  static updateReminder(Todo todo) async {
+    await notifications.cancel(todo.reminderId!);
+    scheduleReminder(todo);
+  }
+
   static cancelReminder(int id) {
     notifications.cancel(id);
   }
