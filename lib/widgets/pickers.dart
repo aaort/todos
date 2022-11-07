@@ -12,7 +12,7 @@ void showDateTimePicker({
   DateTime dateTime = getDateTimeWithPrecisionToMinutes(
       initialDateTime ?? DateTime.now().add(const Duration(minutes: 1)));
 
-  final minimumDate = dateTime;
+  final minimumDate = DateTime.now().add(const Duration(minutes: 1));
 
   void onDateTimeChange(DateTime newDateTime) => dateTime = newDateTime;
 
