@@ -1,6 +1,9 @@
 import 'package:date_time_format/date_time_format.dart';
 
 String getReminderText(DateTime dateTime) {
+  if (dateTime.isBefore(DateTime.now())) {
+    return 'Completed';
+  }
   return 'Remind me in ${dateTime.relative()}';
 }
 
