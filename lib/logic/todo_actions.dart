@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
+import 'package:todos/notifications.dart';
 import 'package:todos/widgets/pickers.dart';
 
 import 'todo.dart';
@@ -24,12 +25,7 @@ class TodoActions {
     context.read<Todos>().editTodo(todo);
     await TodosIO.editTodo(todo);
     if (todo.reminderDateTime != null) {
-      if (currentTodo.reminderId != null) {
-        // Had reminder before
-        // Notifications.updateTodoReminder(todo);
-      } else {
-        // Notifications.addTodoReminder(todo);
-      }
+      Notifications.scheduleReminder(todo);
     }
   }
 
@@ -38,7 +34,7 @@ class TodoActions {
     await TodosIO.createTodo(currentTodo);
 
     if (currentTodo.reminderDateTime != null) {
-      // Notifications.addTodoReminder(currentTodo);
+      Notifications.scheduleReminder(currentTodo);
     }
   }
 
@@ -47,7 +43,7 @@ class TodoActions {
     await TodosIO.deleteTodo(currentTodo.id);
     final reminderId = currentTodo.reminderId;
     if (reminderId != null) {
-      // await Notifications.removeTodoReminder(reminderId);
+      await Notifications.cancelReminder(reminderId);
     }
   }
 
@@ -62,10 +58,10 @@ class TodoActions {
     final todo = context.read<Todos>().getTodoById(currentTodo.id);
     if (todo.reminderId == null) return;
     if (todo.checked) {
-      // Notifications.removeTodoReminder(todo.reminderId!);
+      Notifications.cancelReminder(todo.reminderId!);
     } else {
       if (todo.reminderDateTime!.isAfter(DateTime.now())) {
-        // Notifications.addTodoReminder(todo);
+        Notifications.scheduleReminder(todo);
       }
     }
   }
@@ -75,7 +71,7 @@ class TodoActions {
         .read<Todos>()
         .getTodoById(currentTodo.id)
         .updateReminder(newReminder);
-    // Notifications.updateTodoReminder(currentTodo);
+    Notifications.scheduleReminder(currentTodo);
   }
 
   void onReminderPressed() {
