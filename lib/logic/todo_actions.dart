@@ -25,7 +25,7 @@ class TodoActions {
     context.read<Todos>().editTodo(todo);
     await TodosIO.editTodo(todo);
     if (todo.reminderDateTime != null) {
-      Notifications.scheduleReminder(todo);
+      Notifications.updateReminder(todo);
     }
   }
 
