@@ -52,6 +52,11 @@ class TodoActions {
     }
   }
 
+  Future<void> dropReminder() async {
+    currentTodo.updateReminder(null);
+    updateTodo(currentTodo);
+  }
+
   void toggleCheck() {
     context.read<Todos>().toggleCheckById(currentTodo.id);
     TodosIO.toggleCheck(currentTodo.id);
