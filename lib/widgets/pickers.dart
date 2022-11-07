@@ -13,6 +13,8 @@ void showDateTimePicker({
 
   final minimumDate = dateTime;
 
+  void onDateTimeChange(DateTime newDateTime) => dateTime = newDateTime;
+
   popupModalBottomSheet(
     context: context,
     child: SafeArea(
@@ -27,7 +29,7 @@ void showDateTimePicker({
           SizedBox(
             height: MediaQuery.of(context).size.height / 3,
             child: CupertinoDatePicker(
-              onDateTimeChanged: (newDateTime) => dateTime = newDateTime,
+              onDateTimeChanged: onDateTimeChange,
               minimumDate: minimumDate,
               // Append some time to initial date to avoid conflicts
               initialDateTime: dateTime.add(const Duration(seconds: 10)),
