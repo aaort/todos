@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todos/helpers/date.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 
 void showDateTimePicker({
@@ -8,8 +9,8 @@ void showDateTimePicker({
   String? title,
   DateTime? initialDateTime,
 }) {
-  DateTime dateTime =
-      initialDateTime ?? DateTime.now().add(const Duration(minutes: 1));
+  DateTime dateTime = getDateTimeWithPrecisionToMinutes(
+      initialDateTime ?? DateTime.now().add(const Duration(minutes: 1)));
 
   final minimumDate = dateTime;
 
