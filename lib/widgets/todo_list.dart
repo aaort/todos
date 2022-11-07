@@ -13,6 +13,7 @@ class TodoList extends StatelessWidget {
     final todos = context.watch<Todos>().todos;
     return Container(
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(kModalBorderRadius),
       ),
       child: ListView.builder(
