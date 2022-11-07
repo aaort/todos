@@ -33,8 +33,11 @@ class Todo {
     checked = value ?? !checked;
   }
 
-  void updateReminder(DateTime newReminderDateTime) {
+  void updateReminder(DateTime? newReminderDateTime) {
     reminderDateTime = newReminderDateTime;
+    if (reminderDateTime == null) {
+      reminderId = null;
+    }
   }
 
   Map<String, dynamic> get asMap => {
