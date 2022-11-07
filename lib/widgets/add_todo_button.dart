@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todos/notifications.dart';
 import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 
