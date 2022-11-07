@@ -38,7 +38,6 @@ dependencies:
   provider: ^6.0.3
   path_provider: ^2.0.11
   uuid: ^3.0.6
-  flutter_local_notifications: ^12.0.2
   flutter_dismissible_tile: ^1.0.1+1
   date_time_format: ^2.0.1
 
