@@ -33,6 +33,7 @@ void showDateTimePicker({
             child: CupertinoDatePicker(
               onDateTimeChanged: onDateTimeChange,
               minimumDate: minimumDate,
+              use24hFormat: true,
               // Append some time to initial date to avoid conflicts
               initialDateTime: dateTime,
             ),
