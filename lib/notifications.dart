@@ -43,7 +43,6 @@ class Notifications {
 
   static scheduleReminder(Todo todo) async {
     if (todo.reminderId == null || todo.reminderDateTime == null) return;
-    // use date and time with local time zone for more precision
     notifications.createNotification(
       schedule: await getNotificationScheduleFromTodo(todo),
       content: NotificationContent(
