@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory;
 import 'package:todos/logic/todo.dart';
@@ -63,6 +64,10 @@ class TodosIO {
     final todos = <Todo>[];
     for (File file in todoFiles) {
       final todoMap = jsonDecode((await file.readAsString())) as Map;
+      dynamic repeatOption = todoMap['repeatOption'] != null
+          ? RepeatOption.values.firstWhere(
+              (option) => option.toString() == todoMap['repeatOption'])
+          : null;
       todos.add(
         Todo.fromMap(
           task: todoMap['task'],
@@ -70,7 +75,7 @@ class TodosIO {
           id: todoMap['id'],
           reminderDateTime: DateTime.tryParse('${todoMap['reminderDateTime']}'),
           reminderId: todoMap['reminderId'],
-          repeatOption: todoMap['repeatOption'],
+          repeatOption: repeatOption,
         ),
       );
     }
