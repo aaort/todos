@@ -9,7 +9,7 @@ const String _notificationChannelName = 'Reminding notifications';
 const String _notificationChannelDescription =
     'Notification channel for sending reminders';
 
-const String _appIconDir = 'resource://drawable/res_app_icon';
+const String _appIconPath = 'resource://drawable/ic_launcher';
 
 class Notifications {
   static final notifications = AwesomeNotifications();
@@ -18,7 +18,7 @@ class Notifications {
     final allowed = await notifications.requestPermissionToSendNotifications();
     if (!allowed) return;
     AwesomeNotifications().initialize(
-      _appIconDir,
+      _appIconPath,
       [
         NotificationChannel(
           channelGroupKey: _notificationGroupKey,
