@@ -49,6 +49,7 @@ class Notifications {
         title: todo.task,
         body: todo.task,
         payload: {'todoId': todo.id},
+        wakeUpScreen: true,
         category: NotificationCategory.Reminder,
       ),
       actionButtons: [
