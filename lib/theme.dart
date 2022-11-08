@@ -83,9 +83,11 @@ final themeData = ThemeData(
       fontWeight: FontWeight.w800,
     ),
   ),
-  bottomSheetTheme: BottomSheetThemeData(
+  bottomSheetTheme: const BottomSheetThemeData(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(kModalBorderRadius),
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(kModalBorderRadius),
+      ),
     ),
     backgroundColor: Colors.white,
   ),
