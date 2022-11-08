@@ -1,7 +1,10 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:todos/main.dart';
+import 'package:provider/provider.dart';
 
 const String _notificationChannelKey = 'reminder_notifications_key';
 const String _notificationGroupKey = 'reminding_notifications_group_key';
@@ -59,11 +62,14 @@ class Notifications {
         payload: {'todoId': todo.id},
         wakeUpScreen: true,
         criticalAlert: true,
-        actionType: ActionType.DisabledAction,
         category: NotificationCategory.Reminder,
       ),
       actionButtons: [
-        NotificationActionButton(key: 'COMPLETED', label: 'Mark as completed'),
+        NotificationActionButton(
+          key: 'COMPLETED',
+          label: 'Mark as completed',
+          actionType: ActionType.SilentAction,
+        ),
       ],
     );
   }
