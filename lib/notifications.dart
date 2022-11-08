@@ -1,5 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:todos/helpers/date.dart';
+import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 
 const String _notificationChannelKey = 'basic_channel';
