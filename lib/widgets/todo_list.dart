@@ -12,9 +12,11 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     final todos = context.watch<Todos>().todos;
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(kModalBorderRadius),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(kModalBorderRadius),
+        ),
       ),
       child: ListView.builder(
         padding: Styles(context).todoListPadding,
