@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory;
 import 'package:todos/logic/todo.dart';
+import 'package:todos/widgets/repeat_option_button.dart';
 
 const _appDirName = 'todos';
 
 dynamic _toEncodable(value) {
   if (value is DateTime) {
     return value.toIso8601String();
+  } else if (value is RepeatOption) {
+    return value.toString();
   }
 
   return value;

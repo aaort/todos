@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:todos/widgets/repeat_option_button.dart';
 import 'package:uuid/uuid.dart';
 
 class Todo {
@@ -7,10 +8,16 @@ class Todo {
   bool checked;
   late final String id;
   DateTime? reminderDateTime;
+  RepeatOption? repeatOption;
 
   int? reminderId;
 
-  Todo(this.task, {this.checked = false, this.reminderDateTime}) {
+  Todo(
+    this.task, {
+    this.checked = false,
+    this.reminderDateTime,
+    this.repeatOption,
+  }) {
     id = const Uuid().v4();
     if (reminderDateTime != null) {
       reminderId = Random().nextInt(1000);
@@ -45,6 +52,7 @@ class Todo {
         'checked': checked,
         'id': id,
         'reminderDateTime': reminderDateTime,
-        'reminderId': reminderId
+        'reminderId': reminderId,
+        'repeatOption': repeatOption,
       };
 }

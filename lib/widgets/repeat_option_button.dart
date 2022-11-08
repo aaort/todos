@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/widgets/pickers.dart';
 
+// Represents available time intervals in seconds
 enum RepeatOption {
   hourly,
   daily,

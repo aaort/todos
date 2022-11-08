@@ -1,4 +1,5 @@
 import 'package:date_time_format/date_time_format.dart';
+import 'package:todos/widgets/repeat_option_button.dart';
 
 String getReminderText(DateTime dateTime) {
   if (dateTime.isBefore(DateTime.now())) {
@@ -19,4 +20,15 @@ DateTime getDateTimeWithPrecisionToMinutes(DateTime dateTime) {
     dateTime.hour,
     dateTime.minute,
   );
+}
+
+int getRepeatOptionSeconds(RepeatOption repeatOption) {
+  switch (repeatOption) {
+    case RepeatOption.hourly:
+      return 60 * 60;
+    case RepeatOption.daily:
+      return (24 * 60) * 60;
+    case RepeatOption.weekly:
+      return ((7 * 24) * 60) * 60;
+  }
 }

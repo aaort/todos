@@ -77,7 +77,8 @@ class _TodoEditorState extends State<TodoEditor> {
       DateTime? reminder =
           _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder;
 
-      final todo = Todo(taskController.text, reminderDateTime: reminder);
+      final todo = Todo(taskController.text,
+          reminderDateTime: reminder, repeatOption: _repeatOption);
       if (widget.initialTodo != null) {
         TodoActions(context, widget.initialTodo!).updateTodo(todo);
       } else {
