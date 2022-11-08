@@ -73,8 +73,7 @@ Future<NotificationSchedule> getNotificationScheduleFromTodo(Todo todo) async {
       await AwesomeNotifications().getLocalTimeZoneIdentifier();
   if (todo.repeatOption != null) {
     return NotificationInterval(
-      interval: getRepeatOptionSeconds(todo.repeatOption!) +
-          todo.reminderDateTime!.second,
+      interval: getRepeatOptionSeconds(todo.repeatOption!),
       timeZone: localTimeZone,
       preciseAlarm: true,
       repeats: true,
