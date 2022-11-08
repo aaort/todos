@@ -12,7 +12,8 @@ void showDateTimePicker({
   DateTime dateTime = getDateTimeWithPrecisionToMinutes(
       initialDateTime ?? DateTime.now().add(const Duration(minutes: 1)));
 
-  final minimumDate = DateTime.now().add(const Duration(minutes: 1));
+  final minimumDate = getDateTimeWithPrecisionToMinutes(
+      DateTime.now().add(const Duration(minutes: 1)));
 
   void onDateTimeChange(DateTime newDateTime) => dateTime = newDateTime;
 
@@ -33,7 +34,7 @@ void showDateTimePicker({
               onDateTimeChanged: onDateTimeChange,
               minimumDate: minimumDate,
               // Append some time to initial date to avoid conflicts
-              initialDateTime: dateTime.add(const Duration(seconds: 10)),
+              initialDateTime: dateTime,
             ),
           ),
           InkWell(
