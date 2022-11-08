@@ -20,6 +20,7 @@ class TodoActions {
       id: currentTodo.id,
       reminderId: updatedTodo.reminderId,
       reminderDateTime: updatedTodo.reminderDateTime,
+      repeatOption: updatedTodo.repeatOption,
     );
 
     context.read<Todos>().editTodo(todo);

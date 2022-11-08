@@ -70,6 +70,7 @@ class TodosIO {
           id: todoMap['id'],
           reminderDateTime: DateTime.tryParse('${todoMap['reminderDateTime']}'),
           reminderId: todoMap['reminderId'],
+          repeatOption: todoMap['repeatOption'],
         ),
       );
     }

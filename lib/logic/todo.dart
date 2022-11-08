@@ -29,6 +29,7 @@ class Todo {
     required this.checked,
     required this.id,
     required this.reminderDateTime,
+    required this.repeatOption,
     this.reminderId,
   }) {
     if (reminderDateTime != null && reminderId == null) {
