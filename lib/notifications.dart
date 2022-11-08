@@ -25,6 +25,7 @@ class Notifications {
           channelKey: _notificationChannelKey,
           channelName: _notificationChannelName,
           channelDescription: _notificationChannelDescription,
+          criticalAlerts: true,
         )
       ],
       // TODO: remove if not testing anymore
