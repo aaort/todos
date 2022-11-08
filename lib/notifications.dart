@@ -38,6 +38,11 @@ class Notifications {
 
   static Future<void> _onActionReceivedMethod(ReceivedAction action) async {
     if (action.payload?['todoId'] != null) {
+      if (action.actionLifeCycle != NotificationLifeCycle.AppKilled) {
+        App.materialAppKey.currentContext
+            ?.read<Todos>()
+            .toggleCheckById(action.payload!['todoId']!, value: true);
+      }
       TodosIO.toggleCheck(action.payload!['todoId']!, value: true);
     }
   }
