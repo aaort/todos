@@ -26,6 +26,7 @@ class Notifications {
           channelName: _notificationChannelName,
           channelDescription: _notificationChannelDescription,
           criticalAlerts: true,
+          importance: NotificationImportance.High,
         )
       ],
       // TODO: remove if not testing anymore
