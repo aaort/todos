@@ -3,6 +3,7 @@ import 'package:todos/helpers/date.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/widgets/pickers.dart';
+import 'package:todos/widgets/repeat_option_button.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
 
 enum ReminderOption {
@@ -29,6 +30,7 @@ class _TodoEditorState extends State<TodoEditor> {
   bool createEnabled = false;
 
   dynamic _reminder; // Duration | DateTime | null
+  RepeatOption? _repeatOption;
 
   String get _reminderText {
     return getReminderText(
@@ -46,6 +48,11 @@ class _TodoEditorState extends State<TodoEditor> {
 
   void onReminderChange(dynamic newReminder) =>
       setState(() => _reminder = newReminder);
+
+  void onRepeatOptionChange(RepeatOption option) {
+    Navigator.pop(context);
+    setState(() => _repeatOption = option);
+  }
 
   void onReminderOptionChange(dynamic option) async {
     Navigator.pop(context);
@@ -159,6 +166,13 @@ class _TodoEditorState extends State<TodoEditor> {
                 )
               ],
             ),
+            if (_reminder != null) ...[
+              const SizedBox(height: 15),
+              RepeatOptionButton(
+                repeatOption: _repeatOption,
+                onOptionChange: onRepeatOptionChange,
+              )
+            ]
           ]
         ],
       ),
