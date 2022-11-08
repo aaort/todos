@@ -3,11 +3,11 @@ import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos_io.dart';
 
-const String _notificationChannelKey = 'basic_channel';
-const String _notificationGroupKey = 'basic_channel_group';
-const String _notificationChannelName = 'Basic notifications';
+const String _notificationChannelKey = 'reminder_notifications_key';
+const String _notificationGroupKey = 'reminding_notifications_group_key';
+const String _notificationChannelName = 'Reminding notifications';
 const String _notificationChannelDescription =
-    'Notification channel for basic tests';
+    'Notification channel for sending reminders';
 
 const String _appIconDir = 'resource://drawable/res_app_icon';
 
