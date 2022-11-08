@@ -52,6 +52,8 @@ class Notifications {
         body: todo.task,
         payload: {'todoId': todo.id},
         wakeUpScreen: true,
+        criticalAlert: true,
+        actionType: ActionType.DisabledAction,
         category: NotificationCategory.Reminder,
       ),
       actionButtons: [
