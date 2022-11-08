@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/todos_io.dart';
 
 const String _notificationChannelKey = 'basic_channel';
 const String _notificationGroupKey = 'basic_channel_group';
@@ -34,8 +35,9 @@ class Notifications {
   }
 
   static Future<void> _onActionReceivedMethod(ReceivedAction action) async {
-    // TODO: do required staff
-    print(action.payload);
+    if (action.payload?['todoId'] != null) {
+      TodosIO.toggleCheck(action.payload!['todoId']!, value: true);
+    }
   }
 
   static scheduleReminder(Todo todo) async {
