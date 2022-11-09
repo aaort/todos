@@ -27,7 +27,7 @@ final lightTheme = ThemeData(
 );
 
 const primaryDarkColor = Colors.white;
-final backgroundDarkColor = Colors.grey.shade800;
+final backgroundDarkColor = Colors.black.withOpacity(0.9);
 
 final darkTheme = ThemeData(
   scaffoldBackgroundColor: backgroundDarkColor,
@@ -35,11 +35,11 @@ final darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     accentColor: primaryDarkColor,
   ),
-  textTheme: const TextTheme(
-    titleSmall: titleSmall,
-    bodyMedium: bodyMedium,
-    bodySmall: bodySmall,
-    bodyLarge: bodyLarge,
+  textTheme: TextTheme(
+    titleSmall: titleSmall.copyWith(color: Colors.white),
+    bodyMedium: bodyMedium.copyWith(color: Colors.white),
+    bodySmall: bodySmall.copyWith(color: Colors.white),
+    bodyLarge: bodyLarge.copyWith(color: Colors.white),
   ),
   iconTheme: iconThemeData,
   disabledColor: primaryColor.shade200,
@@ -47,7 +47,7 @@ final darkTheme = ThemeData(
   floatingActionButtonTheme: floatingActionButtonThemeData,
   textButtonTheme: textButtonThemeData,
   elevatedButtonTheme: elevatedButtonThemeData,
-  appBarTheme: appBarTheme,
+  appBarTheme: appBarTheme.copyWith(color: backgroundDarkColor),
   bottomSheetTheme: bottomSheetThemeData,
 );
 
@@ -81,11 +81,11 @@ final textButtonThemeData = TextButtonThemeData(
   ),
 );
 
-final appBarTheme = AppBarTheme(
+const appBarTheme = AppBarTheme(
   elevation: 0,
   titleSpacing: 15.0,
-  backgroundColor: backgroundDarkColor,
-  titleTextStyle: const TextStyle(
+  backgroundColor: primaryColor,
+  titleTextStyle: TextStyle(
     color: primaryDarkColor,
     fontSize: 30.0,
     fontWeight: FontWeight.w800,
