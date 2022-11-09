@@ -18,7 +18,7 @@ class _AddTodoButtonState extends State<AddTodoButton>
   late final _animation =
       CurvedAnimation(parent: _animController, curve: Curves.linear);
 
-  showAddTodoModal(BuildContext context) {
+  showAddTodoModal() {
     popupModalBottomSheet(
       context: context,
       child: const TodoEditor(),
@@ -36,7 +36,7 @@ class _AddTodoButtonState extends State<AddTodoButton>
     return ScaleTransition(
       scale: _animation,
       child: FloatingActionButton(
-        onPressed: () => showAddTodoModal(context),
+        onPressed: showAddTodoModal,
         child: const Icon(Icons.edit_outlined),
       ),
     );
