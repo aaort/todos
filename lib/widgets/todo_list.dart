@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
-import 'package:todos/styles.dart';
-import 'package:todos/theme.dart';
+import 'package:todos/theme/styles.dart';
+import 'package:todos/theme/theme.dart';
 import 'package:todos/widgets/todo_tile.dart';
 
 class TodoList extends StatelessWidget {

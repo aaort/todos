@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/screens/todo_editor.dart';
-import 'package:todos/styles.dart';
+import 'package:todos/theme/styles.dart';
 import 'package:todos/widgets/dismissible.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 
