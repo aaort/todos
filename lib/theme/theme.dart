@@ -11,80 +11,19 @@ final lightTheme = ThemeData(
     accentColor: primaryColor,
   ),
   textTheme: const TextTheme(
-    titleLarge: TextStyle(
-      color: Colors.white,
-      fontSize: 45.0,
-      fontWeight: FontWeight.w900,
-    ),
-    titleMedium: TextStyle(
-      color: Colors.white,
-      fontSize: 30.0,
-      fontWeight: FontWeight.w800,
-    ),
-    titleSmall: TextStyle(
-      color: primaryColor,
-      fontSize: 25.0,
-      fontWeight: FontWeight.w600,
-    ),
-    bodyMedium: TextStyle(
-      color: Colors.white,
-      fontSize: 20,
-      fontWeight: FontWeight.w400,
-    ),
-    bodySmall: TextStyle(
-      color: primaryColor,
-      fontSize: 20.0,
-      fontWeight: FontWeight.w400,
-    ),
-    bodyLarge: TextStyle(
-      color: primaryColor,
-      fontSize: 30.0,
-      fontWeight: FontWeight.w600,
-    ),
+    titleSmall: titleSmall,
+    bodyMedium: bodyMedium,
+    bodySmall: bodySmall,
+    bodyLarge: bodyLarge,
   ),
-  iconTheme: const IconThemeData(
-    color: primaryColor,
-    size: 27,
-  ),
+  iconTheme: iconThemeData,
   disabledColor: primaryColor.shade200,
-  inputDecorationTheme: const InputDecorationTheme(
-    border: InputBorder.none,
-  ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: primaryColor,
-    elevation: 2.0,
-  ),
-  textButtonTheme: TextButtonThemeData(
-    style: ButtonStyle(
-      textStyle: MaterialStateProperty.resolveWith(getButtonTextStyle),
-    ),
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      elevation: MaterialStateProperty.resolveWith(getButtonElevation),
-      backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
-      shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      ),
-    ),
-  ),
-  appBarTheme: const AppBarTheme(
-    elevation: 0,
-    titleSpacing: 15.0,
-    titleTextStyle: TextStyle(
-      color: Colors.white,
-      fontSize: 30.0,
-      fontWeight: FontWeight.w800,
-    ),
-  ),
-  bottomSheetTheme: const BottomSheetThemeData(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(kModalBorderRadius),
-      ),
-    ),
-    backgroundColor: Colors.white,
-  ),
+  inputDecorationTheme: inputDecorationThemeData,
+  floatingActionButtonTheme: floatingActionButtonThemeData,
+  textButtonTheme: textButtonThemeData,
+  elevatedButtonTheme: elevatedButtonThemeData,
+  appBarTheme: appBarTheme,
+  bottomSheetTheme: bottomSheetThemeData,
 );
 
 const primaryDarkColor = Colors.white;
@@ -97,80 +36,92 @@ final darkTheme = ThemeData(
     accentColor: primaryDarkColor,
   ),
   textTheme: const TextTheme(
-    titleLarge: TextStyle(
-      color: Colors.white,
-      fontSize: 45.0,
-      fontWeight: FontWeight.w900,
-    ),
-    titleMedium: TextStyle(
-      color: Colors.white,
-      fontSize: 30.0,
-      fontWeight: FontWeight.w800,
-    ),
-    titleSmall: TextStyle(
-      color: primaryDarkColor,
-      fontSize: 25.0,
-      fontWeight: FontWeight.w600,
-    ),
-    bodyMedium: TextStyle(
-      color: Colors.white,
-      fontSize: 20,
-      fontWeight: FontWeight.w400,
-    ),
-    bodySmall: TextStyle(
-      color: primaryDarkColor,
-      fontSize: 20.0,
-      fontWeight: FontWeight.w400,
-    ),
-    bodyLarge: TextStyle(
-      color: primaryDarkColor,
-      fontSize: 30.0,
-      fontWeight: FontWeight.w600,
-    ),
+    titleSmall: titleSmall,
+    bodyMedium: bodyMedium,
+    bodySmall: bodySmall,
+    bodyLarge: bodyLarge,
   ),
-  iconTheme: const IconThemeData(
-    color: primaryColor,
-    size: 27,
-  ),
+  iconTheme: iconThemeData,
   disabledColor: primaryColor.shade200,
-  inputDecorationTheme: const InputDecorationTheme(
-    border: InputBorder.none,
+  inputDecorationTheme: inputDecorationThemeData,
+  floatingActionButtonTheme: floatingActionButtonThemeData,
+  textButtonTheme: textButtonThemeData,
+  elevatedButtonTheme: elevatedButtonThemeData,
+  appBarTheme: appBarTheme,
+  bottomSheetTheme: bottomSheetThemeData,
+);
+
+const titleSmall = TextStyle(
+  color: primaryColor,
+  fontSize: 25.0,
+  fontWeight: FontWeight.w600,
+);
+
+const bodyMedium = TextStyle(
+  color: Colors.white,
+  fontSize: 20,
+  fontWeight: FontWeight.w400,
+);
+
+const bodySmall = TextStyle(
+  color: primaryColor,
+  fontSize: 20.0,
+  fontWeight: FontWeight.w400,
+);
+
+const bodyLarge = TextStyle(
+  color: primaryColor,
+  fontSize: 30.0,
+  fontWeight: FontWeight.w600,
+);
+
+final textButtonThemeData = TextButtonThemeData(
+  style: ButtonStyle(
+    textStyle: MaterialStateProperty.resolveWith(getButtonTextStyle),
   ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: primaryColor,
-    elevation: 2.0,
+);
+
+final appBarTheme = AppBarTheme(
+  elevation: 0,
+  titleSpacing: 15.0,
+  backgroundColor: backgroundDarkColor,
+  titleTextStyle: const TextStyle(
+    color: primaryDarkColor,
+    fontSize: 30.0,
+    fontWeight: FontWeight.w800,
   ),
-  textButtonTheme: TextButtonThemeData(
-    style: ButtonStyle(
-      textStyle: MaterialStateProperty.resolveWith(getButtonTextStyle),
+);
+
+const floatingActionButtonThemeData = FloatingActionButtonThemeData(
+  backgroundColor: primaryColor,
+  elevation: 2.0,
+);
+
+const iconThemeData = IconThemeData(
+  color: primaryColor,
+  size: 27,
+);
+
+final bottomSheetThemeData = BottomSheetThemeData(
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(
+      top: Radius.circular(kModalBorderRadius),
     ),
   ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ButtonStyle(
-      elevation: MaterialStateProperty.resolveWith(getButtonElevation),
-      backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
-      shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
-      ),
+  backgroundColor: backgroundDarkColor,
+);
+
+const inputDecorationThemeData = InputDecorationTheme(
+  border: InputBorder.none,
+);
+
+final elevatedButtonThemeData = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    elevation: MaterialStateProperty.resolveWith(getButtonElevation),
+    backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
     ),
-  ),
-  appBarTheme: AppBarTheme(
-    elevation: 0,
-    titleSpacing: 15.0,
-    backgroundColor: backgroundDarkColor,
-    titleTextStyle: const TextStyle(
-      color: primaryDarkColor,
-      fontSize: 30.0,
-      fontWeight: FontWeight.w800,
-    ),
-  ),
-  bottomSheetTheme: BottomSheetThemeData(
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(kModalBorderRadius),
-      ),
-    ),
-    backgroundColor: backgroundDarkColor,
   ),
 );
 
