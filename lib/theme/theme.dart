@@ -94,7 +94,6 @@ final darkTheme = ThemeData(
   scaffoldBackgroundColor: backgroundDarkColor,
   primaryColor: primaryDarkColor,
   colorScheme: ColorScheme.fromSwatch(
-    // primarySwatch: ),
     accentColor: primaryDarkColor,
   ),
   textTheme: const TextTheme(
