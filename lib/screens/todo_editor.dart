@@ -46,9 +46,6 @@ class _TodoEditorState extends State<TodoEditor> {
     );
   }
 
-  void onReminderChange(dynamic newReminder) =>
-      setState(() => _reminder = newReminder);
-
   void onRepeatOptionChange(RepeatOption option) {
     Navigator.pop(context);
     setState(() => _repeatOption = option);
@@ -57,7 +54,7 @@ class _TodoEditorState extends State<TodoEditor> {
   void onReminderOptionChange(dynamic option) async {
     Navigator.pop(context);
     if (option is Duration) {
-      onReminderChange(option);
+      setState(() => _reminder = option);
     } else {
       FocusManager.instance.primaryFocus?.unfocus();
       await Future.delayed(const Duration(milliseconds: 400));
@@ -67,7 +64,7 @@ class _TodoEditorState extends State<TodoEditor> {
         initialDateTime: _reminder is Duration
             ? getDateTimeOfDuration(_reminder)
             : _reminder,
-        onChange: onReminderChange,
+        onChange: (option) => setState(() => _reminder = option),
       );
     }
   }
