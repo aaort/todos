@@ -4,6 +4,8 @@ const primaryColor = Colors.blueGrey;
 const kModalBorderRadius = 20.0;
 const primaryDarkColor = Colors.white;
 final backgroundDarkColor = Colors.black.withOpacity(0.9);
+const kButtonElevation = 20.0;
+const kListTileLeftPadding = 10.0;
 
 const titleSmall = TextStyle(
   color: primaryColor,
@@ -37,7 +39,6 @@ final textButtonThemeData = TextButtonThemeData(
 
 const appBarTheme = AppBarTheme(
   elevation: 0,
-  titleSpacing: 15.0,
   backgroundColor: primaryColor,
   titleTextStyle: TextStyle(
     color: primaryDarkColor,
@@ -71,7 +72,7 @@ const inputDecorationThemeData = InputDecorationTheme(
 
 final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
-    elevation: MaterialStateProperty.resolveWith(getButtonElevation),
+    elevation: const MaterialStatePropertyAll(kButtonElevation),
     backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
