@@ -4,7 +4,7 @@ const primaryColor = Colors.blueGrey;
 const kModalBorderRadius = 20.0;
 const primaryDarkColor = Colors.white;
 final backgroundDarkColor = Colors.black.withOpacity(0.9);
-const kButtonElevation = 20.0;
+const kButtonElevation = 2.0;
 const kListTileLeftPadding = 10.0;
 
 const titleSmall = TextStyle(
