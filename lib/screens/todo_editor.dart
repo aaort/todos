@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/theme/constants.dart';
+import 'package:todos/theme/theme_manager.dart';
 import 'package:todos/widgets/pickers.dart';
 import 'package:todos/widgets/repeat_option_button.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
@@ -98,6 +101,7 @@ class _TodoEditorState extends State<TodoEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.watch<ThemeManager>().isDark;
     return FractionallySizedBox(
       heightFactor: 0.8,
       child: Container(
@@ -127,7 +131,7 @@ class _TodoEditorState extends State<TodoEditor> {
               controller: taskController,
               textCapitalization: TextCapitalization.sentences,
               style: Theme.of(context).textTheme.bodySmall,
-              cursorColor: Colors.blueGrey,
+              cursorColor: isDark ? primaryDarkColor : primaryColor,
             ),
             const SizedBox(height: 30),
             ElevatedButton(
