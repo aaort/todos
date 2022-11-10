@@ -56,13 +56,13 @@ const iconThemeData = IconThemeData(
   size: 27,
 );
 
-final bottomSheetThemeData = BottomSheetThemeData(
-  shape: const RoundedRectangleBorder(
+const bottomSheetThemeData = BottomSheetThemeData(
+  shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(
       top: Radius.circular(kModalBorderRadius),
     ),
   ),
-  backgroundColor: backgroundDarkColor,
+  backgroundColor: Colors.white,
 );
 
 const inputDecorationThemeData = InputDecorationTheme(

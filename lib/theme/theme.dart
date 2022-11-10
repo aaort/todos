@@ -46,7 +46,8 @@ final darkTheme = ThemeData(
   textButtonTheme: textButtonThemeData,
   elevatedButtonTheme: elevatedButtonThemeData,
   appBarTheme: appBarTheme.copyWith(color: backgroundDarkColor),
-  bottomSheetTheme: bottomSheetThemeData,
+  bottomSheetTheme:
+      bottomSheetThemeData.copyWith(backgroundColor: backgroundDarkColor),
   checkboxTheme: checkBoxThemeData.copyWith(
     fillColor: MaterialStateProperty.all(primaryDarkColor),
     checkColor: MaterialStateProperty.all(Colors.black),
