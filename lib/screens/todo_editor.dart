@@ -137,12 +137,9 @@ class _TodoEditorState extends State<TodoEditor> {
             ElevatedButton(
               key: const Key('createTodoButtonId'),
               onPressed: onTodoSaved,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: Text(
-                  'Save',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
+              child: Text(
+                'Save',
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             if (_reminder != null) ...[

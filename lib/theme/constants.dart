@@ -73,6 +73,7 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: const MaterialStatePropertyAll(kButtonElevation),
     backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
+    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10)),
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
     ),
