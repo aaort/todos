@@ -23,6 +23,7 @@ final lightTheme = ThemeData(
   appBarTheme: appBarTheme,
   bottomSheetTheme: bottomSheetThemeData,
   checkboxTheme: checkBoxThemeData,
+  listTileTheme: listTileThemeData,
 );
 
 final darkTheme = ThemeData(
@@ -53,4 +54,5 @@ final darkTheme = ThemeData(
     checkColor: MaterialStateProperty.all(backgroundDarkColor),
     side: const BorderSide(color: primaryDarkColor),
   ),
+  listTileTheme: listTileThemeData,
 );

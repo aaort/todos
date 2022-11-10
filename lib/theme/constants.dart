@@ -88,8 +88,9 @@ final checkBoxThemeData = CheckboxThemeData(
   ),
 );
 
-double getButtonElevation(Set<MaterialState> states) =>
-    states.contains(MaterialState.disabled) ? 2.0 : 0;
+const listTileThemeData = ListTileThemeData(
+  contentPadding: EdgeInsets.only(left: kListTileLeftPadding),
+);
 
 Color getButtonColor(Set<MaterialState> states) {
   if (states.contains(MaterialState.disabled)) {
