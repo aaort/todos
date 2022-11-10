@@ -39,7 +39,6 @@ final textButtonThemeData = TextButtonThemeData(
 
 const appBarTheme = AppBarTheme(
   elevation: 0,
-  backgroundColor: kPrimaryColor,
   titleTextStyle: TextStyle(
     color: kPrimaryDarkColor,
     fontSize: 30.0,
