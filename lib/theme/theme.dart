@@ -50,7 +50,7 @@ final darkTheme = ThemeData(
       bottomSheetThemeData.copyWith(backgroundColor: backgroundDarkColor),
   checkboxTheme: checkBoxThemeData.copyWith(
     fillColor: MaterialStateProperty.all(primaryDarkColor),
-    checkColor: MaterialStateProperty.all(Colors.black),
+    checkColor: MaterialStateProperty.all(backgroundDarkColor),
     side: const BorderSide(color: primaryDarkColor),
   ),
 );
