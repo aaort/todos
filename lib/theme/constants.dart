@@ -79,6 +79,15 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
   ),
 );
 
+final checkBoxThemeData = CheckboxThemeData(
+  checkColor: MaterialStateProperty.all(Colors.white),
+  fillColor: MaterialStateProperty.all(primaryColor),
+  side: const BorderSide(color: Colors.blueGrey, width: 1),
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(3),
+  ),
+);
+
 double getButtonElevation(Set<MaterialState> states) =>
     states.contains(MaterialState.disabled) ? 2.0 : 0;
 

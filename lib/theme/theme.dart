@@ -22,6 +22,7 @@ final lightTheme = ThemeData(
   elevatedButtonTheme: elevatedButtonThemeData,
   appBarTheme: appBarTheme,
   bottomSheetTheme: bottomSheetThemeData,
+  checkboxTheme: checkBoxThemeData,
 );
 
 final darkTheme = ThemeData(
@@ -44,4 +45,9 @@ final darkTheme = ThemeData(
   elevatedButtonTheme: elevatedButtonThemeData,
   appBarTheme: appBarTheme.copyWith(color: backgroundDarkColor),
   bottomSheetTheme: bottomSheetThemeData,
+  checkboxTheme: checkBoxThemeData.copyWith(
+    fillColor: MaterialStateProperty.all(Colors.white),
+    checkColor: MaterialStateProperty.all(Colors.black),
+    side: const BorderSide(color: Colors.white),
+  ),
 );
