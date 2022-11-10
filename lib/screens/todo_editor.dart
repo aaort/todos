@@ -131,7 +131,7 @@ class _TodoEditorState extends State<TodoEditor> {
               controller: taskController,
               textCapitalization: TextCapitalization.sentences,
               style: Theme.of(context).textTheme.bodySmall,
-              cursorColor: isDark ? primaryDarkColor : primaryColor,
+              cursorColor: isDark ? kPrimaryDarkColor : kPrimaryColor,
             ),
             const SizedBox(height: 30),
             ElevatedButton(

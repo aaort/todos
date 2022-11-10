@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:todos/theme/constants.dart';
 
 final lightTheme = ThemeData(
-  scaffoldBackgroundColor: primaryColor,
-  primaryColor: primaryColor,
+  scaffoldBackgroundColor: kPrimaryColor,
+  primaryColor: kPrimaryColor,
   colorScheme: ColorScheme.fromSwatch(
-    primarySwatch: primaryColor,
-    accentColor: primaryColor,
+    primarySwatch: kPrimaryColor,
+    accentColor: kPrimaryColor,
   ),
   textTheme: const TextTheme(
     titleSmall: titleSmall,
@@ -15,7 +15,7 @@ final lightTheme = ThemeData(
     bodyLarge: bodyLarge,
   ),
   iconTheme: iconThemeData,
-  disabledColor: primaryColor.shade200,
+  disabledColor: kPrimaryColor.shade200,
   inputDecorationTheme: inputDecorationThemeData,
   floatingActionButtonTheme: floatingActionButtonThemeData,
   textButtonTheme: textButtonThemeData,
@@ -27,32 +27,32 @@ final lightTheme = ThemeData(
 );
 
 final darkTheme = ThemeData(
-  scaffoldBackgroundColor: backgroundDarkColor,
-  primaryColor: primaryDarkColor,
+  scaffoldBackgroundColor: kBackgroundDarkColor,
+  primaryColor: kPrimaryDarkColor,
   colorScheme: ColorScheme.fromSwatch(
-    accentColor: primaryDarkColor,
+    accentColor: kPrimaryDarkColor,
   ),
   textTheme: TextTheme(
-    titleSmall: titleSmall.copyWith(color: primaryDarkColor),
-    bodyMedium: bodyMedium.copyWith(color: primaryDarkColor),
-    bodySmall: bodySmall.copyWith(color: primaryDarkColor),
-    bodyLarge: bodyLarge.copyWith(color: primaryDarkColor),
+    titleSmall: titleSmall.copyWith(color: kPrimaryDarkColor),
+    bodyMedium: bodyMedium.copyWith(color: kPrimaryDarkColor),
+    bodySmall: bodySmall.copyWith(color: kPrimaryDarkColor),
+    bodyLarge: bodyLarge.copyWith(color: kPrimaryDarkColor),
   ),
-  iconTheme: iconThemeData.copyWith(color: primaryDarkColor),
-  disabledColor: primaryDarkColor.withOpacity(0.2),
+  iconTheme: iconThemeData.copyWith(color: kPrimaryDarkColor),
+  disabledColor: kPrimaryDarkColor.withOpacity(0.2),
   inputDecorationTheme: inputDecorationThemeData,
   floatingActionButtonTheme: floatingActionButtonThemeData.copyWith(
-    backgroundColor: primaryDarkColor,
+    backgroundColor: kPrimaryDarkColor,
   ),
   textButtonTheme: textButtonThemeData,
   elevatedButtonTheme: elevatedButtonThemeData,
-  appBarTheme: appBarTheme.copyWith(color: backgroundDarkColor),
+  appBarTheme: appBarTheme.copyWith(color: kBackgroundDarkColor),
   bottomSheetTheme:
-      bottomSheetThemeData.copyWith(backgroundColor: backgroundDarkColor),
+      bottomSheetThemeData.copyWith(backgroundColor: kBackgroundDarkColor),
   checkboxTheme: checkBoxThemeData.copyWith(
-    fillColor: MaterialStateProperty.all(primaryDarkColor),
-    checkColor: MaterialStateProperty.all(backgroundDarkColor),
-    side: const BorderSide(color: primaryDarkColor),
+    fillColor: MaterialStateProperty.all(kPrimaryDarkColor),
+    checkColor: MaterialStateProperty.all(kBackgroundDarkColor),
+    side: const BorderSide(color: kPrimaryDarkColor),
   ),
   listTileTheme: listTileThemeData,
 );

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Colors.blueGrey;
+const kPrimaryColor = Colors.blueGrey;
 const kModalBorderRadius = 20.0;
-const primaryDarkColor = Colors.white;
-final backgroundDarkColor = Colors.black.withOpacity(0.9);
+const kPrimaryDarkColor = Colors.white;
+final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
 const kButtonElevation = 2.0;
 const kListTileLeftPadding = 10.0;
 
 const titleSmall = TextStyle(
-  color: primaryColor,
+  color: kPrimaryColor,
   fontSize: 25.0,
   fontWeight: FontWeight.w600,
 );
@@ -20,13 +20,13 @@ const bodyMedium = TextStyle(
 );
 
 const bodySmall = TextStyle(
-  color: primaryColor,
+  color: kPrimaryColor,
   fontSize: 20.0,
   fontWeight: FontWeight.w400,
 );
 
 const bodyLarge = TextStyle(
-  color: primaryColor,
+  color: kPrimaryColor,
   fontSize: 30.0,
   fontWeight: FontWeight.w600,
 );
@@ -39,21 +39,21 @@ final textButtonThemeData = TextButtonThemeData(
 
 const appBarTheme = AppBarTheme(
   elevation: 0,
-  backgroundColor: primaryColor,
+  backgroundColor: kPrimaryColor,
   titleTextStyle: TextStyle(
-    color: primaryDarkColor,
+    color: kPrimaryDarkColor,
     fontSize: 30.0,
     fontWeight: FontWeight.w800,
   ),
 );
 
 const floatingActionButtonThemeData = FloatingActionButtonThemeData(
-  backgroundColor: primaryColor,
+  backgroundColor: kPrimaryColor,
   elevation: 2.0,
 );
 
 const iconThemeData = IconThemeData(
-  color: primaryColor,
+  color: kPrimaryColor,
   size: 27,
 );
 
@@ -82,7 +82,7 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
 
 final checkBoxThemeData = CheckboxThemeData(
   checkColor: MaterialStateProperty.all(Colors.white),
-  fillColor: MaterialStateProperty.all(primaryColor),
+  fillColor: MaterialStateProperty.all(kPrimaryColor),
   side: const BorderSide(color: Colors.blueGrey, width: 1),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(3),
@@ -95,14 +95,14 @@ const listTileThemeData = ListTileThemeData(
 
 Color getButtonColor(Set<MaterialState> states) {
   if (states.contains(MaterialState.disabled)) {
-    return primaryColor.shade200;
+    return kPrimaryColor.shade200;
   }
-  return primaryColor;
+  return kPrimaryColor;
 }
 
 TextStyle getButtonTextStyle(Set<MaterialState> states) {
   if (states.contains(MaterialState.disabled)) {
-    return TextStyle(color: primaryColor.shade200);
+    return TextStyle(color: kPrimaryColor.shade200);
   }
-  return const TextStyle(color: primaryColor);
+  return const TextStyle(color: kPrimaryColor);
 }

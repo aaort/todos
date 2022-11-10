@@ -12,7 +12,7 @@ class TodoList extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: specify this color in theme
     final backgroundColor = context.watch<ThemeManager>().isDark
-        ? backgroundDarkColor
+        ? kBackgroundDarkColor
         : Colors.white;
     final todos = context.watch<Todos>().todos;
     return Container(
