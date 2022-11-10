@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/theme/constants.dart';
-import 'package:todos/theme/styles.dart';
 import 'package:todos/theme/theme_manager.dart';
 import 'package:todos/widgets/todo_tile.dart';
 
@@ -11,6 +10,7 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: specify this color in theme
     final backgroundColor = context.watch<ThemeManager>().isDark
         ? backgroundDarkColor
         : Colors.white;
@@ -23,7 +23,7 @@ class TodoList extends StatelessWidget {
         ),
       ),
       child: ListView.builder(
-        padding: Styles(context).todoListPadding,
+        padding: const EdgeInsets.only(top: 20),
         itemCount: todos.length,
         itemBuilder: (_, index) => TodoTile(id: todos[index].id),
       ),

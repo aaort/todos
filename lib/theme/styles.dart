@@ -12,13 +12,6 @@ class Styles {
         decoration: checked ? TextDecoration.lineThrough : TextDecoration.none);
   }
 
-  EdgeInsets get todoListPadding {
-    return EdgeInsets.symmetric(
-      vertical: 20.0,
-      horizontal: Theme.of(context).appBarTheme.titleSpacing!,
-    );
-  }
-
   ShapeBorder getRoundedBordersShape(num round) {
     return RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
