@@ -5,19 +5,9 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/theme/theme_manager.dart';
-import 'package:todos/widgets/pickers.dart';
+import 'package:todos/widgets/reminder_picker_button.dart';
 import 'package:todos/widgets/repeat_option_button.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
-
-enum ReminderOption {
-  custom,
-}
-
-final _reminderOptions = <PickerOption<dynamic>>[
-  PickerOption('In 5 minutes', const Duration(minutes: 5)),
-  PickerOption('In 15 minutes', const Duration(minutes: 15)),
-  PickerOption('Custom', ReminderOption.custom),
-];
 
 class TodoEditor extends StatefulWidget {
   final Todo? initialTodo;
@@ -40,36 +30,12 @@ class _TodoEditorState extends State<TodoEditor> {
         _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder);
   }
 
-  void showReminderOptionPicker() {
-    showOptionPicker<dynamic>(
-      context: context,
-      title: 'Remind me',
-      options: _reminderOptions,
-      onChange: onReminderOptionChange,
-    );
-  }
+  void onReminderChange(dynamic reminder) =>
+      setState(() => _reminder = reminder);
 
   void onRepeatOptionChange(RepeatOption option) {
     Navigator.pop(context);
     setState(() => _repeatOption = option);
-  }
-
-  void onReminderOptionChange(dynamic option) async {
-    Navigator.pop(context);
-    if (option is Duration) {
-      setState(() => _reminder = option);
-    } else {
-      FocusManager.instance.primaryFocus?.unfocus();
-      await Future.delayed(const Duration(milliseconds: 400));
-      showDateTimePicker(
-        context: context,
-        title: 'Remind me...',
-        initialDateTime: _reminder is Duration
-            ? getDateTimeOfDuration(_reminder)
-            : _reminder,
-        onChange: (option) => setState(() => _reminder = option),
-      );
-    }
   }
 
   Future<void> onTodoSaved() async {
@@ -117,9 +83,11 @@ class _TodoEditorState extends State<TodoEditor> {
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
-                TodoIconButton(
-                  onPressed: createEnabled ? showReminderOptionPicker : null,
-                  icon: const Icon(
+                ReminderPickerButton(
+                  enabled: createEnabled,
+                  reminder: _reminder,
+                  onReminderChange: onReminderChange,
+                  child: const Icon(
                     Icons.timer_outlined,
                   ),
                 ),
@@ -149,8 +117,10 @@ class _TodoEditorState extends State<TodoEditor> {
                 children: [
                   Flexible(
                     flex: 8,
-                    child: GestureDetector(
-                      onTap: showReminderOptionPicker,
+                    child: ReminderPickerButton(
+                      enabled: createEnabled,
+                      reminder: _reminder,
+                      onReminderChange: onReminderChange,
                       child: Text(
                         _reminderText,
                         style: Theme.of(context).textTheme.bodySmall,
