@@ -19,26 +19,26 @@ class _TodoEditorState extends State<TodoEditor> {
   final taskController = TextEditingController();
   bool createEnabled = false;
 
-  dynamic _reminder; // Duration | DateTime | null
-  RepeatOption? _repeatOption;
+  dynamic reminder; // Duration | DateTime | null
+  RepeatOption? repeatOption;
 
   String get _reminderText {
     return getReminderText(
-        _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder);
+        reminder is Duration ? getDateTimeOfDuration(reminder) : reminder);
   }
 
-  void onReminderChange(dynamic reminder) =>
-      setState(() => _reminder = reminder);
+  void onReminderChange(dynamic newReminder) =>
+      setState(() => reminder = newReminder);
 
   void onRepeatOptionChange(RepeatOption option) {
     Navigator.pop(context);
-    setState(() => _repeatOption = option);
+    setState(() => repeatOption = option);
   }
 
   @override
   void initState() {
     taskController.text = widget.initialTodo?.task ?? '';
-    _reminder = widget.initialTodo?.reminderDateTime;
+    reminder = widget.initialTodo?.reminderDateTime;
     taskController.addListener(() {
       setState(() => createEnabled = taskController.text.isNotEmpty);
     });
@@ -64,7 +64,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 ),
                 ReminderPickerButton(
                   enabled: createEnabled,
-                  reminder: _reminder,
+                  reminder: reminder,
                   onReminderChange: onReminderChange,
                   child: const Icon(
                     Icons.timer_outlined,
@@ -82,10 +82,10 @@ class _TodoEditorState extends State<TodoEditor> {
             const SizedBox(height: 30),
             SaveTodoButton(
               task: taskController.text,
-              reminder: _reminder,
-              repeatOption: _repeatOption,
+              reminder: reminder,
+              repeatOption: repeatOption,
             ),
-            if (_reminder != null) ...[
+            if (reminder != null) ...[
               const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +94,7 @@ class _TodoEditorState extends State<TodoEditor> {
                     flex: 8,
                     child: ReminderPickerButton(
                       enabled: createEnabled,
-                      reminder: _reminder,
+                      reminder: reminder,
                       onReminderChange: onReminderChange,
                       child: Text(
                         _reminderText,
@@ -108,10 +108,10 @@ class _TodoEditorState extends State<TodoEditor> {
                   )
                 ],
               ),
-              if (_reminder != null) ...[
+              if (reminder != null) ...[
                 const SizedBox(height: 30),
                 RepeatOptionButton(
-                  repeatOption: _repeatOption,
+                  repeatOption: repeatOption,
                   onOptionChange: onRepeatOptionChange,
                 )
               ]
@@ -123,7 +123,7 @@ class _TodoEditorState extends State<TodoEditor> {
   }
 
   void clearReminder() {
-    setState(() => _reminder = null);
+    setState(() => reminder = null);
   }
 
   @override
