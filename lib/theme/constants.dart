@@ -93,6 +93,10 @@ const listTileThemeData = ListTileThemeData(
   contentPadding: EdgeInsets.only(left: kListTileLeftPadding),
 );
 
+const textSelectionThemeData = TextSelectionThemeData(
+  cursorColor: kPrimaryColor,
+);
+
 Color getButtonColor(Set<MaterialState> states) {
   if (states.contains(MaterialState.disabled)) {
     return kPrimaryColor.shade200;

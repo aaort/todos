@@ -24,6 +24,7 @@ final lightTheme = ThemeData(
   bottomSheetTheme: bottomSheetThemeData,
   checkboxTheme: checkBoxThemeData,
   listTileTheme: listTileThemeData,
+  textSelectionTheme: textSelectionThemeData,
 );
 
 final darkTheme = ThemeData(
@@ -55,4 +56,7 @@ final darkTheme = ThemeData(
     side: const BorderSide(color: kPrimaryDarkColor),
   ),
   listTileTheme: listTileThemeData,
+  textSelectionTheme: textSelectionThemeData.copyWith(
+    cursorColor: kPrimaryDarkColor,
+  ),
 );
