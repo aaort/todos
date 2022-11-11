@@ -20,8 +20,8 @@ class ReminderPickerButton extends StatelessWidget {
 
   ReminderPickerButton({
     super.key,
-    required this.enabled,
     this.reminder,
+    required this.enabled,
     required this.onReminderChange,
     required this.child,
   });
@@ -59,7 +59,7 @@ class ReminderPickerButton extends StatelessWidget {
     return GestureDetector(
       key: _key,
       onTap: enabled ? showReminderOptionPicker : null,
-      child: child,
+      child: Opacity(opacity: enabled ? 1 : 0.4, child: child),
     );
   }
 }
