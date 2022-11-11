@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/widgets/reminder_picker_button.dart';
 import 'package:todos/widgets/repeat_option_button.dart';
+import 'package:todos/widgets/save_todo_button.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
 
 class TodoEditor extends StatefulWidget {
@@ -33,23 +33,6 @@ class _TodoEditorState extends State<TodoEditor> {
   void onRepeatOptionChange(RepeatOption option) {
     Navigator.pop(context);
     setState(() => _repeatOption = option);
-  }
-
-  Future<void> onTodoSaved() async {
-    if (taskController.text.isNotEmpty) {
-      DateTime? reminder =
-          _reminder is Duration ? getDateTimeOfDuration(_reminder) : _reminder;
-
-      final todo = Todo(taskController.text,
-          reminderDateTime: reminder, repeatOption: _repeatOption);
-      if (widget.initialTodo != null) {
-        TodoActions(context, widget.initialTodo!).updateTodo(todo);
-      } else {
-        TodoActions(context, todo).createTodo();
-      }
-    }
-
-    if (mounted) Navigator.pop(context);
   }
 
   @override
@@ -97,13 +80,10 @@ class _TodoEditorState extends State<TodoEditor> {
               style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 30),
-            ElevatedButton(
-              key: const Key('createTodoButtonId'),
-              onPressed: onTodoSaved,
-              child: Text(
-                'Save',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+            SaveTodoButton(
+              task: taskController.text,
+              reminder: _reminder,
+              repeatOption: _repeatOption,
             ),
             if (_reminder != null) ...[
               const SizedBox(height: 30),
