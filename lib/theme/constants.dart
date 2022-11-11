@@ -31,9 +31,9 @@ const bodyLarge = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
-final textButtonThemeData = TextButtonThemeData(
+const textButtonThemeData = TextButtonThemeData(
   style: ButtonStyle(
-    textStyle: MaterialStateProperty.resolveWith(getButtonTextStyle),
+    textStyle: MaterialStatePropertyAll(bodySmall),
   ),
 );
 
@@ -72,7 +72,7 @@ const inputDecorationThemeData = InputDecorationTheme(
 final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: const MaterialStatePropertyAll(kButtonElevation),
-    backgroundColor: MaterialStateProperty.resolveWith(getButtonColor),
+    backgroundColor: const MaterialStatePropertyAll(kPrimaryColor),
     padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10)),
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
@@ -96,17 +96,3 @@ const listTileThemeData = ListTileThemeData(
 const textSelectionThemeData = TextSelectionThemeData(
   cursorColor: kPrimaryColor,
 );
-
-Color getButtonColor(Set<MaterialState> states) {
-  if (states.contains(MaterialState.disabled)) {
-    return kPrimaryColor.shade200;
-  }
-  return kPrimaryColor;
-}
-
-TextStyle getButtonTextStyle(Set<MaterialState> states) {
-  if (states.contains(MaterialState.disabled)) {
-    return TextStyle(color: kPrimaryColor.shade200);
-  }
-  return const TextStyle(color: kPrimaryColor);
-}
