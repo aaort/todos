@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/theme/theme_manager.dart';
 
-class ThemeSwitcherIconButton extends StatelessWidget {
-  const ThemeSwitcherIconButton({super.key});
+class ThemeSwitchIconButton extends StatelessWidget {
+  const ThemeSwitchIconButton({super.key});
 
   void toggleTheme(BuildContext context) {
     context.read<ThemeManager>().toggleTheme();
