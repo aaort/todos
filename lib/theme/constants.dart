@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Colors.blueGrey;
+const Map<int, Color> primaryColorMap = {
+  50: Color(0xff3B3936),
+  100: Color(0xff3B3936),
+  200: Color(0xff3B3936),
+  300: Color(0xff3B3936),
+  400: Color(0xff3B3936),
+  500: Color(0xff3B3936),
+  600: Color(0xff3B3936),
+  700: Color(0xff3B3936),
+  800: Color(0xff3B3936),
+  900: Color(0xff3B3936),
+};
+
+const kPrimaryColor = MaterialColor(0xff3B3936, primaryColorMap);
 const kModalBorderRadius = 20.0;
 const kPrimaryDarkColor = Colors.white;
 final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
@@ -83,7 +96,7 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
 final checkBoxThemeData = CheckboxThemeData(
   checkColor: MaterialStateProperty.all(Colors.white),
   fillColor: MaterialStateProperty.all(kPrimaryColor),
-  side: const BorderSide(color: Colors.blueGrey, width: 1),
+  side: const BorderSide(color: kPrimaryColor, width: 1),
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(3),
   ),
