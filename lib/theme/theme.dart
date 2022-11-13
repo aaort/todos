@@ -7,6 +7,7 @@ final lightTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: kPrimaryColor,
     accentColor: kPrimaryColor,
+    errorColor: kErrorColor,
   ),
   textTheme: const TextTheme(
     titleLarge: titleLarge,
@@ -33,6 +34,7 @@ final darkTheme = ThemeData(
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: kPrimaryDarkColor,
     accentColor: kPrimaryDarkColor,
+    errorColor: kErrorColor,
   ),
   textTheme: TextTheme(
     titleLarge: titleLarge,
