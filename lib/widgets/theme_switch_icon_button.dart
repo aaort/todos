@@ -14,6 +14,8 @@ class ThemeSwitchIconButton extends StatelessWidget {
     final isDarkMode = context.watch<ThemeManager>().isDark;
 
     return IconButton(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       icon: AnimatedSwitcher(
         duration: const Duration(milliseconds: 350),
         transitionBuilder: (child, anim) => RotationTransition(
