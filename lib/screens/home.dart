@@ -15,15 +15,27 @@ class Home extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         floatingActionButton: const AddTodoButton(),
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: false,
-          actions: const [ThemeSwitchIconButton()],
-          title: Text('${context.watch<Todos>().todos.length} Tasks'),
-        ),
-        body: const SafeArea(
+        body: SafeArea(
           bottom: false,
-          child: TodoList(),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.only(left: 10),
+                color: Theme.of(context).scaffoldBackgroundColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${context.watch<Todos>().todos.length} Tasks',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const ThemeSwitchIconButton()
+                  ],
+                ),
+              ),
+              const Flexible(child: TodoList())
+            ],
+          ),
         ),
       ),
     );
