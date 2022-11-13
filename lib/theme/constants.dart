@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todos/theme/material_colors.dart';
 
 const kPrimaryColor = MaterialColor(0xff3B3936, primaryColorMap);
-const kPrimaryDarkColor = MaterialColor(0xffffffff, primaryDarkColorMap);
-final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
+const kPrimaryDarkColor = MaterialColor(0xfff2f2f2, primaryDarkColorMap);
+const kBackgroundDarkColor = kPrimaryColor;
 const kErrorColor = Color(0xffBD2A2E);
 
 const kButtonElevation = 2.0;
