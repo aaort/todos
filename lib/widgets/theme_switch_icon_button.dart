@@ -23,11 +23,10 @@ class ThemeSwitchIconButton extends StatelessWidget {
           child: ScaleTransition(scale: anim, child: child),
         ),
         child: isDarkMode
-            ? const Icon(Icons.dark_mode, key: ValueKey('dark_key'))
-            : const Icon(
-                Icons.light_mode,
-                key: ValueKey('light_key'),
-              ),
+            ? const Icon(Icons.dark_mode,
+                key: ValueKey('dark_key'), color: Colors.white)
+            : const Icon(Icons.light_mode,
+                key: ValueKey('light_key'), color: Colors.white),
       ),
       onPressed: () {
         toggleTheme(context);
