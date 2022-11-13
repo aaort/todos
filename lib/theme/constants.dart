@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:todos/theme/material_colors.dart';
 
 const kPrimaryColor = MaterialColor(0xff3B3936, primaryColorMap);
-const kModalBorderRadius = 20.0;
 const kPrimaryDarkColor = MaterialColor(0xffffffff, primaryDarkColorMap);
 final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
+const kErrorColor = Color(0xffBD2A2E);
+
 const kButtonElevation = 2.0;
 const kListTileLeftPadding = 10.0;
 
+const kModalBorderRadius = 20.0;
 const kButtonPadding = EdgeInsets.symmetric(vertical: 10);
 final kButtonBorderRadius = BorderRadius.circular(15.0);
 
