@@ -8,8 +8,8 @@ final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
 const kButtonElevation = 2.0;
 const kListTileLeftPadding = 10.0;
 
-const buttonPadding = EdgeInsets.symmetric(vertical: 10);
-final buttonBorderRadius = BorderRadius.circular(15.0);
+const kButtonPadding = EdgeInsets.symmetric(vertical: 10);
+final kButtonBorderRadius = BorderRadius.circular(15.0);
 
 const titleLarge = TextStyle(
   color: Colors.white,
@@ -72,9 +72,9 @@ const inputDecorationThemeData = InputDecorationTheme(
 final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: const MaterialStatePropertyAll(kButtonElevation),
-    padding: const MaterialStatePropertyAll(buttonPadding),
+    padding: const MaterialStatePropertyAll(kButtonPadding),
     shape: MaterialStatePropertyAll(
-      RoundedRectangleBorder(borderRadius: buttonBorderRadius),
+      RoundedRectangleBorder(borderRadius: kButtonBorderRadius),
     ),
   ),
 );
