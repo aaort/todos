@@ -109,7 +109,7 @@ final checkBoxThemeData = CheckboxThemeData(
   fillColor: MaterialStateProperty.all(kPrimaryColor),
   side: const BorderSide(color: kPrimaryColor, width: 1),
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(3),
+    borderRadius: BorderRadius.circular(4),
   ),
 );
 
