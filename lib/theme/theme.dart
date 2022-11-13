@@ -31,6 +31,7 @@ final darkTheme = ThemeData(
   scaffoldBackgroundColor: kBackgroundDarkColor,
   primaryColor: kPrimaryDarkColor,
   colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: kPrimaryDarkColor,
     accentColor: kPrimaryDarkColor,
   ),
   textTheme: TextTheme(
@@ -43,9 +44,7 @@ final darkTheme = ThemeData(
   iconTheme: iconThemeData.copyWith(color: kPrimaryDarkColor),
   disabledColor: kPrimaryDarkColor.withOpacity(0.2),
   inputDecorationTheme: inputDecorationThemeData,
-  floatingActionButtonTheme: floatingActionButtonThemeData.copyWith(
-    backgroundColor: kPrimaryDarkColor,
-  ),
+  floatingActionButtonTheme: floatingActionButtonThemeData,
   textButtonTheme: textButtonThemeData,
   elevatedButtonTheme: elevatedButtonThemeData,
   bottomSheetTheme:

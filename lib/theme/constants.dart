@@ -13,12 +13,28 @@ const Map<int, Color> primaryColorMap = {
   900: Color(0xff3B3936),
 };
 
+const Map<int, Color> primaryDarkColorMap = {
+  50: Color(0xffffffff),
+  100: Color(0xffffffff),
+  200: Color(0xffffffff),
+  300: Color(0xffffffff),
+  400: Color(0xffffffff),
+  500: Color(0xffffffff),
+  600: Color(0xffffffff),
+  700: Color(0xffffffff),
+  800: Color(0xffffffff),
+  900: Color(0xffffffff),
+};
+
 const kPrimaryColor = MaterialColor(0xff3B3936, primaryColorMap);
 const kModalBorderRadius = 20.0;
-const kPrimaryDarkColor = Colors.white;
+const kPrimaryDarkColor = MaterialColor(0xffffffff, primaryDarkColorMap);
 final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
 const kButtonElevation = 2.0;
 const kListTileLeftPadding = 10.0;
+
+const buttonPadding = EdgeInsets.symmetric(vertical: 10);
+final buttonBorderRadius = BorderRadius.circular(15.0);
 
 const titleLarge = TextStyle(
   color: Colors.white,
@@ -57,7 +73,6 @@ const textButtonThemeData = TextButtonThemeData(
 );
 
 const floatingActionButtonThemeData = FloatingActionButtonThemeData(
-  backgroundColor: kPrimaryColor,
   elevation: 2.0,
 );
 
@@ -82,10 +97,9 @@ const inputDecorationThemeData = InputDecorationTheme(
 final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ButtonStyle(
     elevation: const MaterialStatePropertyAll(kButtonElevation),
-    backgroundColor: const MaterialStatePropertyAll(kPrimaryColor),
-    padding: const MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: 10)),
-    shape: MaterialStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+    padding: const MaterialStatePropertyAll(buttonPadding),
+    shape: MaterialStatePropertyAll(
+      RoundedRectangleBorder(borderRadius: buttonBorderRadius),
     ),
   ),
 );
