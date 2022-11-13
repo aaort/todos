@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart' as ds;
+import 'package:todos/theme/constants.dart';
 
 class DismissibleTile extends StatelessWidget {
   final Function onDismiss;
@@ -22,9 +23,9 @@ class DismissibleTile extends StatelessWidget {
       onDismissed: (_) => onDismiss(),
       confirmDismiss:
           onConfirmDismiss != null ? (_) => onConfirmDismiss!() : null,
-      ltrDismissedColor: Colors.red,
+      ltrDismissedColor: kErrorColor,
       ltrOverlay: _trashIcon(),
-      rtlDismissedColor: Colors.red,
+      rtlDismissedColor: kErrorColor,
       rtlOverlay: _trashIcon(),
       resizeDuration: const Duration(milliseconds: 200),
       borderRadius: const BorderRadius.all(Radius.circular(16)),
