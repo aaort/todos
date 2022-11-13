@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/theme/constants.dart';
 import 'package:todos/theme/theme_manager.dart';
 import 'package:todos/widgets/repeat_option_button.dart';
 
@@ -48,8 +49,8 @@ class SaveTodoButton extends StatelessWidget {
         'Save',
         style: Theme.of(context)
             .textTheme
-            .bodyMedium
-            ?.copyWith(color: isDark ? Colors.black : null),
+            .titleSmall!
+            .copyWith(color: isDark ? kPrimaryColor : kPrimaryDarkColor),
       ),
     );
   }
