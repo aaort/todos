@@ -30,12 +30,20 @@ void showDateTimePicker({
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height / 3,
-            child: CupertinoDatePicker(
-              onDateTimeChanged: onDateTimeChange,
-              minimumDate: minimumDate,
-              use24hFormat: true,
-              // Append some time to initial date to avoid conflicts
-              initialDateTime: dateTime,
+            child: CupertinoTheme(
+              data: CupertinoThemeData(
+                textTheme: CupertinoTextThemeData(
+                  dateTimePickerTextStyle:
+                      Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+              child: CupertinoDatePicker(
+                onDateTimeChanged: onDateTimeChange,
+                minimumDate: minimumDate,
+                use24hFormat: true,
+                // Append some time to initial date to avoid conflicts
+                initialDateTime: dateTime,
+              ),
             ),
           ),
           InkWell(
