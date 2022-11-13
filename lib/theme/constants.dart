@@ -20,6 +20,12 @@ final kBackgroundDarkColor = Colors.black.withOpacity(0.9);
 const kButtonElevation = 2.0;
 const kListTileLeftPadding = 10.0;
 
+const titleLarge = TextStyle(
+  color: Colors.white,
+  fontSize: 30.0,
+  fontWeight: FontWeight.w600,
+);
+
 const titleSmall = TextStyle(
   color: kPrimaryColor,
   fontSize: 25.0,
@@ -47,15 +53,6 @@ const bodyLarge = TextStyle(
 const textButtonThemeData = TextButtonThemeData(
   style: ButtonStyle(
     textStyle: MaterialStatePropertyAll(bodySmall),
-  ),
-);
-
-const appBarTheme = AppBarTheme(
-  elevation: 0,
-  titleTextStyle: TextStyle(
-    color: kPrimaryDarkColor,
-    fontSize: 30.0,
-    fontWeight: FontWeight.w800,
   ),
 );
 

@@ -9,6 +9,7 @@ final lightTheme = ThemeData(
     accentColor: kPrimaryColor,
   ),
   textTheme: const TextTheme(
+    titleLarge: titleLarge,
     titleSmall: titleSmall,
     bodyMedium: bodyMedium,
     bodySmall: bodySmall,
@@ -20,7 +21,6 @@ final lightTheme = ThemeData(
   floatingActionButtonTheme: floatingActionButtonThemeData,
   textButtonTheme: textButtonThemeData,
   elevatedButtonTheme: elevatedButtonThemeData,
-  appBarTheme: appBarTheme,
   bottomSheetTheme: bottomSheetThemeData,
   checkboxTheme: checkBoxThemeData,
   listTileTheme: listTileThemeData,
@@ -34,6 +34,7 @@ final darkTheme = ThemeData(
     accentColor: kPrimaryDarkColor,
   ),
   textTheme: TextTheme(
+    titleLarge: titleLarge,
     titleSmall: titleSmall.copyWith(color: kPrimaryDarkColor),
     bodyMedium: bodyMedium.copyWith(color: kPrimaryDarkColor),
     bodySmall: bodySmall.copyWith(color: kPrimaryDarkColor),
@@ -47,7 +48,6 @@ final darkTheme = ThemeData(
   ),
   textButtonTheme: textButtonThemeData,
   elevatedButtonTheme: elevatedButtonThemeData,
-  appBarTheme: appBarTheme.copyWith(color: kBackgroundDarkColor),
   bottomSheetTheme:
       bottomSheetThemeData.copyWith(backgroundColor: kBackgroundDarkColor),
   checkboxTheme: checkBoxThemeData.copyWith(
