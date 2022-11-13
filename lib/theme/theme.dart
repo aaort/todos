@@ -6,8 +6,10 @@ final lightTheme = ThemeData(
   primaryColor: kPrimaryColor,
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: kPrimaryColor,
+    primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryColor,
     errorColor: kErrorColor,
+    backgroundColor: kBackgroundDarkColor,
   ),
   textTheme: const TextTheme(
     titleLarge: titleLarge,
@@ -33,11 +35,13 @@ final darkTheme = ThemeData(
   primaryColor: kPrimaryDarkColor,
   colorScheme: ColorScheme.fromSwatch(
     primarySwatch: kPrimaryDarkColor,
+    primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryDarkColor,
     errorColor: kErrorColor,
+    backgroundColor: kBackgroundDarkColor,
   ),
   textTheme: TextTheme(
-    titleLarge: titleLarge,
+    titleLarge: titleLarge.copyWith(color: kPrimaryDarkColor),
     titleSmall: titleSmall.copyWith(color: kPrimaryDarkColor),
     bodyMedium: bodyMedium.copyWith(color: kPrimaryDarkColor),
     bodySmall: bodySmall.copyWith(color: kPrimaryDarkColor),
