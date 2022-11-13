@@ -23,7 +23,7 @@ class TodoList extends StatelessWidget {
         ),
       ),
       child: ListView.builder(
-        padding: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
         itemCount: todos.length,
         itemBuilder: (_, index) => TodoTile(id: todos[index].id),
       ),
