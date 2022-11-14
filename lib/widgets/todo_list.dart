@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/theme/constants.dart';
-import 'package:todos/theme/theme_manager.dart';
 import 'package:todos/widgets/todo_tile.dart';
 
 class TodoList extends StatelessWidget {
@@ -10,14 +9,10 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: specify this color in theme
-    final backgroundColor = context.watch<ThemeManager>().isDark
-        ? kBackgroundDarkColor
-        : Colors.white;
     final todos = context.watch<Todos>().todos;
     return Container(
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: Theme.of(context).colorScheme.background,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(kModalBorderRadius),
         ),
