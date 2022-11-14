@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/helpers/keyboard.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/widgets/pickers.dart';
 
@@ -30,8 +31,7 @@ class ReminderPickerButton extends StatelessWidget {
 
   void showReminderOptionPicker() async {
     if (MediaQuery.of(_key.currentContext!).viewInsets.bottom > 0) {
-      FocusManager.instance.primaryFocus?.unfocus();
-      await Future.delayed(const Duration(milliseconds: 400));
+      await hideKeyboardAndWait();
     }
     showOptionPicker<dynamic>(
       context: _key.currentContext!,
@@ -46,8 +46,7 @@ class ReminderPickerButton extends StatelessWidget {
     if (option is Duration) {
       onReminderChange(option);
     } else {
-      FocusManager.instance.primaryFocus?.unfocus();
-      await Future.delayed(const Duration(milliseconds: 400));
+      await hideKeyboardAndWait();
       showDateTimePicker(
         context: _key.currentContext!,
         title: 'Remind me...',
