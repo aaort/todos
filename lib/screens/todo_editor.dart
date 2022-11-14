@@ -60,7 +60,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 Text(
                   '${widget.initialTodo != null ? 'Edit' : 'Add'} Todo',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.titleSmall,
                 ),
                 ReminderPickerButton(
                   enabled: createEnabled,
