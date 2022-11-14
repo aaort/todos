@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todos/theme/constants.dart';
 
 class ThemeManager extends ChangeNotifier {
   ThemeManager() {
@@ -16,7 +18,9 @@ class ThemeManager extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('isDark') == true) {
       _themeMode = ThemeMode.dark;
+      SystemChrome.setSystemUIOverlayStyle(kOverlayDarkStyle);
     }
+    SystemChrome.setSystemUIOverlayStyle(kOverlayStyle);
     notifyListeners();
   }
 

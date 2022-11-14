@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:todos/theme/material_colors.dart';
 
 const kPrimaryColor = MaterialColor(0xff3B3936, primaryColorMap);
@@ -12,6 +13,18 @@ const kListTileLeftPadding = 10.0;
 const kModalBorderRadius = 20.0;
 const kButtonPadding = EdgeInsets.symmetric(vertical: 10);
 final kButtonBorderRadius = BorderRadius.circular(15.0);
+
+const SystemUiOverlayStyle kOverlayStyle = SystemUiOverlayStyle(
+  systemNavigationBarColor: kPrimaryColor,
+  systemNavigationBarIconBrightness: Brightness.light,
+  systemNavigationBarDividerColor: Colors.transparent,
+);
+
+const SystemUiOverlayStyle kOverlayDarkStyle = SystemUiOverlayStyle(
+  systemNavigationBarColor: kPrimaryColor,
+  systemNavigationBarIconBrightness: Brightness.dark,
+  systemNavigationBarDividerColor: Colors.transparent,
+);
 
 const titleLarge = TextStyle(
   color: Colors.white,
