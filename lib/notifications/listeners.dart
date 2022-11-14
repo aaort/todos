@@ -1,10 +1,9 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
+import 'package:todos/main.dart';
 import 'package:todos/notifications/constants.dart';
-import 'package:provider/provider.dart';
-
-import '../main.dart';
 
 Future<void> onActionReceivedMethod(ReceivedAction action) async {
   final todoId = action.payload?['todoId'];
