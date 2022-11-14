@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/helpers/keyboard.dart';
 import 'package:todos/widgets/pickers.dart';
 
 // Represents available time intervals in seconds
@@ -24,7 +25,10 @@ class RepeatOptionButton extends StatelessWidget {
     required this.onOptionChange,
   });
 
-  void onOptionButtonPressed(BuildContext context) {
+  void onOptionButtonPressed(BuildContext context) async {
+    if (isKeyboardVisible(context)) {
+      await hideKeyboardAndWait();
+    }
     showOptionPicker<RepeatOption>(
       context: context,
       title: 'Remind me...',
@@ -35,24 +39,27 @@ class RepeatOptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Flexible(
-          child: GestureDetector(
-            onTap: () => onOptionButtonPressed(context),
-            child: Text(
-              'Repeat',
-              style: Theme.of(context).textTheme.bodySmall,
+    return GestureDetector(
+      onTap: () => onOptionButtonPressed(context),
+      child: Container(
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Text(
+                'Repeat',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
             ),
-          ),
+            if (repeatOption != null)
+              Text(
+                repeatOptionText(repeatOption!),
+                style: Theme.of(context).textTheme.bodySmall,
+              )
+          ],
         ),
-        if (repeatOption != null)
-          Text(
-            repeatOptionText(repeatOption!),
-            style: Theme.of(context).textTheme.bodySmall,
-          )
-      ],
+      ),
     );
   }
 }
