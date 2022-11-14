@@ -16,16 +16,12 @@ Future<void> onActionReceivedMethod(ReceivedAction action) async {
     }
     TodosIO.toggleCheck(action.payload!['todoId']!, value: true);
   } else {
-    late Duration duration;
-    if (action.buttonKeyPressed == notificationActions[in5MinutesButtonKey]) {
-      duration = const Duration(minutes: 5);
-    } else {
-      duration = const Duration(minutes: 15);
-    }
-    final newReminder = DateTime.now().add(duration);
+    final is5Minutes =
+        action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
+    final duration = Duration(minutes: is5Minutes ? 1 : 2);
     final todo = context?.read<Todos>().getTodoById(todoId);
     if (context != null && todo != null) {
-      TodoActions(context, todo).updateReminder(newReminder);
+      TodoActions(context, todo).updateReminder(DateTime.now().add(duration));
     }
   }
 }
