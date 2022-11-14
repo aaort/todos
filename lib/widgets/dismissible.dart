@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dismissible_tile/flutter_dismissible_tile.dart' as ds;
 import 'package:todos/theme/constants.dart';
 
+const resizeDuration = Duration(milliseconds: 200);
+
 class DismissibleTile extends StatelessWidget {
   final Function onDismiss;
   final Future<bool?> Function()? onConfirmDismiss;
@@ -27,9 +29,9 @@ class DismissibleTile extends StatelessWidget {
       ltrOverlay: _trashIcon(),
       rtlDismissedColor: kErrorColor,
       rtlOverlay: _trashIcon(),
-      resizeDuration: const Duration(milliseconds: 200),
+      resizeDuration: resizeDuration,
       borderRadius: const BorderRadius.all(Radius.circular(16)),
-      delayBeforeResize: const Duration(milliseconds: 200),
+      delayBeforeResize: resizeDuration,
       child: GestureDetector(onLongPress: onLongPress, child: child),
     );
   }
