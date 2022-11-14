@@ -58,7 +58,7 @@ class _TodoEditorState extends State<TodoEditor> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Add Todo',
+                  '${widget.initialTodo != null ? 'Edit' : 'Add'} Todo',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
