@@ -28,7 +28,11 @@ class ReminderPickerButton extends StatelessWidget {
 
   final _key = GlobalKey();
 
-  void showReminderOptionPicker() {
+  void showReminderOptionPicker() async {
+    if (MediaQuery.of(_key.currentContext!).viewInsets.bottom > 0) {
+      FocusManager.instance.primaryFocus?.unfocus();
+      await Future.delayed(const Duration(milliseconds: 400));
+    }
     showOptionPicker<dynamic>(
       context: _key.currentContext!,
       title: 'Remind me',
