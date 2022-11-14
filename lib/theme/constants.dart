@@ -26,8 +26,8 @@ const titleSmall = TextStyle(
 );
 
 const bodyMedium = TextStyle(
-  color: Colors.white,
-  fontSize: 20,
+  color: kPrimaryColor,
+  fontSize: 22.0,
   fontWeight: FontWeight.w400,
 );
 
@@ -78,6 +78,7 @@ final elevatedButtonThemeData = ElevatedButtonThemeData(
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(borderRadius: kButtonBorderRadius),
     ),
+    textStyle: const MaterialStatePropertyAll(bodyMedium),
   ),
 );
 
