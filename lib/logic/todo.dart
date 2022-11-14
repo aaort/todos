@@ -56,4 +56,15 @@ class Todo {
         'reminderId': reminderId,
         'repeatOption': repeatOption,
       };
+
+  static Todo getTodoFromMap(Map todoMap) {
+    return Todo.fromMap(
+      task: todoMap['task'],
+      checked: todoMap['checked'],
+      id: todoMap['id'],
+      reminderId: todoMap['reminderId'],
+      reminderDateTime: todoMap['reminderDateTime'],
+      repeatOption: todoMap['repeatOption'],
+    );
+  }
 }
