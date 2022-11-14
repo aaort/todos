@@ -55,7 +55,7 @@ class _TodoEditorState extends State<TodoEditor> {
         child: FractionallySizedBox(
           heightFactor: 0.8,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 0),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
