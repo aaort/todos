@@ -4,7 +4,9 @@ import 'package:todos/theme/constants.dart';
 final lightTheme = ThemeData(
   scaffoldBackgroundColor: kPrimaryColor,
   primaryColor: kPrimaryColor,
+  brightness: Brightness.light,
   colorScheme: ColorScheme.fromSwatch(
+    brightness: Brightness.light,
     primarySwatch: kPrimaryColor,
     primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryColor,
@@ -33,7 +35,9 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(
   scaffoldBackgroundColor: kBackgroundDarkColor,
   primaryColor: kPrimaryDarkColor,
+  brightness: Brightness.dark,
   colorScheme: ColorScheme.fromSwatch(
+    brightness: Brightness.dark,
     primarySwatch: kPrimaryDarkColor,
     primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryDarkColor,
