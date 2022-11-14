@@ -24,11 +24,7 @@ class ThemeSwitchIconButton extends StatelessWidget {
               : Tween<double>(begin: 0.75, end: 1).animate(anim),
           child: ScaleTransition(scale: anim, child: child),
         ),
-        child: isDarkMode
-            ? const Icon(Icons.dark_mode,
-                key: ValueKey('dark_key'), color: Colors.white)
-            : const Icon(Icons.light_mode,
-                key: ValueKey('light_key'), color: Colors.white),
+        child: isDarkMode ? _darkIcon : _lightIcon,
       ),
       onPressed: () {
         toggleTheme(context);
@@ -36,3 +32,8 @@ class ThemeSwitchIconButton extends StatelessWidget {
     );
   }
 }
+
+const _darkIcon =
+    Icon(Icons.dark_mode, key: ValueKey('dark_key'), color: Colors.white);
+const _lightIcon =
+    Icon(Icons.light_mode, key: ValueKey('light_key'), color: Colors.white);
