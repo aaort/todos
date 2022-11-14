@@ -9,11 +9,9 @@ void showDateTimePicker({
   String? title,
   DateTime? initialDateTime,
 }) {
-  DateTime dateTime = getDateTimeWithPrecisionToMinutes(
-      initialDateTime ?? DateTime.now().add(const Duration(minutes: 1)));
+  DateTime dateTime = getInitialDateTime(initialDateTime);
 
-  final minimumDate = getDateTimeWithPrecisionToMinutes(
-      DateTime.now().add(const Duration(minutes: 1)));
+  final minimumDate = getMinimumDateTime();
 
   void onDateTimeChange(DateTime newDateTime) => dateTime = newDateTime;
 

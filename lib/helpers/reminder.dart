@@ -12,6 +12,20 @@ DateTime getDateTimeOfDuration(Duration duration) {
   return DateTime.now().add(duration);
 }
 
+DateTime getInitialDateTime(DateTime? initialDateTime) {
+  final now = DateTime.now();
+  if (initialDateTime != null && initialDateTime.isAfter(now)) {
+    return getDateTimeWithPrecisionToMinutes(initialDateTime);
+  }
+  return getDateTimeWithPrecisionToMinutes(now.add(const Duration(minutes: 1)));
+}
+
+DateTime getMinimumDateTime() {
+  return getDateTimeWithPrecisionToMinutes(
+    DateTime.now().add(const Duration(minutes: 1)),
+  );
+}
+
 DateTime getDateTimeWithPrecisionToMinutes(DateTime dateTime) {
   return DateTime(
     dateTime.year,
