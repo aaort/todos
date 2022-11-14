@@ -130,7 +130,12 @@ class _TodoEditorState extends State<TodoEditor> {
     );
   }
 
-  void clearReminder() => setState(() => reminder = null);
+  void clearReminder() {
+    setState(() {
+      reminder = null;
+      repeatOption = null;
+    });
+  }
 
   @override
   void dispose() {
