@@ -68,10 +68,7 @@ class TodoActions {
   }
 
   void updateReminder(DateTime newReminder) {
-    context
-        .read<Todos>()
-        .getTodoById(currentTodo.id)
-        .updateReminder(newReminder);
+    context.read<Todos>().updateReminder(currentTodo.id, newReminder);
     Notifications.scheduleReminder(currentTodo);
   }
 
