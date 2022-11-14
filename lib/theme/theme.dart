@@ -9,7 +9,7 @@ final lightTheme = ThemeData(
     primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryColor,
     errorColor: kErrorColor,
-    backgroundColor: kBackgroundDarkColor,
+    backgroundColor: Colors.white,
   ),
   textTheme: const TextTheme(
     titleLarge: titleLarge,
@@ -38,7 +38,7 @@ final darkTheme = ThemeData(
     primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryDarkColor,
     errorColor: kErrorColor,
-    backgroundColor: kBackgroundDarkColor,
+    backgroundColor: kPrimaryColor,
   ),
   textTheme: TextTheme(
     titleLarge: titleLarge.copyWith(color: kPrimaryDarkColor),
