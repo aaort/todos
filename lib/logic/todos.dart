@@ -39,6 +39,9 @@ class Todos extends ChangeNotifier {
       ..reminderDateTime = updatedTodo.reminderDateTime;
     notifyListeners();
   }
+
+  void updateReminder(String id, DateTime? newReminder) {
+    getTodoById(id).updateReminder(newReminder);
     notifyListeners();
   }
 
