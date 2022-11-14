@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/notifications/notifications.dart';
-import 'package:todos/widgets/pickers.dart';
 
 import 'todo.dart';
 import 'todos_io.dart';
@@ -70,13 +69,5 @@ class TodoActions {
   void updateReminder(DateTime newReminder) {
     context.read<Todos>().updateReminder(currentTodo.id, newReminder);
     Notifications.scheduleReminder(currentTodo);
-  }
-
-  void onReminderPressed() {
-    showDateTimePicker(
-      context: context,
-      onChange: updateReminder,
-      initialDateTime: currentTodo.reminderDateTime,
-    );
   }
 }
