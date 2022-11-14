@@ -30,7 +30,7 @@ class ReminderPickerButton extends StatelessWidget {
   final _key = GlobalKey();
 
   void showReminderOptionPicker() async {
-    if (MediaQuery.of(_key.currentContext!).viewInsets.bottom > 0) {
+    if (isKeyboardVisible(_key.currentContext!)) {
       await hideKeyboardAndWait();
     }
     showOptionPicker<dynamic>(
