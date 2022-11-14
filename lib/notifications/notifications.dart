@@ -5,14 +5,7 @@ import 'package:todos/logic/todos.dart';
 import 'package:todos/logic/todos_io.dart';
 import 'package:todos/main.dart';
 import 'package:provider/provider.dart';
-
-const String _notificationChannelKey = 'reminder_notifications_key';
-const String _notificationGroupKey = 'reminding_notifications_group_key';
-const String _notificationChannelName = 'Reminding notifications';
-const String _notificationChannelDescription =
-    'Notification channel for sending reminders';
-
-const String _appIconPath = 'resource://drawable/ic_launcher';
+import 'package:todos/notifications/constants.dart';
 
 class Notifications {
   static final notifications = AwesomeNotifications();
@@ -21,13 +14,13 @@ class Notifications {
     final allowed = await notifications.requestPermissionToSendNotifications();
     if (!allowed) return;
     AwesomeNotifications().initialize(
-      _appIconPath,
+      appIconPath,
       [
         NotificationChannel(
-          channelGroupKey: _notificationGroupKey,
-          channelKey: _notificationChannelKey,
-          channelName: _notificationChannelName,
-          channelDescription: _notificationChannelDescription,
+          channelGroupKey: notificationGroupKey,
+          channelKey: notificationChannelKey,
+          channelName: notificationChannelName,
+          channelDescription: notificationChannelDescription,
           criticalAlerts: true,
           importance: NotificationImportance.High,
         )
@@ -40,11 +33,13 @@ class Notifications {
   }
 
   static Future<void> _onActionReceivedMethod(ReceivedAction action) async {
-    if (action.payload?['todoId'] != null) {
+    final todoId = action.payload?['todoId'];
+    if (todoId == null) return;
+    if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
       if (action.actionLifeCycle != NotificationLifeCycle.AppKilled) {
         App.materialAppKey.currentContext
             ?.read<Todos>()
-            .toggleCheckById(action.payload!['todoId']!, value: true);
+            .toggleCheckById(todoId, value: true);
       }
       TodosIO.toggleCheck(action.payload!['todoId']!, value: true);
     }
@@ -56,7 +51,7 @@ class Notifications {
       schedule: await getNotificationScheduleFromTodo(todo),
       content: NotificationContent(
         id: todo.reminderId!,
-        channelKey: _notificationChannelKey,
+        channelKey: notificationChannelKey,
         title: todo.task,
         body: todo.task,
         payload: {'todoId': todo.id},
@@ -66,8 +61,18 @@ class Notifications {
       ),
       actionButtons: [
         NotificationActionButton(
-          key: 'COMPLETED',
+          key: notificationActions[completedButtonKey]!,
           label: 'Mark as completed',
+          actionType: ActionType.SilentAction,
+        ),
+        NotificationActionButton(
+          key: notificationActions[in5MinutesButtonKey]!,
+          label: 'Repeat in 5 minutes',
+          actionType: ActionType.SilentAction,
+        ),
+        NotificationActionButton(
+          key: notificationActions[in15MinutesButtonKey]!,
+          label: 'Repeat in 15 minutes',
           actionType: ActionType.SilentAction,
         ),
       ],
