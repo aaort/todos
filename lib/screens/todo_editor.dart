@@ -81,6 +81,7 @@ class _TodoEditorState extends State<TodoEditor> {
             ),
             const SizedBox(height: 30),
             SaveTodoButton(
+              initialTodo: widget.initialTodo,
               task: taskController.text,
               reminder: reminder,
               repeatOption: repeatOption,
