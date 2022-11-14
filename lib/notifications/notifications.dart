@@ -64,7 +64,7 @@ class Notifications {
   }
 
   static updateReminder(Todo todo) async {
-    await notifications.cancel(todo.reminderId!);
+    await cancelReminder(todo.reminderId!);
     scheduleReminder(todo);
   }
 
