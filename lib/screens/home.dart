@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/widgets/add_todo_button.dart';
-import 'package:todos/widgets/theme_switch_icon_button.dart';
+import 'package:todos/widgets/theme_switch_button.dart';
 import 'package:todos/widgets/todo_list.dart';
 
 class Home extends StatelessWidget {
