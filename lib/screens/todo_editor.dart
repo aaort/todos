@@ -47,77 +47,84 @@ class _TodoEditorState extends State<TodoEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return FractionallySizedBox(
-      heightFactor: 0.8,
+    return GestureDetector(
+      onTap: FocusManager.instance.primaryFocus?.unfocus,
       child: Container(
-        padding: const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // Tap for hiding keyboard will not be detected without this prop
+        color: Colors.transparent,
+        child: FractionallySizedBox(
+          heightFactor: 0.8,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  '${widget.initialTodo != null ? 'Edit' : 'Add'} Todo',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-                ReminderPickerButton(
-                  enabled: createEnabled,
-                  reminder: reminder,
-                  onReminderChange: onReminderChange,
-                  child: const Icon(
-                    Icons.timer_outlined,
-                  ),
-                ),
-              ],
-            ),
-            TextField(
-              key: const Key('createTodoInputId'),
-              autofocus: true,
-              controller: taskController,
-              textCapitalization: TextCapitalization.sentences,
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            const SizedBox(height: 30),
-            SaveTodoButton(
-              initialTodo: widget.initialTodo,
-              task: taskController.text,
-              reminder: reminder,
-              repeatOption: repeatOption,
-            ),
-            if (reminder != null) ...[
-              const SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    flex: 8,
-                    child: ReminderPickerButton(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${widget.initialTodo != null ? 'Edit' : 'Add'} Todo',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    ReminderPickerButton(
                       enabled: createEnabled,
                       reminder: reminder,
                       onReminderChange: onReminderChange,
-                      child: Text(
-                        _reminderText,
-                        style: Theme.of(context).textTheme.bodySmall,
+                      child: const Icon(
+                        Icons.timer_outlined,
                       ),
                     ),
-                  ),
-                  TodoIconButton(
-                    onPressed: clearReminder,
-                    icon: const Icon(Icons.close),
-                  )
-                ],
-              ),
-              if (reminder != null) ...[
+                  ],
+                ),
+                TextField(
+                  key: const Key('createTodoInputId'),
+                  autofocus: true,
+                  controller: taskController,
+                  textCapitalization: TextCapitalization.sentences,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 const SizedBox(height: 30),
-                RepeatOptionButton(
+                SaveTodoButton(
+                  initialTodo: widget.initialTodo,
+                  task: taskController.text,
+                  reminder: reminder,
                   repeatOption: repeatOption,
-                  onOptionChange: onRepeatOptionChange,
-                )
-              ]
-            ]
-          ],
+                ),
+                if (reminder != null) ...[
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        flex: 8,
+                        child: ReminderPickerButton(
+                          enabled: createEnabled,
+                          reminder: reminder,
+                          onReminderChange: onReminderChange,
+                          child: Text(
+                            _reminderText,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ),
+                      ),
+                      TodoIconButton(
+                        onPressed: clearReminder,
+                        icon: const Icon(Icons.close),
+                      )
+                    ],
+                  ),
+                  if (reminder != null) ...[
+                    const SizedBox(height: 30),
+                    RepeatOptionButton(
+                      repeatOption: repeatOption,
+                      onOptionChange: onRepeatOptionChange,
+                    )
+                  ]
+                ]
+              ],
+            ),
+          ),
         ),
       ),
     );
