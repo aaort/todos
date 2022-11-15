@@ -69,3 +69,8 @@ final darkTheme = ThemeData(
     cursorColor: kPrimaryDarkColor,
   ),
 );
+
+extension CustomTextStyles on TextTheme {
+  TextStyle get lineThrough =>
+      this.bodySmall!.copyWith(decoration: TextDecoration.lineThrough);
+}
