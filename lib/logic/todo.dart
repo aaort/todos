@@ -45,6 +45,7 @@ class Todo {
     reminderDateTime = newReminderDateTime;
     if (reminderDateTime == null) {
       reminderId = null;
+      repeatOption = null;
     }
   }
 
