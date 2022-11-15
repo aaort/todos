@@ -59,13 +59,18 @@ class Todo {
       };
 
   static Todo getTodoFromMap(Map todoMap) {
+    // TODO: should be better way for handling this operation
+    dynamic repeatOption = todoMap['repeatOption'] != null
+        ? RepeatOption.values.firstWhere(
+            (option) => option.toString() == todoMap['repeatOption'])
+        : null;
     return Todo.fromMap(
       task: todoMap['task'],
       checked: todoMap['checked'],
       id: todoMap['id'],
       reminderId: todoMap['reminderId'],
-      reminderDateTime: todoMap['reminderDateTime'],
-      repeatOption: todoMap['repeatOption'],
+      reminderDateTime: DateTime.tryParse('${todoMap['reminderDateTime']}'),
+      repeatOption: repeatOption,
     );
   }
 }
