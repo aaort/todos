@@ -16,7 +16,7 @@ Future<void> onActionReceived(ReceivedAction action) async {
       context?.read<Todos>().toggleCheckById(todoId, value: true);
       context?.read<Todos>().updateReminder(todoId, null);
     }
-    TodosIO.toggleCheck(todoId, value: true);
+    await TodosIO.toggleCheck(todoId, value: true);
     TodosIO.updateReminder(todoId, null);
   } else {
     final is5Minutes =
