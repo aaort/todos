@@ -59,11 +59,7 @@ class Todo {
       };
 
   static Todo getTodoFromMap(Map todoMap) {
-    // TODO: should be better way for handling this operation
-    dynamic repeatOption = todoMap['repeatOption'] != null
-        ? RepeatOption.values.firstWhere(
-            (option) => option.toString() == todoMap['repeatOption'])
-        : null;
+    dynamic repeatOption = _getRepeatOptionFromString(todoMap['repeatOption']);
     return Todo.fromMap(
       task: todoMap['task'],
       checked: todoMap['checked'],
@@ -72,5 +68,15 @@ class Todo {
       reminderDateTime: DateTime.tryParse('${todoMap['reminderDateTime']}'),
       repeatOption: repeatOption,
     );
+  }
+
+  static RepeatOption? _getRepeatOptionFromString(String? optionAsString) {
+    if (optionAsString == null) return null;
+    try {
+      return RepeatOption.values
+          .firstWhere((option) => option.toString() == optionAsString);
+    } catch (_) {
+      throw 'Unable to found repeat option to match $optionAsString';
+    }
   }
 }
