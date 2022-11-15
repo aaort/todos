@@ -26,7 +26,9 @@ class Notifications {
       debug: true,
     );
 
-    notifications.setListeners(onActionReceivedMethod: onActionReceivedMethod);
+    notifications.setListeners(
+      onActionReceivedMethod: onActionReceived,
+    );
   }
 
   static scheduleReminder(Todo todo) async {

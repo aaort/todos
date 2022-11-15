@@ -6,7 +6,7 @@ import 'package:todos/logic/todos_io.dart';
 import 'package:todos/main.dart';
 import 'package:todos/notifications/constants.dart';
 
-Future<void> onActionReceivedMethod(ReceivedAction action) async {
+Future<void> onActionReceived(ReceivedAction action) async {
   final todoId = action.payload?['todoId'];
   if (todoId == null) return;
   final context = App.materialAppKey.currentContext;
