@@ -110,6 +110,15 @@ class TodosIO {
     await file.writeAsString(jsonEncode(todoMap));
   }
 
+  static Future<void> updateReminder(String id, DateTime? reminder) async {
+    final file = await _getTodoFileById(id);
+    if (file == null) return;
+    final todoMap = jsonDecode((await file.readAsString())) as Map;
+    final todo = Todo.getTodoFromMap(todoMap);
+    todo.updateReminder(reminder);
+    await file.writeAsString(jsonEncode(todo.asMap));
+  }
+
   static Future<void> deleteTodo(String id) async {
     final file = await _getTodoFileById(id);
     await file?.delete();
