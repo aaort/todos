@@ -95,7 +95,7 @@ class TodosIO {
     if (file == null) return;
     final todoMap = jsonDecode((await file.readAsString())) as Map;
     todoMap['checked'] = value ?? !todoMap['checked'];
-    await file.writeAsString(jsonEncode(todoMap));
+    await file.writeAsString(jsonEncode(todoMap, toEncodable: _toEncodable));
   }
 
   static Future<void> updateReminder(String id, DateTime? reminder) async {
@@ -104,7 +104,7 @@ class TodosIO {
     final todoMap = jsonDecode((await file.readAsString())) as Map;
     final todo = Todo.getTodoFromMap(todoMap);
     todo.updateReminder(reminder);
-    await file.writeAsString(jsonEncode(todo.asMap));
+    await file.writeAsString(jsonEncode(todo.asMap, toEncodable: _toEncodable));
   }
 
   static Future<void> deleteTodo(String id) async {
