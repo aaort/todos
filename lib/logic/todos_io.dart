@@ -64,20 +64,8 @@ class TodosIO {
     final todos = <Todo>[];
     for (File file in todoFiles) {
       final todoMap = jsonDecode((await file.readAsString())) as Map;
-      dynamic repeatOption = todoMap['repeatOption'] != null
-          ? RepeatOption.values.firstWhere(
-              (option) => option.toString() == todoMap['repeatOption'])
-          : null;
-      todos.add(
-        Todo.fromMap(
-          task: todoMap['task'],
-          checked: todoMap['checked'],
-          id: todoMap['id'],
-          reminderDateTime: DateTime.tryParse('${todoMap['reminderDateTime']}'),
-          reminderId: todoMap['reminderId'],
-          repeatOption: repeatOption,
-        ),
-      );
+
+      todos.add(Todo.getTodoFromMap(todoMap));
     }
 
     return todos;
