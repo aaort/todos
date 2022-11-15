@@ -13,8 +13,10 @@ Future<void> onActionReceivedMethod(ReceivedAction action) async {
   if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
     if (action.actionLifeCycle != NotificationLifeCycle.AppKilled) {
       context?.read<Todos>().toggleCheckById(todoId, value: true);
+      context?.read<Todos>().updateReminder(todoId, null);
     }
-    TodosIO.toggleCheck(action.payload!['todoId']!, value: true);
+    TodosIO.toggleCheck(todoId, value: true);
+    TodosIO.updateReminder(todoId, null);
   } else {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
