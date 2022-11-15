@@ -83,7 +83,6 @@ Future<NotificationSchedule> getNotificationScheduleFromTodo(Todo todo) async {
       preciseAlarm: true,
       repeats: true,
     );
-  } else {
-    return NotificationCalendar.fromDate(date: todo.reminderDateTime!);
   }
+  return NotificationCalendar.fromDate(date: todo.reminderDateTime!);
 }
