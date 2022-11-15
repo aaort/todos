@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart' hide Checkbox;
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/screens/todo_editor.dart';
-import 'package:todos/theme/styles.dart';
+import 'package:todos/theme/theme.dart' show CustomTextStyles;
 import 'package:todos/widgets/dismissible.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 
@@ -28,6 +28,7 @@ class TodoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todo = context.watch<Todos>().getTodoById(id);
+    final textTheme = Theme.of(context).textTheme;
 
     return DismissibleTile(
       onDismiss: TodoActions(context, todo).deleteTodo,
@@ -37,7 +38,7 @@ class TodoTile extends StatelessWidget {
           todo.task,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: Styles(context).getTodoTextStyle(todo.checked),
+          style: todo.checked ? textTheme.lineThrough : textTheme.bodySmall,
         ),
         value: todo.checked,
         onChanged: (_) => onTap(context),
