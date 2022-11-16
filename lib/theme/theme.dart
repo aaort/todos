@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/theme/constants.dart';
 
 final lightTheme = ThemeData(
-  scaffoldBackgroundColor: kPrimaryColor,
+  scaffoldBackgroundColor: kBackgroundColor,
   primaryColor: kPrimaryColor,
   brightness: Brightness.light,
   colorScheme: ColorScheme.fromSwatch(
