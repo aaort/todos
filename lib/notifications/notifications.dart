@@ -45,23 +45,7 @@ class Notifications {
         criticalAlert: true,
         category: NotificationCategory.Reminder,
       ),
-      actionButtons: [
-        NotificationActionButton(
-          key: notificationActions[completedButtonKey]!,
-          label: 'Mark as completed',
-          actionType: ActionType.SilentAction,
-        ),
-        NotificationActionButton(
-          key: notificationActions[in5MinutesButtonKey]!,
-          label: 'Repeat in 5 minutes',
-          actionType: ActionType.SilentAction,
-        ),
-        NotificationActionButton(
-          key: notificationActions[in15MinutesButtonKey]!,
-          label: 'Repeat in 15 minutes',
-          actionType: ActionType.SilentAction,
-        ),
-      ],
+      actionButtons: actionButtons,
     );
   }
 
