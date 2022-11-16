@@ -5,9 +5,16 @@ import 'package:todos/notifications/notifications.dart';
 import 'package:todos/screens/home.dart';
 import 'package:todos/theme/theme.dart';
 import 'package:todos/theme/theme_manager.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    name: 'todos',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   await Notifications.initialize();
 
