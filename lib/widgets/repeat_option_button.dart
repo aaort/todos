@@ -16,11 +16,13 @@ final _repeatOptions = <PickerOption<RepeatOption>>[
 ];
 
 class RepeatOptionButton extends StatelessWidget {
+  final bool enabled;
   final RepeatOption? repeatOption;
   final Function(RepeatOption) onOptionChange;
 
   const RepeatOptionButton({
     super.key,
+    required this.enabled,
     required this.repeatOption,
     required this.onOptionChange,
   });
@@ -43,24 +45,27 @@ class RepeatOptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onOptionButtonPressed(context),
-      child: Container(
-        color: Colors.transparent,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Text(
-                'Repeat',
-                style: Theme.of(context).textTheme.bodySmall,
+      onTap: enabled ? () => onOptionButtonPressed(context) : null,
+      child: Opacity(
+        opacity: enabled ? 1 : 0.4,
+        child: Container(
+          color: Colors.transparent,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Text(
+                  'Repeat',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               ),
-            ),
-            if (repeatOption != null)
-              Text(
-                repeatOptionText(repeatOption!),
-                style: Theme.of(context).textTheme.bodySmall,
-              )
-          ],
+              if (repeatOption != null)
+                Text(
+                  repeatOptionText(repeatOption!),
+                  style: Theme.of(context).textTheme.bodySmall,
+                )
+            ],
+          ),
         ),
       ),
     );
