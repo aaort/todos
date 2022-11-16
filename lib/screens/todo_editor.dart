@@ -30,7 +30,6 @@ class _TodoEditorState extends State<TodoEditor> {
       setState(() => reminder = newReminder);
 
   void onRepeatOptionChange(RepeatOption option) {
-    Navigator.pop(context);
     setState(() => repeatOption = option);
   }
 
