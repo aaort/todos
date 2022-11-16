@@ -13,7 +13,7 @@ class TodoTile extends StatelessWidget {
   const TodoTile({super.key, required this.id});
 
   void onLongPress(BuildContext context) async {
-    final todo = context.read<Todos>().getTodoById(id);
+    final todo = context.read<TodoManager>().getTodoById(id);
     popupModalBottomSheet(
       context: context,
       child: TodoEditor(initialTodo: todo),
@@ -21,13 +21,13 @@ class TodoTile extends StatelessWidget {
   }
 
   onTap(BuildContext context) {
-    final todo = context.read<Todos>().getTodoById(id);
+    final todo = context.read<TodoManager>().getTodoById(id);
     TodoActions(context, todo).toggleCheck();
   }
 
   @override
   Widget build(BuildContext context) {
-    final todo = context.watch<Todos>().getTodoById(id);
+    final todo = context.watch<TodoManager>().getTodoById(id);
     final textTheme = Theme.of(context).textTheme;
 
     return DismissibleTile(
