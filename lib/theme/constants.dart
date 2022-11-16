@@ -19,12 +19,14 @@ const SystemUiOverlayStyle kOverlayStyle = SystemUiOverlayStyle(
   systemNavigationBarColor: kPrimaryColor,
   systemNavigationBarIconBrightness: Brightness.light,
   systemNavigationBarDividerColor: Colors.transparent,
+  statusBarBrightness: Brightness.dark,
 );
 
 const SystemUiOverlayStyle kOverlayDarkStyle = SystemUiOverlayStyle(
   systemNavigationBarColor: kPrimaryColor,
   systemNavigationBarIconBrightness: Brightness.dark,
   systemNavigationBarDividerColor: Colors.transparent,
+  statusBarBrightness: Brightness.dark,
 );
 
 const titleLarge = TextStyle(
