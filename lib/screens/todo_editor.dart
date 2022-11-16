@@ -17,7 +17,6 @@ class TodoEditor extends StatefulWidget {
 
 class _TodoEditorState extends State<TodoEditor> {
   final taskController = TextEditingController();
-  bool createEnabled = false;
 
   dynamic reminder; // Duration | DateTime | null
   RepeatOption? repeatOption;
@@ -39,9 +38,6 @@ class _TodoEditorState extends State<TodoEditor> {
   void initState() {
     taskController.text = widget.initialTodo?.task ?? '';
     reminder = widget.initialTodo?.reminderDateTime;
-    taskController.addListener(() {
-      setState(() => createEnabled = taskController.text.isNotEmpty);
-    });
     super.initState();
   }
 
@@ -68,12 +64,10 @@ class _TodoEditorState extends State<TodoEditor> {
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     ReminderPickerButton(
-                      enabled: createEnabled,
+                      enabled: taskController.text.isNotEmpty,
                       reminder: reminder,
                       onReminderChange: onReminderChange,
-                      child: const Icon(
-                        Icons.timer_outlined,
-                      ),
+                      child: const Icon(Icons.timer_outlined),
                     ),
                   ],
                 ),
@@ -99,7 +93,7 @@ class _TodoEditorState extends State<TodoEditor> {
                       Flexible(
                         flex: 8,
                         child: ReminderPickerButton(
-                          enabled: createEnabled,
+                          enabled: taskController.text.isNotEmpty,
                           reminder: reminder,
                           onReminderChange: onReminderChange,
                           child: Text(
