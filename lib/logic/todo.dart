@@ -19,7 +19,7 @@ class Todo {
     this.repeatOption,
   }) {
     id = const Uuid().v4();
-    if (reminderDateTime != null) {
+    if (reminderDateTime != null || repeatOption != null) {
       reminderId = Random().nextInt(1000);
     }
   }

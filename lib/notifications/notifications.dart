@@ -32,7 +32,7 @@ class Notifications {
   }
 
   static scheduleReminder(Todo todo) async {
-    if (todo.reminderId == null || todo.reminderDateTime == null) return;
+    if (todo.reminderId == null) return;
     notifications.createNotification(
       schedule: await getNotificationScheduleFromTodo(todo),
       content: NotificationContent(
