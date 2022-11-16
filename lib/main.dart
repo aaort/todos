@@ -23,7 +23,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<Todos>(create: (_) => Todos()),
+        ChangeNotifierProvider<TodoManager>(create: (_) => TodoManager()),
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager())
       ],
       child: Builder(builder: (ctx) {

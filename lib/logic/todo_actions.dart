@@ -22,7 +22,7 @@ class TodoActions {
       repeatOption: updatedTodo.repeatOption,
     );
 
-    context.read<Todos>().editTodo(todo);
+    context.read<TodoManager>().editTodo(todo);
     await TodosIO.editTodo(todo);
     if (todo.reminderDateTime != null) {
       Notifications.updateReminder(todo);
@@ -30,7 +30,7 @@ class TodoActions {
   }
 
   Future<void> createTodo() async {
-    context.read<Todos>().addTodo(currentTodo);
+    context.read<TodoManager>().addTodo(currentTodo);
     await TodosIO.createTodo(currentTodo);
 
     if (currentTodo.reminderId != null) {
@@ -39,7 +39,7 @@ class TodoActions {
   }
 
   Future<void> deleteTodo() async {
-    context.read<Todos>().deleteTodo(currentTodo.id);
+    context.read<TodoManager>().deleteTodo(currentTodo.id);
     await TodosIO.deleteTodo(currentTodo.id);
     final reminderId = currentTodo.reminderId;
     if (reminderId != null) {
@@ -53,9 +53,9 @@ class TodoActions {
   }
 
   void toggleCheck() {
-    context.read<Todos>().toggleCheckById(currentTodo.id);
+    context.read<TodoManager>().toggleCheckById(currentTodo.id);
     TodosIO.toggleCheck(currentTodo.id);
-    final todo = context.read<Todos>().getTodoById(currentTodo.id);
+    final todo = context.read<TodoManager>().getTodoById(currentTodo.id);
     if (todo.reminderId == null) return;
     if (todo.checked) {
       Notifications.cancelReminder(todo.reminderId!);
@@ -67,7 +67,7 @@ class TodoActions {
   }
 
   void updateReminder(DateTime newReminder) {
-    context.read<Todos>().updateReminder(currentTodo.id, newReminder);
+    context.read<TodoManager>().updateReminder(currentTodo.id, newReminder);
     Notifications.scheduleReminder(currentTodo);
   }
 }

@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todos_io.dart';
 
-class Todos extends ChangeNotifier {
-  Todos() {
+class TodoManager extends ChangeNotifier {
+  TodoManager() {
     initiateTodos();
   }
 
