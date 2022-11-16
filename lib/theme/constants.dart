@@ -13,6 +13,7 @@ const kListTileLeftPadding = 10.0;
 const kModalBorderRadius = 20.0;
 const kButtonPadding = EdgeInsets.symmetric(vertical: 10);
 final kButtonBorderRadius = BorderRadius.circular(15.0);
+const kDisabledOpacity = 0.4;
 
 const SystemUiOverlayStyle kOverlayStyle = SystemUiOverlayStyle(
   systemNavigationBarColor: kPrimaryColor,
