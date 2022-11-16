@@ -26,7 +26,7 @@ class Home extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${context.watch<Todos>().todos.length} Tasks',
+                      '${context.watch<TodoManager>().todos.length} Tasks',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const ThemeSwitchIconButton()
