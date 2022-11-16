@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "524090500432",
+    "project_id": "com-aort-todos",
+    "storage_bucket": "com-aort-todos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524090500432:android:1a89d79edde8642aa33855",
+        "android_client_info": {
+          "package_name": "com.aort.todos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "524090500432-ei3olsidveedih1o82rkht9vdhqh09ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBciYj2cKOXetuM8pcShksHIwg78d9YtA8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "524090500432-ei3olsidveedih1o82rkht9vdhqh09ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
