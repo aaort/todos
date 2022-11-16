@@ -9,7 +9,7 @@ class TodoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final todos = context.watch<Todos>().todos;
+    final todos = context.watch<TodoManager>().todos;
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
