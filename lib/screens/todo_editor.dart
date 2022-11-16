@@ -26,11 +26,18 @@ class _TodoEditorState extends State<TodoEditor> {
         reminder is Duration ? getDateTimeOfDuration(reminder) : reminder);
   }
 
-  void onReminderChange(dynamic newReminder) =>
-      setState(() => reminder = newReminder);
+  void onReminderChange(dynamic newReminder) {
+    setState(() {
+      reminder = newReminder;
+      repeatOption = null;
+    });
+  }
 
   void onRepeatOptionChange(RepeatOption option) {
-    setState(() => repeatOption = option);
+    setState(() {
+      repeatOption = option;
+      reminder = null;
+    });
   }
 
   @override
@@ -109,14 +116,13 @@ class _TodoEditorState extends State<TodoEditor> {
                       )
                     ],
                   ),
-                  if (reminder != null) ...[
-                    const SizedBox(height: 30),
-                    RepeatOptionButton(
-                      repeatOption: repeatOption,
-                      onOptionChange: onRepeatOptionChange,
-                    )
-                  ]
-                ]
+                ],
+                const SizedBox(height: 30),
+                RepeatOptionButton(
+                  enabled: taskController.text.isNotEmpty,
+                  repeatOption: repeatOption,
+                  onOptionChange: onRepeatOptionChange,
+                )
               ],
             ),
           ),

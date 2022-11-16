@@ -33,7 +33,7 @@ class TodoActions {
     context.read<Todos>().addTodo(currentTodo);
     await TodosIO.createTodo(currentTodo);
 
-    if (currentTodo.reminderDateTime != null) {
+    if (currentTodo.reminderId != null) {
       Notifications.scheduleReminder(currentTodo);
     }
   }
