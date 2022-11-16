@@ -33,7 +33,10 @@ class RepeatOptionButton extends StatelessWidget {
       context: context,
       title: 'Remind me...',
       options: _repeatOptions,
-      onChange: onOptionChange,
+      onChange: (_) {
+        Navigator.pop(context);
+        onOptionChange(_);
+      },
     );
   }
 
