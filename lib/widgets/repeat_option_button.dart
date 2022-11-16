@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/helpers/keyboard.dart';
+import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/pickers.dart';
 
 // Represents available time intervals in seconds
@@ -47,7 +48,7 @@ class RepeatOptionButton extends StatelessWidget {
     return GestureDetector(
       onTap: enabled ? () => onOptionButtonPressed(context) : null,
       child: Opacity(
-        opacity: enabled ? 1 : 0.4,
+        opacity: enabled ? 1 : kDisabledOpacity,
         child: Container(
           color: Colors.transparent,
           child: Row(
