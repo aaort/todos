@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:todos/theme/material_colors.dart';
 
 const kPrimaryColor = MaterialColor(0xff3B3936, primaryColorMap);
-const kBackgroundColor = kPrimaryDarkColor;
+const kBackgroundColor = kPrimaryColor;
 const kPrimaryDarkColor = MaterialColor(0xfff2f2f2, primaryDarkColorMap);
 const kBackgroundDarkColor = kPrimaryColor;
 const kErrorColor = Color(0xffBD2A2E);
