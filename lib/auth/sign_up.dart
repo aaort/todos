@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todos/auth/utils.dart';
 import 'package:todos/widgets/dismiss_keyboard.dart';
-import 'package:todos/auth/constants.dart';
+
+final _auth = FirebaseAuth.instance;
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -22,7 +24,7 @@ class _SignUpState extends State<SignUp> {
     if (!(_formKey.currentState?.validate() ?? false)) return;
 
     try {
-      await auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
