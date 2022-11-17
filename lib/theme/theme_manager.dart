@@ -24,9 +24,9 @@ class ThemeManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  toggleTheme() async {
-    _themeMode =
-        _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+  toggleTheme({ThemeMode? mode}) async {
+    _themeMode = mode ??
+        (_themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark);
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('isDark', isDark);
     notifyListeners();
