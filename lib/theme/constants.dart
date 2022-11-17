@@ -84,8 +84,9 @@ const bottomSheetThemeData = BottomSheetThemeData(
   backgroundColor: Colors.white,
 );
 
-const inputDecorationThemeData = InputDecorationTheme(
+final inputDecorationThemeData = InputDecorationTheme(
   border: InputBorder.none,
+  errorStyle: bodySmall.copyWith(color: kErrorColor),
 );
 
 final elevatedButtonThemeData = ElevatedButtonThemeData(
