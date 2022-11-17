@@ -6,6 +6,7 @@ class CustomForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final Function() onSave;
+  final String buttonTitle;
   final String? errorText;
 
   const CustomForm({
@@ -14,6 +15,7 @@ class CustomForm extends StatefulWidget {
     required this.emailController,
     required this.passwordController,
     required this.onSave,
+    required this.buttonTitle,
     this.errorText,
   });
 
@@ -53,7 +55,7 @@ class _CustomFormState extends State<CustomForm> {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: widget.onSave,
-            child: const Text('Sign up'),
+            child: Text(widget.buttonTitle),
           ),
           if (_errorText != null) ...[
             const SizedBox(height: 20),
