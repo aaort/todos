@@ -11,37 +11,34 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: FocusScope.of(context).unfocus,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        floatingActionButton: const AddTodoButton(),
-        body: SafeArea(
-          bottom: false,
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 10),
-                color: Theme.of(context).scaffoldBackgroundColor,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${context.watch<TodoManager>().todos.length} Tasks',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Row(
-                      children: const [
-                        LogoutButton(),
-                        ThemeSwitchIconButton(),
-                      ],
-                    )
-                  ],
-                ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      floatingActionButton: const AddTodoButton(),
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(left: 10),
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${context.watch<TodoManager>().todos.length} Tasks',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  Row(
+                    children: const [
+                      LogoutButton(),
+                      ThemeSwitchIconButton(),
+                    ],
+                  )
+                ],
               ),
-              const Flexible(child: TodoList())
-            ],
-          ),
+            ),
+            const Flexible(child: TodoList())
+          ],
         ),
       ),
     );
