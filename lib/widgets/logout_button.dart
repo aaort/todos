@@ -18,6 +18,11 @@ class LogoutButton extends StatelessWidget {
     }
 
     return IconButton(
-        onPressed: onLogout, icon: const Icon(Icons.logout_outlined));
+      onPressed: onLogout,
+      icon: const Icon(
+        Icons.logout_outlined,
+        color: Colors.white,
+      ),
+    );
   }
 }
