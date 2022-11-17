@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todos/auth/app_navigator.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/notifications/notifications.dart';
-import 'package:todos/screens/home.dart';
 import 'package:todos/theme/theme.dart';
 import 'package:todos/theme/theme_manager.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,7 +40,7 @@ class App extends StatelessWidget {
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: ctx.watch<ThemeManager>().themeMode,
-          home: const Home(),
+          home: const AppNavigator(),
         );
       }),
     );
