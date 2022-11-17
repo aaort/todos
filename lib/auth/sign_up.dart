@@ -49,6 +49,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return DismissKeyboard(
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
