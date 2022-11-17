@@ -36,6 +36,7 @@ class _CustomFormState extends State<CustomForm> {
         children: [
           TextFormField(
             controller: widget.emailController,
+            // TODO: uncomment
             // autofocus: true,
             validator: emailValidator,
             decoration: const InputDecoration(
