@@ -20,7 +20,6 @@ class Home extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.only(left: 10),
-              color: Theme.of(context).scaffoldBackgroundColor,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
