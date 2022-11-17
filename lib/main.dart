@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todos/auth/app_navigator.dart';
+import 'package:todos/navigation/app_navigator.dart';
 import 'package:todos/logic/todos.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/theme/theme.dart';
