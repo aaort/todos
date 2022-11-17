@@ -11,7 +11,7 @@ final lightTheme = ThemeData(
     primaryColorDark: kPrimaryColor,
     accentColor: kPrimaryColor,
     errorColor: kErrorColor,
-    backgroundColor: Colors.white,
+    backgroundColor: kPrimaryDarkColor,
   ),
   textTheme: const TextTheme(
     titleLarge: titleLarge,
