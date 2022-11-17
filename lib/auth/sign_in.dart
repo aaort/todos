@@ -59,6 +59,7 @@ class _SignInState extends State<SignIn> {
                 passwordController: _passwordController,
                 onSave: onSignIn,
                 formKey: _formKey,
+                buttonTitle: 'Sign in',
                 errorText: _errorText,
               ),
               const SizedBox(height: 20),

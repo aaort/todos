@@ -59,6 +59,7 @@ class _SignUpState extends State<SignUp> {
                 passwordController: _passwordController,
                 onSave: onSignUp,
                 formKey: _formKey,
+                buttonTitle: 'Sign up',
                 errorText: _errorText,
               ),
               const SizedBox(height: 20),
