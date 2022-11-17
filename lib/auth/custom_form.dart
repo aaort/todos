@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/auth/utils.dart';
 
-class CustomForm extends StatefulWidget {
+class CustomForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -20,22 +20,15 @@ class CustomForm extends StatefulWidget {
   });
 
   @override
-  State<CustomForm> createState() => _CustomFormState();
-}
-
-class _CustomFormState extends State<CustomForm> {
-  String? _errorText;
-
-  @override
   Widget build(BuildContext context) {
     return Form(
-      key: widget.formKey,
+      key: formKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextFormField(
-            controller: widget.emailController,
+            controller: emailController,
             // TODO: uncomment
             // autofocus: true,
             validator: emailValidator,
@@ -45,7 +38,7 @@ class _CustomFormState extends State<CustomForm> {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           TextFormField(
-            controller: widget.passwordController,
+            controller: passwordController,
             obscureText: true,
             validator: passwordValidator,
             decoration: const InputDecoration(
@@ -55,13 +48,14 @@ class _CustomFormState extends State<CustomForm> {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: widget.onSave,
-            child: Text(widget.buttonTitle),
+            onPressed: onSave,
+            child: Text(buttonTitle),
           ),
-          if (_errorText != null) ...[
+          if (errorText != null) ...[
             const SizedBox(height: 20),
             Text(
-              _errorText!,
+              errorText!,
+              textAlign: TextAlign.center,
               style: Theme.of(context).inputDecorationTheme.errorStyle,
             ),
           ]
