@@ -4,9 +4,13 @@ import 'package:todos/screens/home.dart';
 import 'constants.dart';
 
 String getErrorText(String errorCode) {
-  return errorMessages.entries
-      .firstWhere((entry) => entry.key == errorCode)
-      .value;
+  try {
+    return errorMessages.entries
+        .firstWhere((entry) => entry.key == errorCode)
+        .value;
+  } catch (_) {
+    return 'Unexpected exception occurred';
+  }
 }
 
 String? emailValidator(String? email) {
