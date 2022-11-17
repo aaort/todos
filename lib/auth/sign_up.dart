@@ -1,23 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/screens/home.dart';
 import 'package:todos/widgets/dismiss_keyboard.dart';
-
-final _auth = FirebaseAuth.instance;
-
-final Set _authExceptions = <String>{
-  'wrong-password',
-  'weak-password',
-  'email-already-in-use',
-  'user-not-found',
-};
-
-final Set _errorMessages = <String>{
-  'Provided password is incorrect',
-  'Provided password is too weak',
-  'Provided email is already in use',
-  "There is no user found with provided credentials",
-};
+import 'package:todos/auth/constants.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -38,28 +22,13 @@ class _SignUpState extends State<SignUp> {
     if (!(_formKey.currentState?.validate() ?? false)) return;
 
     try {
-      await _auth.createUserWithEmailAndPassword(
+      await auth.createUserWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );
-      if (mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const Home(),
-          ),
-        );
-      }
+      if (mounted) navigateToHome(context);
     } on FirebaseAuthException catch (e) {
-      if (e.code == _authExceptions.elementAt(0)) {
-        setState(() => _errorText = _errorMessages.elementAt(0));
-      } else if (e.code == _authExceptions.elementAt(1)) {
-        setState(() => _errorText = _errorMessages.elementAt(1));
-      } else if (e.code == _authExceptions.elementAt(2)) {
-        setState(() => _errorText = _errorMessages.elementAt(2));
-      } else if (e.code == _authExceptions.elementAt(3)) {
-        setState(() => _errorText = _errorMessages.elementAt(3));
-      }
+      setState(() => _errorText = getErrorText(e.code));
     }
   }
 
@@ -78,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                 TextFormField(
                   controller: _emailController,
                   autofocus: true,
-                  validator: _emailValidator,
+                  validator: emailValidator,
                   decoration: const InputDecoration(
                     label: Text('Email'),
                   ),
@@ -87,7 +56,7 @@ class _SignUpState extends State<SignUp> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  validator: _passwordValidator,
+                  validator: passwordValidator,
                   decoration: const InputDecoration(
                     label: Text('Password'),
                   ),
@@ -112,32 +81,4 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
-}
-
-String? _emailValidator(String? email) {
-  if (email == null) {
-    return 'Your email is empty';
-  }
-  if (email.isEmpty) {
-    return 'Please enter your email';
-  }
-  if (!email.contains('@')) {
-    return 'Your email should container @ sign';
-  }
-
-  return null;
-}
-
-String? _passwordValidator(String? password) {
-  if (password == null) {
-    return 'Your password is empty';
-  }
-  if (password.isEmpty) {
-    return 'Please enter your password';
-  }
-  if (password.length < 6) {
-    return 'Your password is too short';
-  }
-
-  return null;
 }
