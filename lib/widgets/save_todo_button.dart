@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/notifications/notifications.dart';
 import 'package:todos/widgets/repeat_option_button.dart';
 
 class SaveTodoButton extends StatelessWidget {
@@ -29,6 +30,7 @@ class SaveTodoButton extends StatelessWidget {
         final updatedTodo = initialTodo!.updateValues(todo.asMap);
         TodoActions(context, updatedTodo).updateTodo();
       } else {
+        Notifications.scheduleReminder(todo);
         TodoActions(context, todo).createTodo();
       }
     }
