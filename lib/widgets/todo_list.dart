@@ -20,13 +20,19 @@ class TodoList extends StatelessWidget {
       child: FutureBuilder<QuerySnapshot<Map>>(
         future: DbActions.getTodos(),
         builder: (context, snapshot) {
-          final todoMap = snapshot.data?.docs.first.data();
-          if (todoMap == null) return const SizedBox();
-          final todo = Todo.getTodoFromMap(todoMap);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          final todos =
+              snapshot.data?.docs.map((snapshot) => snapshot.data()).toList();
+          if (todos == null) return const SizedBox();
           return ListView.builder(
             padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
-            itemCount: snapshot.data?.docs.length,
-            itemBuilder: (_, index) => TodoTile(todo: todo),
+            itemCount: todos.length,
+            itemBuilder: (_, index) {
+              final todo = Todo.getTodoFromMap(todos[index]);
+              return TodoTile(todo: todo);
+            },
           );
         },
       ),
