@@ -69,25 +69,14 @@ class Todo {
       repeat: repeat,
     );
   }
-
-  Todo updateValues(Map<String, dynamic> todoMap) {
-    return Todo._fromMap(
-      id: id, // can't be mutated
-      reminderId: reminderId, // can't be mutated
-      task: todoMap['task'],
-      isDone: todoMap['isDone'],
-      reminder: todoMap['reminder'],
-      repeat: todoMap['repeat'],
-    );
   }
 
-  static RepeatOption? _getRepeatOptionFromString(String? optionAsString) {
+RepeatOption? _getRepeatOptionFromString(String? optionAsString) {
     if (optionAsString == null) return null;
     try {
       return RepeatOption.values.firstWhere(
           (option) => option.toString().split('.').last == optionAsString);
     } catch (_) {
       throw 'Unable to found repeat option to match $optionAsString';
-    }
   }
 }
