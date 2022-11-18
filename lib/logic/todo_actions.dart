@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'todo.dart';
 
 class TodoActions {
+  // TODO: delete if not used
   final BuildContext context;
   final Todo todo;
 
