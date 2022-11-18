@@ -73,8 +73,8 @@ class Todo {
   static RepeatOption? _getRepeatOptionFromString(String? optionAsString) {
     if (optionAsString == null) return null;
     try {
-      return RepeatOption.values
-          .firstWhere((option) => option.toString() == optionAsString);
+      return RepeatOption.values.firstWhere(
+          (option) => option.toString().split('.').last == optionAsString);
     } catch (_) {
       throw 'Unable to found repeat option to match $optionAsString';
     }
