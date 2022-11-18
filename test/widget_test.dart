@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:todos/main.dart';
 import 'package:todos/screens/home.dart';
 import 'package:todos/screens/todo_editor.dart';
-import 'package:todos/widgets/todo_list.dart';
-import 'package:todos/widgets/todo_tile.dart';
+import 'package:todos/widgets/home/todo_list.dart';
+import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
 void main() {
   testWidgets('Testing widgets', (tester) async {

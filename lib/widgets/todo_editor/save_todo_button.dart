@@ -3,7 +3,7 @@ import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/notifications/notifications.dart';
-import 'package:todos/widgets/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
 
 class SaveTodoButton extends StatelessWidget {
   final Todo? initialTodo;
