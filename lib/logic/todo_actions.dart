@@ -10,6 +10,10 @@ class TodoActions {
   TodoActions(this.context, this.currentTodo);
 
   Future<void> createTodo() async {
-    DbActions.createTodo(currentTodo);
+    await DbActions.createTodo(currentTodo);
+  }
+
+  Future<void> updateTodo() async {
+    await DbActions.updateTodo(currentTodo);
   }
 }
