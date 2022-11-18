@@ -37,7 +37,7 @@ class Todo {
     }
   }
 
-  void toggleCheck(bool? value) {
+  void toggleIsDone({bool? value}) {
     isDone = value ?? !isDone;
   }
 
