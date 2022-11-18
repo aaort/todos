@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/logic/db_actions.dart';
 import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/todo_tile.dart';
 
@@ -18,7 +18,7 @@ class TodoList extends StatelessWidget {
         ),
       ),
       child: StreamBuilder<QuerySnapshot<Map>>(
-        stream: DbActions.getTodos(),
+        stream: TodoActions.getTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

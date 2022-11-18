@@ -1,27 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/logic/db_actions.dart';
 
 import 'todo.dart';
 
 class TodoActions {
   final BuildContext context;
-  final Todo currentTodo;
+  final Todo todo;
 
-  TodoActions(this.context, this.currentTodo);
+  TodoActions(this.context, this.todo);
 
-  Future<void> createTodo() async {
-    await DbActions.createTodo(currentTodo);
+  static final _db = FirebaseFirestore.instance;
+  static final _auth = FirebaseAuth.instance;
+
+  static final _todos =
+      _db.collection('users').doc(_auth.currentUser?.uid).collection('todos');
+
+  createTodo() {
+    _todos.doc(todo.id).set(todo.asMap);
   }
 
-  Future<void> updateTodo() async {
-    await DbActions.updateTodo(currentTodo);
+  updateTodo() {
+    _todos.doc(todo.id).set(todo.asMap);
   }
 
-  Future<void> deleteTodo() async {
-    await DbActions.deleteTodo(currentTodo.id);
+  toggleIsDone({bool? value}) async {
+    final toggledTodo = todo..toggleIsDone(value: value);
+    await _todos.doc(todo.id).set(toggledTodo.asMap);
   }
 
-  Future<void> toggleIsDone() async {
-    await DbActions.updateTodo(currentTodo..toggleIsDone());
+  deleteTodo() async {
+    await _todos.doc(todo.id).delete();
+  }
+
+  static Stream<QuerySnapshot<Map>> getTodos() {
+    return _todos.snapshots();
+  }
+
+  static Future<int> getTodosCount() async {
+    return (await _todos.get()).docs.length;
   }
 }
