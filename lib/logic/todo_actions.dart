@@ -16,4 +16,12 @@ class TodoActions {
   Future<void> updateTodo() async {
     await DbActions.updateTodo(currentTodo);
   }
+
+  Future<void> deleteTodo() async {
+    await DbActions.deleteTodo(currentTodo.id);
+  }
+
+  Future<void> toggleIsDone() async {
+    await DbActions.updateTodo(currentTodo..toggleIsDone());
+  }
 }
