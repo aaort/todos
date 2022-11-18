@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:todos/widgets/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
 import 'package:uuid/uuid.dart';
 
 class Todo {

@@ -1,5 +1,5 @@
 import 'package:date_time_format/date_time_format.dart';
-import 'package:todos/widgets/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
 
 String getReminderText(DateTime dateTime) {
   if (dateTime.isBefore(DateTime.now())) {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/widgets/reminder_picker_button.dart';
-import 'package:todos/widgets/repeat_option_button.dart';
-import 'package:todos/widgets/save_todo_button.dart';
+import 'package:todos/widgets/todo_editor/reminder_picker_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/save_todo_button.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
 
 class TodoEditor extends StatefulWidget {

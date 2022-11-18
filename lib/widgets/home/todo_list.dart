@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/theme/constants.dart';
-import 'package:todos/widgets/todo_tile.dart';
+import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
 class TodoList extends StatelessWidget {
   const TodoList({super.key});
