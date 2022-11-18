@@ -38,6 +38,12 @@ class TodoActions {
     return _todos.snapshots();
   }
 
+  static Future<Todo?> getTodoById(String id) async {
+    final todoMap = (await _todos.doc(id).get()).data();
+    if (todoMap is Map) return Todo.getTodoFromMap(todoMap!);
+    return null;
+  }
+
   static Future<int> getTodosCount() async {
     return (await _todos.get()).docs.length;
   }
