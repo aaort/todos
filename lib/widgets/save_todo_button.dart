@@ -20,20 +20,22 @@ class SaveTodoButton extends StatelessWidget {
   });
 
   Future<void> onTodoSaved(BuildContext context) async {
-    if (task.isNotEmpty) {
-      DateTime? reminder = this.reminder is Duration
-          ? getDateTimeOfDuration(this.reminder)
-          : this.reminder;
+    if (task.isEmpty) return;
+    DateTime? reminder = this.reminder is Duration
+        ? getDateTimeOfDuration(this.reminder)
+        : this.reminder;
 
-      final todo = Todo(task, reminder: reminder, repeat: repeatOption);
-      if (initialTodo != null) {
-        final updatedTodo = initialTodo!.updateValues(todo.asMap);
-        TodoActions(updatedTodo).updateTodo();
-      } else {
-        Notifications.scheduleReminder(todo);
-        TodoActions(todo).createTodo();
+    final todo = Todo(task, reminder: reminder, repeat: repeatOption);
+    if (initialTodo != null) {
+      final updatedTodo = initialTodo!.updateValues(todo.asMap);
+      TodoActions(updatedTodo).updateTodo();
+      if (updatedTodo.reminderId != null) {
+        Notifications.cancelReminder(updatedTodo.reminderId!);
       }
+    } else {
+      TodoActions(todo).createTodo();
     }
+    if (todo.reminderId != null) Notifications.scheduleReminder(todo);
 
     Navigator.pop(context);
   }
