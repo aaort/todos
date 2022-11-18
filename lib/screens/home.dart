@@ -5,9 +5,14 @@ import 'package:todos/widgets/logout_button.dart';
 import 'package:todos/widgets/theme_switch_button.dart';
 import 'package:todos/widgets/todo_list.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +27,8 @@ class Home extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  FutureBuilder(
-                    future: TodoActions.getTodosCount(),
+                  StreamBuilder(
+                    stream: TodoActions.getTodosCount(),
                     builder: ((context, AsyncSnapshot<int> snapshot) {
                       if (snapshot.hasData) {
                         return Text(
