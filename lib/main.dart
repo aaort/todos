@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todos/logic/todos.dart';
 import 'package:todos/navigation/app_navigator.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/theme/theme.dart';
@@ -31,7 +30,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<TodoManager>(create: (_) => TodoManager()),
         ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager())
       ],
       child: Builder(builder: (ctx) {

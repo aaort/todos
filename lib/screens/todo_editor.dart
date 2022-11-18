@@ -43,8 +43,8 @@ class _TodoEditorState extends State<TodoEditor> {
   @override
   void initState() {
     taskController.text = widget.initialTodo?.task ?? '';
-    reminder = widget.initialTodo?.reminderDateTime;
-    repeatOption = widget.initialTodo?.repeatOption;
+    reminder = widget.initialTodo?.reminder;
+    repeatOption = widget.initialTodo?.repeat;
     taskController.addListener(() => setState(() {}));
     super.initState();
   }

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todos/logic/todos.dart';
 import 'package:todos/widgets/add_todo_button.dart';
 import 'package:todos/widgets/logout_button.dart';
 import 'package:todos/widgets/theme_switch_button.dart';
@@ -24,7 +22,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${context.watch<TodoManager>().todos.length} Tasks',
+                    'TODO:',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   Row(

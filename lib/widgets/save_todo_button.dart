@@ -24,10 +24,10 @@ class SaveTodoButton extends StatelessWidget {
           ? getDateTimeOfDuration(this.reminder)
           : this.reminder;
 
-      final todo =
-          Todo(task, reminderDateTime: reminder, repeatOption: repeatOption);
+      final todo = Todo(task, reminder: reminder, repeat: repeatOption);
       if (initialTodo != null) {
-        TodoActions(context, initialTodo!).updateTodo(todo);
+        // TODO: implement
+        // TodoActions(context, initialTodo!).updateTodo(todo);
       } else {
         TodoActions(context, todo).createTodo();
       }
