@@ -1,4 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/main.dart';
 import 'package:todos/notifications/constants.dart';
 
@@ -8,6 +9,9 @@ Future<void> onActionReceived(ReceivedAction action) async {
   if (todoId == null) return;
   final context = App.materialAppKey.currentContext;
   if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
+    final todo = await TodoActions.getTodoById(todoId);
+    if (todo == null) return;
+    TodoActions(context!, todo).toggleIsDone();
   } else {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
