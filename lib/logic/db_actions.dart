@@ -15,12 +15,13 @@ class DbActions {
         .set(todo.asMap);
   }
 
-  updateTodo(Todo updatedTodo) {
+  static updateTodo(Todo updatedTodo) {
     _db
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .collection('todos')
-        .doc(updatedTodo.id);
+        .doc(updatedTodo.id)
+        .set(updatedTodo.asMap);
   }
 
   static Future<QuerySnapshot<Map>> getTodos() async {
