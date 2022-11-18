@@ -9,35 +9,39 @@ import 'package:todos/widgets/modal_bottom_sheet.dart';
 class TodoTile extends StatelessWidget {
   final Todo todo;
 
-  const TodoTile({super.key, required this.todo});
+  TodoTile({super.key, required this.todo});
 
-  void onLongPress(BuildContext context) async {
+  // Only for accessing context inside methods
+  final _key = GlobalKey();
+
+  void onLongPress() async {
     popupModalBottomSheet(
-      context: context,
+      context: _key.currentContext!,
       child: TodoEditor(initialTodo: todo),
     );
   }
 
-  // onTap(BuildContext context) {
-  //   TodoActions(context, todo).toggleCheck();
-  // }
+  onTap(bool? _) {
+    TodoActions(_key.currentContext!, todo).toggleIsDone();
+  }
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
     return DismissibleTile(
-      onDismiss: () {},
-      onLongPress: () => onLongPress(context),
+      onDismiss: () => TodoActions(context, todo).deleteTodo(),
+      onLongPress: onLongPress,
       child: CheckboxListTile(
+        key: _key,
         title: Text(
           todo.task,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: todo.isDone ? textTheme.lineThrough : textTheme.bodySmall,
         ),
-        value: false,
-        onChanged: (_) => {},
+        value: todo.isDone,
+        onChanged: onTap,
       ),
     );
   }
