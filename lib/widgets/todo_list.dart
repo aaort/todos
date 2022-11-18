@@ -17,8 +17,8 @@ class TodoList extends StatelessWidget {
           top: Radius.circular(kModalBorderRadius),
         ),
       ),
-      child: FutureBuilder<QuerySnapshot<Map>>(
-        future: DbActions.getTodos(),
+      child: StreamBuilder<QuerySnapshot<Map>>(
+        stream: DbActions.getTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
