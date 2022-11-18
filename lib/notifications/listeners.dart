@@ -1,5 +1,4 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:todos/logic/todos_io.dart';
 import 'package:todos/main.dart';
 import 'package:todos/notifications/constants.dart';
 
@@ -13,8 +12,6 @@ Future<void> onActionReceived(ReceivedAction action) async {
       // context?.read<TodoManager>().toggleCheckById(todoId, value: true);
       // context?.read<TodoManager>().updateReminder(todoId, null);
     }
-    await TodosIO.toggleCheck(todoId, value: true);
-    TodosIO.updateReminder(todoId, null);
   } else {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
