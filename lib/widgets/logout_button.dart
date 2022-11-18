@@ -2,21 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:todos/logic/user_actions.dart';
 import 'package:todos/navigation/app_navigator.dart';
 
-class LogoutButton extends StatelessWidget {
+class LogoutButton extends StatefulWidget {
   const LogoutButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    onLogout() {
-      UserActions.logout().then((_) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const AppNavigator()),
-          (route) => false,
-        );
-      });
-    }
+  State<LogoutButton> createState() => _LogoutButtonState();
+}
 
+class _LogoutButtonState extends State<LogoutButton> {
+  onLogout() async {
+    await UserActions.logout();
+
+    if (mounted) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const AppNavigator()),
+        (route) => false,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return IconButton(
       onPressed: onLogout,
       icon: const Icon(
