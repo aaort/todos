@@ -32,6 +32,7 @@ class CustomForm extends StatelessWidget {
             // TODO: uncomment
             // autofocus: true,
             validator: emailValidator,
+            keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
               label: Text('Email'),
             ),
@@ -41,6 +42,7 @@ class CustomForm extends StatelessWidget {
             controller: passwordController,
             obscureText: true,
             validator: passwordValidator,
+            keyboardType: TextInputType.visiblePassword,
             decoration: const InputDecoration(
               label: Text('Password'),
             ),
