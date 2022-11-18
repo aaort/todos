@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todos/logic/user_actions.dart';
 import 'package:todos/navigation/app_navigator.dart';
 
 class LogoutButton extends StatelessWidget {
@@ -7,8 +7,8 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    onLogout() async {
-      FirebaseAuth.instance.signOut().then((_) {
+    onLogout() {
+      UserActions.logout().then((_) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const AppNavigator()),
