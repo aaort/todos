@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todos/logic/db_actions.dart';
+import 'package:todos/logic/todo.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/todo_tile.dart';
 
@@ -14,10 +17,18 @@ class TodoList extends StatelessWidget {
           top: Radius.circular(kModalBorderRadius),
         ),
       ),
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
-        itemCount: [].length,
-        itemBuilder: (_, index) => TodoTile(id: 'null'),
+      child: FutureBuilder<QuerySnapshot<Map>>(
+        future: DbActions.getTodos(),
+        builder: (context, snapshot) {
+          final todoMap = snapshot.data?.docs.first.data();
+          if (todoMap == null) return const SizedBox();
+          final todo = Todo.getTodoFromMap(todoMap);
+          return ListView.builder(
+            padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
+            itemCount: snapshot.data?.docs.length,
+            itemBuilder: (_, index) => TodoTile(todo: todo),
+          );
+        },
       ),
     );
   }
