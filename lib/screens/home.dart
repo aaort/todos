@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/db_actions.dart';
+import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/widgets/add_todo_button.dart';
 import 'package:todos/widgets/logout_button.dart';
 import 'package:todos/widgets/theme_switch_button.dart';
@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   FutureBuilder(
-                    future: DbActions.getTodosCount(),
+                    future: TodoActions.getTodosCount(),
                     builder: ((context, AsyncSnapshot<int> snapshot) {
                       if (snapshot.hasData) {
                         return Text(
