@@ -29,9 +29,7 @@ class RepeatOptionButton extends StatelessWidget {
   });
 
   void onOptionButtonPressed(BuildContext context) async {
-    if (isKeyboardVisible(context)) {
-      await hideKeyboardAndWait();
-    }
+    await ensureKeyboardIsHidden(context);
     showOptionPicker<RepeatOption>(
       context: context,
       title: 'Remind me...',

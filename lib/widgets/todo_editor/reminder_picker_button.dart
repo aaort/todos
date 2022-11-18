@@ -31,9 +31,7 @@ class ReminderPickerButton extends StatelessWidget {
   final _key = GlobalKey();
 
   void showReminderOptionPicker() async {
-    if (isKeyboardVisible(_key.currentContext!)) {
-      await hideKeyboardAndWait();
-    }
+    await ensureKeyboardIsHidden(_key.currentContext!);
     showOptionPicker<dynamic>(
       context: _key.currentContext!,
       title: 'Remind me',
@@ -47,7 +45,7 @@ class ReminderPickerButton extends StatelessWidget {
     if (option is Duration) {
       onReminderChange(option);
     } else {
-      await hideKeyboardAndWait();
+      await ensureKeyboardIsHidden(_key.currentContext!);
       showDateTimePicker(
         context: _key.currentContext!,
         title: 'Remind me...',
