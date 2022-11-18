@@ -24,7 +24,7 @@ class Todo {
     }
   }
 
-  Todo.fromMap({
+  Todo._fromMap({
     required this.task,
     required this.isDone,
     required this.id,
@@ -58,9 +58,9 @@ class Todo {
         'repeatOption': repeat?.asString,
       };
 
-  static Todo getTodoFromMap(Map todoMap) {
+  static Todo fromMap(Map todoMap) {
     dynamic repeat = _getRepeatOptionFromString(todoMap['repeatOption']);
-    return Todo.fromMap(
+    return Todo._fromMap(
       task: todoMap['task'],
       isDone: todoMap['isDone'],
       id: todoMap['id'],
@@ -71,7 +71,7 @@ class Todo {
   }
 
   Todo updateValues(Map<String, dynamic> todoMap) {
-    return Todo.fromMap(
+    return Todo._fromMap(
       id: id,
       reminderId: reminderId,
       task: todoMap['task'],
