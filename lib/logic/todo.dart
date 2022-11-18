@@ -64,9 +64,9 @@ class Todo {
         'task': task,
         'isDone': isDone,
         'id': id,
-        'reminderDateTime': reminder?.toIso8601String(),
+        'reminder': reminder?.toIso8601String(),
         'reminderId': reminderId,
-        'repeatOption': repeat?.asString,
+        'repeat': repeat?.asString,
       };
 
   static Todo fromMap(Map todoMap) {
@@ -75,9 +75,9 @@ class Todo {
       isDone: todoMap['isDone'],
       id: todoMap['id'],
       reminderId: todoMap['reminderId'],
-      reminder: DateTime.tryParse('${todoMap['reminderDateTime']}'),
-      repeat: todoMap['repeatOption'] != null
-          ? RepeatOption.values.byName(todoMap['repeatOption'])
+      reminder: DateTime.tryParse('${todoMap['reminder']}'),
+      repeat: todoMap['repeat'] != null
+          ? RepeatOption.values.byName(todoMap['repeat'])
           : null,
     );
   }
