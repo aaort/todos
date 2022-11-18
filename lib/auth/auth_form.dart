@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/auth/utils.dart';
 
-class CustomForm extends StatelessWidget {
+class AuthForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -9,7 +9,7 @@ class CustomForm extends StatelessWidget {
   final String buttonTitle;
   final String? errorText;
 
-  const CustomForm({
+  const AuthForm({
     super.key,
     required this.formKey,
     required this.emailController,

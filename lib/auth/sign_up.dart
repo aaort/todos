@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/auth/custom_form.dart';
+import 'package:todos/auth/auth_form.dart';
 import 'package:todos/auth/sign_in.dart';
 import 'package:todos/auth/utils.dart';
 import 'package:todos/logic/user_actions.dart';
@@ -54,7 +54,7 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomForm(
+              AuthForm(
                 emailController: _emailController,
                 passwordController: _passwordController,
                 onSave: onSignUp,
