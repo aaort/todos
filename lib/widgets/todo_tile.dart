@@ -22,7 +22,7 @@ class TodoTile extends StatelessWidget {
   }
 
   onTap(bool? _) {
-    TodoActions(_key.currentContext!, todo).toggleIsDone();
+    TodoActions(todo).toggleIsDone();
   }
 
   @override
@@ -30,7 +30,7 @@ class TodoTile extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return DismissibleTile(
-      onDismiss: () => TodoActions(context, todo).deleteTodo(),
+      onDismiss: () => TodoActions(todo).deleteTodo(),
       onLongPress: onLongPress,
       child: CheckboxListTile(
         key: _key,

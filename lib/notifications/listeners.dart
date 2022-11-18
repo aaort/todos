@@ -11,7 +11,7 @@ Future<void> onActionReceived(ReceivedAction action) async {
   if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
     final todo = await TodoActions.getTodoById(todoId);
     if (todo == null) return;
-    TodoActions(context!, todo).toggleIsDone();
+    TodoActions(todo).toggleIsDone();
   } else {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];

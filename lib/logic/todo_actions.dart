@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'todo.dart';
 
 class TodoActions {
-  // TODO: delete if not used
-  final BuildContext context;
   final Todo todo;
 
-  TodoActions(this.context, this.todo);
+  TodoActions(this.todo);
 
   static final _db = FirebaseFirestore.instance;
   static final _auth = FirebaseAuth.instance;
