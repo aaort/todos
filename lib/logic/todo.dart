@@ -51,7 +51,7 @@ class Todo {
 
   Map<String, dynamic> get asMap => {
         'task': task,
-        'checked': isDone,
+        'isDone': isDone,
         'id': id,
         'reminderDateTime': reminder?.toIso8601String(),
         'reminderId': reminderId,
@@ -59,14 +59,25 @@ class Todo {
       };
 
   static Todo getTodoFromMap(Map todoMap) {
-    dynamic repeatOption = _getRepeatOptionFromString(todoMap['repeatOption']);
+    dynamic repeat = _getRepeatOptionFromString(todoMap['repeatOption']);
     return Todo.fromMap(
       task: todoMap['task'],
-      isDone: todoMap['checked'],
+      isDone: todoMap['isDone'],
       id: todoMap['id'],
       reminderId: todoMap['reminderId'],
       reminder: DateTime.tryParse('${todoMap['reminderDateTime']}'),
-      repeat: repeatOption,
+      repeat: repeat,
+    );
+  }
+
+  Todo updateValues(Map<String, dynamic> todoMap) {
+    return Todo.fromMap(
+      id: id,
+      reminderId: reminderId,
+      task: todoMap['task'],
+      isDone: todoMap['isDone'],
+      reminder: todoMap['reminder'],
+      repeat: todoMap['repeat'],
     );
   }
 
