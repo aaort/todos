@@ -41,7 +41,9 @@ class TodoActions {
     return null;
   }
 
-  static Future<int> getTodosCount() async {
-    return (await _todos.get()).docs.length;
+  static Stream<int> getTodosCount() async* {
+    await for (var snapshot in _todos.snapshots()) {
+      yield snapshot.docs.length;
+    }
   }
 }
