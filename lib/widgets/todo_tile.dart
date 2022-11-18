@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/screens/todo_editor.dart';
@@ -12,16 +11,14 @@ class TodoTile extends StatelessWidget {
 
   const TodoTile({super.key, required this.todo});
 
-  // void onLongPress(BuildContext context) async {
-  //   final todo = context.read<TodoManager>().getTodoById(id);
-  //   popupModalBottomSheet(
-  //     context: context,
-  //     child: TodoEditor(initialTodo: todo),
-  //   );
-  // }
+  void onLongPress(BuildContext context) async {
+    popupModalBottomSheet(
+      context: context,
+      child: TodoEditor(initialTodo: todo),
+    );
+  }
 
   // onTap(BuildContext context) {
-  //   final todo = context.read<TodoManager>().getTodoById(id);
   //   TodoActions(context, todo).toggleCheck();
   // }
 
@@ -31,7 +28,7 @@ class TodoTile extends StatelessWidget {
 
     return DismissibleTile(
       onDismiss: () {},
-      onLongPress: () {},
+      onLongPress: () => onLongPress(context),
       child: CheckboxListTile(
         title: Text(
           todo.task,
