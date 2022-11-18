@@ -40,7 +40,7 @@ class TodoActions {
 
   static Future<Todo?> getTodoById(String id) async {
     final todoMap = (await _todos.doc(id).get()).data();
-    if (todoMap is Map) return Todo.getTodoFromMap(todoMap!);
+    if (todoMap is Map) return Todo.fromMap(todoMap!);
     return null;
   }
 

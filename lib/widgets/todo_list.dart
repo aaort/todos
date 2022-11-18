@@ -30,7 +30,7 @@ class TodoList extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
             itemCount: todos.length,
             itemBuilder: (_, index) {
-              final todo = Todo.getTodoFromMap(todos[index]);
+              final todo = Todo.fromMap(todos[index]);
               return TodoTile(todo: todo);
             },
           );
