@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todos/logic/todo.dart';
 
-class CloudTodoActions {
+class DbActions {
   static final _db = FirebaseFirestore.instance;
   static final _auth = FirebaseAuth.instance;
 
@@ -11,7 +11,8 @@ class CloudTodoActions {
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .collection('todos')
-        .add(todo.asMap);
+        .doc(todo.id)
+        .set(todo.asMap);
   }
 
   updateTodo(Todo updatedTodo) {
@@ -22,6 +23,23 @@ class CloudTodoActions {
         .doc(updatedTodo.id);
   }
 
-  getTodos(String userId) {}
+  static Future<QuerySnapshot<Map>> getTodos() async {
+    return _db
+        .collection('users')
+        .doc(_auth.currentUser?.uid)
+        .collection('todos')
+        .get();
+  }
+
+  static Future<int> getTodosCount() async {
+    return (await _db
+            .collection('users')
+            .doc(_auth.currentUser?.uid)
+            .collection('todos')
+            .get())
+        .docs
+        .length;
+  }
+
   deleteTodo(String id) {}
 }

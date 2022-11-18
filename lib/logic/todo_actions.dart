@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/cloud_todo_actions.dart';
+import 'package:todos/logic/db_actions.dart';
 
 import 'todo.dart';
 
@@ -10,6 +10,6 @@ class TodoActions {
   TodoActions(this.context, this.currentTodo);
 
   Future<void> createTodo() async {
-    CloudTodoActions.createTodo(currentTodo);
+    DbActions.createTodo(currentTodo);
   }
 }
