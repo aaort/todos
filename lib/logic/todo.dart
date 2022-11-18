@@ -5,68 +5,68 @@ import 'package:uuid/uuid.dart';
 
 class Todo {
   String task;
-  bool checked;
+  bool isDone;
   late final String id;
-  DateTime? reminderDateTime;
-  RepeatOption? repeatOption;
+  DateTime? reminder;
+  RepeatOption? repeat;
 
   int? reminderId;
 
   Todo(
     this.task, {
-    this.checked = false,
-    this.reminderDateTime,
-    this.repeatOption,
+    this.isDone = false,
+    this.reminder,
+    this.repeat,
   }) {
     id = const Uuid().v4();
-    if (reminderDateTime != null || repeatOption != null) {
+    if (reminder != null || repeat != null) {
       reminderId = Random().nextInt(1000);
     }
   }
 
   Todo.fromMap({
     required this.task,
-    required this.checked,
+    required this.isDone,
     required this.id,
-    required this.reminderDateTime,
-    required this.repeatOption,
+    required this.reminder,
+    required this.repeat,
     this.reminderId,
   }) {
-    if (reminderDateTime != null && reminderId == null) {
+    if (reminder != null && reminderId == null) {
       reminderId = Random().nextInt(1000);
     }
   }
 
   void toggleCheck(bool? value) {
-    checked = value ?? !checked;
+    isDone = value ?? !isDone;
   }
 
   void updateReminder(DateTime? newReminderDateTime) {
-    reminderDateTime = newReminderDateTime;
-    if (reminderDateTime == null) {
+    reminder = newReminderDateTime;
+    if (reminder == null) {
       reminderId = null;
-      repeatOption = null;
+      repeat = null;
     }
   }
 
   Map<String, dynamic> get asMap => {
         'task': task,
-        'checked': checked,
+        'checked': isDone,
         'id': id,
-        'reminderDateTime': reminderDateTime,
+        'reminderDateTime': reminder?.toIso8601String(),
         'reminderId': reminderId,
-        'repeatOption': repeatOption,
+        'repeatOption': repeat?.asString,
       };
 
   static Todo getTodoFromMap(Map todoMap) {
     dynamic repeatOption = _getRepeatOptionFromString(todoMap['repeatOption']);
     return Todo.fromMap(
       task: todoMap['task'],
-      checked: todoMap['checked'],
+      isDone: todoMap['checked'],
       id: todoMap['id'],
       reminderId: todoMap['reminderId'],
-      reminderDateTime: DateTime.tryParse('${todoMap['reminderDateTime']}'),
-      repeatOption: repeatOption,
+      reminder: DateTime.tryParse('${todoMap['reminderDateTime']}'),
+      repeat: repeatOption,
     );
   }
 
