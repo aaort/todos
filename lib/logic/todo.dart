@@ -72,8 +72,8 @@ class Todo {
 
   Todo updateValues(Map<String, dynamic> todoMap) {
     return Todo._fromMap(
-      id: id,
-      reminderId: reminderId,
+      id: id, // can't be mutated
+      reminderId: reminderId, // can't be mutated
       task: todoMap['task'],
       isDone: todoMap['isDone'],
       reminder: todoMap['reminder'],
