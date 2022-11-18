@@ -24,12 +24,12 @@ class DbActions {
         .set(updatedTodo.asMap);
   }
 
-  static Future<QuerySnapshot<Map>> getTodos() async {
+  static Stream<QuerySnapshot<Map>> getTodos() {
     return _db
         .collection('users')
         .doc(_auth.currentUser?.uid)
         .collection('todos')
-        .get();
+        .snapshots();
   }
 
   static Future<int> getTodosCount() async {
