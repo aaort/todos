@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 
 extension Stringify on Repeat {
-  String get asString => toString().split('.').last;
+  String toName() => toString().split('.').last;
 }
 
 extension CustomTextStyles on TextTheme {
