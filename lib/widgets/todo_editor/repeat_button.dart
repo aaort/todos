@@ -81,7 +81,3 @@ String repeatText(Repeat option) {
       return 'Weekly';
   }
 }
-
-extension Stringify on Repeat {
-  String get asString => toString().split('.').last;
-}

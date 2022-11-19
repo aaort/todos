@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:todos/extensions.dart' show Stringify;
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:uuid/uuid.dart';
 
