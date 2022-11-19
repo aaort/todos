@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/screens/todo_editor.dart';
-import 'package:todos/theme/theme.dart' show CustomTextStyles;
+import 'package:todos/extensions.dart' show CustomTextStyles;
 import 'package:todos/widgets/todo_editor/dismissible.dart';
 import 'package:todos/widgets/modal_bottom_sheet.dart';
 
