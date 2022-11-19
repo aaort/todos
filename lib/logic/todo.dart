@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:uuid/uuid.dart';
 
 class Todo {
@@ -8,7 +8,7 @@ class Todo {
   bool isDone;
   late final String id;
   DateTime? reminder;
-  RepeatOption? repeat;
+  Repeat? repeat;
 
   int? reminderId;
 
@@ -77,7 +77,7 @@ class Todo {
       reminderId: todoMap['reminderId'],
       reminder: DateTime.tryParse('${todoMap['reminder']}'),
       repeat: todoMap['repeat'] != null
-          ? RepeatOption.values.byName(todoMap['repeat'])
+          ? Repeat.values.byName(todoMap['repeat'])
           : null,
     );
   }

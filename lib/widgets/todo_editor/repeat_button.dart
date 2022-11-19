@@ -4,36 +4,36 @@ import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/pickers.dart';
 
 // Represents available time intervals in seconds
-enum RepeatOption {
+enum Repeat {
   hourly,
   daily,
   weekly,
 }
 
-final _repeatOptions = <PickerOption<RepeatOption>>[
-  PickerOption('Hourly', RepeatOption.hourly),
-  PickerOption('Daily', RepeatOption.daily),
-  PickerOption('Weekly', RepeatOption.weekly),
+final _repeats = <PickerOption<Repeat>>[
+  PickerOption('Hourly', Repeat.hourly),
+  PickerOption('Daily', Repeat.daily),
+  PickerOption('Weekly', Repeat.weekly),
 ];
 
-class RepeatOptionButton extends StatelessWidget {
+class RepeatButton extends StatelessWidget {
   final bool enabled;
-  final RepeatOption? repeatOption;
-  final Function(RepeatOption) onOptionChange;
+  final Repeat? repeat;
+  final Function(Repeat) onOptionChange;
 
-  const RepeatOptionButton({
+  const RepeatButton({
     super.key,
     required this.enabled,
-    required this.repeatOption,
+    required this.repeat,
     required this.onOptionChange,
   });
 
   void onOptionButtonPressed(BuildContext context) async {
     await ensureKeyboardIsHidden(context);
-    showOptionPicker<RepeatOption>(
+    showOptionPicker<Repeat>(
       context: context,
       title: 'Remind me...',
-      options: _repeatOptions,
+      options: _repeats,
       onChange: (_) {
         Navigator.pop(context);
         onOptionChange(_);
@@ -58,9 +58,9 @@ class RepeatOptionButton extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
-              if (repeatOption != null)
+              if (repeat != null)
                 Text(
-                  repeatOptionText(repeatOption!),
+                  repeatText(repeat!),
                   style: Theme.of(context).textTheme.bodySmall,
                 )
             ],
@@ -71,17 +71,17 @@ class RepeatOptionButton extends StatelessWidget {
   }
 }
 
-String repeatOptionText(RepeatOption option) {
+String repeatText(Repeat option) {
   switch (option) {
-    case RepeatOption.hourly:
+    case Repeat.hourly:
       return 'Hourly';
-    case RepeatOption.daily:
+    case Repeat.daily:
       return 'Daily';
-    case RepeatOption.weekly:
+    case Repeat.weekly:
       return 'Weekly';
   }
 }
 
-extension Stringify on RepeatOption {
+extension Stringify on Repeat {
   String get asString => toString().split('.').last;
 }
