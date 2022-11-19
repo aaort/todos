@@ -9,12 +9,12 @@ class SaveTodoButton extends StatelessWidget {
   final Todo? initialTodo;
   final String task;
   final dynamic reminder;
-  final Repeat? repeatOption;
+  final Repeat? repeat;
 
   const SaveTodoButton({
     super.key,
     this.initialTodo,
-    this.repeatOption,
+    this.repeat,
     required this.task,
     required this.reminder,
   });
@@ -25,7 +25,7 @@ class SaveTodoButton extends StatelessWidget {
         ? getDateTimeOfDuration(this.reminder)
         : this.reminder;
 
-    final todo = Todo(task, reminder: reminder, repeat: repeatOption);
+    final todo = Todo(task, reminder: reminder, repeat: repeat);
     if (initialTodo != null) {
       final updatedTodo = initialTodo!.updateValues(todo.asMap);
       TodoActions(updatedTodo).updateTodo();

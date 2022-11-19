@@ -90,7 +90,7 @@ class _TodoEditorState extends State<TodoEditor> {
                   initialTodo: widget.initialTodo,
                   task: taskController.text,
                   reminder: reminder,
-                  repeatOption: repeatOption,
+                  repeat: repeatOption,
                 ),
                 if (reminder != null) ...[
                   const SizedBox(height: 30),
