@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/helpers/keyboard.dart';
-import 'package:todos/theme/constants.dart';
+import 'package:todos/theme/constants.dart' show kDisabledOpacity;
 import 'package:todos/widgets/pickers.dart';
 
 enum Repeat {
@@ -59,7 +59,7 @@ class RepeatButton extends StatelessWidget {
               ),
               if (repeat != null)
                 Text(
-                  repeatText(repeat!),
+                  _repeatText(repeat!),
                   style: Theme.of(context).textTheme.bodySmall,
                 )
             ],
@@ -70,7 +70,7 @@ class RepeatButton extends StatelessWidget {
   }
 }
 
-String repeatText(Repeat option) {
+String _repeatText(Repeat option) {
   switch (option) {
     case Repeat.hourly:
       return 'Hourly';
