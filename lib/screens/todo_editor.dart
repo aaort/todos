@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/widgets/todo_editor/reminder_picker_button.dart';
-import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
 import 'package:todos/widgets/todo_icon_button.dart';
 
@@ -19,7 +19,7 @@ class _TodoEditorState extends State<TodoEditor> {
   final taskController = TextEditingController();
 
   dynamic reminder; // Duration | DateTime | null
-  RepeatOption? repeatOption;
+  Repeat? repeatOption;
 
   String get _reminderText {
     return getReminderText(
@@ -33,7 +33,7 @@ class _TodoEditorState extends State<TodoEditor> {
     });
   }
 
-  void onRepeatOptionChange(RepeatOption option) {
+  void onRepeatOptionChange(Repeat option) {
     setState(() {
       repeatOption = option;
       reminder = null;
@@ -118,9 +118,9 @@ class _TodoEditorState extends State<TodoEditor> {
                   ),
                 ],
                 const SizedBox(height: 30),
-                RepeatOptionButton(
+                RepeatButton(
                   enabled: taskController.text.isNotEmpty,
-                  repeatOption: repeatOption,
+                  repeat: repeatOption,
                   onOptionChange: onRepeatOptionChange,
                 )
               ],

@@ -1,5 +1,5 @@
 import 'package:date_time_format/date_time_format.dart';
-import 'package:todos/widgets/todo_editor/repeat_option_button.dart';
+import 'package:todos/widgets/todo_editor/repeat_button.dart';
 
 String getReminderText(DateTime dateTime) {
   if (dateTime.isBefore(DateTime.now())) {
@@ -36,13 +36,13 @@ DateTime getDateTimeWithPrecisionToMinutes(DateTime dateTime) {
   );
 }
 
-int getRepeatOptionSeconds(RepeatOption repeatOption) {
+int getRepeatOptionSeconds(Repeat repeatOption) {
   switch (repeatOption) {
-    case RepeatOption.hourly:
+    case Repeat.hourly:
       return 60 * 60;
-    case RepeatOption.daily:
+    case Repeat.daily:
       return (24 * 60) * 60;
-    case RepeatOption.weekly:
+    case Repeat.weekly:
       return ((7 * 24) * 60) * 60;
   }
 }
