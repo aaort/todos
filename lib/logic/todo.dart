@@ -69,7 +69,7 @@ class Todo {
         'id': id,
         'reminder': reminder?.toIso8601String(),
         'reminderId': reminderId,
-        'repeat': repeat?.asString,
+        'repeat': repeat?.toName(),
       };
 
   static Todo fromMap(Map todoMap) {
