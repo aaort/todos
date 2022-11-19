@@ -3,7 +3,6 @@ import 'package:todos/helpers/keyboard.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/pickers.dart';
 
-// Represents available time intervals in seconds
 enum Repeat {
   hourly,
   daily,
