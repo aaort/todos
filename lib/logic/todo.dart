@@ -40,11 +40,10 @@ class Todo {
 
   void toggleIsDone([bool? value]) => isDone = value ?? !isDone;
 
-  void updateReminder(DateTime? newReminderDateTime) {
-    reminder = newReminderDateTime;
-    if (reminder == null) {
+  void updateReminder(DateTime? newReminder) {
+    reminder = newReminder;
+    if (reminder == null && repeat == null) {
       reminderId = null;
-      repeat = null;
     }
   }
 
