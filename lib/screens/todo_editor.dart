@@ -4,7 +4,6 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/widgets/todo_editor/reminder_picker_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
-import 'package:todos/widgets/todo_icon_button.dart';
 
 class TodoEditor extends StatefulWidget {
   final Todo? initialTodo;
@@ -110,9 +109,11 @@ class _TodoEditorState extends State<TodoEditor> {
                           ),
                         ),
                       ),
-                      TodoIconButton(
+                      IconButton(
                         onPressed: clearReminder,
                         icon: const Icon(Icons.close),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
                       )
                     ],
                   ),
