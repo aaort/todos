@@ -69,12 +69,13 @@ class _SignInState extends State<SignIn> {
                   style: Theme.of(context).textTheme.bodySmall,
                   children: [
                     TextSpan(
-                        text: 'Sign up',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
-                        recognizer: TapGestureRecognizer()..onTap = onSignUp)
+                      text: 'Sign up',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(fontWeight: FontWeight.bold),
+                      recognizer: TapGestureRecognizer()..onTap = onSignUp,
+                    )
                   ],
                 ),
               )
