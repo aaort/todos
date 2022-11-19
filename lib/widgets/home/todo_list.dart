@@ -43,8 +43,7 @@ class _TodoListState extends State<TodoList> {
             padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
             itemCount: todos.length,
             itemBuilder: (_, index) {
-              final todo = Todo.fromMap(todos[index]);
-              return TodoTile(todo: todo);
+              return TodoTile(todo: Todo.fromMap(todos[index]));
             },
           );
         },
