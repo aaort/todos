@@ -25,6 +25,8 @@ class _LogoutButtonState extends State<LogoutButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onPressed: onLogout,
       icon: const Icon(
         Icons.logout_outlined,
