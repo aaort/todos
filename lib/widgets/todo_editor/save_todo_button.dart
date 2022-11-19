@@ -25,17 +25,19 @@ class SaveTodoButton extends StatelessWidget {
         ? getDateTimeOfDuration(this.reminder)
         : this.reminder;
 
-    final todo = Todo(task, reminder: reminder, repeat: repeat);
     if (initialTodo != null) {
-      final updatedTodo = initialTodo!.updateValues(todo.asMap);
-      TodoActions(updatedTodo).updateTodo();
-      if (updatedTodo.reminderId != null) {
-        Notifications.cancelReminder(updatedTodo.reminderId!);
+      final todo = initialTodo!.updateValues(
+        {'task': task, 'reminder': reminder, 'repeat': repeat},
+      );
+      TodoActions(todo).updateTodo();
+      if (todo.reminderId != null) {
+        Notifications.cancelReminder(todo.reminderId!);
       }
     } else {
+      final todo = Todo(task, reminder: reminder, repeat: repeat);
       TodoActions(todo).createTodo();
+      if (todo.reminderId != null) Notifications.scheduleReminder(todo);
     }
-    if (todo.reminderId != null) Notifications.scheduleReminder(todo);
 
     Navigator.pop(context);
   }
