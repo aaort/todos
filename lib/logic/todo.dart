@@ -38,9 +38,7 @@ class Todo {
     }
   }
 
-  void toggleIsDone({bool? value}) {
-    isDone = value ?? !isDone;
-  }
+  void toggleIsDone([bool? value]) => isDone = value ?? !isDone;
 
   void updateReminder(DateTime? newReminderDateTime) {
     reminder = newReminderDateTime;
