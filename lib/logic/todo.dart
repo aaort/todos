@@ -55,7 +55,7 @@ class Todo {
       isDone: todoMap['isDone'] ?? isDone,
       reminder: DateTime.tryParse(todoMap['reminder'] ?? ''),
       repeat: todoMap['repeat'] != null
-          ? Repeat.values.byName(todoMap['repeat'])
+          ? Repeat.values.byName((todoMap['repeat'] as Repeat).toName())
           : null,
     );
   }
