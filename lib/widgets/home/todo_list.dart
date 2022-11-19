@@ -34,7 +34,10 @@ class _TodoListState extends State<TodoList> {
         stream: _todoSnaps,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                  color: Theme.of(context).primaryColor),
+            );
           }
           final todos =
               snapshot.data?.docs.map((snapshot) => snapshot.data()).toList();
