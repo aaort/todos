@@ -53,7 +53,7 @@ class Todo {
   Todo updateValues(Map<String, dynamic> todoMap) {
     return Todo._fromMap(
       id: id, // can't be mutated
-      reminderId: reminderId, // can't be mutated
+      reminderId: todoMap['reminderId'] ?? reminderId,
       task: todoMap['task'] ?? task,
       isDone: todoMap['isDone'] ?? isDone,
       reminder: DateTime.tryParse(todoMap['reminder'] ?? '') ?? reminder,
