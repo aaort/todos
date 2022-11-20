@@ -28,10 +28,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<ThemeManager>(create: (_) => ThemeManager())
-      ],
+    return ChangeNotifierProvider<ThemeManager>(
+      create: (_) => ThemeManager(),
       child: Builder(builder: (ctx) {
         return MaterialApp(
           key: materialAppKey,
