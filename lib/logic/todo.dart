@@ -53,7 +53,7 @@ class Todo {
       reminderId: reminderId, // can't be mutated
       task: todoMap['task'] ?? task,
       isDone: todoMap['isDone'] ?? isDone,
-      reminder: DateTime.tryParse(todoMap['reminder'] ?? ''),
+      reminder: DateTime.tryParse('${todoMap['reminder']}'),
       repeat: todoMap['repeat'] != null
           ? Repeat.values.byName((todoMap['repeat'] as Repeat).toName())
           : null,
