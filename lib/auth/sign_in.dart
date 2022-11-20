@@ -19,16 +19,20 @@ class _SignInState extends State<SignIn> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  bool _loading = true;
+
   String? _errorText;
 
   onSignIn() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-
+    setState(() => _loading = true);
     try {
       await UserActions.login(
         email: _emailController.text,
         password: _passwordController.text,
       );
+
+      setState(() => _loading = false);
       if (mounted) navigateToHome(context);
     } on FirebaseAuthException catch (e) {
       setState(() => _errorText = getErrorText(e.code));
@@ -61,6 +65,7 @@ class _SignInState extends State<SignIn> {
                 formKey: _formKey,
                 buttonTitle: 'Sign in',
                 errorText: _errorText,
+                loading: _loading,
               ),
               const SizedBox(height: 20),
               RichText(

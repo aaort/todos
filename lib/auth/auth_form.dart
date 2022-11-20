@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/auth/utils.dart';
+import 'package:todos/theme/constants.dart';
+import 'package:todos/widgets/loading_indicator.dart';
 
 class AuthForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -8,6 +10,7 @@ class AuthForm extends StatelessWidget {
   final Function() onSave;
   final String buttonTitle;
   final String? errorText;
+  final bool loading;
 
   const AuthForm({
     super.key,
@@ -16,6 +19,7 @@ class AuthForm extends StatelessWidget {
     required this.passwordController,
     required this.onSave,
     required this.buttonTitle,
+    required this.loading,
     this.errorText,
   });
 
@@ -51,7 +55,7 @@ class AuthForm extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: onSave,
-            child: Text(buttonTitle),
+            child: loading ? const LoadingIndicator() : Text(buttonTitle),
           ),
           if (errorText != null) ...[
             const SizedBox(height: 20),
