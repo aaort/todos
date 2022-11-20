@@ -34,7 +34,7 @@ class Notifications {
   static scheduleReminder(Todo todo) async {
     if (todo.reminderId == null) return;
     _notifications.createNotification(
-      schedule: await getNotificationScheduleFromTodo(todo),
+      schedule: await _getNotificationScheduleFromTodo(todo),
       content: NotificationContent(
         id: todo.reminderId!,
         channelKey: notificationChannelKey,
@@ -59,7 +59,7 @@ class Notifications {
   }
 }
 
-Future<NotificationSchedule> getNotificationScheduleFromTodo(Todo todo) async {
+Future<NotificationSchedule> _getNotificationScheduleFromTodo(Todo todo) async {
   final localTimeZone =
       await AwesomeNotifications().getLocalTimeZoneIdentifier();
   if (todo.repeat != null) {
