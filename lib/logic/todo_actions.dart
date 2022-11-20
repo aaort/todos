@@ -22,7 +22,7 @@ class TodoActions {
     _todos.doc(todo.id).set(todo.asMap);
   }
 
-  toggleIsDone({bool? value}) async {
+  toggleIsDone([bool? value]) async {
     final toggledTodo = todo..toggleIsDone(value);
     await _todos.doc(todo.id).set(toggledTodo.asMap);
   }
