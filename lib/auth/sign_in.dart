@@ -19,7 +19,7 @@ class _SignInState extends State<SignIn> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  bool _loading = true;
+  bool _loading = false;
 
   String? _errorText;
 
