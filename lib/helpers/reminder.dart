@@ -3,6 +3,7 @@ import 'package:todos/widgets/todo_editor/repeat_button.dart';
 
 String getReminderText(DateTime dateTime) {
   if (dateTime.isBefore(DateTime.now())) {
+    // TODO: need to be removed, passed reminders should be deleted on todo
     return 'Completed';
   }
   return 'Remind me in ${dateTime.relative()}';
