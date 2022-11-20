@@ -32,8 +32,7 @@ class AuthForm extends StatelessWidget {
         children: [
           TextFormField(
             controller: emailController,
-            // TODO: uncomment
-            // autofocus: true,
+            autofocus: true,
             validator: emailValidator,
             keyboardType: TextInputType.emailAddress,
             decoration: const InputDecoration(
