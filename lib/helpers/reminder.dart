@@ -9,10 +9,6 @@ String getReminderText(DateTime dateTime) {
   return 'Remind me in ${dateTime.relative()}';
 }
 
-DateTime getDateTimeOfDuration(Duration duration) {
-  return DateTime.now().add(duration);
-}
-
 DateTime getInitialDateTime(DateTime? initialDateTime) {
   final now = DateTime.now();
   if (initialDateTime != null && initialDateTime.isAfter(now)) {

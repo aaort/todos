@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/helpers/reminder.dart';
+import 'package:todos/extensions.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/notifications/notifications.dart';
@@ -22,7 +22,7 @@ class SaveTodoButton extends StatelessWidget {
   Future<void> onTodoSaved(BuildContext context) async {
     if (task.isEmpty) return;
     DateTime? reminder = this.reminder is Duration
-        ? getDateTimeOfDuration(this.reminder)
+        ? (this.reminder as Duration).toDateTime()
         : this.reminder;
 
     if (initialTodo != null) {

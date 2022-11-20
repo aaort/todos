@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/extensions.dart' show Reminder;
 import 'package:todos/helpers/reminder.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/widgets/todo_editor/reminder_picker_button.dart';
@@ -22,7 +23,7 @@ class _TodoEditorState extends State<TodoEditor> {
 
   String get _reminderText {
     return getReminderText(
-        reminder is Duration ? getDateTimeOfDuration(reminder) : reminder);
+        reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
   }
 
   void onReminderChange(dynamic newReminder) {
