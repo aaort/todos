@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/logic/user_actions.dart';
-import 'package:todos/navigation/app_navigator.dart';
+import 'package:todos/app_navigator.dart';
 
 class LogoutButton extends StatefulWidget {
   const LogoutButton({super.key});
