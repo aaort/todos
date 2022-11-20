@@ -5,10 +5,10 @@ import 'package:todos/notifications/constants.dart';
 import 'package:todos/notifications/listeners.dart';
 
 class Notifications {
-  static final notifications = AwesomeNotifications();
+  static final _notifications = AwesomeNotifications();
 
   static initialize() async {
-    final allowed = await notifications.requestPermissionToSendNotifications();
+    final allowed = await _notifications.requestPermissionToSendNotifications();
     if (!allowed) return;
     AwesomeNotifications().initialize(
       appIconPath,
@@ -26,14 +26,14 @@ class Notifications {
       debug: true,
     );
 
-    notifications.setListeners(
+    _notifications.setListeners(
       onActionReceivedMethod: onActionReceived,
     );
   }
 
   static scheduleReminder(Todo todo) async {
     if (todo.reminderId == null) return;
-    notifications.createNotification(
+    _notifications.createNotification(
       schedule: await getNotificationScheduleFromTodo(todo),
       content: NotificationContent(
         id: todo.reminderId!,
@@ -55,7 +55,7 @@ class Notifications {
   }
 
   static cancelReminder(int id) {
-    notifications.cancel(id);
+    _notifications.cancel(id);
   }
 }
 
