@@ -47,7 +47,7 @@ class Todo {
     }
   }
 
-  Todo updateValues(Map<String, dynamic> todoMap) {
+  Todo copyWith(Map<String, dynamic> todoMap) {
     return Todo._fromMap(
       id: id, // can't be mutated
       reminderId: reminderId, // can't be mutated

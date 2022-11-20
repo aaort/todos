@@ -26,7 +26,7 @@ class SaveTodoButton extends StatelessWidget {
         : this.reminder;
 
     if (initialTodo != null) {
-      final todo = initialTodo!.updateValues(
+      final todo = initialTodo!.copyWith(
         {'task': task, 'reminder': reminder, 'repeat': repeat},
       );
       TodoActions(todo).updateTodo();
