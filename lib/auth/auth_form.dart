@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:todos/auth/utils.dart';
-import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/loading_indicator.dart';
 
 class AuthForm extends StatelessWidget {
