@@ -12,6 +12,12 @@ Future<void> onActionReceived(ReceivedAction action) async {
     final todo = await TodoActions.getTodoById(todoId);
     if (todo == null) return;
     TodoActions(todo).toggleIsDone();
+    if (todo.repeat == null && todo.reminderId != null) {
+      // if not a repeating reminder, cancel it
+      Notifications.cancelReminder(todo.reminderId!);
+      todo.updateReminder(null); // drop reminder
+      TodoActions(todo).updateTodo();
+    }
   } else {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
