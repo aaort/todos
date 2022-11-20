@@ -45,7 +45,7 @@ class Notifications {
         criticalAlert: true,
         category: NotificationCategory.Reminder,
       ),
-      actionButtons: actionButtons,
+      actionButtons: todo.repeat == null ? actionButtons : [actionButtons[0]],
     );
   }
 
