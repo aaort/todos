@@ -9,3 +9,7 @@ extension CustomTextStyles on TextTheme {
   TextStyle get lineThrough =>
       bodySmall!.copyWith(decoration: TextDecoration.lineThrough);
 }
+
+extension Reminder on Duration {
+  DateTime toDateTime() => DateTime.now().add(this);
+}
