@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/theme/constants.dart';
+import 'package:todos/widgets/loading_indicator.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
 class TodoList extends StatefulWidget {
@@ -34,10 +35,7 @@ class _TodoListState extends State<TodoList> {
         stream: _todoSnaps,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                  color: Theme.of(context).primaryColor),
-            );
+            return const LoadingIndicator();
           }
           final todos =
               snapshot.data?.docs.map((snapshot) => snapshot.data()).toList();
