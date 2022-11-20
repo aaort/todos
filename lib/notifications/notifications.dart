@@ -45,7 +45,10 @@ class Notifications {
         criticalAlert: true,
         category: NotificationCategory.Reminder,
       ),
-      actionButtons: todo.repeat == null ? actionButtons : [actionButtons[0]],
+      // if repeats, cancel will appear, otherwise repeat in 5/15 minutes buttons
+      actionButtons: todo.repeat == null
+          ? actionButtons.sublist(0, 3)
+          : [actionButtons[0], actionButtons[3]],
     );
   }
 
