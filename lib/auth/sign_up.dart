@@ -32,11 +32,11 @@ class _SignUpState extends State<SignUp> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-      setState(() => _loading = false);
       if (mounted) navigateToHome(context);
     } on FirebaseAuthException catch (e) {
       setState(() => _errorText = getErrorText(e.code));
     }
+    setState(() => _loading = false);
   }
 
   onSignIn() {
