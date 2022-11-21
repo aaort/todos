@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/extensions.dart' show Reminder;
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
-import 'package:todos/theme/constants.dart';
+import 'package:todos/widgets/common/disabled.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
 enum ReminderOption {
@@ -62,7 +62,7 @@ class ReminderPickerButton extends StatelessWidget {
     return GestureDetector(
       key: _key,
       onTap: enabled ? showReminderOptionPicker : null,
-      child: Opacity(opacity: enabled ? 1 : kDisabledOpacity, child: child),
+      child: DisabledOpacity(enabled: enabled, child: child),
     );
   }
 }
