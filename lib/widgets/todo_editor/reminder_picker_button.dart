@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/extensions.dart' show Reminder;
-import 'package:todos/helpers/keyboard.dart';
+import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/pickers.dart';
 

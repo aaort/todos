@@ -30,7 +30,9 @@ class SaveTodoButton extends StatelessWidget {
         {'task': task, 'reminder': reminder, 'repeat': repeat},
       );
       TodoActions(todo).updateTodo();
-      if (todo.reminderId != null) {
+      if (todo.reminderId != null &&
+          todo.reminder == null &&
+          todo.repeat == null) {
         Notifications.cancelReminder(todo.reminderId!);
       }
     } else {

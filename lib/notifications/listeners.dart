@@ -1,5 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:todos/helpers/reminder.dart';
+import 'package:todos/helpers.dart';
 import 'package:todos/logic/todo_actions.dart';
 import 'package:todos/notifications/constants.dart';
 import 'package:todos/notifications/notifications.dart';
