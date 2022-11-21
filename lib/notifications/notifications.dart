@@ -10,7 +10,7 @@ class Notifications {
   static initialize() async {
     final allowed = await _notifications.requestPermissionToSendNotifications();
     if (!allowed) return;
-    AwesomeNotifications().initialize(
+    _notifications.initialize(
       appIconPath,
       [
         NotificationChannel(
