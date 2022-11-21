@@ -49,7 +49,10 @@ class TodoTile extends StatelessWidget {
           todo.task,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: todo.isDone ? textTheme.lineThrough : textTheme.bodySmall,
+          style: todo.isDone
+              ? textTheme.lineThrough
+                  .copyWith(color: Theme.of(context).disabledColor)
+              : textTheme.bodySmall,
         ),
         value: todo.isDone,
         onChanged: onTap,
