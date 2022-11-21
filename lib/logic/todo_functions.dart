@@ -3,10 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'todo.dart';
 
-class DBActions {
+class TodoFunctions {
   final Todo todo;
 
-  DBActions(this.todo) {
+  TodoFunctions(this.todo) {
     _db.settings = const Settings(persistenceEnabled: true);
   }
 
