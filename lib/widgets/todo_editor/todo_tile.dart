@@ -26,14 +26,14 @@ class TodoTile extends StatelessWidget {
     if (todo.reminderId != null) {
       Notifications.cancelReminder(todo.reminderId!);
     }
-    DBActions(todo).deleteTodo();
+    TodoFunctions(todo).deleteTodo();
   }
 
   onTap(bool? value) {
     if (todo.reminderId != null) {
       Notifications.cancelReminder(todo.reminderId!);
     }
-    DBActions(todo).toggleIsDone(value);
+    TodoFunctions(todo).toggleIsDone(value);
   }
 
   @override

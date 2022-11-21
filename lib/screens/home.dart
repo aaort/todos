@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   StreamBuilder(
-                    stream: DBActions.getTodosCount(),
+                    stream: TodoFunctions.getTodosCount(),
                     builder: ((context, AsyncSnapshot<int> snapshot) {
                       if (snapshot.hasData) {
                         return Text(

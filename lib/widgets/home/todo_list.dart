@@ -17,7 +17,7 @@ class _TodoListState extends State<TodoList> {
 
   @override
   void initState() {
-    _todoSnaps = DBActions.getTodos();
+    _todoSnaps = TodoFunctions.getTodos();
     super.initState();
   }
 
