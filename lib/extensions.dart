@@ -13,3 +13,15 @@ extension CustomTextStyles on TextTheme {
 extension Reminder on Duration {
   DateTime toDateTime() => DateTime.now().add(this);
 }
+
+extension MinutePrecision on DateTime {
+  DateTime toMinutePrecision() {
+    return DateTime(
+      year,
+      month,
+      day,
+      hour,
+      minute,
+    );
+  }
+}
