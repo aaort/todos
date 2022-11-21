@@ -23,7 +23,7 @@ class _TodoEditorState extends State<TodoEditor> {
 
   String get _reminderText {
     return getReminderText(
-        reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
+        reminder is Duration ? reminder.toDateTime() : reminder);
   }
 
   void onReminderChange(dynamic newReminder) {
