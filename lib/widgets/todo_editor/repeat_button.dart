@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
-import 'package:todos/theme/constants.dart' show kDisabledOpacity;
+import 'package:todos/widgets/common/disabled.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
 enum Repeat {
@@ -44,8 +44,8 @@ class RepeatButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: enabled ? () => onOptionButtonPressed(context) : null,
-      child: Opacity(
-        opacity: enabled ? 1 : kDisabledOpacity,
+      child: DisabledOpacity(
+        enabled: enabled,
         child: Container(
           color: Colors.transparent,
           child: Row(
