@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todos/auth/sign_in.dart';
+import 'package:todos/auth/sign_up.dart';
 import 'package:todos/screens/home.dart';
 
 import 'constants.dart';
@@ -40,6 +42,24 @@ navigateToHome(BuildContext context) {
     context,
     MaterialPageRoute(
       builder: (context) => const Home(),
+    ),
+  );
+}
+
+navigateToSignIn(BuildContext context) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const SignIn(),
+    ),
+  );
+}
+
+navigateToSignUp(BuildContext context) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const SignUp(),
     ),
   );
 }
