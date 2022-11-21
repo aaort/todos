@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todos/extensions.dart' show Reminder;
 import 'package:todos/helpers.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/widgets/todo_editor/reminder_picker_button.dart';
