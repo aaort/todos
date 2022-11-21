@@ -57,8 +57,13 @@ class Notifications {
     scheduleReminder(todo);
   }
 
-  static cancelReminder(int id) {
-    _notifications.cancel(id);
+  static cancelReminder(int id) async {
+    await _notifications.cancel(id);
+  }
+
+  // TODO: used for development, delete later
+  static cancelAllReminders() async {
+    await _notifications.cancelAll();
   }
 }
 
