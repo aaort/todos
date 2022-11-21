@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/logic/db_actions.dart';
+import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/extensions.dart' show CustomTextStyles;
