@@ -37,8 +37,7 @@ class _TodoListState extends State<TodoList> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();
           }
-          final todos =
-              snapshot.data?.docs.map((snapshot) => snapshot.data()).toList();
+          final todos = snapshot.data?.docs.map((_) => _.data()).toList();
           if (todos == null) return const SizedBox();
           return ListView.builder(
             padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
