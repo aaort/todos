@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/auth/sign_in.dart';
 import 'package:todos/screens/home.dart';
-import 'package:todos/widgets/loading_indicator.dart';
+import 'package:todos/widgets/common/loading_indicator.dart';
 
 class AppNavigator extends StatelessWidget {
   const AppNavigator({super.key});

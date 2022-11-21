@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/helpers.dart';
-import 'package:todos/widgets/modal_bottom_sheet.dart';
+import 'modal_bottom_sheet.dart';
 
 void showDateTimePicker({
   required BuildContext context,
