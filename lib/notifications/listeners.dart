@@ -1,5 +1,5 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:todos/helpers.dart';
+import 'package:todos/extensions.dart' show MinutePrecision;
 import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/notifications/constants.dart';
 import 'package:todos/notifications/notifications.dart';
@@ -20,9 +20,9 @@ Future<void> onActionReceived(ReceivedAction action) async {
   } else if (action.buttonKeyPressed != notificationActions[cancelButtonKey]) {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
-    final reminder = getDateTimeWithPrecisionToMinutes(
-      DateTime.now().add(Duration(minutes: is5Minutes ? 5 : 15)),
-    );
+    final reminder = DateTime.now()
+        .add(Duration(minutes: is5Minutes ? 5 : 15))
+        .toMinutePrecision();
     final updatedTodo = todo.copyWith({'reminder': reminder});
     DBActions(updatedTodo).updateTodo();
     Notifications.updateReminder(updatedTodo);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
+import 'package:todos/extensions.dart' show MinutePrecision;
 
 Future ensureKeyboardIsHidden(BuildContext ctx) async {
   if (MediaQuery.of(ctx).viewInsets.bottom > 0) {
@@ -20,25 +21,13 @@ String getReminderText(DateTime dateTime) {
 DateTime getInitialDateTime(DateTime? initialDateTime) {
   final now = DateTime.now();
   if (initialDateTime != null && initialDateTime.isAfter(now)) {
-    return getDateTimeWithPrecisionToMinutes(initialDateTime);
+    return initialDateTime.toMinutePrecision();
   }
-  return getDateTimeWithPrecisionToMinutes(now.add(const Duration(minutes: 1)));
+  return now.add(const Duration(minutes: 1)).toMinutePrecision();
 }
 
 DateTime getMinimumDateTime() {
-  return getDateTimeWithPrecisionToMinutes(
-    DateTime.now().add(const Duration(minutes: 1)),
-  );
-}
-
-DateTime getDateTimeWithPrecisionToMinutes(DateTime dateTime) {
-  return DateTime(
-    dateTime.year,
-    dateTime.month,
-    dateTime.day,
-    dateTime.hour,
-    dateTime.minute,
-  );
+  return DateTime.now().add(const Duration(minutes: 1)).toMinutePrecision();
 }
 
 int getRepeatOptionSeconds(Repeat repeatOption) {
