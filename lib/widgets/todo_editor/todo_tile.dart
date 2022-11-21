@@ -22,6 +22,13 @@ class TodoTile extends StatelessWidget {
     );
   }
 
+  onDismiss() {
+    if (todo.reminderId != null) {
+      Notifications.cancelReminder(todo.reminderId!);
+    }
+    TodoActions(todo).deleteTodo();
+  }
+
   onTap(bool? _) {
     TodoActions(todo).toggleIsDone();
   }
@@ -29,13 +36,6 @@ class TodoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-
-    onDismiss() {
-      if (todo.reminderId != null) {
-        Notifications.cancelReminder(todo.reminderId!);
-      }
-      TodoActions(todo).deleteTodo();
-    }
 
     return DismissibleTile(
       onDismiss: onDismiss,
