@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/auth/auth_form.dart';
 import 'package:todos/auth/utils.dart';
 import 'package:todos/logic/user_functions.dart';
-import 'package:todos/widgets/dismiss_keyboard.dart';
+import 'package:todos/widgets/common/dismiss_keyboard.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});

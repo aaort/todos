@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/auth/utils.dart';
-import 'package:todos/widgets/loading_indicator.dart';
+import 'package:todos/widgets/common/loading_indicator.dart';
 
 class AuthForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
