@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/helpers.dart';
 import 'package:todos/logic/todo.dart';
 import 'package:todos/widgets/common/dismiss_keyboard.dart';
-import 'package:todos/widgets/todo_editor/reminder_picker_button.dart';
+import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
 
@@ -70,7 +70,7 @@ class _TodoEditorState extends State<TodoEditor> {
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    ReminderPickerButton(
+                    ReminderButton(
                       enabled: taskController.text.isNotEmpty,
                       reminder: reminder,
                       onReminderChange: onReminderChange,
@@ -99,7 +99,7 @@ class _TodoEditorState extends State<TodoEditor> {
                     children: [
                       Flexible(
                         flex: 8,
-                        child: ReminderPickerButton(
+                        child: ReminderButton(
                           enabled: taskController.text.isNotEmpty,
                           reminder: reminder,
                           onReminderChange: onReminderChange,
