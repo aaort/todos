@@ -14,10 +14,7 @@ String getErrorText(String errorCode) {
 }
 
 String? emailValidator(String? email) {
-  if (email == null) {
-    return 'Your email is empty';
-  }
-  if (email.isEmpty) {
+  if (email == null || email.isEmpty) {
     return 'Please enter your email';
   }
   if (!email.contains('@')) {
@@ -28,10 +25,7 @@ String? emailValidator(String? email) {
 }
 
 String? passwordValidator(String? password) {
-  if (password == null) {
-    return 'Your password is empty';
-  }
-  if (password.isEmpty) {
+  if (password == null || password.isEmpty) {
     return 'Please enter your password';
   }
   if (password.length < 6) {
