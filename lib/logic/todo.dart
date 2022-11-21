@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todos/extensions.dart' show Stringify;
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:uuid/uuid.dart';
@@ -10,6 +11,7 @@ class Todo {
   late final String id;
   DateTime? reminder;
   Repeat? repeat;
+  late final Timestamp createdAt;
 
   int? reminderId;
 
@@ -23,6 +25,7 @@ class Todo {
     if (reminder != null || repeat != null) {
       reminderId = Random().nextInt(1000);
     }
+    createdAt = Timestamp.now();
   }
 
   Todo._fromMap({
@@ -31,6 +34,7 @@ class Todo {
     required this.id,
     required this.reminder,
     required this.repeat,
+    required this.createdAt,
     this.reminderId,
   }) {
     if (reminder != null && reminderId == null) {
@@ -54,6 +58,7 @@ class Todo {
       task: todoMap['task'] ?? task,
       isDone: todoMap['isDone'] ?? isDone,
       reminder: DateTime.tryParse('${todoMap['reminder']}'),
+      createdAt: todoMap['createdAt'],
       repeat: todoMap['repeat'] != null
           ? Repeat.values.byName((todoMap['repeat'] as Repeat).toName())
           : null,
@@ -67,6 +72,7 @@ class Todo {
         'reminder': reminder?.toIso8601String(),
         'reminderId': reminderId,
         'repeat': repeat?.toName(),
+        'createdAt': createdAt,
       };
 
   static Todo fromMap(Map todoMap) {
@@ -76,6 +82,7 @@ class Todo {
       id: todoMap['id'],
       reminderId: todoMap['reminderId'],
       reminder: DateTime.tryParse('${todoMap['reminder']}'),
+      createdAt: todoMap['createdAt'],
       repeat: todoMap['repeat'] != null
           ? Repeat.values.byName(todoMap['repeat'])
           : null,
