@@ -15,8 +15,7 @@ class TodoEditor extends StatefulWidget {
 }
 
 class _TodoEditorState extends State<TodoEditor> {
-  final taskController = TextEditingController();
-
+  late TextEditingController taskController;
   dynamic reminder; // Duration | DateTime | null
   Repeat? repeatOption;
 
@@ -41,7 +40,8 @@ class _TodoEditorState extends State<TodoEditor> {
 
   @override
   void initState() {
-    taskController.text = widget.initialTodo?.task ?? '';
+    taskController =
+        TextEditingController(text: widget.initialTodo?.task ?? '');
     reminder = widget.initialTodo?.reminder;
     repeatOption = widget.initialTodo?.repeat;
     taskController.addListener(() => setState(() {}));
