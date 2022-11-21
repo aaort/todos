@@ -14,13 +14,13 @@ final _reminderOptions = <PickerOption<dynamic>>[
   PickerOption('Custom', ReminderOption.custom),
 ];
 
-class ReminderPickerButton extends StatelessWidget {
+class ReminderButton extends StatelessWidget {
   final bool enabled;
   final dynamic reminder;
   final Function(dynamic) onReminderChange;
   final Widget child;
 
-  ReminderPickerButton({
+  ReminderButton({
     super.key,
     this.reminder,
     required this.enabled,
