@@ -32,7 +32,7 @@ class TodoActions {
   }
 
   static Stream<QuerySnapshot<Map>> getTodos() {
-    return _todos.snapshots();
+    return _todos.orderBy('createdAt').snapshots();
   }
 
   static Future<Todo?> getTodoById(String id) async {
