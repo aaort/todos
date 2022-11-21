@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todos/app_navigator.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/theme/theme.dart';
