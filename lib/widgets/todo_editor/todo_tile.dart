@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/logic/db_actions.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/extensions.dart' show CustomTextStyles;
@@ -26,14 +26,14 @@ class TodoTile extends StatelessWidget {
     if (todo.reminderId != null) {
       Notifications.cancelReminder(todo.reminderId!);
     }
-    TodoActions(todo).deleteTodo();
+    DBActions(todo).deleteTodo();
   }
 
   onTap(bool? value) {
     if (todo.reminderId != null) {
       Notifications.cancelReminder(todo.reminderId!);
     }
-    TodoActions(todo).toggleIsDone(value);
+    DBActions(todo).toggleIsDone(value);
   }
 
   @override
