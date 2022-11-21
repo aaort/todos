@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/logic/db_actions.dart';
+import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/loading_indicator.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';

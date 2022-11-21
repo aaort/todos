@@ -1,6 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todos/helpers.dart';
-import 'package:todos/logic/db_actions.dart';
+import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/notifications/constants.dart';
 import 'package:todos/notifications/notifications.dart';
 

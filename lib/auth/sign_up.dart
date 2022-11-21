@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/auth/auth_form.dart';
 import 'package:todos/auth/utils.dart';
-import 'package:todos/logic/user_actions.dart';
+import 'package:todos/logic/user_functions.dart';
 import 'package:todos/widgets/dismiss_keyboard.dart';
 
 class SignUp extends StatefulWidget {

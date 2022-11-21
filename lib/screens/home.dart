@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/db_actions.dart';
+import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/widgets/home/add_todo_button.dart';
 import 'package:todos/widgets/home/logout_button.dart';
 import 'package:todos/widgets/home/theme_switch_button.dart';
