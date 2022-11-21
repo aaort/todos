@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/auth/auth_form.dart';
-import 'package:todos/auth/sign_up.dart';
 import 'package:todos/auth/utils.dart';
 import 'package:todos/logic/user_actions.dart';
 import 'package:todos/widgets/dismiss_keyboard.dart';
@@ -39,14 +38,7 @@ class _SignInState extends State<SignIn> {
     setState(() => _loading = false);
   }
 
-  onSignUp() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SignUp(),
-      ),
-    );
-  }
+  onSignUp() => navigateToSignUp(context);
 
   @override
   Widget build(BuildContext context) {
