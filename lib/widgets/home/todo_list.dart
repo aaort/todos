@@ -14,7 +14,7 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  late Stream<QuerySnapshot<Map>> _todoSnaps;
+  late Stream<List<Todo>> _todoSnaps;
 
   @override
   void initState() {
@@ -31,19 +31,19 @@ class _TodoListState extends State<TodoList> {
           top: Radius.circular(kModalBorderRadius),
         ),
       ),
-      child: StreamBuilder<QuerySnapshot<Map>>(
+      child: StreamBuilder<List<Todo>>(
         stream: _todoSnaps,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();
           }
-          final todos = snapshot.data?.docs.map((_) => _.data()).toList();
+          final todos = snapshot.data;
           if (todos == null) return const SizedBox();
           return ListView.builder(
             padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
             itemCount: todos.length,
             itemBuilder: (_, index) {
-              return TodoTile(todo: Todo.fromMap(todos[index]));
+              return TodoTile(todo: todos[index]);
             },
           );
         },

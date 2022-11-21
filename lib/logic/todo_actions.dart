@@ -31,8 +31,10 @@ class TodoActions {
     await _todos.doc(todo.id).delete();
   }
 
-  static Stream<QuerySnapshot<Map>> getTodos() {
-    return _todos.orderBy('createdAt').snapshots();
+  static Stream<List<Todo>> getTodos() async* {
+    await for (QuerySnapshot snap in _todos.orderBy('createdAt').snapshots()) {
+      yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
+    }
   }
 
   static Future<Todo?> getTodoById(String id) async {
