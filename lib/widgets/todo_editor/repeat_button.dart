@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/extensions.dart';
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
 import 'package:todos/widgets/common/disabled.dart';
 import 'package:todos/widgets/common/pickers.dart';
@@ -59,7 +60,7 @@ class RepeatButton extends StatelessWidget {
               ),
               if (repeat != null)
                 Text(
-                  _repeatText(repeat!),
+                  repeat!.toName().capitalize(),
                   style: Theme.of(context).textTheme.bodySmall,
                 )
             ],
@@ -67,16 +68,5 @@ class RepeatButton extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-String _repeatText(Repeat option) {
-  switch (option) {
-    case Repeat.hourly:
-      return 'Hourly';
-    case Repeat.daily:
-      return 'Daily';
-    case Repeat.weekly:
-      return 'Weekly';
   }
 }
