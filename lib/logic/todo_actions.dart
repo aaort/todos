@@ -6,7 +6,9 @@ import 'todo.dart';
 class TodoActions {
   final Todo todo;
 
-  TodoActions(this.todo);
+  TodoActions(this.todo) {
+    _db.settings = const Settings(persistenceEnabled: true);
+  }
 
   static final _db = FirebaseFirestore.instance;
   static final _auth = FirebaseAuth.instance;
