@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/logic/db_actions.dart';
 import 'package:todos/widgets/home/add_todo_button.dart';
 import 'package:todos/widgets/home/logout_button.dart';
 import 'package:todos/widgets/home/theme_switch_button.dart';
@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   StreamBuilder(
-                    stream: TodoActions.getTodosCount(),
+                    stream: DBActions.getTodosCount(),
                     builder: ((context, AsyncSnapshot<int> snapshot) {
                       if (snapshot.hasData) {
                         return Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/extensions.dart';
 import 'package:todos/logic/todo.dart';
-import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/logic/db_actions.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 
@@ -29,7 +29,7 @@ class SaveTodoButton extends StatelessWidget {
       final todo = initialTodo!.copyWith(
         {'task': task, 'reminder': reminder, 'repeat': repeat},
       );
-      TodoActions(todo).updateTodo();
+      DBActions(todo).updateTodo();
       if (todo.reminderId != null &&
           todo.reminder == null &&
           todo.repeat == null) {
@@ -37,7 +37,7 @@ class SaveTodoButton extends StatelessWidget {
       }
     } else {
       final todo = Todo(task, reminder: reminder, repeat: repeat);
-      TodoActions(todo).createTodo();
+      DBActions(todo).createTodo();
       if (todo.reminderId != null) Notifications.scheduleReminder(todo);
     }
 

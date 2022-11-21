@@ -1,21 +1,21 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todos/helpers.dart';
-import 'package:todos/logic/todo_actions.dart';
+import 'package:todos/logic/db_actions.dart';
 import 'package:todos/notifications/constants.dart';
 import 'package:todos/notifications/notifications.dart';
 
 @pragma("vm:entry-point")
 Future<void> onActionReceived(ReceivedAction action) async {
   if (action.payload?['todoId'] == null) return;
-  final todo = await TodoActions.getTodoById(action.payload!['todoId']!);
+  final todo = await DBActions.getTodoById(action.payload!['todoId']!);
   if (todo == null || todo.reminderId == null) return;
   if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
-    TodoActions(todo).toggleIsDone();
+    DBActions(todo).toggleIsDone();
     if (todo.repeat == null) {
       // if not a repeating reminder, cancel it
       Notifications.cancelReminder(todo.reminderId!);
       todo.updateReminder(null); // drop reminder
-      TodoActions(todo).updateTodo();
+      DBActions(todo).updateTodo();
     }
   } else if (action.buttonKeyPressed != notificationActions[cancelButtonKey]) {
     final is5Minutes =
@@ -24,7 +24,7 @@ Future<void> onActionReceived(ReceivedAction action) async {
       DateTime.now().add(Duration(minutes: is5Minutes ? 5 : 15)),
     );
     final updatedTodo = todo.copyWith({'reminder': reminder});
-    TodoActions(updatedTodo).updateTodo();
+    DBActions(updatedTodo).updateTodo();
     Notifications.updateReminder(updatedTodo);
   } else {
     Notifications.cancelReminder(todo.reminderId!);
