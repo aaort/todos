@@ -58,10 +58,13 @@ class ReminderButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      key: _key,
-      onTap: enabled ? showReminderOptionPicker : null,
-      child: DisabledOpacity(enabled: enabled, child: child),
+    return DisabledOpacity(
+      enabled: enabled,
+      child: GestureDetector(
+        key: _key,
+        onTap: enabled ? showReminderOptionPicker : null,
+        child: child,
+      ),
     );
   }
 }
