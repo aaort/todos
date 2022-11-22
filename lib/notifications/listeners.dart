@@ -19,11 +19,11 @@ Future<void> onActionReceived(ReceivedAction action) async {
   } else if (action.buttonKeyPressed != notificationActions[cancelButtonKey]) {
     final is5Minutes =
         action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
-    final reminder =
-        Duration(minutes: is5Minutes ? 5 : 15).toDateTime().toMinutePrecision();
-    final updatedTodo = todo.copyWith({'reminder': reminder});
-    TodoFunctions(updatedTodo).updateTodo();
-    Notifications.updateReminder(updatedTodo);
+    todo.updateReminder(Duration(minutes: is5Minutes ? 5 : 15)
+        .toDateTime()
+        .toMinutePrecision());
+    TodoFunctions(todo).updateTodo();
+    Notifications.updateReminder(todo);
   } else {
     Notifications.cancelReminder(todo.reminderId!);
   }
