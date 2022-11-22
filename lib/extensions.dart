@@ -27,7 +27,5 @@ extension MinutePrecision on DateTime {
 }
 
 extension Capitalize on String {
-  capitalize() {
-    this[0].toUpperCase() + substring(1);
-  }
+  String capitalize() => this[0].toUpperCase() + substring(1);
 }
