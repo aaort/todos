@@ -43,7 +43,7 @@ class TodoTile extends StatelessWidget {
 
     return DismissibleTile(
       onDismiss: onDismiss,
-      onLongPress: onLongPress,
+      onLongPress: !todo.isDone ? onLongPress : () {},
       child: CheckboxListTile(
         key: _key,
         title: Text(
