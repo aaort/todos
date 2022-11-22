@@ -37,7 +37,9 @@ class Todo {
     required this.createdAt,
     this.reminderId,
   }) {
-    if (reminder != null && reminderId == null) {
+    if (repeat == null && reminder == null) {
+      reminderId = null;
+    } else if ((reminder != null || repeat != null) && reminderId == null) {
       reminderId = Random().nextInt(1000);
     }
   }
