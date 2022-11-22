@@ -19,7 +19,7 @@ class TodoEditor extends StatefulWidget {
 class _TodoEditorState extends State<TodoEditor> {
   late TextEditingController taskController;
   dynamic reminder; // Duration | DateTime | null
-  Repeat? repeatOption;
+  Repeat? repeat;
 
   String get _reminderText {
     return getReminderText(
@@ -29,13 +29,13 @@ class _TodoEditorState extends State<TodoEditor> {
   void onReminderChange(dynamic newReminder) {
     setState(() {
       reminder = newReminder;
-      repeatOption = null;
+      repeat = null;
     });
   }
 
   void onRepeatOptionChange(Repeat option) {
     setState(() {
-      repeatOption = option;
+      repeat = option;
       reminder = null;
     });
   }
@@ -45,7 +45,7 @@ class _TodoEditorState extends State<TodoEditor> {
     taskController =
         TextEditingController(text: widget.initialTodo?.task ?? '');
     reminder = widget.initialTodo?.reminder;
-    repeatOption = widget.initialTodo?.repeat;
+    repeat = widget.initialTodo?.repeat;
     taskController.addListener(() => setState(() {}));
     super.initState();
   }
@@ -91,7 +91,7 @@ class _TodoEditorState extends State<TodoEditor> {
                   initialTodo: widget.initialTodo,
                   task: taskController.text,
                   reminder: reminder,
-                  repeat: repeatOption,
+                  repeat: repeat,
                 ),
                 if (reminder != null) ...[
                   const SizedBox(height: 30),
@@ -122,7 +122,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 const SizedBox(height: 30),
                 RepeatButton(
                   enabled: taskController.text.isNotEmpty,
-                  repeat: repeatOption,
+                  repeat: repeat,
                   onOptionChange: onRepeatOptionChange,
                 )
               ],
@@ -136,7 +136,7 @@ class _TodoEditorState extends State<TodoEditor> {
   void clearReminder() {
     setState(() {
       reminder = null;
-      repeatOption = null;
+      repeat = null;
     });
   }
 
