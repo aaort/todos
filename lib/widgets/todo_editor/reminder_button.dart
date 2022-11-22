@@ -49,8 +49,9 @@ class ReminderButton extends StatelessWidget {
       showDateTimePicker(
         context: _key.currentContext!,
         title: 'Remind me...',
-        initialDateTime:
-            reminder is Duration ? reminder.toDateTime() : reminder,
+        initialDateTime: reminder is Duration
+            ? (reminder as Duration).toDateTime()
+            : reminder,
         onChange: onReminderChange,
       );
     }

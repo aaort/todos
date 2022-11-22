@@ -5,6 +5,7 @@ import 'package:todos/widgets/common/dismiss_keyboard.dart';
 import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
+import 'package:todos/extensions.dart' show Reminder;
 
 class TodoEditor extends StatefulWidget {
   final Todo? initialTodo;
@@ -22,7 +23,7 @@ class _TodoEditorState extends State<TodoEditor> {
 
   String get _reminderText {
     return getReminderText(
-        reminder is Duration ? reminder.toDateTime() : reminder);
+        reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
   }
 
   void onReminderChange(dynamic newReminder) {

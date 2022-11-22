@@ -3,6 +3,7 @@ import 'package:todos/logic/todo.dart';
 import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
+import 'package:todos/extensions.dart' show Reminder;
 
 class SaveTodoButton extends StatelessWidget {
   final Todo? initialTodo;
@@ -20,8 +21,9 @@ class SaveTodoButton extends StatelessWidget {
 
   Future<void> onTodoSaved(BuildContext context) async {
     if (task.isEmpty) return;
-    DateTime? reminder =
-        this.reminder is Duration ? this.reminder.toDateTime() : this.reminder;
+    DateTime? reminder = this.reminder is Duration
+        ? (this.reminder as Duration).toDateTime()
+        : this.reminder;
 
     if (initialTodo != null) {
       final todo = initialTodo!.copyWith(
