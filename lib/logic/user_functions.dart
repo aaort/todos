@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class UserActions {
+class UserFunctions {
   static final _auth = FirebaseAuth.instance;
   static final _db = FirebaseFirestore.instance;
+
+  static Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   static Future<void> logout() async {
     await _auth.signOut();

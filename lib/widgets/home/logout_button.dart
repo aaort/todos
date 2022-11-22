@@ -11,7 +11,7 @@ class LogoutButton extends StatefulWidget {
 
 class _LogoutButtonState extends State<LogoutButton> {
   onLogout() async {
-    await UserActions.logout();
+    await UserFunctions.logout();
 
     if (mounted) {
       Navigator.pushAndRemoveUntil(
