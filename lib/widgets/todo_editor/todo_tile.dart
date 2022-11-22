@@ -18,6 +18,7 @@ class TodoTile extends StatelessWidget {
   void onLongPress() async {
     popupModalBottomSheet(
       context: _key.currentContext!,
+      shouldConfirmPop: true,
       child: TodoEditor(initialTodo: todo),
     );
   }
