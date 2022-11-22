@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/helpers.dart';
@@ -57,12 +59,12 @@ void showDateTimePicker({
   );
 }
 
-void showOptionPicker<T>({
+Future<void> showOptionPicker<T>({
   required BuildContext context,
   required String title,
   required List<PickerOption<T>> options,
   required Function(T) onChange,
-}) {
+}) async {
   final optionWidgets = options.map((option) {
     return TextButton(
       onPressed: () => onChange(option.value),
@@ -74,13 +76,23 @@ void showOptionPicker<T>({
     );
   }).toList();
 
-  popupModalBottomSheet(
+  await popupModalBottomSheet(
     context: context,
     child: SafeArea(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: optionWidgets,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+          ...optionWidgets,
+        ],
       ),
     ),
   );
