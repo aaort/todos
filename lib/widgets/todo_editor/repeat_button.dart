@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todos/extensions.dart';
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
-import 'package:todos/widgets/common/disabled.dart';
+import 'package:todos/widgets/common/disabled_opacity.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
 enum Repeat {
