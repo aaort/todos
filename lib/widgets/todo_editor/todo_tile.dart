@@ -51,8 +51,10 @@ class TodoTile extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: todo.isDone
-              ? textTheme.lineThrough
-                  .copyWith(color: Theme.of(context).disabledColor)
+              ? textTheme.bodySmall!.copyWith(
+                  color: Theme.of(context).disabledColor,
+                  decoration: TextDecoration.lineThrough,
+                )
               : textTheme.bodySmall,
         ),
         value: todo.isDone,
