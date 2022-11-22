@@ -8,10 +8,10 @@ import 'package:todos/notifications/notifications.dart';
 Future<void> onActionReceived(ReceivedAction action) async {
   if (action.payload?['todoId'] == null) return;
   final todo = await TodoFunctions.getTodoById(action.payload!['todoId']!);
-  if (todo == null) return;
+  if (todo == null || todo.reminderId == null) return;
   if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
     todo.toggleIsDone();
-    if (todo.repeat == null && todo.reminderId != null) {
+    if (todo.repeat == null) {
       // if not a repeating reminder, cancel it
       Notifications.cancelReminder(todo.reminderId!);
       TodoFunctions(todo..updateReminder(null)).updateTodo();
