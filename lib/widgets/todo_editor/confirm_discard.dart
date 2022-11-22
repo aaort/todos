@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todos/helpers.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
 final options = [
@@ -14,6 +15,7 @@ Future<bool> showConfirmDiscard(BuildContext context) async {
     Navigator.pop(context);
   }
 
+  await ensureKeyboardIsHidden(context);
   await showOptionPicker<bool>(
     context: context,
     title: 'Are you sure ?',
