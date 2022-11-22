@@ -32,7 +32,7 @@ class RepeatButton extends StatelessWidget {
     await ensureKeyboardIsHidden(context);
     showOptionPicker<Repeat>(
       context: context,
-      title: 'Remind me...',
+      title: 'Remind',
       options: _repeats,
       onChange: (_) {
         Navigator.pop(context);
