@@ -26,7 +26,7 @@ class _SignInState extends State<SignIn> {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     setState(() => _loading = true);
     try {
-      await UserActions.login(
+      await UserFunctions.login(
         email: _emailController.text,
         password: _passwordController.text,
       );
