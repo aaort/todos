@@ -27,7 +27,7 @@ class Notifications {
     );
 
     _notifications.setListeners(
-      onActionReceivedMethod: onActionReceived,
+      onActionReceivedMethod: NotificationListeners.onActionReceived,
     );
   }
 
