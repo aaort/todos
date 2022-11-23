@@ -39,6 +39,12 @@ class TodoFunctions {
     }
   }
 
+  // TODO: for future features
+  static Future<List<Todo>> getTodosOnce() async {
+    final todos = await _todos.get();
+    return todos.docs.map((doc) => Todo.fromMap(doc.data())).toList();
+  }
+
   static Future<Todo?> getTodoById(String id) async {
     final todoMap = (await _todos.doc(id).get()).data();
     if (todoMap is Map) return Todo.fromMap(todoMap!);
