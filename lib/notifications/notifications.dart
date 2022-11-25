@@ -1,6 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:todos/helpers.dart';
 import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/notifications/constants.dart';
 import 'package:todos/notifications/listeners.dart';
 
@@ -50,6 +51,19 @@ class Notifications {
           ? actionButtons.sublist(0, 3)
           : [actionButtons[0], actionButtons[3]],
     );
+
+    final todos = await TodoFunctions.getTodosOnce();
+    final notifications = await _notifications.listScheduledNotifications();
+    for (Todo todo in todos) {
+      final reminderId = todo.reminderId;
+      if (reminderId == null) continue;
+      for (var i = 0; i < notifications.length; i++) {
+        if (notifications[i].content?.id == reminderId) return;
+        if (i + 1 == notifications.length) {
+          scheduleReminder(todo);
+        }
+      }
+    }
   }
 
   static updateReminder(Todo todo) async {
