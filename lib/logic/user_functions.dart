@@ -7,9 +7,7 @@ class UserFunctions {
 
   static Stream<User?> get authStateChanges => _auth.authStateChanges();
 
-  static Future<void> logout() async {
-    await _auth.signOut();
-  }
+  static Future<void> logout() => _auth.signOut();
 
   static login({required String email, required String password}) async {
     await _auth.signInWithEmailAndPassword(email: email, password: password);
