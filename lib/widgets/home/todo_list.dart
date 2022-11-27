@@ -5,21 +5,8 @@ import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/common/loading_indicator.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
-class TodoList extends StatefulWidget {
+class TodoList extends StatelessWidget {
   const TodoList({super.key});
-
-  @override
-  State<TodoList> createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
-  late Stream<List<Todo>> _todoSnaps;
-
-  @override
-  void initState() {
-    _todoSnaps = TodoFunctions.getTodos();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +18,7 @@ class _TodoListState extends State<TodoList> {
         ),
       ),
       child: StreamBuilder<List<Todo>>(
-        stream: _todoSnaps,
+        stream: TodoFunctions.getTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();
