@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'todo.dart';
+import 'models/todo.dart';
 
 class TodoFunctions {
   final Todo todo;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/models/todo.dart';
 import 'package:todos/logic/todo_functions.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/common/loading_indicator.dart';

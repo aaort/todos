@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/helpers.dart';
-import 'package:todos/logic/todo.dart';
+import 'package:todos/logic/models/todo.dart';
 import 'package:todos/widgets/common/dismiss_keyboard.dart';
 import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
