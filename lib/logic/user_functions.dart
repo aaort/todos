@@ -23,6 +23,9 @@ class UserFunctions {
       password: password,
     );
 
+    // Called to trigger new event on authStateChanges stream
+    login(email, password);
+
     if (credentials.user == null) return null;
 
     final user = {
