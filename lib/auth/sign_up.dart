@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/auth/auth_form.dart';
 import 'package:todos/auth/utils.dart';
 import 'package:todos/logic/user_functions.dart';
+import 'package:todos/screens/home.dart';
 import 'package:todos/widgets/common/dismiss_keyboard.dart';
 
 class SignUp extends StatefulWidget {
@@ -22,23 +23,31 @@ class _SignUpState extends State<SignUp> {
 
   String? _errorText;
 
-  onSignUp() async {
+  _onSignUp() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
 
     setState(() => _loading = true);
     try {
-      await UserFunctions.createUser(
-        email: _emailController.text,
-        password: _passwordController.text,
+      final result = await UserFunctions.createUser(
+        _emailController.text,
+        _passwordController.text,
       );
-      if (mounted) navigateToHome(context);
+
+      if (result?.user != null && mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+        );
+      }
     } on FirebaseAuthException catch (e) {
       setState(() => _errorText = getErrorText(e.code));
     }
     setState(() => _loading = false);
   }
 
-  onSignIn() => navigateToSignIn(context);
+  _onSignIn() => navigateToSignIn(context);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +62,7 @@ class _SignUpState extends State<SignUp> {
               AuthForm(
                 emailController: _emailController,
                 passwordController: _passwordController,
-                onSave: onSignUp,
+                onSave: _onSignUp,
                 formKey: _formKey,
                 buttonTitle: 'Sign up',
                 errorText: _errorText,
@@ -71,7 +80,7 @@ class _SignUpState extends State<SignUp> {
                           .textTheme
                           .bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()..onTap = onSignIn,
+                      recognizer: TapGestureRecognizer()..onTap = _onSignIn,
                     )
                   ],
                 ),

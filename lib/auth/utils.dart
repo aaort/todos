@@ -37,15 +37,6 @@ String? passwordValidator(String? password) {
   return null;
 }
 
-navigateToHome(BuildContext context) {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const Home(),
-    ),
-  );
-}
-
 navigateToSignIn(BuildContext context) {
   Navigator.pushReplacement(
     context,

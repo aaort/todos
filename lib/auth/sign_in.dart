@@ -22,23 +22,21 @@ class _SignInState extends State<SignIn> {
 
   String? _errorText;
 
-  onSignIn() async {
+  _onSignIn() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     setState(() => _loading = true);
     try {
       await UserFunctions.login(
-        email: _emailController.text,
-        password: _passwordController.text,
+        _emailController.text,
+        _passwordController.text,
       );
-
-      if (mounted) navigateToHome(context);
     } on FirebaseAuthException catch (e) {
       setState(() => _errorText = getErrorText(e.code));
     }
     setState(() => _loading = false);
   }
 
-  onSignUp() => navigateToSignUp(context);
+  _onSignUp() => navigateToSignUp(context);
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +51,7 @@ class _SignInState extends State<SignIn> {
               AuthForm(
                 emailController: _emailController,
                 passwordController: _passwordController,
-                onSave: onSignIn,
+                onSave: _onSignIn,
                 formKey: _formKey,
                 buttonTitle: 'Sign in',
                 errorText: _errorText,
@@ -71,7 +69,7 @@ class _SignInState extends State<SignIn> {
                           .textTheme
                           .bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()..onTap = onSignUp,
+                      recognizer: TapGestureRecognizer()..onTap = _onSignUp,
                     )
                   ],
                 ),
