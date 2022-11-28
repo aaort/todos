@@ -21,12 +21,11 @@ You can create/edit/delete tasks, set reminder for particular date in the future
 
 ### Get Started
 
-In case if you want to run this project on your machine (i'm assuming you have [Flutter](https://docs.flutter.dev/get-started/install) installed locally) you need to copy this repo and run following commands.
+If you want to run this project on your machine you first need to [configure your firebase project](https://firebase.google.com/docs/flutter/setup?platform=ios). After configuration is finished you should see the `firebase_options.dart` file under lib/ directory (it is not recommended to publish this file to the public since it contains your firebase project api key and a lot of other information that you might want to keep private). If everything is done properly you should be able to run the project easily with following commands.
 
 ```
 $ flutter packages get
-$ flutter devices (copy the id of one of availaible devices)
-$ flutter run -d <id of device you want to run project on>
+$ flutter run
 ```
 
 ## Contact
