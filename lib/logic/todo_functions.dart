@@ -34,8 +34,13 @@ class TodoFunctions {
   }
 
   static Stream<List<Todo>> getTodos() async* {
-    await for (QuerySnapshot snap in _todos.orderBy('createdAt').snapshots()) {
-      yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
+    try {
+      await for (QuerySnapshot snap
+          in _todos.orderBy('createdAt').snapshots()) {
+        yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
+      }
+    } on FirebaseException catch (e) {
+      if (!e.code.contains('permission-denied')) rethrow;
     }
   }
 
@@ -51,8 +56,12 @@ class TodoFunctions {
   }
 
   static Stream<int> getTodosCount() async* {
-    await for (var snapshot in _todos.snapshots()) {
-      yield snapshot.docs.length;
+    try {
+      await for (var snapshot in _todos.snapshots()) {
+        yield snapshot.docs.length;
+      }
+    } on FirebaseException catch (e) {
+      if (!e.code.contains('permission-denied')) rethrow;
     }
   }
 }
