@@ -5,62 +5,52 @@ import 'package:todos/logic/models/todo.dart';
 class Database {
   final Todo todo;
 
-  Database(this.todo) {
-    _db.settings = const Settings(persistenceEnabled: true);
-  }
+  Database(this.todo);
 
   static final _db = FirebaseFirestore.instance;
   static final _auth = FirebaseAuth.instance;
 
-  static final _todos =
+  static final _todosRef =
       _db.collection('users').doc(_auth.currentUser?.uid).collection('todos');
 
   createTodo() {
-    _todos.doc(todo.id).set(todo.asMap);
+    _todosRef.doc(todo.id).set(todo.asMap);
   }
 
   updateTodo() {
-    _todos.doc(todo.id).set(todo.asMap);
+    _todosRef.doc(todo.id).set(todo.asMap);
   }
 
   toggleIsDone([bool? value]) async {
     final toggledTodo = todo..toggleIsDone(value);
-    await _todos.doc(todo.id).set(toggledTodo.asMap);
+    await _todosRef.doc(todo.id).set(toggledTodo.asMap);
   }
 
   deleteTodo() async {
-    await _todos.doc(todo.id).delete();
+    await _todosRef.doc(todo.id).delete();
   }
 
   static Stream<List<Todo>> getTodos() async* {
-    try {
-      await for (QuerySnapshot snap
-          in _todos.orderBy('createdAt').snapshots()) {
-        yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
-      }
-    } on FirebaseException catch (e) {
-      if (!e.code.contains('permission-denied')) rethrow;
+    await for (QuerySnapshot snap
+        in _todosRef.orderBy('createdAt').snapshots()) {
+      yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
     }
   }
 
   static Future<List<Todo>> getTodosOnce() async {
-    final todos = await _todos.get();
+    final todos = await _todosRef.get();
     return todos.docs.map((doc) => Todo.fromMap(doc.data())).toList();
   }
 
   static Future<Todo?> getTodoById(String id) async {
-    final todoMap = (await _todos.doc(id).get()).data();
+    final todoMap = (await _todosRef.doc(id).get()).data();
     if (todoMap is Map) return Todo.fromMap(todoMap!);
     return null;
   }
 
   static Stream<int> getTodosCount() async* {
-    try {
-      await for (var snapshot in _todos.snapshots()) {
-        yield snapshot.docs.length;
-      }
-    } on FirebaseException catch (e) {
-      if (!e.code.contains('permission-denied')) rethrow;
+    await for (var snapshot in _todosRef.snapshots()) {
+      yield snapshot.docs.length;
     }
   }
 }
