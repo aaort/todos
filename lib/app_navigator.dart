@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todos/screens/auth/sign_in.dart';
-import 'package:todos/logic/user_functions.dart';
+import 'package:todos/logic/services/auth.dart';
 import 'package:todos/screens/home.dart';
 
 class AppNavigator extends StatelessWidget {
@@ -12,7 +12,7 @@ class AppNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<User?>.value(
       initialData: null,
-      value: UserFunctions.authStateChanges,
+      value: Auth.authStateChanges,
       builder: ((context, _) {
         return context.watch<User?>() == null ? const SignIn() : const Home();
       }),

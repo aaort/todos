@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/widgets/auth/auth_form.dart';
 import 'package:todos/screens/auth/sign_in.dart';
-import 'package:todos/logic/user_functions.dart';
+import 'package:todos/logic/services/auth.dart';
 import 'package:todos/screens/home.dart';
 import 'package:todos/widgets/common/dismiss_keyboard.dart';
 
@@ -28,7 +28,7 @@ class _SignUpState extends State<SignUp> {
 
     setState(() => _loading = true);
     try {
-      final result = await UserFunctions.createUser(
+      final result = await Auth.createUser(
         _emailController.text,
         _passwordController.text,
       );

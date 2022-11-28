@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/todo_functions.dart';
+import 'package:todos/logic/services/database.dart';
 import 'package:todos/widgets/home/add_todo_button.dart';
 import 'package:todos/widgets/home/logout_button.dart';
 import 'package:todos/widgets/home/theme_switch_button.dart';
@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   StreamBuilder(
-                    stream: TodoFunctions.getTodosCount(),
+                    stream: Database.getTodosCount(),
                     builder: ((context, AsyncSnapshot<int> snapshot) {
                       if (snapshot.hasData) {
                         return Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/user_functions.dart';
+import 'package:todos/logic/services/auth.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({super.key});
@@ -9,7 +9,7 @@ class LogoutButton extends StatelessWidget {
     return const IconButton(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
-      onPressed: UserFunctions.logout,
+      onPressed: Auth.logout,
       icon: Icon(
         Icons.logout_outlined,
         color: Colors.white,

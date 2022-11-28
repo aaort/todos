@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/logic/models/todo.dart';
-import 'package:todos/logic/todo_functions.dart';
+import 'package:todos/logic/services/database.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/common/loading_indicator.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
@@ -18,7 +18,7 @@ class TodoList extends StatelessWidget {
         ),
       ),
       child: StreamBuilder<List<Todo>>(
-        stream: TodoFunctions.getTodos(),
+        stream: Database.getTodos(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();

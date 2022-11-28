@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todos/logic/models/todo.dart';
 
-import 'models/todo.dart';
-
-class TodoFunctions {
+class Database {
   final Todo todo;
 
-  TodoFunctions(this.todo) {
+  Database(this.todo) {
     _db.settings = const Settings(persistenceEnabled: true);
   }
 

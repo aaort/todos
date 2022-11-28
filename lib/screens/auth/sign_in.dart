@@ -3,7 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todos/widgets/auth/auth_form.dart';
 import 'package:todos/screens/auth/sign_up.dart';
-import 'package:todos/logic/user_functions.dart';
+import 'package:todos/logic/services/auth.dart';
 import 'package:todos/widgets/common/dismiss_keyboard.dart';
 
 class SignIn extends StatefulWidget {
@@ -26,7 +26,7 @@ class _SignInState extends State<SignIn> {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     setState(() => _loading = true);
     try {
-      await UserFunctions.login(
+      await Auth.login(
         _emailController.text,
         _passwordController.text,
       );

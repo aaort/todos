@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todos/logic/models/todo.dart';
-import 'package:todos/logic/todo_functions.dart';
+import 'package:todos/logic/services/database.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/extensions.dart' show Reminder;
@@ -32,13 +32,13 @@ class SaveTodoButton extends StatelessWidget {
       if (initialTodo!.reminderId != null) {
         Notifications.cancelReminder(initialTodo!.reminderId!);
       }
-      TodoFunctions(todo).updateTodo();
+      Database(todo).updateTodo();
       if (todo.reminderId != null) {
         Notifications.scheduleReminder(todo);
       }
     } else {
       final todo = Todo(task, reminder: reminder, repeat: repeat);
-      TodoFunctions(todo).createTodo();
+      Database(todo).createTodo();
       if (todo.reminderId != null) Notifications.scheduleReminder(todo);
     }
 
