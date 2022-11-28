@@ -13,11 +13,11 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  late Stream<List<Todo>> _stream;
+  late Stream<List<Todo>> _todos;
 
   @override
   void initState() {
-    _stream = Database.getTodos();
+    _todos = Database.getTodos();
     super.initState();
   }
 
@@ -31,7 +31,7 @@ class _TodoListState extends State<TodoList> {
         ),
       ),
       child: StreamBuilder<List<Todo>>(
-        stream: _stream,
+        stream: _todos,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingIndicator();
