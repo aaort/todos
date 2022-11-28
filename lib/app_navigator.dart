@@ -14,7 +14,12 @@ class AppNavigator extends StatelessWidget {
       initialData: null,
       value: Auth.authStateChanges,
       builder: ((context, _) {
-        return context.watch<User?>() == null ? const SignIn() : const Home();
+        final user = context.watch<User?>();
+        if (user != null && !user.isAnonymous) {
+          return const Home();
+        } else {
+          return const SignIn();
+        }
       }),
     );
   }
