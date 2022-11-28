@@ -1,20 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/auth/auth_form.dart';
-import 'package:todos/auth/utils.dart';
+import 'package:todos/widgets/auth/auth_form.dart';
+import 'package:todos/screens/auth/sign_up.dart';
 import 'package:todos/logic/user_functions.dart';
-import 'package:todos/screens/home.dart';
 import 'package:todos/widgets/common/dismiss_keyboard.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignInState extends State<SignIn> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -23,31 +22,28 @@ class _SignUpState extends State<SignUp> {
 
   String? _errorText;
 
-  _onSignUp() async {
+  _onSignIn() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-
     setState(() => _loading = true);
     try {
-      final result = await UserFunctions.createUser(
+      await UserFunctions.login(
         _emailController.text,
         _passwordController.text,
       );
-
-      if (result?.user != null && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
-        );
-      }
     } on FirebaseAuthException catch (e) {
       setState(() => _errorText = getErrorText(e.code));
     }
     setState(() => _loading = false);
   }
 
-  _onSignIn() => navigateToSignIn(context);
+  _onSignUp() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SignUp(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,25 +58,25 @@ class _SignUpState extends State<SignUp> {
               AuthForm(
                 emailController: _emailController,
                 passwordController: _passwordController,
-                onSave: _onSignUp,
+                onSave: _onSignIn,
                 formKey: _formKey,
-                buttonTitle: 'Sign up',
+                buttonTitle: 'Sign in',
                 errorText: _errorText,
                 loading: _loading,
               ),
               const SizedBox(height: 20),
               RichText(
                 text: TextSpan(
-                  text: 'Already have an account ? ',
+                  text: 'Don\'t have an account ? ',
                   style: Theme.of(context).textTheme.bodySmall,
                   children: [
                     TextSpan(
-                      text: 'Sign in',
+                      text: 'Sign up',
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()..onTap = _onSignIn,
+                      recognizer: TapGestureRecognizer()..onTap = _onSignUp,
                     )
                   ],
                 ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todos/auth/utils.dart';
 import 'package:todos/widgets/common/loading_indicator.dart';
 
 class AuthForm extends StatelessWidget {
@@ -67,4 +66,50 @@ class AuthForm extends StatelessWidget {
       ),
     );
   }
+}
+
+final authExceptions = <String>[
+  'wrong-password',
+  'weak-password',
+  'email-already-in-use',
+  'user-not-found',
+];
+
+final Map errorMessages = <String, String>{
+  authExceptions[0]: 'Provided password is incorrect',
+  authExceptions[1]: 'Provided password is too weak',
+  authExceptions[2]: 'Provided email is already in use',
+  authExceptions[3]: "There is no user found with provided credentials",
+};
+
+String getErrorText(String errorCode) {
+  try {
+    return errorMessages.entries
+        .firstWhere((entry) => entry.key == errorCode)
+        .value;
+  } catch (_) {
+    return 'Unexpected exception occurred';
+  }
+}
+
+String? emailValidator(String? email) {
+  if (email == null || email.isEmpty) {
+    return 'Please enter your email';
+  }
+  if (!email.contains('@')) {
+    return 'Your email should container @ sign';
+  }
+
+  return null;
+}
+
+String? passwordValidator(String? password) {
+  if (password == null || password.isEmpty) {
+    return 'Please enter your password';
+  }
+  if (password.length < 6) {
+    return 'Your password is too short';
+  }
+
+  return null;
 }
