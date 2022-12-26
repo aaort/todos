@@ -2,10 +2,18 @@
 
 Todo app for storing and managing tasks
 
+## Showcase
+
+<div style="flex-direction: row;">
+    <img src="media/android_3.png" width="200" height="450">
+    <img src="media/android_2.png" width="200" height="450">
+    <img src="media/android_1.png" width="200" height="450">
+    <img src="media/ios_3.PNG" width="200" height="450">
+</div>
+
 ## Built with
 
 This project is built with [Flutter](https://github.com/flutter/flutter) and [Firebase](https://firebase.google.com/). local notifications are created with [Awesome Notifications](https://github.com/rafaelsetragni/awesome_notifications). Data stored in [Cloud Firestore](https://firebase.google.com/docs/firestore) and authentication is handled with [Firebase auth](https://firebase.google.com/docs/auth). Dark and light theme switching is managed with [Provider package](https://pub.dev/packages/provider).
-
 
 ## Overview
 
