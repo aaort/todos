@@ -7,8 +7,8 @@ Todo app for storing and managing tasks
 <div style="flex-direction: row;">
     <img src="media/android_3.png" width="200" height="450">
     <img src="media/android_2.png" width="200" height="450">
-    <img src="media/android_1.png" width="200" height="450">
-    <img src="media/ios_3.PNG" width="200" height="450">
+    <img src="media/ios_1.png" width="200" height="450">
+    <img src="media/ios_2.png" width="200" height="450">
 </div>
 
 ## Built with
@@ -39,4 +39,3 @@ $ flutter run
 ## Contact
 
 <artashesano@gmail.com>
-
