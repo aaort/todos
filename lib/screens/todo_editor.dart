@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todos/helpers.dart';
 import 'package:todos/logic/models/todo.dart';
-import 'package:todos/widgets/common/dismiss_keyboard.dart';
 import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
@@ -52,7 +52,7 @@ class _TodoEditorState extends State<TodoEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return DismissKeyboard(
+    return KeyboardDismisser(
       child: Container(
         // Tap for hiding keyboard will not be detected without this prop
         color: Colors.transparent,

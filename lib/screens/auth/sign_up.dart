@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:todos/widgets/auth/auth_form.dart';
-import 'package:todos/screens/auth/sign_in.dart';
+import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todos/logic/services/auth.dart';
+import 'package:todos/screens/auth/sign_in.dart';
 import 'package:todos/screens/home.dart';
-import 'package:todos/widgets/common/dismiss_keyboard.dart';
+import 'package:todos/widgets/auth/auth_form.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return DismissKeyboard(
+    return KeyboardDismisser(
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Padding(
