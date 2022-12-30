@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/logic/models/todo.dart';
 import 'package:todos/logic/services/database.dart';
 import 'package:todos/theme/constants.dart';
-import 'package:todos/widgets/common/loading_indicator.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
-class TodoList extends StatefulWidget {
+final todosProvider = StreamProvider<List<Todo>>((ref) {
+  return Database.getTodos();
+});
+
+class TodoList extends ConsumerWidget {
   const TodoList({super.key});
 
   @override
-  State<TodoList> createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
-  late Stream<List<Todo>> _todos;
-
-  @override
-  void initState() {
-    _todos = Database.getTodos();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todos = ref.watch(todosProvider);
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
@@ -30,14 +22,10 @@ class _TodoListState extends State<TodoList> {
           top: Radius.circular(kModalBorderRadius),
         ),
       ),
-      child: StreamBuilder<List<Todo>>(
-        stream: _todos,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LoadingIndicator();
-          }
-          final todos = snapshot.data;
-          if (todos == null) return const SizedBox();
+      child: todos.when(
+        error: (_, __) => const Center(child: Text('Something went wrong')),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        data: (todos) {
           return ListView.builder(
             padding: const EdgeInsets.only(top: 20, left: 5, right: 5),
             itemCount: todos.length,
