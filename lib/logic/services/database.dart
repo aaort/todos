@@ -30,9 +30,9 @@ class Database {
     await _todosRef.doc(todo.id).delete();
   }
 
-  static Stream<List<Todo>> getTodos() async* {
-    await for (QuerySnapshot snap
-        in _todosRef.orderBy('createdAt').snapshots()) {
+  static Stream<List<Todo>> get todos async* {
+    final todosQuery = _todosRef.orderBy('createdAt');
+    await for (QuerySnapshot snap in todosQuery.snapshots()) {
       yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
     }
   }
@@ -48,7 +48,7 @@ class Database {
     return null;
   }
 
-  static Stream<int> getTodosCount() async* {
+  static Stream<int> get todosCount async* {
     await for (var snapshot in _todosRef.snapshots()) {
       yield snapshot.docs.length;
     }

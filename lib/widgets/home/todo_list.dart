@@ -6,7 +6,7 @@ import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
 final todosProvider = StreamProvider<List<Todo>>((ref) {
-  return Database.getTodos();
+  return Database.todos;
 });
 
 class TodoList extends ConsumerWidget {
