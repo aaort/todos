@@ -4,7 +4,7 @@ import 'package:todos/logic/services/database.dart';
 import 'package:todos/widgets/home/logout_button.dart';
 import 'package:todos/widgets/home/theme_switch_button.dart';
 
-final todosCountProvider = StreamProvider<int?>((ref) {
+final todosCountProvider = StreamProvider.autoDispose<int?>((ref) {
   return Database.getTodosCount();
 });
 
