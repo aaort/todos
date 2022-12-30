@@ -13,7 +13,7 @@ Todo app for storing and managing tasks
 
 ## Built with
 
-This project is built with [Flutter](https://github.com/flutter/flutter) and [Firebase](https://firebase.google.com/). local notifications are created with [Awesome Notifications](https://github.com/rafaelsetragni/awesome_notifications). Data stored in [Cloud Firestore](https://firebase.google.com/docs/firestore) and authentication is handled with [Firebase auth](https://firebase.google.com/docs/auth). Dark and light theme switching is managed with [Provider package](https://pub.dev/packages/provider).
+This project is built with [Flutter](https://github.com/flutter/flutter) and [Firebase](https://firebase.google.com/). local notifications are implemented with [Awesome Notifications](https://github.com/rafaelsetragni/awesome_notifications).
 
 ## Overview
 
@@ -25,7 +25,7 @@ To run this project on your machine you need to have Flutter and [Xcode](https:/
 
 ## Features
 
-You can create/edit/delete tasks, set reminder for particular date in the future or make it repeat itself with a given interval. Sign in into your account to be able to manage tasks from several devices or sign up if you're new. You also can switch between light and dark modes. There is a lot more festures which will be aded very soon.
+You can create/edit/delete tasks, set reminder for particular date in the future or make it repeat itself with a given interval. Sign in into your account to be able to manage tasks from several devices or create an account with email and passwords. You also can switch between light and dark modes.
 
 ### Get Started
 
