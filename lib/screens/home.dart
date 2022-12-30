@@ -37,15 +37,12 @@ class _HomeState extends State<Home> {
                 children: [
                   StreamBuilder<int>(
                     stream: _todosCount,
-                    builder: ((context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Text(
-                          '${snapshot.data.toString()} Todos',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        );
-                      }
-                      return const Text('');
-                    }),
+                    builder: (context, snapshot) {
+                      return Text(
+                        '${(snapshot.data ?? '').toString()} Todos',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      );
+                    },
                   ),
                   Row(
                     children: const [
