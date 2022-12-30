@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/app_navigator.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/theme/theme.dart';
@@ -18,28 +18,30 @@ void main() async {
 
   await Notifications.initialize();
 
-  runApp(const App());
+  runApp(const ProviderScope(child: App()));
 }
 
-class App extends StatelessWidget {
+final themeModeProvider =
+    StateNotifierProvider<ThemeModeManager, ThemeMode>((ref) {
+  return ThemeModeManager();
+});
+
+class App extends ConsumerWidget {
   const App({super.key});
 
+  // TODO: unused
   static final materialAppKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeManager>(
-      create: (_) => ThemeManager(),
-      child: Builder(builder: (ctx) {
-        return MaterialApp(
-          key: materialAppKey,
-          title: 'Todos',
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: ctx.watch<ThemeManager>().themeMode,
-          home: const AppNavigator(),
-        );
-      }),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeModeProvider);
+    return MaterialApp(
+      key: materialAppKey,
+      title: 'Todos',
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: themeMode,
+      home: const AppNavigator(),
     );
   }
 }

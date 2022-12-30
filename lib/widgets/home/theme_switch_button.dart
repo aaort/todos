@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todos/theme/theme_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todos/main.dart';
 
-class ThemeSwitchIconButton extends StatelessWidget {
+class ThemeSwitchIconButton extends ConsumerWidget {
   const ThemeSwitchIconButton({super.key});
 
-  void toggleTheme(BuildContext context) {
-    context.read<ThemeManager>().toggleTheme();
+  void toggleTheme(WidgetRef ref) {
+    ref.read(themeModeProvider.notifier).toggleTheme();
   }
 
   @override
-  Widget build(BuildContext context) {
-    final isDarkMode = context.watch<ThemeManager>().isDark;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(themeModeProvider) == ThemeMode.dark;
 
     return IconButton(
       highlightColor: Colors.transparent,
@@ -26,9 +26,7 @@ class ThemeSwitchIconButton extends StatelessWidget {
         ),
         child: isDarkMode ? _darkIcon : _lightIcon,
       ),
-      onPressed: () {
-        toggleTheme(context);
-      },
+      onPressed: () => toggleTheme(ref),
     );
   }
 }
