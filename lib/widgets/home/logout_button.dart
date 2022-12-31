@@ -6,6 +6,7 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: remove hard coded values (colors)
     return const IconButton(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
