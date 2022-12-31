@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:todos/app_navigator.dart';
 import 'package:todos/logic/services/auth.dart';
 import 'package:todos/screens/auth/sign_in.dart';
-import 'package:todos/screens/home.dart';
 import 'package:todos/widgets/auth/auth_form.dart';
 
 class SignUp extends StatefulWidget {
@@ -34,11 +34,9 @@ class _SignUpState extends State<SignUp> {
       );
 
       if (user != null && mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const AppNavigator()),
+          (route) => false,
         );
       }
     } on FirebaseAuthException catch (e) {
