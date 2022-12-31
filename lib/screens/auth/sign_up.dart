@@ -28,12 +28,12 @@ class _SignUpState extends State<SignUp> {
 
     setState(() => _loading = true);
     try {
-      final result = await Auth.createUser(
+      final user = await Auth.createUser(
         _emailController.text,
         _passwordController.text,
       );
 
-      if (result?.user != null && mounted) {
+      if (user != null && mounted) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
