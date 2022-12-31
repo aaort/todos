@@ -6,6 +6,8 @@ class Auth {
 
   static Stream<User?> get authStateChanges => _auth.authStateChanges();
 
+  static User? currentUser = _auth.currentUser;
+
   static Future<void> logout() async {
     Database.terminateSession();
     await _auth.signOut();
