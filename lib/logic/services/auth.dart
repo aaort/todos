@@ -1,15 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:todos/logic/services/database.dart';
 
 class Auth {
   static final _auth = FirebaseAuth.instance;
-  static final _db = FirebaseFirestore.instance;
 
   static Stream<User?> get authStateChanges => _auth.authStateChanges();
 
   static Future<void> logout() async {
-    await _db.terminate();
-    await _db.clearPersistence();
+    Database.terminateSession();
     await _auth.signOut();
   }
 
@@ -37,7 +35,7 @@ class Auth {
       'id': credentials.user!.uid,
     };
 
-    await _db.collection('users').doc(user['id']).set(user);
+    await Database.createUser(user);
 
     return credentials;
   }
