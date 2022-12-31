@@ -65,22 +65,25 @@ class _SignInState extends State<SignIn> {
                 loading: _loading,
               ),
               const SizedBox(height: 20),
-              RichText(
-                text: TextSpan(
-                  text: 'Don\'t have an account ? ',
-                  style: Theme.of(context).textTheme.bodySmall,
-                  children: [
-                    TextSpan(
-                      text: 'Sign up',
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Don\'t have an account ? ',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  InkWell(
+                    onTap: _onSignUp,
+                    child: Text(
+                      'Sign up',
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium!
                           .copyWith(fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()..onTap = _onSignUp,
-                    )
-                  ],
-                ),
-              )
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
