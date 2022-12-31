@@ -53,7 +53,7 @@ class _TodoEditorState extends State<TodoEditor> {
   @override
   Widget build(BuildContext context) {
     return KeyboardDismisser(
-      child: Container(
+      child: ColoredBox(
         // Tap for hiding keyboard will not be detected without this prop
         color: Colors.transparent,
         child: FractionallySizedBox(
