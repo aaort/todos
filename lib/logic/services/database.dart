@@ -30,6 +30,10 @@ class Database {
     await _todosRef.doc(todo.id).delete();
   }
 
+  static Future<void> createUser(Map<String, dynamic> user) async {
+    _db.collection('users').doc(user['id']).set(user);
+  }
+
   static Stream<List<Todo>> get todos async* {
     final todosQuery = _todosRef.orderBy('createdAt');
     await for (QuerySnapshot snap in todosQuery.snapshots()) {
@@ -52,5 +56,9 @@ class Database {
     await for (var snapshot in _todosRef.snapshots()) {
       yield snapshot.docs.length;
     }
+  }
+
+  static Future<void> terminateSession() async {
+    await Future.wait([_db.terminate(), _db.clearPersistence()]);
   }
 }
