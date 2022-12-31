@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todos/logic/models/todo.dart';
 import 'package:todos/logic/services/auth.dart';
 
@@ -8,9 +9,9 @@ class Database {
   Database(this.todo);
 
   static final _db = FirebaseFirestore.instance;
-  static final currentUser = Auth.currentUser;
+  static User? get currentUser => Auth.currentUser;
 
-  static final _todosRef =
+  static CollectionReference<Map<String, dynamic>> get _todosRef =>
       _db.collection('users').doc(currentUser?.uid).collection('todos');
 
   createTodo() {

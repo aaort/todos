@@ -6,11 +6,10 @@ class Auth {
 
   static Stream<User?> get authStateChanges => _auth.authStateChanges();
 
-  static User? currentUser = _auth.currentUser;
+  static User? get currentUser => _auth.currentUser;
 
   static Future<void> logout() async {
-    Database.terminateSession();
-    await _auth.signOut();
+    await Future.wait([Database.terminateSession(), _auth.signOut()]);
   }
 
   static Future<UserCredential?> login(String email, String password) async {
