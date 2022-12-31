@@ -19,25 +19,12 @@ class Auth {
     );
   }
 
-  static Future<UserCredential?> createUser(
-      String email, String password) async {
+  static Future<User?> createUser(String email, String password) async {
     final credentials = await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
 
-    // Called to trigger new event on authStateChanges stream
-    login(email, password);
-
-    if (credentials.user == null) return null;
-
-    final user = {
-      'email': credentials.user!.email,
-      'id': credentials.user!.uid,
-    };
-
-    await Database.createUser(user);
-
-    return credentials;
+    return credentials.user;
   }
 }
