@@ -5,9 +5,7 @@ import 'package:todos/logic/services/database.dart';
 import 'package:todos/theme/constants.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
-final todosProvider = StreamProvider<List<Todo>>((ref) {
-  return Database.todos;
-});
+final todosProvider = StreamProvider<List<Todo>>((ref) => Database.todos);
 
 class TodoList extends ConsumerWidget {
   const TodoList({super.key});
