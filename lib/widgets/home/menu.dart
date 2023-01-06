@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/logic/services/auth.dart';
 import 'package:todos/main.dart';
-import 'package:todos/widgets/home/logout_button.dart';
+import 'package:todos/widgets/auth/logout_button.dart';
 import 'package:todos/widgets/home/theme_switch_button.dart';
 
 class Menu extends ConsumerWidget {
