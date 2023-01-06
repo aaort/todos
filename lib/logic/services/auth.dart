@@ -12,6 +12,10 @@ class Auth {
     await Future.wait([Database.terminateSession(), _auth.signOut()]);
   }
 
+  static Future<UserCredential> signInAnonymously() async {
+    return await _auth.signInAnonymously();
+  }
+
   static Future<UserCredential?> login(String email, String password) async {
     return await _auth.signInWithEmailAndPassword(
       email: email,
