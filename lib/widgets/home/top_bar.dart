@@ -1,8 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/logic/services/database.dart';
-import 'package:todos/widgets/home/logout_button.dart';
-import 'package:todos/widgets/home/theme_switch_button.dart';
+import 'package:todos/widgets/home/menu.dart';
 
 final todosCountProvider = StreamProvider.autoDispose<int?>((ref) {
   return Database.todosCount;
@@ -23,12 +22,7 @@ class TopBar extends ConsumerWidget {
             '${(todosCount.value ?? '').toString()} Todos',
             style: Theme.of(context).textTheme.titleLarge,
           ),
-          Row(
-            children: const [
-              LogoutButton(),
-              ThemeSwitchIconButton(),
-            ],
-          )
+          const Menu(),
         ],
       ),
     );
