@@ -8,6 +8,8 @@ class Auth {
 
   static User? get currentUser => _auth.currentUser;
 
+  static bool? get isAnonymous => currentUser?.isAnonymous;
+
   static Future<void> logout() async {
     await Future.wait([Database.terminateSession(), _auth.signOut()]);
   }
