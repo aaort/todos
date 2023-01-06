@@ -30,10 +30,11 @@ class Menu extends ConsumerWidget {
                 onTap: () => toggleTheme(ref),
                 child: const ThemeSwitchIconButton(),
               ),
-              const PopupMenuItem(
-                onTap: Auth.logout,
-                child: LogoutButton(),
-              ),
+              if (!(Auth.isAnonymous ?? true))
+                const PopupMenuItem(
+                  onTap: Auth.logout,
+                  child: LogoutButton(),
+                ),
             ],
           );
         },
