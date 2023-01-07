@@ -67,7 +67,7 @@ class _SignUpState extends State<SignUp> {
               AuthForm(
                 emailController: _emailController,
                 passwordController: _passwordController,
-                onSave: _onSignUp,
+                onSubmit: _onSignUp,
                 formKey: _formKey,
                 buttonTitle: 'Sign up',
                 errorText: _errorText,

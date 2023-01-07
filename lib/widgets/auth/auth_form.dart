@@ -5,7 +5,7 @@ class AuthForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
   final TextEditingController passwordController;
-  final Function() onSave;
+  final Function() onSubmit;
   final String buttonTitle;
   final String? errorText;
   final bool loading;
@@ -15,7 +15,7 @@ class AuthForm extends StatelessWidget {
     required this.formKey,
     required this.emailController,
     required this.passwordController,
-    required this.onSave,
+    required this.onSubmit,
     required this.buttonTitle,
     required this.loading,
     this.errorText,
@@ -51,7 +51,7 @@ class AuthForm extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: onSave,
+            onPressed: onSubmit,
             child: loading ? const LoadingIndicator() : Text(buttonTitle),
           ),
           if (errorText != null) ...[

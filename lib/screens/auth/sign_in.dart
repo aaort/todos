@@ -58,7 +58,7 @@ class _SignInState extends State<SignIn> {
               AuthForm(
                 emailController: _emailController,
                 passwordController: _passwordController,
-                onSave: _onSignIn,
+                onSubmit: _onSignIn,
                 formKey: _formKey,
                 buttonTitle: 'Sign in',
                 errorText: _errorText,
