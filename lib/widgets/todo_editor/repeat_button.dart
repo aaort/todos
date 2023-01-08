@@ -19,7 +19,7 @@ final _repeats = <PickerOption<Repeat>>[
 class RepeatButton extends StatelessWidget {
   final bool enabled;
   final Repeat? repeat;
-  final Function(Repeat) onOptionChange;
+  final Function(Repeat?) onOptionChange;
 
   const RepeatButton({
     super.key,
@@ -41,28 +41,35 @@ class RepeatButton extends StatelessWidget {
     );
   }
 
+  onRepeatDeleted() => onOptionChange(null);
+
   @override
   Widget build(BuildContext context) {
+    final repeatName =
+        repeat != null ? ' - ${repeat!.toName().capitalize()}' : '';
     return GestureDetector(
       onTap: enabled ? () => onOptionButtonPressed(context) : null,
       child: DisabledOpacity(
         enabled: enabled,
-        child: Container(
+        child: ColoredBox(
           color: Colors.transparent,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 child: Text(
-                  'Repeat',
+                  'Repeat $repeatName',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
+              // Delete selected repeat option
               if (repeat != null)
-                Text(
-                  repeat!.toName().capitalize(),
-                  style: Theme.of(context).textTheme.bodySmall,
-                )
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  onPressed: onRepeatDeleted,
+                  icon: const Icon(Icons.close),
+                ),
             ],
           ),
         ),

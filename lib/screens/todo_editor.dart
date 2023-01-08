@@ -33,7 +33,7 @@ class _TodoEditorState extends State<TodoEditor> {
     });
   }
 
-  void onRepeatOptionChange(Repeat option) {
+  void onRepeatOptionChange(Repeat? option) {
     setState(() {
       repeat = option;
       reminder = null;
