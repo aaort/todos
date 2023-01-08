@@ -93,8 +93,8 @@ class _TodoEditorState extends State<TodoEditor> {
                   reminder: reminder,
                   repeat: repeat,
                 ),
+                const SizedBox(height: 30),
                 if (reminder != null) ...[
-                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -119,12 +119,12 @@ class _TodoEditorState extends State<TodoEditor> {
                     ],
                   ),
                 ],
-                const SizedBox(height: 30),
-                RepeatButton(
-                  enabled: taskController.text.isNotEmpty,
-                  repeat: repeat,
-                  onOptionChange: onRepeatOptionChange,
-                )
+                if (reminder == null)
+                  RepeatButton(
+                    enabled: taskController.text.isNotEmpty,
+                    repeat: repeat,
+                    onOptionChange: onRepeatOptionChange,
+                  )
               ],
             ),
           ),
