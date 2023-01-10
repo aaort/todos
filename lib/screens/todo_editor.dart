@@ -9,6 +9,9 @@ import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
 import 'package:todos/extensions.dart' show Reminder;
 
+// This provided is supposed to be used only inside this file and widgets
+// That are used by TodoEditor widget, in the future files of extracted widgets
+// Might become part of this file
 final todoProvider = StateProvider.autoDispose.family((ref, Map? args) {
   if (args == null) return Todo('');
   final repeat =
