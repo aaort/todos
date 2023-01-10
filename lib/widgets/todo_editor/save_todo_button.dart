@@ -8,10 +8,7 @@ import 'package:todos/screens/todo_editor.dart';
 class SaveTodoButton extends ConsumerWidget {
   final Todo? initialTodo;
 
-  const SaveTodoButton({
-    super.key,
-    this.initialTodo,
-  });
+  const SaveTodoButton({super.key, this.initialTodo});
 
   Future<void> onTodoSaved(WidgetRef ref) async {
     final todo = ref.read(todoProvider(null));
