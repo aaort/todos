@@ -11,7 +11,7 @@ class SaveTodoButton extends ConsumerWidget {
   const SaveTodoButton({super.key, this.initialTodo});
 
   Future<void> onTodoSaved(WidgetRef ref) async {
-    final todo = ref.read(todoProvider(null));
+    final todo = ref.read(todoProvider(initialTodo));
     if (todo.task.isEmpty) return;
 
     if (initialTodo != null) {

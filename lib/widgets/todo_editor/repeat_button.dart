@@ -20,7 +20,8 @@ const _repeats = <PickerOption<Repeat>>[
 ];
 
 class RepeatButton extends ConsumerWidget {
-  const RepeatButton({super.key});
+  final Todo? initialTodo;
+  const RepeatButton({super.key, this.initialTodo});
 
   void onOptionButtonPressed(WidgetRef ref) async {
     await ensureKeyboardIsHidden(ref.context);
@@ -37,7 +38,7 @@ class RepeatButton extends ConsumerWidget {
 
   void onOptionChange({required WidgetRef ref, Repeat? repeat}) {
     ref
-        .read(todoProvider(null).notifier)
+        .read(todoProvider(initialTodo).notifier)
         .update((state) => Todo(state.task, reminder: null, repeat: repeat));
   }
 
@@ -45,7 +46,7 @@ class RepeatButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todo = ref.watch(todoProvider(null));
+    final todo = ref.watch(todoProvider(initialTodo));
     final enabled = todo.task.isNotEmpty;
     final repeat = todo.repeat;
     final repeatName =

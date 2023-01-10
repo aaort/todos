@@ -19,8 +19,9 @@ const _reminderOptions = <PickerOption<dynamic>>[
 
 class ReminderButton extends ConsumerWidget {
   final Widget child;
+  final Todo? initialTodo;
 
-  const ReminderButton({super.key, required this.child});
+  const ReminderButton({super.key, this.initialTodo, required this.child});
 
   void showReminderOptionPicker(WidgetRef ref) async {
     await ensureKeyboardIsHidden(ref.context);
@@ -39,7 +40,7 @@ class ReminderButton extends ConsumerWidget {
       onReminderChange(ref: ref, option: option);
     } else {
       await ensureKeyboardIsHidden(ref.context);
-      final reminder = ref.read(todoProvider(null)).reminder;
+      final reminder = ref.read(todoProvider(initialTodo)).reminder;
       showDateTimePicker(
         context: ref.context,
         title: 'Remind me...',
@@ -54,13 +55,13 @@ class ReminderButton extends ConsumerWidget {
   void onReminderChange({required WidgetRef ref, dynamic option}) {
     final reminder = option is Duration ? option.toDateTime() : option;
     ref
-        .read(todoProvider(null).notifier)
+        .read(todoProvider(initialTodo).notifier)
         .update((state) => Todo(state.task, reminder: reminder, repeat: null));
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final enabled = ref.watch(todoProvider(null)).task.isNotEmpty;
+    final enabled = ref.watch(todoProvider(initialTodo)).task.isNotEmpty;
     return DisabledOpacity(
       enabled: enabled,
       child: GestureDetector(

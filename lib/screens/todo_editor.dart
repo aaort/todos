@@ -16,16 +16,8 @@ final todoProvider = StateProvider.autoDispose.family((ref, Todo? todo) {
   return todo ?? Todo('');
 });
 
-void todoTaskListener({required WidgetRef ref, required String task}) {
-  ref.read(todoProvider(null).notifier).update((state) {
-    return state
-      ..task = task
-      ..reminder = state.reminder
-      ..repeat = state.repeat;
-  });
-}
-
 String _reminderText(WidgetRef ref) {
+  // TODO: pass intialTodo argument for provider
   final reminder = ref.read(todoProvider(null)).reminder;
   if (reminder == null) return '';
   return getReminderText(
@@ -38,21 +30,15 @@ class TodoEditor extends HookConsumerWidget {
   const TodoEditor({this.initialTodo, super.key});
 
   void clearReminder(WidgetRef ref) {
-    ref
-        .read(todoProvider(null).notifier)
-        .update((state) => Todo(state.task, reminder: null, repeat: null));
+    ref.read(todoProvider(initialTodo).notifier).update((state) => state
+      ..reminder = null
+      ..repeat = null);
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(initialTodo));
     final taskController = useTextEditingController(text: initialTodo?.task);
-    useEffect(() {
-      taskController.addListener(() {
-        todoTaskListener(ref: ref, task: taskController.text);
-      });
-      return null;
-    }, []);
 
     return KeyboardDismisser(
       child: ColoredBox(
@@ -73,13 +59,20 @@ class TodoEditor extends HookConsumerWidget {
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    const ReminderButton(child: Icon(Icons.timer_outlined)),
+                    ReminderButton(
+                      // Required to pass to the todoProvider as an argument
+                      initialTodo: initialTodo,
+                      child: const Icon(Icons.timer_outlined),
+                    ),
                   ],
                 ),
                 TextField(
                   key: const Key('createTodoInputId'),
                   autofocus: true,
                   controller: taskController,
+                  onChanged: (_) => ref
+                      .read(todoProvider(initialTodo).notifier)
+                      .update((state) => state.copyWith(state.asMap)),
                   textCapitalization: TextCapitalization.sentences,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
@@ -108,7 +101,10 @@ class TodoEditor extends HookConsumerWidget {
                     ],
                   ),
                 ],
-                if (todo.reminder == null) const RepeatButton()
+                if (todo.reminder == null)
+                  // Initial todo is required to pass it to the todoProvider
+                  // to do not create new providers see https://riverpod.dev/docs/concepts/modifiers/family
+                  RepeatButton(initialTodo: initialTodo)
               ],
             ),
           ),
