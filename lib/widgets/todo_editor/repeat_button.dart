@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/extensions.dart';
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
+import 'package:todos/logic/models/todo.dart';
+import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/widgets/common/disabled_opacity.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
@@ -16,39 +19,39 @@ const _repeats = <PickerOption<Repeat>>[
   PickerOption('Weekly', Repeat.weekly),
 ];
 
-class RepeatButton extends StatelessWidget {
-  final bool enabled;
-  final Repeat? repeat;
-  final Function(Repeat?) onOptionChange;
+class RepeatButton extends ConsumerWidget {
+  const RepeatButton({super.key});
 
-  const RepeatButton({
-    super.key,
-    required this.enabled,
-    required this.repeat,
-    required this.onOptionChange,
-  });
-
-  void onOptionButtonPressed(BuildContext context) async {
-    await ensureKeyboardIsHidden(context);
+  void onOptionButtonPressed(WidgetRef ref) async {
+    await ensureKeyboardIsHidden(ref.context);
     showOptionPicker<Repeat>(
-      context: context,
+      context: ref.context,
       title: 'Remind',
       options: _repeats,
       onChange: (_) {
-        Navigator.pop(context);
-        onOptionChange(_);
+        Navigator.pop(ref.context);
+        onOptionChange(ref: ref, repeat: _);
       },
     );
   }
 
-  onRepeatDeleted() => onOptionChange(null);
+  void onOptionChange({required WidgetRef ref, Repeat? repeat}) {
+    ref
+        .read(todoProvider(null).notifier)
+        .update((state) => Todo(state.task, reminder: null, repeat: repeat));
+  }
+
+  onRepeatDeleted(WidgetRef ref) => onOptionChange(ref: ref, repeat: null);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todo = ref.watch(todoProvider(null));
+    final enabled = todo.task.isNotEmpty;
+    final repeat = todo.repeat;
     final repeatName =
-        repeat != null ? ' - ${repeat!.toName().capitalize()}' : '';
+        repeat != null ? ' - ${repeat.toName().capitalize()}' : '';
     return GestureDetector(
-      onTap: enabled ? () => onOptionButtonPressed(context) : null,
+      onTap: enabled ? () => onOptionButtonPressed(ref) : null,
       child: DisabledOpacity(
         enabled: enabled,
         child: ColoredBox(
@@ -62,12 +65,12 @@ class RepeatButton extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ),
-              // Delete selected repeat option
+              // Delete selected repeat options
               if (repeat != null)
                 IconButton(
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
-                  onPressed: onRepeatDeleted,
+                  onPressed: () => onRepeatDeleted(ref),
                   icon: const Icon(Icons.close),
                 ),
             ],

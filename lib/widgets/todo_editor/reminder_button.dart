@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/extensions.dart' show Reminder;
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
+import 'package:todos/logic/models/todo.dart';
+import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/widgets/common/disabled_opacity.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
@@ -14,56 +17,54 @@ const _reminderOptions = <PickerOption<dynamic>>[
   PickerOption('Custom', ReminderOption.custom),
 ];
 
-class ReminderButton extends StatelessWidget {
-  final bool enabled;
-  final dynamic reminder;
-  final Function(dynamic) onReminderChange;
+class ReminderButton extends ConsumerWidget {
   final Widget child;
 
-  ReminderButton({
-    super.key,
-    this.reminder,
-    required this.enabled,
-    required this.onReminderChange,
-    required this.child,
-  });
+  const ReminderButton({super.key, required this.child});
 
-  final _key = GlobalKey();
-
-  void showReminderOptionPicker() async {
-    await ensureKeyboardIsHidden(_key.currentContext!);
+  void showReminderOptionPicker(WidgetRef ref) async {
+    await ensureKeyboardIsHidden(ref.context);
     showOptionPicker<dynamic>(
-      context: _key.currentContext!,
+      context: ref.context,
       title: 'Remind me',
       options: _reminderOptions,
-      onChange: onReminderOptionChange,
+      onChange: (_) => onReminderOptionChange(ref: ref, option: _),
     );
   }
 
-  void onReminderOptionChange(dynamic option) async {
-    Navigator.pop(_key.currentContext!);
+  void onReminderOptionChange(
+      {required WidgetRef ref, required dynamic option}) async {
+    Navigator.pop(ref.context);
     if (option is Duration) {
-      onReminderChange(option);
+      onReminderChange(ref: ref, option: option);
     } else {
-      await ensureKeyboardIsHidden(_key.currentContext!);
+      await ensureKeyboardIsHidden(ref.context);
+      final reminder = ref.read(todoProvider(null)).reminder;
       showDateTimePicker(
-        context: _key.currentContext!,
+        context: ref.context,
         title: 'Remind me...',
         initialDateTime: reminder is Duration
             ? (reminder as Duration).toDateTime()
             : reminder,
-        onChange: onReminderChange,
+        onChange: (_) => onReminderChange(ref: ref, option: _),
       );
     }
   }
 
+  void onReminderChange({required WidgetRef ref, dynamic option}) {
+    final reminder = option is Duration ? option.toDateTime() : option;
+    ref
+        .read(todoProvider(null).notifier)
+        .update((state) => Todo(state.task, reminder: reminder, repeat: null));
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final enabled = ref.watch(todoProvider(null)).task.isNotEmpty;
     return DisabledOpacity(
       enabled: enabled,
       child: GestureDetector(
-        key: _key,
-        onTap: enabled ? showReminderOptionPicker : null,
+        onTap: enabled ? () => showReminderOptionPicker(ref) : null,
         child: child,
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todos/helpers.dart';
 import 'package:todos/logic/models/todo.dart';
@@ -19,42 +20,28 @@ final todoProvider = StateProvider.autoDispose.family((ref, Map? args) {
   );
 });
 
-class TodoEditor extends ConsumerStatefulWidget {
-  final Todo? todo;
-
-  const TodoEditor({super.key, this.todo});
-
-  @override
-  ConsumerState<TodoEditor> createState() => _TodoEditorState();
+String _reminderText(WidgetRef ref) {
+  final reminder = ref.read(todoProvider(null)).reminder;
+  if (reminder == null) return '';
+  return getReminderText(
+      reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
 }
 
-class _TodoEditorState extends ConsumerState<TodoEditor> {
-  late TextEditingController taskController;
+class TodoEditor extends HookConsumerWidget {
+  final Todo? initialTodo;
 
-  String get _reminderText {
-    final reminder = ref.read(todoProvider(null)).reminder;
-    if (reminder == null) return '';
-    return getReminderText(
-        reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
-  }
+  const TodoEditor({this.initialTodo, super.key});
 
-  void onReminderChange(dynamic newReminder) {
-    final reminder =
-        newReminder is Duration ? newReminder.toDateTime() : newReminder;
+  void clearReminder(WidgetRef ref) {
     ref
         .read(todoProvider(null).notifier)
-        .update((state) => Todo(state.task, repeat: null, reminder: reminder));
-  }
-
-  void onRepeatOptionChange(Repeat? option) {
-    ref
-        .read(todoProvider(null).notifier)
-        .update((state) => Todo(state.task, repeat: option, reminder: null));
+        .update((state) => Todo(state.task, reminder: null, repeat: null));
   }
 
   @override
-  void initState() {
-    taskController = TextEditingController(text: widget.todo?.task ?? '');
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todo = ref.watch(todoProvider(initialTodo?.asMap));
+    final taskController = useTextEditingController(text: initialTodo?.task);
     taskController.addListener(() {
       ref.read(todoProvider(null).notifier).update((state) {
         return Todo(
@@ -64,12 +51,7 @@ class _TodoEditorState extends ConsumerState<TodoEditor> {
         );
       });
     });
-    super.initState();
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    final todo = ref.watch(todoProvider(widget.todo?.asMap));
     return KeyboardDismisser(
       child: ColoredBox(
         // Tap for hiding keyboard will not be detected without this prop
@@ -85,16 +67,11 @@ class _TodoEditorState extends ConsumerState<TodoEditor> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${widget.todo != null ? 'Edit' : 'Add'} Todo',
+                      '${initialTodo != null ? 'Edit' : 'Add'} Todo',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
-                    ReminderButton(
-                      enabled: todo.task.isNotEmpty,
-                      reminder: todo.reminder,
-                      onReminderChange: onReminderChange,
-                      child: const Icon(Icons.timer_outlined),
-                    ),
+                    const ReminderButton(child: Icon(Icons.timer_outlined)),
                   ],
                 ),
                 TextField(
@@ -105,8 +82,9 @@ class _TodoEditorState extends ConsumerState<TodoEditor> {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 30),
+                // TODO: should access todo with todoProvider
                 SaveTodoButton(
-                  initialTodo: widget.todo,
+                  initialTodo: initialTodo,
                   task: todo.task,
                   reminder: todo.reminder,
                   repeat: todo.repeat,
@@ -119,17 +97,14 @@ class _TodoEditorState extends ConsumerState<TodoEditor> {
                       Flexible(
                         flex: 8,
                         child: ReminderButton(
-                          enabled: todo.task.isNotEmpty,
-                          reminder: todo.reminder,
-                          onReminderChange: onReminderChange,
                           child: Text(
-                            _reminderText,
+                            _reminderText(ref),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),
                       ),
                       IconButton(
-                        onPressed: clearReminder,
+                        onPressed: () => clearReminder(ref),
                         icon: const Icon(Icons.close),
                         padding: EdgeInsets.zero,
                         constraints: const BoxConstraints(),
@@ -137,29 +112,12 @@ class _TodoEditorState extends ConsumerState<TodoEditor> {
                     ],
                   ),
                 ],
-                if (todo.reminder == null)
-                  RepeatButton(
-                    enabled: todo.task.isNotEmpty,
-                    repeat: todo.repeat,
-                    onOptionChange: onRepeatOptionChange,
-                  )
+                if (todo.reminder == null) const RepeatButton()
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  void clearReminder() {
-    ref
-        .read(todoProvider(null).notifier)
-        .update((state) => Todo(state.task, reminder: null, repeat: null));
-  }
-
-  @override
-  void dispose() {
-    taskController.dispose();
-    super.dispose();
   }
 }

@@ -18,7 +18,7 @@ class TodoTile extends StatelessWidget {
     popupModalBottomSheet(
       context: _key.currentContext!,
       shouldConfirmPop: true,
-      child: TodoEditor(todo: todo),
+      child: TodoEditor(initialTodo: todo),
     );
   }
 
