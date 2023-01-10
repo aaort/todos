@@ -23,6 +23,16 @@ final todoProvider = StateProvider.autoDispose.family((ref, Map? args) {
   );
 });
 
+void todoTaskListener({required WidgetRef ref, required String task}) {
+  ref.read(todoProvider(null).notifier).update((state) {
+    return Todo(
+      task,
+      reminder: state.reminder,
+      repeat: state.repeat,
+    );
+  });
+}
+
 String _reminderText(WidgetRef ref) {
   final reminder = ref.read(todoProvider(null)).reminder;
   if (reminder == null) return '';
@@ -45,15 +55,12 @@ class TodoEditor extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(initialTodo?.asMap));
     final taskController = useTextEditingController(text: initialTodo?.task);
-    taskController.addListener(() {
-      ref.read(todoProvider(null).notifier).update((state) {
-        return Todo(
-          taskController.text,
-          reminder: state.reminder,
-          repeat: state.repeat,
-        );
+    useEffect(() {
+      taskController.addListener(() {
+        todoTaskListener(ref: ref, task: taskController.text);
       });
-    });
+      return null;
+    }, []);
 
     return KeyboardDismisser(
       child: ColoredBox(
