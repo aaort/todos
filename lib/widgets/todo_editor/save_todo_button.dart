@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/logic/models/todo.dart';
 import 'package:todos/logic/services/database.dart';
 import 'package:todos/notifications/notifications.dart';
-import 'package:todos/widgets/todo_editor/repeat_button.dart';
-import 'package:todos/extensions.dart' show Reminder;
+import 'package:todos/screens/todo_editor.dart';
 
-class SaveTodoButton extends StatelessWidget {
+class SaveTodoButton extends ConsumerWidget {
   final Todo? initialTodo;
-  final String task;
-  final dynamic reminder;
-  final Repeat? repeat;
 
   const SaveTodoButton({
     super.key,
     this.initialTodo,
-    this.repeat,
-    required this.task,
-    required this.reminder,
   });
 
-  Future<void> onTodoSaved(BuildContext context) async {
-    if (task.isEmpty) return;
-    DateTime? reminder = this.reminder is Duration
-        ? (this.reminder as Duration).toDateTime()
-        : this.reminder;
+  Future<void> onTodoSaved(WidgetRef ref) async {
+    final todo = ref.read(todoProvider(null));
+    if (todo.task.isEmpty) return;
 
     if (initialTodo != null) {
-      final todo = initialTodo!.copyWith(
-        {'task': task, 'reminder': reminder, 'repeat': repeat},
-      );
       if (initialTodo!.reminderId != null) {
         Notifications.cancelReminder(initialTodo!.reminderId!);
       }
@@ -37,19 +26,18 @@ class SaveTodoButton extends StatelessWidget {
         Notifications.scheduleReminder(todo);
       }
     } else {
-      final todo = Todo(task, reminder: reminder, repeat: repeat);
       Database(todo).createTodo();
       if (todo.reminderId != null) Notifications.scheduleReminder(todo);
     }
 
-    Navigator.pop(context);
+    Navigator.pop(ref.context);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
       key: const Key('createTodoButtonId'),
-      onPressed: () => onTodoSaved(context),
+      onPressed: () => onTodoSaved(ref),
       child: const Text('Save'),
     );
   }

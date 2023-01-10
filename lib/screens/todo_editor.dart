@@ -83,12 +83,7 @@ class TodoEditor extends HookConsumerWidget {
                 ),
                 const SizedBox(height: 30),
                 // TODO: should access todo with todoProvider
-                SaveTodoButton(
-                  initialTodo: initialTodo,
-                  task: todo.task,
-                  reminder: todo.reminder,
-                  repeat: todo.repeat,
-                ),
+                SaveTodoButton(initialTodo: initialTodo),
                 const SizedBox(height: 30),
                 if (todo.reminder != null) ...[
                   Row(
