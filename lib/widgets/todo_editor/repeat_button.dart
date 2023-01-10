@@ -10,7 +10,7 @@ enum Repeat {
   weekly,
 }
 
-final _repeats = <PickerOption<Repeat>>[
+const _repeats = <PickerOption<Repeat>>[
   PickerOption('Hourly', Repeat.hourly),
   PickerOption('Daily', Repeat.daily),
   PickerOption('Weekly', Repeat.weekly),

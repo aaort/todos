@@ -101,5 +101,5 @@ class PickerOption<T> {
   final String title;
   final T value;
 
-  PickerOption(this.title, this.value);
+  const PickerOption(this.title, this.value);
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todos/helpers.dart';
 import 'package:todos/widgets/common/pickers.dart';
 
-final options = [
+const options = [
   PickerOption<bool>('Discard', true),
   PickerOption<bool>('Cancel', false),
 ];
