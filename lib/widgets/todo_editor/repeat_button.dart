@@ -39,7 +39,7 @@ class RepeatButton extends ConsumerWidget {
   void onOptionChange({required WidgetRef ref, Repeat? repeat}) {
     ref
         .read(todoProvider(initialTodo).notifier)
-        .update((state) => Todo(state.task, reminder: null, repeat: repeat));
+        .updateValues({'reminder': null, 'repeat': repeat});
   }
 
   onRepeatDeleted(WidgetRef ref) => onOptionChange(ref: ref, repeat: null);

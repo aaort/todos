@@ -9,14 +9,15 @@ import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
 import 'package:todos/extensions.dart' show Reminder;
 
-// This provided is supposed to be used only inside this file and widgets
+// This provider is supposed to be used only inside this file and widgets
 // That are used by TodoEditor widget, in the future files of extracted widgets
 // Might become part of this file
-final todoProvider = StateProvider.autoDispose.family((ref, Todo? todo) {
-  return todo ?? Todo('');
+final todoProvider = StateNotifierProvider.autoDispose
+    .family<TodoState, Todo, Todo?>((ref, Todo? todo) {
+  return TodoState(todo ?? Todo(''));
 });
 
-String _reminderText(WidgetRef ref) {
+String _reminderText({required WidgetRef ref, required Todo? initialTodo}) {
   // TODO: pass intialTodo argument for provider
   final reminder = ref.read(todoProvider(null)).reminder;
   if (reminder == null) return '';
@@ -30,9 +31,9 @@ class TodoEditor extends HookConsumerWidget {
   const TodoEditor({this.initialTodo, super.key});
 
   void clearReminder(WidgetRef ref) {
-    ref.read(todoProvider(initialTodo).notifier).update((state) => state
-      ..reminder = null
-      ..repeat = null);
+    ref
+        .read(todoProvider(initialTodo).notifier)
+        .updateValues({'reminder': null, 'repeat': null});
   }
 
   @override
@@ -70,9 +71,9 @@ class TodoEditor extends HookConsumerWidget {
                   key: const Key('createTodoInputId'),
                   autofocus: true,
                   controller: taskController,
-                  onChanged: (_) => ref
+                  onChanged: (value) => ref
                       .read(todoProvider(initialTodo).notifier)
-                      .update((state) => state.copyWith(state.asMap)),
+                      .updateValues({'task': value}),
                   textCapitalization: TextCapitalization.sentences,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
@@ -87,7 +88,7 @@ class TodoEditor extends HookConsumerWidget {
                         flex: 8,
                         child: ReminderButton(
                           child: Text(
-                            _reminderText(ref),
+                            _reminderText(ref: ref, initialTodo: initialTodo),
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ),

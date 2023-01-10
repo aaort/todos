@@ -56,7 +56,7 @@ class ReminderButton extends ConsumerWidget {
     final reminder = option is Duration ? option.toDateTime() : option;
     ref
         .read(todoProvider(initialTodo).notifier)
-        .update((state) => Todo(state.task, reminder: reminder, repeat: null));
+        .updateValues({'reminder': reminder, 'repeat': null});
   }
 
   @override

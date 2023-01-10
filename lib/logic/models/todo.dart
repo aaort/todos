@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/extensions.dart' show Stringify;
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:uuid/uuid.dart';
@@ -89,5 +90,14 @@ class Todo {
           ? Repeat.values.byName(todoMap['repeat'])
           : null,
     );
+  }
+}
+
+class TodoState extends StateNotifier<Todo> {
+  final Todo todo;
+  TodoState(this.todo) : super(todo);
+
+  updateValues(Map<String, dynamic> values) {
+    state = state.copyWith(values);
   }
 }
