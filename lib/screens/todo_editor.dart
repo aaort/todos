@@ -92,7 +92,6 @@ class TodoEditor extends HookConsumerWidget {
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 const SizedBox(height: 30),
-                // TODO: should access todo with todoProvider
                 SaveTodoButton(initialTodo: initialTodo),
                 const SizedBox(height: 30),
                 if (todo.reminder != null) ...[
