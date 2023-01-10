@@ -8,9 +8,9 @@ import 'package:todos/widgets/todo_editor/save_todo_button.dart';
 import 'package:todos/extensions.dart' show Reminder;
 
 class TodoEditor extends StatefulWidget {
-  final Todo? initialTodo;
+  final Todo? todo;
 
-  const TodoEditor({super.key, this.initialTodo});
+  const TodoEditor({super.key, this.todo});
 
   @override
   State<TodoEditor> createState() => _TodoEditorState();
@@ -42,10 +42,9 @@ class _TodoEditorState extends State<TodoEditor> {
 
   @override
   void initState() {
-    taskController =
-        TextEditingController(text: widget.initialTodo?.task ?? '');
-    reminder = widget.initialTodo?.reminder;
-    repeat = widget.initialTodo?.repeat;
+    taskController = TextEditingController(text: widget.todo?.task ?? '');
+    reminder = widget.todo?.reminder;
+    repeat = widget.todo?.repeat;
     taskController.addListener(() => setState(() {}));
     super.initState();
   }
@@ -67,7 +66,7 @@ class _TodoEditorState extends State<TodoEditor> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${widget.initialTodo != null ? 'Edit' : 'Add'} Todo',
+                      '${widget.todo != null ? 'Edit' : 'Add'} Todo',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
@@ -88,7 +87,7 @@ class _TodoEditorState extends State<TodoEditor> {
                 ),
                 const SizedBox(height: 30),
                 SaveTodoButton(
-                  initialTodo: widget.initialTodo,
+                  initialTodo: widget.todo,
                   task: taskController.text,
                   reminder: reminder,
                   repeat: repeat,
