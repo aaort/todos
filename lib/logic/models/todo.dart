@@ -44,11 +44,11 @@ class Todo {
   /// Returns new [Todo] instance with mutated [isDone] field (uses [copyWith] method).
   Todo toggleIsDone([bool? value]) => copyWith({'isDone': value ?? !isDone});
 
-  void updateReminder(DateTime? newReminder) {
-    reminder = newReminder;
-    if (reminder == null && repeat == null) {
-      reminderId = null;
-    }
+  Todo updateReminder(DateTime? newReminder) {
+    final stillHasReminder = (newReminder != null && repeat != null);
+    // Set reminderId to null if both repeat and newReminder are null
+    return copyWith(
+        {'reminder': reminder, if (!stillHasReminder) 'reminderId': null});
   }
 
   /// Creates a new instance of [Todo] class with specified overridden values.

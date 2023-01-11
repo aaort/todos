@@ -15,17 +15,18 @@ class NotificationListeners {
       if (toggledTodo.repeat == null) {
         // if not a repeating reminder, cancel it
         Notifications.cancelReminder(todo.reminderId!);
-        Database(toggledTodo..updateReminder(null)).updateTodo();
+        Database(toggledTodo.updateReminder(null)).updateTodo();
       }
     } else if (action.buttonKeyPressed !=
         notificationActions[cancelButtonKey]) {
       final is5Minutes =
           action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
-      todo.updateReminder(Duration(minutes: is5Minutes ? 5 : 15)
-          .toDateTime()
-          .toMinutePrecision());
-      Database(todo).updateTodo();
-      Notifications.updateReminder(todo);
+      final updatedReminderTodo = todo.updateReminder(
+          Duration(minutes: is5Minutes ? 5 : 15)
+              .toDateTime()
+              .toMinutePrecision());
+      Database(updatedReminderTodo).updateTodo();
+      Notifications.updateReminder(updatedReminderTodo);
     } else {
       Notifications.cancelReminder(todo.reminderId!);
     }
