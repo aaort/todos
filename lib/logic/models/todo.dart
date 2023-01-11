@@ -78,19 +78,16 @@ class Todo {
         'createdAt': createdAt,
       };
 
-  static Todo fromMap(Map todoMap) {
-    return Todo._fromMap(
-      task: todoMap['task'],
-      isDone: todoMap['isDone'],
-      id: todoMap['id'],
-      reminderId: todoMap['reminderId'],
-      reminder: DateTime.tryParse('${todoMap['reminder']}'),
-      createdAt: todoMap['createdAt'],
-      repeat: todoMap['repeat'] != null
+  Todo.fromMap(Map todoMap)
+      : id = todoMap['id'],
+        task = todoMap['task'],
+        isDone = todoMap['isDone'],
+        reminder = DateTime.tryParse('${todoMap['reminder']}'),
+        reminderId = todoMap['reminderId'],
+        createdAt = todoMap['createdAt'],
+        repeat = todoMap['repeat'] != null
           ? Repeat.values.byName(todoMap['repeat'])
-          : null,
-    );
-  }
+            : null;
 }
 
 class TodoState extends StateNotifier<Todo> {
