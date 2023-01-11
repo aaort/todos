@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todos/logic/services/auth.dart';
+import 'package:todos/services/auth.dart';
 import 'package:todos/screens/auth/sign_in_options.dart';
 import 'package:todos/screens/home.dart';
 

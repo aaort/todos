@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todos/logic/services/auth.dart';
+import 'package:todos/services/auth.dart';
 import 'package:todos/screens/auth/sign_in.dart';
 
 const _laterText =

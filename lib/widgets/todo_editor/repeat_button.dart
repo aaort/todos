@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/extensions.dart';
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
-import 'package:todos/logic/models/todo.dart';
+import 'package:todos/models/todo.dart';
 import 'package:todos/screens/todo_editor.dart';
 import 'package:todos/widgets/common/disabled_opacity.dart';
 import 'package:todos/widgets/common/pickers.dart';

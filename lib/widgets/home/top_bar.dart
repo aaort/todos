@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todos/logic/services/database.dart';
+import 'package:todos/services/database.dart';
 import 'package:todos/widgets/home/menu.dart';
 
 final todosCountProvider = StreamProvider.autoDispose<int?>((ref) {

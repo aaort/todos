@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todos/logic/models/todo.dart';
-import 'package:todos/logic/services/database.dart';
+import 'package:todos/models/todo.dart';
+import 'package:todos/services/database.dart';
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/screens/todo_editor.dart';
 

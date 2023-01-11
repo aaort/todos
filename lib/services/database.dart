@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:todos/logic/models/todo.dart';
-import 'package:todos/logic/services/auth.dart';
+import 'package:todos/models/todo.dart';
+import 'package:todos/services/auth.dart';
 
 class Database {
   final Todo todo;
