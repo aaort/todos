@@ -11,11 +11,11 @@ class NotificationListeners {
     final todo = await Database.getTodoById(action.payload!['todoId']!);
     if (todo == null || todo.reminderId == null) return;
     if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
-      todo.toggleIsDone();
-      if (todo.repeat == null) {
+      final toggledTodo = todo.toggleIsDone();
+      if (toggledTodo.repeat == null) {
         // if not a repeating reminder, cancel it
         Notifications.cancelReminder(todo.reminderId!);
-        Database(todo..updateReminder(null)).updateTodo();
+        Database(toggledTodo..updateReminder(null)).updateTodo();
       }
     } else if (action.buttonKeyPressed !=
         notificationActions[cancelButtonKey]) {

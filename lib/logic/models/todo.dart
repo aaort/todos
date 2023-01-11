@@ -41,7 +41,8 @@ class Todo {
     required this.reminderId,
   });
 
-  void toggleIsDone([bool? value]) => isDone = value ?? !isDone;
+  /// Returns new [Todo] instance with mutated [isDone] field (uses [copyWith] method).
+  Todo toggleIsDone([bool? value]) => copyWith({'isDone': value ?? !isDone});
 
   void updateReminder(DateTime? newReminder) {
     reminder = newReminder;

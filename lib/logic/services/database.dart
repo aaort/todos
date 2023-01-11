@@ -23,7 +23,7 @@ class Database {
   }
 
   toggleIsDone([bool? value]) async {
-    final toggledTodo = todo..toggleIsDone(value);
+    final toggledTodo = todo.toggleIsDone(value);
     await _todosRef.doc(todo.id).set(toggledTodo.asMap);
   }
 
