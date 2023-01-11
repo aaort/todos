@@ -29,21 +29,17 @@ class Todo {
     createdAt = Timestamp.now();
   }
 
-  Todo._fromMap({
+  // This private constructor SHOULD be used only inside this class methods
+  // It makes possible the creation of copied object with same id field
+  Todo._custom({
+    required this.id,
     required this.task,
     required this.isDone,
-    required this.id,
     required this.reminder,
     required this.repeat,
     required this.createdAt,
-    this.reminderId,
-  }) {
-    if (repeat == null && reminder == null) {
-      reminderId = null;
-    } else if ((reminder != null || repeat != null) && reminderId == null) {
-      reminderId = Random().nextInt(1000);
-    }
-  }
+    required this.reminderId,
+  });
 
   void toggleIsDone([bool? value]) => isDone = value ?? !isDone;
 
@@ -54,11 +50,16 @@ class Todo {
     }
   }
 
+  /// Creates a new instance of [Todo] class with specified overridden values.
+  ///
+  /// Should be used carefully because [id], [reminderId] and [createdAt]
+  /// fields also can be mutated which might be changed in the future.
   Todo copyWith(Map<String, dynamic> todoMap) {
-    return Todo._fromMap(
-      id: id, // can't be mutated
-      reminderId: reminderId, // can't be mutated
-      createdAt: createdAt, // can't be mutated
+    // id, createdAt and reminderId values cannot be mutated
+    return Todo._custom(
+      id: todoMap[' id'] ?? id,
+      createdAt: todoMap['createdAt'] ?? createdAt,
+      reminderId: todoMap['reminderId'] ?? reminderId,
       task: todoMap['task'] ?? task,
       isDone: todoMap['isDone'] ?? isDone,
       reminder: DateTime.tryParse('${todoMap['reminder']}'),
@@ -86,7 +87,7 @@ class Todo {
         reminderId = todoMap['reminderId'],
         createdAt = todoMap['createdAt'],
         repeat = todoMap['repeat'] != null
-          ? Repeat.values.byName(todoMap['repeat'])
+            ? Repeat.values.byName(todoMap['repeat'])
             : null;
 }
 
