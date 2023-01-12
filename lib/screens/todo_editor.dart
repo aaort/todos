@@ -18,8 +18,7 @@ final todoProvider = StateNotifierProvider.autoDispose
 });
 
 String _reminderText({required WidgetRef ref, required Todo? initialTodo}) {
-  // TODO: pass intialTodo argument for provider
-  final reminder = ref.read(todoProvider(null)).reminder;
+  final reminder = ref.read(todoProvider(initialTodo)).reminder;
   if (reminder == null) return '';
   return getReminderText(
       reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
