@@ -97,6 +97,12 @@ class TodoState extends StateNotifier<Todo> {
   TodoState(this.todo) : super(todo);
 
   updateValues(Map<String, dynamic> values) {
-    state = state.copyWith(values);
+    state = state.copyWith({
+      ...values,
+      // [reminder] and [repeat] will not be updated unless explicit value given
+      // in a [values] map
+      if (!values.containsKey('reminder')) 'reminder': state.reminder,
+      if (!values.containsKey('repeat')) 'repeat': state.repeat,
+    });
   }
 }
