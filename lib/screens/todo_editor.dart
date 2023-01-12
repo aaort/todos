@@ -67,8 +67,9 @@ class TodoEditor extends HookConsumerWidget {
                 const SizedBox(height: 30),
                 SaveTodoButton(initialTodo: initialTodo),
                 const SizedBox(height: 30),
-                if (todo.reminder != null) _editorBottom(ref, context),
-                if (todo.reminder == null)
+                if (todo.reminder != null)
+                  _editorBottom(ref, context)
+                else
                   RepeatButton(initialTodo: initialTodo)
                 // Initial todo is required to pass it to the todoProvider
                 // to do not create new providers see https://riverpod.dev/docs/concepts/modifiers/family
