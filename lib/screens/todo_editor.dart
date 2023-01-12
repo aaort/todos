@@ -55,21 +55,7 @@ class TodoEditor extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${initialTodo != null ? 'Edit' : 'Add'} Todo',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    ReminderButton(
-                      // Required to pass to the todoProvider as an argument
-                      initialTodo: initialTodo,
-                      child: const Icon(Icons.timer_outlined),
-                    ),
-                  ],
-                ),
+                _editorTop(context),
                 TextField(
                   key: const Key('createTodoInputId'),
                   autofocus: true,
@@ -81,37 +67,57 @@ class TodoEditor extends HookConsumerWidget {
                 const SizedBox(height: 30),
                 SaveTodoButton(initialTodo: initialTodo),
                 const SizedBox(height: 30),
-                if (todo.reminder != null) ...[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        flex: 8,
-                        child: ReminderButton(
-                          child: Text(
-                            _reminderText(ref: ref, initialTodo: initialTodo),
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => clearReminder(ref),
-                        icon: const Icon(Icons.close),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      )
-                    ],
-                  ),
-                ],
+                if (todo.reminder != null) _editorBottom(ref, context),
                 if (todo.reminder == null)
-                  // Initial todo is required to pass it to the todoProvider
-                  // to do not create new providers see https://riverpod.dev/docs/concepts/modifiers/family
                   RepeatButton(initialTodo: initialTodo)
+                // Initial todo is required to pass it to the todoProvider
+                // to do not create new providers see https://riverpod.dev/docs/concepts/modifiers/family
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _editorTop(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          '${initialTodo != null ? 'Edit' : 'Add'} Todo',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        ReminderButton(
+          // Required to pass to the todoProvider as an argument
+          initialTodo: initialTodo,
+          child: const Icon(Icons.timer_outlined),
+        ),
+      ],
+    );
+  }
+
+  Widget _editorBottom(WidgetRef ref, context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Flexible(
+          flex: 8,
+          child: ReminderButton(
+            child: Text(
+              _reminderText(ref: ref, initialTodo: initialTodo),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+        ),
+        IconButton(
+          onPressed: () => clearReminder(ref),
+          icon: const Icon(Icons.close),
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(),
+        )
+      ],
     );
   }
 }
