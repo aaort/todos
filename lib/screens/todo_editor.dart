@@ -35,6 +35,10 @@ class TodoEditor extends HookConsumerWidget {
         .updateValues({'reminder': null, 'repeat': null});
   }
 
+  _onTaskChanged(WidgetRef ref, String value) {
+    ref.read(todoProvider(initialTodo).notifier).updateValues({'task': value});
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(initialTodo));
@@ -70,9 +74,7 @@ class TodoEditor extends HookConsumerWidget {
                   key: const Key('createTodoInputId'),
                   autofocus: true,
                   controller: taskController,
-                  onChanged: (value) => ref
-                      .read(todoProvider(initialTodo).notifier)
-                      .updateValues({'task': value}),
+                  onChanged: (_) => _onTaskChanged(ref, _),
                   textCapitalization: TextCapitalization.sentences,
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
