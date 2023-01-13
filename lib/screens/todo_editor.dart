@@ -14,7 +14,7 @@ import 'package:todos/extensions.dart' show Reminder;
 // Might become part of this file
 final todoProvider = StateNotifierProvider.autoDispose
     .family<TodoState, Todo, Todo?>((ref, Todo? todo) {
-  return TodoState(todo ?? Todo(''));
+  return TodoState(todo ?? Todo(task: ''));
 });
 
 String _reminderText({required WidgetRef ref, required Todo? initialTodo}) {

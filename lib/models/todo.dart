@@ -7,26 +7,24 @@ import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:uuid/uuid.dart';
 
 class Todo {
+  late final String id;
   String task;
   bool isDone;
-  late final String id;
   DateTime? reminder;
   Repeat? repeat;
+  int? reminderId;
   late final Timestamp createdAt;
 
-  int? reminderId;
-
-  Todo(
-    this.task, {
+  Todo({
+    required this.task,
     this.isDone = false,
     this.reminder,
     this.repeat,
-  }) {
-    id = const Uuid().v4();
+  })  : id = const Uuid().v4(),
+        createdAt = Timestamp.now() {
     if (reminder != null || repeat != null) {
       reminderId = Random().nextInt(1000);
     }
-    createdAt = Timestamp.now();
   }
 
   // This private constructor SHOULD be used only inside this class methods
@@ -37,8 +35,8 @@ class Todo {
     required this.isDone,
     required this.reminder,
     required this.repeat,
-    required this.createdAt,
     required this.reminderId,
+    required this.createdAt,
   });
 
   /// Returns new [Todo] instance with mutated [isDone] field (uses [copyWith] method).
