@@ -18,7 +18,8 @@ class ThemeModeManager extends StateNotifier<ThemeMode> {
       state = ThemeMode.light;
       SystemChrome.setSystemUIOverlayStyle(kOverlayStyle);
     }
-    SystemChrome.setSystemUIOverlayStyle(kOverlayStyle);
+    // TODO: Figure out why this line was added, removed if not required
+    // SystemChrome.setSystemUIOverlayStyle(kOverlayStyle);
   }
 
   toggleTheme([ThemeMode? mode]) async {
