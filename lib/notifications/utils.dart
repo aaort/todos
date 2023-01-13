@@ -18,7 +18,7 @@ toggleTodo(Todo todo) async {
   }
 }
 
-updateReminder({required Todo todo, required ReceivedAction action}) async {
+rescheduleReminder({required Todo todo, required ReceivedAction action}) async {
   final is5Minutes =
       action.buttonKeyPressed == notificationActions[in5MinutesButtonKey];
   final updatedReminderTodo = todo.updateReminder(

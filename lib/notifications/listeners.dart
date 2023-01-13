@@ -19,7 +19,7 @@ class NotificationListeners {
       // If not marked as [CANCELED] then todo's rescheduled with either 5 or 15 minutes
     } else if (action.buttonKeyPressed !=
         notificationActions[cancelButtonKey]) {
-      await updateReminder(todo: todo, action: action);
+      await rescheduleReminder(todo: todo, action: action);
     } else {
       Notifications.cancelReminder(todo.reminderId!);
     }
