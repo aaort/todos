@@ -8,6 +8,11 @@ import 'package:todos/theme/theme_manager.dart';
 
 import 'firebase_options.dart';
 
+final themeModeManagerProvider =
+    StateNotifierProvider<ThemeModeManager, ThemeMode?>((ref) {
+  return ThemeModeManager();
+});
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -18,25 +23,32 @@ void main() async {
 
   await Notifications.initialize();
 
-  runApp(const ProviderScope(child: App()));
+  runApp(
+    ProviderScope(
+      child: Consumer(
+        builder: (_, ref, __) {
+          final themeMode = ref.watch(themeModeManagerProvider);
+          if (themeMode != null) {
+            return const App();
+          } else {
+            // TODO: the idea was to do not display any UI until theme mode will be defined
+            // This behavior should be tested in a release or profile mode
+            // To be able to detect how app behaves without frame drops
+            return const MaterialApp(home: Scaffold());
+          }
+        },
+      ),
+    ),
+  );
 }
-
-final themeModeProvider =
-    StateNotifierProvider<ThemeModeManager, ThemeMode>((ref) {
-  return ThemeModeManager();
-});
 
 class App extends ConsumerWidget {
   const App({super.key});
 
-  // TODO: unused
-  static final materialAppKey = GlobalKey();
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
+    final themeMode = ref.watch(themeModeManagerProvider)!;
     return MaterialApp(
-      key: materialAppKey,
       title: 'Todos',
       theme: lightTheme,
       darkTheme: darkTheme,

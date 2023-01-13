@@ -7,7 +7,7 @@ class ThemeSwitchIconButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isDarkMode = ref.watch(themeModeProvider) == ThemeMode.dark;
+    final isDarkMode = ref.watch(themeModeManagerProvider) == ThemeMode.dark;
 
     return Row(
       mainAxisSize: MainAxisSize.min,

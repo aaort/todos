@@ -9,7 +9,7 @@ class Menu extends ConsumerWidget {
   const Menu({super.key});
 
   void toggleTheme(WidgetRef ref) {
-    ref.read(themeModeProvider.notifier).toggleTheme();
+    ref.read(themeModeManagerProvider.notifier).toggleTheme();
   }
 
   @override
