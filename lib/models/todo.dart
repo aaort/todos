@@ -56,7 +56,6 @@ class Todo {
   /// Should be used carefully because [id], [reminderId] and [createdAt]
   /// fields also can be mutated which might be changed in the future.
   Todo copyWith(Map<String, dynamic> todoMap) {
-    // id, createdAt and reminderId values cannot be mutated
     return Todo._custom(
       id: todoMap[' id'] ?? id,
       createdAt: todoMap['createdAt'] ?? createdAt,
