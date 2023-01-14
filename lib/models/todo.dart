@@ -6,6 +6,8 @@ import 'package:todos/extensions.dart' show Stringify;
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:uuid/uuid.dart';
 
+const _maxReminderIdValue = 999999;
+
 class Todo {
   late final String id;
   String task;
@@ -23,7 +25,7 @@ class Todo {
   })  : id = const Uuid().v4(),
         createdAt = Timestamp.now() {
     if (reminder != null || repeat != null) {
-      reminderId = Random().nextInt(1000);
+      reminderId = Random().nextInt(_maxReminderIdValue);
     }
   }
 
@@ -94,14 +96,22 @@ class Todo {
 class TodoState extends StateNotifier<Todo> {
   final Todo todo;
   TodoState(this.todo) : super(todo);
-
   updateValues(Map<String, dynamic> values) {
-    state = state.copyWith({
+    final stateObj = {
       ...values,
       // [reminder] and [repeat] will not be updated unless explicit value given
       // in a [values] map
       if (!values.containsKey('reminder')) 'reminder': state.reminder,
       if (!values.containsKey('repeat')) 'repeat': state.repeat,
-    });
+      'reminderId': state.reminderId,
+    };
+    // If both [reminder] and [repeat] are null, set [reminderId] to null
+    if (stateObj['reminder'] == null && stateObj['repeat'] == null) {
+      stateObj['reminderId'] = null;
+      // If either [reminder] or [repeat] have value but [reminderId] is null, give reminderId a value
+    } else if (stateObj['reminderId'] == null) {
+      stateObj['reminderId'] = Random().nextInt(_maxReminderIdValue);
+    }
+    state = state.copyWith(stateObj);
   }
 }
