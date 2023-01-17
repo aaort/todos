@@ -29,7 +29,7 @@ class Reminder {
     required this.id,
     required this.dateTime,
     required this.repeat,
-  }) : assert(repeat != null || dateTime != null);
+  }) : assert(!(repeat == null && dateTime == null));
 
   factory Reminder.fromMap(Map<String, dynamic> map) {
     return Reminder._custom(
