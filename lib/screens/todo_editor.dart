@@ -101,6 +101,7 @@ class TodoEditor extends HookConsumerWidget {
         Flexible(
           flex: 8,
           child: ReminderButton(
+            initialTodo: initialTodo,
             child: Text(
               _reminderText(ref: ref, initialTodo: initialTodo),
               style: Theme.of(context).textTheme.bodySmall,
