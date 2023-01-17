@@ -12,9 +12,9 @@ enum ReminderOption {
   custom,
 }
 
-const _reminderOptions = <PickerOption<dynamic>>[
-  PickerOption('In 5 minutes', Duration(minutes: 5)),
-  PickerOption('In 15 minutes', Duration(minutes: 15)),
+const _reminderOptions = <PickerOption<ReminderOption>>[
+  // PickerOption('In 5 minutes', Duration(minutes: 5)),
+  // PickerOption('In 15 minutes', Duration(minutes: 15)),
   PickerOption('Custom', ReminderOption.custom),
 ];
 
