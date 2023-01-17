@@ -1,6 +1,6 @@
 # Todos
 
-Todo app for storing and managing tasks
+Task manager
 
 ## Showcase
 
