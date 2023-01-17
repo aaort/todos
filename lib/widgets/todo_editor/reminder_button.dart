@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todos/extensions.dart' show Reminder;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todos/extensions.dart' show ToDateTime;
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
 import 'package:todos/models/todo.dart';
 import 'package:todos/screens/todo_editor.dart';

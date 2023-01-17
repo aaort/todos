@@ -1,6 +1,6 @@
 import 'package:awesome_notifications/awesome_notifications.dart'
     show ReceivedAction;
-import 'package:todos/extensions.dart' show Reminder, MinutePrecision;
+import 'package:todos/extensions.dart' show ToDateTime, MinutePrecision;
 import 'package:todos/models/todo.dart' show Todo;
 import 'package:todos/notifications/notifications.dart';
 import 'package:todos/notifications/constants.dart'

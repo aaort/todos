@@ -4,7 +4,7 @@ extension Stringify on Repeat {
   String toName() => toString().split('.').last;
 }
 
-extension Reminder on Duration {
+extension ToDateTime on Duration {
   DateTime toDateTime() => DateTime.now().add(this);
 }
 
