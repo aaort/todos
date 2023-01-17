@@ -31,11 +31,12 @@ class Reminder {
     required this.repeat,
   }) : assert(!(repeat == null && dateTime == null));
 
-  factory Reminder.fromMap(Map<String, dynamic> map) {
+  factory Reminder.fromMap(Map<String, dynamic> values) {
     return Reminder._custom(
-      id: map['id'],
-      dateTime: DateTime.tryParse(map['dateTime']),
-      repeat: map['repeat'],
+      id: values['id'],
+      dateTime: DateTime.tryParse('${values['dateTime']}'),
+      repeat: Repeat.values
+          .firstWhere((value) => value.toName() == values['repeat']),
     );
   }
 
