@@ -66,8 +66,6 @@ class TodoEditor extends HookConsumerWidget {
                   _editorBottom(ref, context)
                 else
                   RepeatButton(initialTodo: initialTodo)
-                // Initial todo is required to pass it to the todoProvider
-                // to do not create new providers see https://riverpod.dev/docs/concepts/modifiers/family
               ],
             ),
           ),
@@ -86,7 +84,6 @@ class TodoEditor extends HookConsumerWidget {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         ReminderButton(
-          // Required to pass to the todoProvider as an argument
           initialTodo: initialTodo,
           child: const Icon(Icons.timer_outlined),
         ),
