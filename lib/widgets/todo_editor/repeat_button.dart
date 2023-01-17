@@ -37,9 +37,8 @@ class RepeatButton extends ConsumerWidget {
   }
 
   void onOptionChange({required WidgetRef ref, Repeat? repeat}) {
-    ref
-        .read(todoProvider(initialTodo).notifier)
-        .updateValues({'reminder': null, 'repeat': repeat});
+    // TODO: update to match current api
+    ref.read(todoProvider(initialTodo).notifier).updateReminder(repeat);
   }
 
   onRepeatDeleted(WidgetRef ref) => onOptionChange(ref: ref, repeat: null);
@@ -48,7 +47,7 @@ class RepeatButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(initialTodo));
     final enabled = todo.task.isNotEmpty;
-    final repeat = todo.repeat;
+    final repeat = todo.reminder?.repeat;
     final repeatName =
         repeat != null ? ' - ${repeat.toName().capitalize()}' : '';
     return GestureDetector(

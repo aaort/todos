@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todos/extensions.dart' show Reminder;
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todos/extensions.dart' show ToDateTime;
 import 'package:todos/helpers.dart' show ensureKeyboardIsHidden;
 import 'package:todos/models/todo.dart';
 import 'package:todos/screens/todo_editor.dart';
@@ -44,9 +45,7 @@ class ReminderButton extends ConsumerWidget {
       showDateTimePicker(
         context: ref.context,
         title: 'Remind me...',
-        initialDateTime: reminder is Duration
-            ? (reminder as Duration).toDateTime()
-            : reminder,
+        initialDateTime: reminder?.dateTime,
         onChange: (_) => onReminderChange(ref: ref, option: _),
       );
     }
@@ -54,9 +53,7 @@ class ReminderButton extends ConsumerWidget {
 
   void onReminderChange({required WidgetRef ref, dynamic option}) {
     final reminder = option is Duration ? option.toDateTime() : option;
-    ref
-        .read(todoProvider(initialTodo).notifier)
-        .updateValues({'reminder': reminder, 'repeat': null});
+    ref.read(todoProvider(initialTodo).notifier).updateReminder(reminder);
   }
 
   @override

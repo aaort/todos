@@ -2,26 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:todos/extensions.dart' show RepeatName, Capitalize;
 import 'package:todos/helpers.dart';
 import 'package:todos/models/todo.dart';
 import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
-import 'package:todos/extensions.dart' show Reminder;
 
 // This provider is supposed to be used only inside this file and inside widgets
 // That are used by [TodoEditor] widget, in the future files of extracted widgets
 // Might become part of this file
 final todoProvider = StateNotifierProvider.autoDispose
     .family<TodoState, Todo, Todo?>((ref, Todo? todo) {
-  return TodoState(todo ?? Todo(task: ''));
+  return TodoState(todo);
 });
 
 String _reminderText({required WidgetRef ref, required Todo? initialTodo}) {
   final reminder = ref.read(todoProvider(initialTodo)).reminder;
   if (reminder == null) return '';
-  return getReminderText(
-      reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
+  if (reminder.dateTime != null) {
+    return getReminderText(reminder.dateTime!);
+  } else {
+    return 'Repeat - ${reminder.repeat!.toName().capitalize()}';
+  }
 }
 
 class TodoEditor extends HookConsumerWidget {
@@ -30,9 +33,7 @@ class TodoEditor extends HookConsumerWidget {
   const TodoEditor({this.initialTodo, super.key});
 
   void clearReminder(WidgetRef ref) {
-    ref
-        .read(todoProvider(initialTodo).notifier)
-        .updateValues({'reminder': null, 'repeat': null});
+    ref.read(todoProvider(initialTodo).notifier).updateReminder(null);
   }
 
   _onTaskChanged(WidgetRef ref, String value) {
@@ -71,8 +72,6 @@ class TodoEditor extends HookConsumerWidget {
                   _editorBottom(ref, context)
                 else
                   RepeatButton(initialTodo: initialTodo)
-                // Initial todo is required to pass it to the todoProvider
-                // to do not create new providers see https://riverpod.dev/docs/concepts/modifiers/family
               ],
             ),
           ),
@@ -91,7 +90,6 @@ class TodoEditor extends HookConsumerWidget {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         ReminderButton(
-          // Required to pass to the todoProvider as an argument
           initialTodo: initialTodo,
           child: const Icon(Icons.timer_outlined),
         ),
@@ -106,6 +104,7 @@ class TodoEditor extends HookConsumerWidget {
         Flexible(
           flex: 8,
           child: ReminderButton(
+            initialTodo: initialTodo,
             child: Text(
               _reminderText(ref: ref, initialTodo: initialTodo),
               style: Theme.of(context).textTheme.bodySmall,

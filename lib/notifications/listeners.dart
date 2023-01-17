@@ -11,7 +11,7 @@ class NotificationListeners {
 
     // Get todo by id and return functions if null or does not have reminderId
     final todo = await Database.getTodoById(action.payload!['todoId']!);
-    if (todo == null || todo.reminderId == null) return;
+    if (todo == null || todo.reminder?.id == null) return;
 
     // If todo's marked as completed
     if (action.buttonKeyPressed == notificationActions[completedButtonKey]) {
@@ -21,7 +21,7 @@ class NotificationListeners {
         notificationActions[cancelButtonKey]) {
       await rescheduleReminder(todo: todo, action: action);
     } else {
-      Notifications.cancelReminder(todo.reminderId!);
+      Notifications.cancelReminder(todo.reminder!.id);
     }
   }
 }

@@ -1,33 +1,21 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todos/extensions.dart' show Stringify;
-import 'package:todos/widgets/todo_editor/repeat_button.dart';
+import 'package:todos/models/reminder.dart';
 import 'package:uuid/uuid.dart';
-
-const _maxReminderIdValue = 999999;
 
 class Todo {
   late final String id;
   String task;
   bool isDone;
-  DateTime? reminder;
-  Repeat? repeat;
-  int? reminderId;
+  Reminder? reminder;
   late final Timestamp createdAt;
 
   Todo({
     required this.task,
     this.isDone = false,
     this.reminder,
-    this.repeat,
   })  : id = const Uuid().v4(),
-        createdAt = Timestamp.now() {
-    if (reminder != null || repeat != null) {
-      reminderId = Random().nextInt(_maxReminderIdValue);
-    }
-  }
+        createdAt = Timestamp.now();
 
   // This private constructor SHOULD be used only inside this class methods
   // It makes possible the creation of copied object with same id field
@@ -36,8 +24,6 @@ class Todo {
     required this.task,
     required this.isDone,
     required this.reminder,
-    required this.repeat,
-    required this.reminderId,
     required this.createdAt,
   });
 
@@ -45,10 +31,9 @@ class Todo {
   Todo toggleIsDone([bool? value]) => copyWith({'isDone': value ?? !isDone});
 
   Todo updateReminder(DateTime? newReminder) {
-    final stillHasReminder = (newReminder != null && repeat != null);
-    // Set reminderId to null if both repeat and newReminder are null
-    return copyWith(
-        {'reminder': reminder, if (!stillHasReminder) 'reminderId': null});
+    return copyWith({
+      'reminder': reminder?.copyWith({'dateTime': newReminder})
+    });
   }
 
   /// Creates a new instance of [Todo] class with specified overridden values.
@@ -59,13 +44,10 @@ class Todo {
     return Todo._custom(
       id: todoMap[' id'] ?? id,
       createdAt: todoMap['createdAt'] ?? createdAt,
-      reminderId: todoMap['reminderId'] ?? reminderId,
       task: todoMap['task'] ?? task,
       isDone: todoMap['isDone'] ?? isDone,
-      reminder: DateTime.tryParse('${todoMap['reminder']}'),
-      repeat: todoMap['repeat'] != null
-          ? Repeat.values.byName((todoMap['repeat'] as Repeat).toName())
-          : null,
+      reminder: todoMap['reminder'] ??
+          (todoMap.containsKey('reminder') ? null : reminder),
     );
   }
 
@@ -73,45 +55,42 @@ class Todo {
         'task': task,
         'isDone': isDone,
         'id': id,
-        'reminder': reminder?.toIso8601String(),
-        'reminderId': reminderId,
-        'repeat': repeat?.toName(),
+        'reminder': reminder?.asMap,
         'createdAt': createdAt,
       };
 
   factory Todo.fromMap(Map todoMap) {
     return Todo._custom(
-        id: todoMap['id'],
-        task: todoMap['task'],
-        isDone: todoMap['isDone'],
-        reminder: DateTime.tryParse('${todoMap['reminder']}'),
-        reminderId: todoMap['reminderId'],
-        createdAt: todoMap['createdAt'],
-        repeat: todoMap['repeat'] != null
-            ? Repeat.values.byName(todoMap['repeat'])
-            : null);
+      id: todoMap['id'],
+      task: todoMap['task'],
+      isDone: todoMap['isDone'],
+      reminder: todoMap['reminder'] != null
+          ? Reminder.fromMap(todoMap['reminder'])
+          : null,
+      createdAt: todoMap['createdAt'],
+    );
   }
 }
 
 class TodoState extends StateNotifier<Todo> {
-  final Todo todo;
-  TodoState(this.todo) : super(todo);
+  final Todo? todo;
+  TodoState([this.todo]) : super(todo ?? Todo(task: ''));
+
   updateValues(Map<String, dynamic> values) {
-    final stateObj = {
-      ...values,
-      // [reminder] and [repeat] will not be updated unless explicit value given
-      // in a [values] map
-      if (!values.containsKey('reminder')) 'reminder': state.reminder,
-      if (!values.containsKey('repeat')) 'repeat': state.repeat,
-      'reminderId': state.reminderId,
-    };
-    // If both [reminder] and [repeat] are null, set [reminderId] to null
-    if (stateObj['reminder'] == null && stateObj['repeat'] == null) {
-      stateObj['reminderId'] = null;
-      // If either [reminder] or [repeat] have value but [reminderId] is null, give reminderId a value
-    } else if (stateObj['reminderId'] == null) {
-      stateObj['reminderId'] = Random().nextInt(_maxReminderIdValue);
+    state = state.copyWith(values);
+  }
+
+  updateReminder(dynamic reminderValue) {
+    if (reminderValue == null) {
+      state = state.copyWith({'reminder': null});
+      return;
     }
-    state = state.copyWith(stateObj);
+    Reminder? reminder = state.reminder;
+    if (reminderValue is DateTime) {
+      reminder ??= Reminder.dateTime(dateTime: reminderValue);
+    } else {
+      reminder ??= Reminder.repeat(repeat: reminderValue);
+    }
+    state = state.copyWith({'reminder': reminder});
   }
 }

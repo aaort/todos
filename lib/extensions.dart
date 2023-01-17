@@ -1,10 +1,10 @@
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 
-extension Stringify on Repeat {
+extension RepeatName on Repeat {
   String toName() => toString().split('.').last;
 }
 
-extension Reminder on Duration {
+extension ToDateTime on Duration {
   DateTime toDateTime() => DateTime.now().add(this);
 }
 
