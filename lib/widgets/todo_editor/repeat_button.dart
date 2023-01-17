@@ -48,7 +48,7 @@ class RepeatButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(initialTodo));
     final enabled = todo.task.isNotEmpty;
-    final repeat = todo.repeat;
+    final repeat = todo.reminder?.repeat;
     final repeatName =
         repeat != null ? ' - ${repeat.toName().capitalize()}' : '';
     return GestureDetector(

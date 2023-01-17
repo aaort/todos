@@ -26,7 +26,7 @@ class ReminderButton extends ConsumerWidget {
 
   void showReminderOptionPicker(WidgetRef ref) async {
     await ensureKeyboardIsHidden(ref.context);
-    showOptionPicker<dynamic>(
+    showOptionPicker<ReminderOption>(
       context: ref.context,
       title: 'Remind me',
       options: _reminderOptions,
@@ -45,9 +45,7 @@ class ReminderButton extends ConsumerWidget {
       showDateTimePicker(
         context: ref.context,
         title: 'Remind me...',
-        initialDateTime: reminder is Duration
-            ? (reminder as Duration).toDateTime()
-            : reminder,
+        initialDateTime: reminder?.dateTime,
         onChange: (_) => onReminderChange(ref: ref, option: _),
       );
     }
@@ -57,7 +55,7 @@ class ReminderButton extends ConsumerWidget {
     final reminder = option is Duration ? option.toDateTime() : option;
     ref
         .read(todoProvider(initialTodo).notifier)
-        .updateValues({'reminder': reminder, 'repeat': null});
+        .updateReminder({'dateTime': reminder});
   }
 
   @override

@@ -7,21 +7,19 @@ import 'package:todos/models/todo.dart';
 import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
-import 'package:todos/extensions.dart' show Reminder;
 
 // This provider is supposed to be used only inside this file and inside widgets
 // That are used by [TodoEditor] widget, in the future files of extracted widgets
 // Might become part of this file
 final todoProvider = StateNotifierProvider.autoDispose
     .family<TodoState, Todo, Todo?>((ref, Todo? todo) {
-  return TodoState(todo ?? Todo(task: ''));
+  return TodoState(todo);
 });
 
 String _reminderText({required WidgetRef ref, required Todo? initialTodo}) {
   final reminder = ref.read(todoProvider(initialTodo)).reminder;
-  if (reminder == null) return '';
-  return getReminderText(
-      reminder is Duration ? (reminder as Duration).toDateTime() : reminder);
+  if (reminder?.dateTime == null) return '';
+  return getReminderText(reminder!.dateTime!);
 }
 
 class TodoEditor extends HookConsumerWidget {
@@ -30,9 +28,7 @@ class TodoEditor extends HookConsumerWidget {
   const TodoEditor({this.initialTodo, super.key});
 
   void clearReminder(WidgetRef ref) {
-    ref
-        .read(todoProvider(initialTodo).notifier)
-        .updateValues({'reminder': null, 'repeat': null});
+    ref.read(todoProvider(initialTodo).notifier).updateReminder(null);
   }
 
   _onTaskChanged(WidgetRef ref, String value) {
@@ -43,7 +39,6 @@ class TodoEditor extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final todo = ref.watch(todoProvider(initialTodo));
     final taskController = useTextEditingController(text: initialTodo?.task);
-
     return KeyboardDismisser(
       child: ColoredBox(
         // Tap for hiding keyboard will not be detected without this prop

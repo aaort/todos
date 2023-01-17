@@ -15,16 +15,16 @@ class SaveTodoButton extends ConsumerWidget {
     if (todo.task.isEmpty) return;
 
     if (initialTodo != null) {
-      if (initialTodo!.reminderId != null) {
-        Notifications.cancelReminder(initialTodo!.reminderId!);
+      if (initialTodo!.reminder?.id != null) {
+        Notifications.cancelReminder(initialTodo!.reminder!.id);
       }
       Database(todo).updateTodo();
-      if (todo.reminderId != null) {
+      if (todo.reminder?.id != null) {
         Notifications.scheduleReminder(todo);
       }
     } else {
       Database(todo).createTodo();
-      if (todo.reminderId != null) Notifications.scheduleReminder(todo);
+      if (todo.reminder?.id != null) Notifications.scheduleReminder(todo);
     }
 
     Navigator.pop(ref.context);

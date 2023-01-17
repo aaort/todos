@@ -33,11 +33,11 @@ class Notifications {
   }
 
   static scheduleReminder(Todo todo) async {
-    if (todo.reminderId == null) return;
+    if (todo.reminder?.id == null) return;
     _notifications.createNotification(
       schedule: await _getNotificationScheduleFromTodo(todo),
       content: NotificationContent(
-        id: todo.reminderId!,
+        id: todo.reminder!.id,
         channelKey: notificationChannelKey,
         title: todo.task,
         body: todo.task,
@@ -47,7 +47,7 @@ class Notifications {
         category: NotificationCategory.Reminder,
       ),
       // if repeats, cancel will appear, otherwise repeat in 5/15 minutes buttons
-      actionButtons: todo.repeat == null
+      actionButtons: todo.reminder?.repeat == null
           ? actionButtons.sublist(0, 3)
           : [actionButtons[0], actionButtons[3]],
     );
@@ -55,7 +55,7 @@ class Notifications {
     final todos = await Database.getTodosOnce();
     final notifications = await _notifications.listScheduledNotifications();
     for (Todo todo in todos) {
-      final reminderId = todo.reminderId;
+      final reminderId = todo.reminder?.id;
       if (reminderId == null) continue;
       for (var i = 0; i < notifications.length; i++) {
         if (notifications[i].content?.id == reminderId) return;
@@ -67,7 +67,7 @@ class Notifications {
   }
 
   static updateReminder(Todo todo) async {
-    await cancelReminder(todo.reminderId!);
+    await cancelReminder(todo.reminder!.id);
     scheduleReminder(todo);
   }
 
@@ -84,13 +84,13 @@ class Notifications {
 Future<NotificationSchedule> _getNotificationScheduleFromTodo(Todo todo) async {
   final localTimeZone =
       await AwesomeNotifications().getLocalTimeZoneIdentifier();
-  if (todo.repeat != null) {
+  if (todo.reminder?.repeat != null) {
     return NotificationInterval(
-      interval: getRepeatOptionSeconds(todo.repeat!),
+      interval: getRepeatOptionSeconds(todo.reminder!.repeat!),
       timeZone: localTimeZone,
       preciseAlarm: true,
       repeats: true,
     );
   }
-  return NotificationCalendar.fromDate(date: todo.reminder!);
+  return NotificationCalendar.fromDate(date: todo.reminder!.dateTime!);
 }

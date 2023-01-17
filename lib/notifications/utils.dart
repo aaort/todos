@@ -11,9 +11,9 @@ import 'package:todos/services/database.dart';
 
 toggleTodo(Todo todo) async {
   final toggledTodo = todo.toggleIsDone();
-  if (toggledTodo.repeat == null) {
+  if (toggledTodo.reminder?.repeat == null) {
     // if not a repeating reminder, cancel it
-    Notifications.cancelReminder(todo.reminderId!);
+    Notifications.cancelReminder(todo.reminder!.id);
     Database(toggledTodo.updateReminder(null)).updateTodo();
   }
 }

@@ -20,15 +20,15 @@ class TodoTile extends StatelessWidget {
   }
 
   onDismiss() {
-    if (todo.reminderId != null) {
-      Notifications.cancelReminder(todo.reminderId!);
+    if (todo.reminder?.id != null) {
+      Notifications.cancelReminder(todo.reminder!.id);
     }
     Database(todo).deleteTodo();
   }
 
   onTap(bool? value) {
-    if (todo.reminderId != null) {
-      Notifications.cancelReminder(todo.reminderId!);
+    if (todo.reminder?.id != null) {
+      Notifications.cancelReminder(todo.reminder!.id);
     }
     Database(todo).toggleIsDone(value);
   }
