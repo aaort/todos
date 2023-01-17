@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:todos/widgets/todo_editor/repeat_button.dart' show Repeat;
-import 'package:todos/extensions.dart' show Stringify;
+import 'package:todos/extensions.dart' show RepeatName;
 
 class Reminder {
   /// Reminder id which should be of type int to be used as notification id
