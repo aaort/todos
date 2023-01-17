@@ -36,6 +36,10 @@ class TodoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final doneTextTheme = textTheme.bodySmall!.copyWith(
+      color: Theme.of(context).disabledColor,
+      decoration: TextDecoration.lineThrough,
+    );
 
     return DismissibleTile(
       onDismiss: onDismiss,
@@ -45,12 +49,7 @@ class TodoTile extends StatelessWidget {
           todo.task,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
-          style: todo.isDone
-              ? textTheme.bodySmall!.copyWith(
-                  color: Theme.of(context).disabledColor,
-                  decoration: TextDecoration.lineThrough,
-                )
-              : textTheme.bodySmall,
+          style: todo.isDone ? doneTextTheme : textTheme.bodySmall,
         ),
         value: todo.isDone,
         onChanged: onTap,
