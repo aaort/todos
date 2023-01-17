@@ -33,9 +33,10 @@ class Reminder {
 
   factory Reminder.fromMap(Map<String, dynamic> map) {
     return Reminder._custom(
-        id: map['id'],
-        dateTime: DateTime.tryParse(map['dateTime']),
-        repeat: map['repeat']);
+      id: map['id'],
+      dateTime: DateTime.tryParse(map['dateTime']),
+      repeat: map['repeat'],
+    );
   }
 
   Reminder copyWith(Map<String, dynamic> values) {
