@@ -80,14 +80,17 @@ class TodoState extends StateNotifier<Todo> {
     state = state.copyWith(values);
   }
 
-  updateReminder(Map<String, dynamic>? reminderMap) {
-    if (reminderMap == null) {
+  updateReminder(dynamic reminderValue) {
+    if (reminderValue == null) {
       state = state.copyWith({'reminder': null});
       return;
     }
-    final reminder =
-        state.reminder?.copyWith({'dateTime': reminderMap['dateTime']}) ??
-            Reminder.dateTime(dateTime: reminderMap['dateTime']);
+    Reminder? reminder = state.reminder;
+    if (reminderValue is DateTime) {
+      reminder ??= Reminder.dateTime(dateTime: reminderValue);
+    } else {
+      reminder ??= Reminder.repeat(repeat: reminderValue);
+    }
     state = state.copyWith({'reminder': reminder});
   }
 }
