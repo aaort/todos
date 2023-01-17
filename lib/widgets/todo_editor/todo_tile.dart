@@ -9,14 +9,11 @@ import 'package:todos/widgets/todo_editor/dismissible.dart';
 class TodoTile extends StatelessWidget {
   final Todo todo;
 
-  TodoTile({super.key, required this.todo});
+  const TodoTile({super.key, required this.todo});
 
-  // Only for accessing context inside methods
-  final _key = GlobalKey();
-
-  void onLongPress() async {
+  void onLongPress(BuildContext context) async {
     popupModalBottomSheet(
-      context: _key.currentContext!,
+      context: context,
       shouldConfirmPop: true,
       child: TodoEditor(initialTodo: todo),
     );
@@ -42,9 +39,8 @@ class TodoTile extends StatelessWidget {
 
     return DismissibleTile(
       onDismiss: onDismiss,
-      onLongPress: !todo.isDone ? onLongPress : () {},
+      onLongPress: !todo.isDone ? () => onLongPress(context) : () {},
       child: CheckboxListTile(
-        key: _key,
         title: Text(
           todo.task,
           maxLines: 2,
