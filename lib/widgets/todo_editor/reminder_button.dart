@@ -53,9 +53,7 @@ class ReminderButton extends ConsumerWidget {
 
   void onReminderChange({required WidgetRef ref, dynamic option}) {
     final reminder = option is Duration ? option.toDateTime() : option;
-    ref
-        .read(todoProvider(initialTodo).notifier)
-        .updateReminder({'dateTime': reminder});
+    ref.read(todoProvider(initialTodo).notifier).updateReminder(reminder);
   }
 
   @override
