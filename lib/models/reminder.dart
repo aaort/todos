@@ -1,8 +1,10 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:todos/widgets/todo_editor/repeat_button.dart' show Repeat;
 import 'package:todos/extensions.dart' show RepeatName;
 
+@immutable
 class Reminder {
   /// Reminder id which should be of type int to be used as notification id
   late final int id;
