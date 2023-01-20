@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart' show immutable;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/models/reminder.dart';
 import 'package:uuid/uuid.dart';
 
+@immutable
 class Todo {
   late final String id;
-  String task;
-  bool isDone;
-  Reminder? reminder;
+  final String task;
+  final bool isDone;
+  final Reminder? reminder;
   late final Timestamp createdAt;
 
   Todo({
