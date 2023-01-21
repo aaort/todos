@@ -6,11 +6,11 @@ import 'package:uuid/uuid.dart';
 
 @immutable
 class Todo {
-  late final String id;
+  final String id;
   final String task;
   final bool isDone;
   final Reminder? reminder;
-  late final Timestamp createdAt;
+  final Timestamp createdAt;
 
   Todo({
     required this.task,
@@ -21,7 +21,7 @@ class Todo {
 
   // This private constructor SHOULD be used only inside this class methods
   // It makes possible the creation of copied object with same id field
-  Todo._custom({
+  const Todo._custom({
     required this.id,
     required this.task,
     required this.isDone,
