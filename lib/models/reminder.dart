@@ -7,7 +7,7 @@ import 'package:todos/extensions.dart' show RepeatName;
 @immutable
 class Reminder {
   /// Reminder id which should be of type int to be used as notification id
-  late final int id;
+  final int id;
 
   /// Will have value only if [type == ReminderType.once] && [repeat == null]
   /// Represent the duration exact date and time at which this reminder should appear
@@ -27,7 +27,7 @@ class Reminder {
         dateTime = null,
         assert(repeat != null);
 
-  Reminder._custom({
+  const Reminder._custom({
     required this.id,
     required this.dateTime,
     required this.repeat,
