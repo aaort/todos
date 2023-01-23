@@ -32,15 +32,8 @@ class Database {
     await _todosRef.doc(todo.id).delete();
   }
 
-  static Stream<List<Todo>> todos(
-      {TodosFilter filter = TodosFilter.all}) async* {
-    Query<Map<String, dynamic>> todosQuery = _todosRef.orderBy('createdAt');
-    if (filter != TodosFilter.all) {
-      todosQuery = todosQuery.where(
-        'isDone',
-        isEqualTo: filter == TodosFilter.completed,
-      );
-    }
+  static Stream<List<Todo>> get todos async* {
+    final todosQuery = _todosRef.orderBy('createdAt');
     await for (QuerySnapshot snap in todosQuery.snapshots()) {
       yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
     }
