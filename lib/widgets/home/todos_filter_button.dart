@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/extensions.dart' show Capitalize;
+import 'package:todos/theme/constants.dart';
 
 enum TodosFilter { all, completed, uncompleted }
 
@@ -12,19 +13,43 @@ class TodosFilterButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return DropdownButton<TodosFilter>(
-      value: ref.watch(todosFilterProvider),
-      items: TodosFilter.values
-          .map(
-            (filter) => DropdownMenuItem<TodosFilter>(
-              value: filter,
-              child: Text(filter.toString().split('.').last.capitalize()),
-            ),
-          )
-          .toList(),
-      onChanged: (value) {
-        ref.read(todosFilterProvider.notifier).state = value ?? TodosFilter.all;
+    return IconButton(
+      color: Colors.white,
+      onPressed: () async {
+        final filter = await showDialog<TodosFilter>(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              contentPadding: const EdgeInsets.all(10.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(kModalBorderRadius),
+              ),
+              title: Text(
+                'Show...',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: TodosFilter.values
+                    .map(
+                      (filter) => ListTile(
+                        onTap: () {
+                          Navigator.pop(context, filter);
+                        },
+                        title: Text(
+                          filter.name.capitalize(),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            );
+          },
+        );
+        if (filter == null) return;
+        ref.read(todosFilterProvider.notifier).state = filter;
       },
+      icon: const Icon(Icons.filter_list),
     );
   }
 }
