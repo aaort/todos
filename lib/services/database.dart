@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todos/models/todo.dart';
 import 'package:todos/services/auth.dart';
+import 'package:todos/widgets/home/todos_filter_button.dart';
 
 class Database {
   final Todo todo;
@@ -31,8 +32,15 @@ class Database {
     await _todosRef.doc(todo.id).delete();
   }
 
-  static Stream<List<Todo>> get todos async* {
-    final todosQuery = _todosRef.orderBy('createdAt');
+  static Stream<List<Todo>> todos(
+      {TodosFilter filter = TodosFilter.all}) async* {
+    Query<Map<String, dynamic>> todosQuery = _todosRef.orderBy('createdAt');
+    if (filter != TodosFilter.all) {
+      todosQuery = todosQuery.where(
+        'isDone',
+        isEqualTo: filter == TodosFilter.completed,
+      );
+    }
     await for (QuerySnapshot snap in todosQuery.snapshots()) {
       yield [...snap.docs.map((doc) => Todo.fromMap(doc.data() as Map))];
     }

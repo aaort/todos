@@ -7,18 +7,7 @@ import 'package:todos/widgets/home/todos_filter_button.dart';
 import 'package:todos/widgets/todo_editor/todo_tile.dart';
 
 final todosProvider = StreamProvider<List<Todo>>((ref) {
-  final filter = ref.watch(todosFilterProvider);
-  if (filter == TodosFilter.all) {
-    return Database.todos;
-  } else if (filter == TodosFilter.completed) {
-    return Database.todos.map(
-      (todos) => todos.where((todo) => todo.isDone).toList(),
-    );
-  } else {
-    return Database.todos.map(
-      (todos) => todos.where((todo) => !todo.isDone).toList(),
-    );
-  }
+  return Database.todos(filter: ref.watch(todosFilterProvider));
 });
 
 class TodoList extends ConsumerWidget {
