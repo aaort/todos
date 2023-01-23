@@ -21,7 +21,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await Notifications.initialize();
+  // await Notifications.initialize();
 
   runApp(
     ProviderScope(
