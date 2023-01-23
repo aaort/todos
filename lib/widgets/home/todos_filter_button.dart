@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todos/extensions.dart' show Capitalize;
 
 enum TodosFilter { all, completed, uncompleted }
 
@@ -17,7 +18,7 @@ class TodosFilterButton extends ConsumerWidget {
           .map(
             (filter) => DropdownMenuItem<TodosFilter>(
               value: filter,
-              child: Text(filter.toString().split('.').last),
+              child: Text(filter.toString().split('.').last.capitalize()),
             ),
           )
           .toList(),
