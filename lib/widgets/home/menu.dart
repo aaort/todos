@@ -16,6 +16,7 @@ class Menu extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return LayoutBuilder(
       builder: (context, constraints) => IconButton(
+        color: Colors.white,
         onPressed: () {
           showMenu(
             context: context,
@@ -38,7 +39,7 @@ class Menu extends ConsumerWidget {
             ],
           );
         },
-        icon: const Icon(Icons.menu, color: Colors.white),
+        icon: const Icon(Icons.menu),
       ),
     );
   }
