@@ -7,11 +7,11 @@ import 'package:todos/theme/constants.dart';
 class ThemeModeManager extends StateNotifier<ThemeMode?> {
   ThemeModeManager() : super(null) {
     // Initialize theme mode
-    getThemeMode();
+    _initThemeMode();
   }
 
   /// Initializes theme mode and returns the current state of type [ThemeMode]
-  Future<ThemeMode?> getThemeMode() async {
+  Future<void> _initThemeMode() async {
     final prefs = await SharedPreferences.getInstance();
     final isThemeModeDark = prefs.getBool('isThemeModeDark');
     final themeMode =
@@ -21,7 +21,6 @@ class ThemeModeManager extends StateNotifier<ThemeMode?> {
     if (isThemeModeDark == null) prefs.setBool('isThemeModeDark', false);
     state = isThemeModeDark == true ? ThemeMode.dark : ThemeMode.light;
     _setThemeMode(state!);
-    return state;
   }
 
   Future<void> _setThemeMode(ThemeMode themeMode) async {
