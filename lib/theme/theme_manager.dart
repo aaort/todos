@@ -22,14 +22,12 @@ class ThemeModeManager extends StateNotifier<ThemeMode?> {
     state = isThemeModeDark == true ? ThemeMode.dark : ThemeMode.light;
     _setThemeMode(state!);
     return state;
-    // TODO: Figure out why this line was added, removed if not required
-    // SystemChrome.setSystemUIOverlayStyle(kOverlayStyle);
   }
 
   Future<void> _setThemeMode(ThemeMode themeMode) async {
     state = themeMode;
     SystemChrome.setSystemUIOverlayStyle(
-        themeMode == ThemeMode.dark ? kOverlayDarkStyle : kOverlayStyle);
+        themeMode == ThemeMode.dark ? kOverlayStyle : kOverlayDarkStyle);
   }
 
   toggleTheme() async {
