@@ -5,6 +5,7 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:todos/extensions.dart' show RepeatName, Capitalize;
 import 'package:todos/helpers.dart';
 import 'package:todos/models/todo.dart';
+import 'package:todos/widgets/todo_editor/confirm_discard.dart';
 import 'package:todos/widgets/todo_editor/reminder_button.dart';
 import 'package:todos/widgets/todo_editor/repeat_button.dart';
 import 'package:todos/widgets/todo_editor/save_todo_button.dart';
@@ -45,34 +46,39 @@ class TodoEditor extends HookConsumerWidget {
     final todo = ref.watch(todoProvider(initialTodo));
     final taskController = useTextEditingController(text: initialTodo?.task);
 
-    return KeyboardDismisser(
-      child: ColoredBox(
-        // Tap for hiding keyboard will not be detected without this prop
-        color: Colors.transparent,
-        child: FractionallySizedBox(
-          heightFactor: 0.8,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _editorTop(context),
-                TextField(
-                  key: const Key('createTodoInputId'),
-                  autofocus: true,
-                  controller: taskController,
-                  onChanged: (_) => _onTaskChanged(ref, _),
-                  textCapitalization: TextCapitalization.sentences,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                const SizedBox(height: 30),
-                SaveTodoButton(initialTodo: initialTodo),
-                const SizedBox(height: 30),
-                if (todo.reminder != null)
-                  _editorBottom(ref, context)
-                else
-                  RepeatButton(initialTodo: initialTodo)
-              ],
+    return WillPopScope(
+      onWillPop: () async {
+        return todo.task.isEmpty ? true : await showConfirmDiscard(context);
+      },
+      child: KeyboardDismisser(
+        child: ColoredBox(
+          // Tap for hiding keyboard will not be detected without this prop
+          color: Colors.transparent,
+          child: FractionallySizedBox(
+            heightFactor: 0.8,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _editorTop(context),
+                  TextField(
+                    key: const Key('createTodoInputId'),
+                    autofocus: true,
+                    controller: taskController,
+                    onChanged: (_) => _onTaskChanged(ref, _),
+                    textCapitalization: TextCapitalization.sentences,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  const SizedBox(height: 30),
+                  SaveTodoButton(initialTodo: initialTodo),
+                  const SizedBox(height: 30),
+                  if (todo.reminder != null)
+                    _editorBottom(ref, context)
+                  else
+                    RepeatButton(initialTodo: initialTodo)
+                ],
+              ),
             ),
           ),
         ),
