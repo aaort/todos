@@ -15,7 +15,6 @@ class TodoTile extends HookWidget {
   void onLongPress(BuildContext context) async {
     popupModalBottomSheet(
       context: context,
-      shouldConfirmPop: true,
       child: TodoEditor(initialTodo: todo),
     );
   }
