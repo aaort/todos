@@ -38,10 +38,7 @@ class Todo {
     });
   }
 
-  /// Creates a new instance of [Todo] class with specified overridden values.
-  ///
-  /// Should be used carefully because [id], [reminderId] and [createdAt]
-  /// fields also can be mutated which might be changed in the future.
+  /// Returns a new instance of [Todo] class with specified overridden values.
   Todo copyWith(Map<String, dynamic> todoMap) {
     return Todo._custom(
       id: todoMap['id'] ?? id,
