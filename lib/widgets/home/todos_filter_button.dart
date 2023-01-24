@@ -31,16 +31,7 @@ class TodosFilterButton extends ConsumerWidget {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: TodosFilter.values
-                    .map(
-                      (filter) => ListTile(
-                        onTap: () {
-                          Navigator.pop(context, filter);
-                        },
-                        title: Text(
-                          filter.name.capitalize(),
-                        ),
-                      ),
-                    )
+                    .map((filter) => _FilterTile(filter))
                     .toList(),
               ),
             );
@@ -50,6 +41,23 @@ class TodosFilterButton extends ConsumerWidget {
         ref.read(todosFilterProvider.notifier).state = filter;
       },
       icon: const Icon(Icons.filter_list),
+    );
+  }
+}
+
+class _FilterTile extends StatelessWidget {
+  final TodosFilter filter;
+  const _FilterTile(this.filter);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () {
+        Navigator.pop(context, filter);
+      },
+      title: Text(
+        filter.name.capitalize(),
+      ),
     );
   }
 }
