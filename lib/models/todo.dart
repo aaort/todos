@@ -44,7 +44,7 @@ class Todo {
   /// fields also can be mutated which might be changed in the future.
   Todo copyWith(Map<String, dynamic> todoMap) {
     return Todo._custom(
-      id: todoMap[' id'] ?? id,
+      id: todoMap['id'] ?? id,
       createdAt: todoMap['createdAt'] ?? createdAt,
       task: todoMap['task'] ?? task,
       isDone: todoMap['isDone'] ?? isDone,
