@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/app_navigator.dart';
 import 'package:todos/theme/theme.dart';
-import 'package:todos/theme/theme_manager.dart';
+import 'package:todos/theme/theme_mode_manager.dart';
 
 import 'firebase_options.dart';
 
