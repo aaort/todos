@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todos/app_navigator.dart';
-import 'package:todos/notifications/notifications.dart';
 import 'package:todos/theme/theme.dart';
 import 'package:todos/theme/theme_manager.dart';
 
@@ -21,6 +20,8 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // On Android new notification is scheduled each second,
+  // possibly issue inside awesome_notifications itself
   // await Notifications.initialize();
 
   runApp(
