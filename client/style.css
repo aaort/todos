@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fasthand&family=Inconsolata&display=swap");
+
+html,
+body {
+  min-height: 100%;
+}
+
+:root {
+  --primary-color: #3b3936;
+  --primary-color-rgb: 59, 57, 54;
+  --secondary-color: #f2f2f2;
+}
+
+body {
+  color: var(--primary-color);
+  font-family: "Inconsolata", monospace;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 1.1px;
+}
+
+a {
+  text-underline-offset: 0.2rem;
+  transition: all 200ms;
+  color: var(--primary-color);
+}
+
+a:hover {
+  text-underline-offset: 0.5rem;
+}
+.main-container {
+  padding-top: 10dvh;
+}
+
+.main-container > section {
+  flex: 1;
+  margin-block: 20dvh;
+}
+
+.main-container section:nth-child(1) {
+  margin-top: 0;
+}
+
+.main-section {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding-inline: 5dvw;
+  gap: 5dvh;
+}
+
+.main-section .content-title {
+  font-size: 3rem;
+  animation: title-float 1s infinite alternate;
+}
+
+@keyframes title-float {
+  from {
+    translate: 1rem;
+  }
+  to {
+    translate: 0px;
+  }
+}
+
+.main-section img {
+  height: auto;
+  box-shadow: 10px 10px 30px rgba(var(--primary-color-rgb), 0.2);
+  border-radius: 20px;
+}
+
+.main-section img:nth-child(even) {
+  transform: skewY(10deg);
+}
+
+.main-section img:nth-child(odd) {
+  transform: skewY(10deg);
+}
+
+.main-section img {
+  min-width: 150px;
+  max-width: 300px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.description-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.description-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description-text {
+  width: 40dvw;
+  line-height: 1.5;
+}
