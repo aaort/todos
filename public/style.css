@@ -72,13 +72,6 @@ a:hover {
   height: auto;
   box-shadow: 10px 10px 30px rgba(var(--primary-color-rgb), 0.2);
   border-radius: 20px;
-}
-
-.main-section img:nth-child(even) {
-  transform: skewY(10deg);
-}
-
-.main-section img:nth-child(odd) {
   transform: skewY(10deg);
 }
 
