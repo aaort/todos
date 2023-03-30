@@ -69,18 +69,13 @@ a:hover {
 }
 
 .main-section img {
+  width: 40%;
   height: auto;
-  box-shadow: 10px 10px 30px rgba(var(--primary-color-rgb), 0.2);
-  border-radius: 20px;
-  transform: skewY(10deg);
-}
-
-.main-section img {
-  min-width: 150px;
   max-width: 300px;
-  height: auto;
+  min-width: 150px;
+  box-shadow: 10px 10px 30px rgba(var(--primary-color-rgb), 0.2);
+  transform: skewY(10deg);
   border-radius: 20px;
-  object-fit: cover;
 }
 
 .description-section {
