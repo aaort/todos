@@ -100,16 +100,16 @@ a:hover {
 
 @media (width <= 600px) {
   .description-text {
-    width: 50%;
+    width: 80%;
   }
 }
 @media (width <= 1000px) {
   .description-text {
-    width: 60%;
+    width: 70%;
   }
 }
 @media (width <= 1200px) {
   .description-text {
-    width: 70%;
+    width: 60%;
   }
 }
