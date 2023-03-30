@@ -29,13 +29,14 @@ a {
 a:hover {
   text-underline-offset: 0.5rem;
 }
+
 .main-container {
-  padding-top: 10dvh;
+  padding-top: 5%;
 }
 
 .main-container > section {
   flex: 1;
-  margin-block: 20dvh;
+  margin-top: 10%;
 }
 
 .main-container section:nth-child(1) {
@@ -49,8 +50,8 @@ a:hover {
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  padding-inline: 5dvw;
-  gap: 5dvh;
+  padding-inline: 5%;
+  row-gap: 40px;
 }
 
 .main-section .content-title {
@@ -105,6 +106,22 @@ a:hover {
 }
 
 .description-text {
-  width: 40dvw;
+  width: 40%;
   line-height: 1.5;
+}
+
+@media (width <= 600px) {
+  .description-text {
+    width: 50%;
+  }
+}
+@media (width <= 1000px) {
+  .description-text {
+    width: 60%;
+  }
+}
+@media (width <= 1200px) {
+  .description-text {
+    width: 70%;
+  }
 }
