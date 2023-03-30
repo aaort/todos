@@ -98,17 +98,17 @@ a:hover {
   line-height: 1.5;
 }
 
-@media (width <= 600px) {
+@media (max-width: 600px) {
   .description-text {
     width: 80%;
   }
 }
-@media (width <= 1000px) {
+@media (max-width: 1000px) {
   .description-text {
     width: 70%;
   }
 }
-@media (width <= 1200px) {
+@media (max-width: 1200px) {
   .description-text {
     width: 60%;
   }
