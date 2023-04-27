@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fasthand&family=Inconsolata&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Fasthand&family=Inconsolata&display=swap');
 
 html,
 body {
@@ -13,7 +13,7 @@ body {
 
 body {
   color: var(--primary-color);
-  font-family: "Inconsolata", monospace;
+  font-family: 'Inconsolata', monospace;
   font-size: 20px;
   padding: 0;
   margin: 0;
@@ -55,8 +55,10 @@ a:hover {
 }
 
 .main-section .content-title {
+  display: inline-block;
   font-size: 3rem;
   animation: title-float 1s infinite alternate;
+  text-decoration-thickness: 2px;
 }
 
 @keyframes title-float {
