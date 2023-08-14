@@ -17,7 +17,7 @@ This project is built with [Flutter](https://github.com/flutter/flutter) and [Fi
 
 ## Overview
 
-This is my first Flutter project, and I am still working on it as a learning experience.
+This was my first Flutter project that I built as the part of learning process.
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ You can create, edit, and delete tasks. Additionally, you can set a reminder for
 
 ### Get Started
 
-If you want to run this project on your machine you first need to [configure your firebase project](https://firebase.google.com/docs/flutter/setup?platform=ios). After configuration is finished you should see the `firebase_options.dart` file under lib/ directory (it is not recommended to publish this file to the public since it contains your firebase project API keys and a lot of other information that you might want to keep private). If everything is done properly you should be able to run the project easily with following commands.
+If you want to run this project on your machine you first need to [configure your firebase project](https://firebase.google.com/docs/flutter/setup?platform=ios). After configuration is finished you'll see the `firebase_options.dart` file under `/lib` directory (it is not recommended to publish this file to the public since it contains your firebase project API keys and a lot of other information that you might want to keep private). If everything is done properly you should be able to run the project easily with following commands.
 
 ```
 $ flutter packages get
